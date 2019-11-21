@@ -1,0 +1,11 @@
+version: '2'
+services:
+  adventquiz-postgresql:
+    image: postgres:11.5
+    # volumes:
+    #     - ~/volumes/jhipster/AdventQuiz/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=AdventQuiz
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432
