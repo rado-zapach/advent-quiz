@@ -44,6 +44,9 @@ public class CacheConfiguration {
             createCache(cm, sk.rzapach.advent.domain.User.class.getName() + ".authorities");
             createCache(cm, sk.rzapach.advent.domain.PersistentToken.class.getName());
             createCache(cm, sk.rzapach.advent.domain.User.class.getName() + ".persistentTokens");
+            createCache(cm, sk.rzapach.advent.domain.Question.class.getName());
+            createCache(cm, sk.rzapach.advent.domain.Question.class.getName() + ".answers");
+            createCache(cm, sk.rzapach.advent.domain.Answer.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

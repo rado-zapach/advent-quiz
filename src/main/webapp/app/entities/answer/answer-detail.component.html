@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="answer">
+            <h2><span>Answer</span> {{answer.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Text</span></dt>
+                <dd>
+                    <span>{{answer.text}}</span>
+                </dd>
+                <dt><span>Time</span></dt>
+                <dd>
+                    <span>{{answer.time}}</span>
+                </dd>
+                <dt><span>Question</span></dt>
+                <dd>
+                    <div *ngIf="answer.question">
+                        <a [routerLink]="['/question', answer.question?.id, 'view']">{{answer.question?.text}}</a>
+                    </div>
+                </dd>
+                <dt><span>User</span></dt>
+                <dd>
+                    {{answer.user?.login}}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/answer', answer.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
