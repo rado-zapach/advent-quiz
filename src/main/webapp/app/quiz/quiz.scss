@@ -1,0 +1,30 @@
+.quiz {
+  background-color: indianred;
+  display: flex;
+  justify-content: center;
+  // TODO: move to the main.component
+  // deduct the navbar height
+  min-height: calc(100vh - 150px);
+}
+
+.quiz-body {
+  padding: 0 10%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.quiz-day {
+  padding: 0 5%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: whitesmoke;
+}
+
+.quiz-day__icon {
+}
+
+.quiz-day__label {
+  align-self: center;
+}

@@ -1,0 +1,8 @@
+<div class="quiz">
+    <div class="quiz-body">
+        <div *ngFor="let question of questions" class="quiz-day" (click)="answerQuestion(question)">
+            <fa-icon icon="home" class="fa-3x"></fa-icon>
+            <div class="quiz-day__label">{{question.time.date()}}</div>
+        </div>
+    </div>
+</div>

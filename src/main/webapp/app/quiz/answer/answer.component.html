@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{question.text}}</h4>
+    <button aria-label="Close" data-dismiss="modal" class="close" type="button" (click)="activeModal.dismiss('closed')">
+        <span aria-hidden="true">x</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form class="form" role="form" (ngSubmit)="onSubmit()" [formGroup]="answerForm">
+                <div class="form-group" [ngSwitch]="isFreeText">
+                    <input *ngSwitchCase="true" type="text" class="form-control" id="answer" name="answer"
+                           placeholder="Your answer"
+                           formControlName="answer">
+                    <ng-container *ngSwitchCase="false">
+                        <div *ngFor="let choice of choices; let i = index" class="form-check">
+                            <input type="radio" class="form-check-input" id="choice-answer-{{i}}" name="answer"
+                                   value="{{choice}}"
+                                   formControlName="answer">
+                            <label class="form-check-label" for="choice-answer-{{i}}">{{choice}}</label>
+                        </div>
+                    </ng-container>
+                </div>
+                <div *ngIf="saveCounter > 0" class="alert alert-success">Your answer was saved <span *ngIf="saveCounter > 1">({{saveCounter}}x)</span></div>
+                <p></p>
+                <button type="submit" class="btn btn-primary" [disabled]="isAnswerEmpty">Submit the answer</button>
+            </form>
+        </div>
+    </div>
+</div>

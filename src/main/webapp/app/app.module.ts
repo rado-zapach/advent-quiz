@@ -13,6 +13,7 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
+import { QuizModule } from 'app/quiz/quiz.module';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { ErrorComponent } from './layouts/error/error.component';
     AdventQuizHomeModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     AdventQuizEntityModule,
-    AdventQuizAppRoutingModule
+    AdventQuizAppRoutingModule,
+    QuizModule
   ],
   declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent],
   bootstrap: [JhiMainComponent]
