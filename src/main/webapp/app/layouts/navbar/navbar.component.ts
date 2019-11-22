@@ -7,6 +7,8 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { LoginService } from 'app/core/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { map } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'jhi-navbar',
@@ -62,5 +64,9 @@ export class NavbarComponent implements OnInit {
 
   getImageUrl() {
     return this.isAuthenticated() ? this.accountService.getImageUrl() : null;
+  }
+
+  getAccountLogin() {
+    return this.isAuthenticated() ? this.accountService.identity().pipe(map(i => i.login)) : of('Account');
   }
 }
