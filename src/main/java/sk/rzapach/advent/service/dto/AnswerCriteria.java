@@ -31,6 +31,10 @@ public class AnswerCriteria implements Serializable, Criteria {
 
     private InstantFilter time;
 
+    private BooleanFilter isCorrect;
+
+    private IntegerFilter points;
+
     private LongFilter questionId;
 
     private LongFilter userId;
@@ -42,6 +46,8 @@ public class AnswerCriteria implements Serializable, Criteria {
         this.id = other.id == null ? null : other.id.copy();
         this.text = other.text == null ? null : other.text.copy();
         this.time = other.time == null ? null : other.time.copy();
+        this.isCorrect = other.isCorrect == null ? null : other.isCorrect.copy();
+        this.points = other.points == null ? null : other.points.copy();
         this.questionId = other.questionId == null ? null : other.questionId.copy();
         this.userId = other.userId == null ? null : other.userId.copy();
     }
@@ -75,6 +81,22 @@ public class AnswerCriteria implements Serializable, Criteria {
         this.time = time;
     }
 
+    public BooleanFilter getIsCorrect() {
+        return isCorrect;
+    }
+
+    public void setIsCorrect(BooleanFilter isCorrect) {
+        this.isCorrect = isCorrect;
+    }
+
+    public IntegerFilter getPoints() {
+        return points;
+    }
+
+    public void setPoints(IntegerFilter points) {
+        this.points = points;
+    }
+
     public LongFilter getQuestionId() {
         return questionId;
     }
@@ -105,6 +127,8 @@ public class AnswerCriteria implements Serializable, Criteria {
             Objects.equals(id, that.id) &&
             Objects.equals(text, that.text) &&
             Objects.equals(time, that.time) &&
+            Objects.equals(isCorrect, that.isCorrect) &&
+            Objects.equals(points, that.points) &&
             Objects.equals(questionId, that.questionId) &&
             Objects.equals(userId, that.userId);
     }
@@ -115,6 +139,8 @@ public class AnswerCriteria implements Serializable, Criteria {
         id,
         text,
         time,
+        isCorrect,
+        points,
         questionId,
         userId
         );
@@ -126,6 +152,8 @@ public class AnswerCriteria implements Serializable, Criteria {
                 (id != null ? "id=" + id + ", " : "") +
                 (text != null ? "text=" + text + ", " : "") +
                 (time != null ? "time=" + time + ", " : "") +
+                (isCorrect != null ? "isCorrect=" + isCorrect + ", " : "") +
+                (points != null ? "points=" + points + ", " : "") +
                 (questionId != null ? "questionId=" + questionId + ", " : "") +
                 (userId != null ? "userId=" + userId + ", " : "") +
             "}";

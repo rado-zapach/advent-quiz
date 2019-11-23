@@ -30,6 +30,8 @@ export class AnswerUpdateComponent implements OnInit {
     id: [],
     text: [],
     time: [],
+    isCorrect: [],
+    points: [],
     question: [],
     user: []
   });
@@ -61,6 +63,8 @@ export class AnswerUpdateComponent implements OnInit {
       id: answer.id,
       text: answer.text,
       time: answer.time != null ? answer.time.format(DATE_TIME_FORMAT) : null,
+      isCorrect: answer.isCorrect,
+      points: answer.points,
       question: answer.question,
       user: answer.user
     });
@@ -86,6 +90,8 @@ export class AnswerUpdateComponent implements OnInit {
       id: this.editForm.get(['id']).value,
       text: this.editForm.get(['text']).value,
       time: this.editForm.get(['time']).value != null ? moment(this.editForm.get(['time']).value, DATE_TIME_FORMAT) : undefined,
+      isCorrect: this.editForm.get(['isCorrect']).value,
+      points: this.editForm.get(['points']).value,
       question: this.editForm.get(['question']).value,
       user: this.editForm.get(['user']).value
     };

@@ -21,6 +21,12 @@
             <column name="time" type="datetime">
                 <constraints nullable="true" />
             </column>
+            <column name="is_correct" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="points" type="integer">
+                <constraints nullable="true" />
+            </column>
             <column name="question_id" type="bigint">
                 <constraints nullable="true" />
             </column>
@@ -53,6 +59,8 @@
             <column name="id" type="numeric"/>
             <column name="text" type="string"/>
             <column name="time" type="datetime"/>
+            <column name="is_correct" type="boolean"/>
+            <column name="points" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

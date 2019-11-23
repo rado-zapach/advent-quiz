@@ -47,6 +47,13 @@ public class AnswerResourceIT {
     private static final Instant DEFAULT_TIME = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final Boolean DEFAULT_IS_CORRECT = false;
+    private static final Boolean UPDATED_IS_CORRECT = true;
+
+    private static final Integer DEFAULT_POINTS = 1;
+    private static final Integer UPDATED_POINTS = 2;
+    private static final Integer SMALLER_POINTS = 1 - 1;
+
     @Autowired
     private AnswerRepository answerRepository;
 
@@ -99,7 +106,9 @@ public class AnswerResourceIT {
     public static Answer createEntity(EntityManager em) {
         Answer answer = new Answer()
             .text(DEFAULT_TEXT)
-            .time(DEFAULT_TIME);
+            .time(DEFAULT_TIME)
+            .isCorrect(DEFAULT_IS_CORRECT)
+            .points(DEFAULT_POINTS);
         return answer;
     }
     /**
@@ -111,7 +120,9 @@ public class AnswerResourceIT {
     public static Answer createUpdatedEntity(EntityManager em) {
         Answer answer = new Answer()
             .text(UPDATED_TEXT)
-            .time(UPDATED_TIME);
+            .time(UPDATED_TIME)
+            .isCorrect(UPDATED_IS_CORRECT)
+            .points(UPDATED_POINTS);
         return answer;
     }
 
@@ -137,6 +148,8 @@ public class AnswerResourceIT {
         Answer testAnswer = answerList.get(answerList.size() - 1);
         assertThat(testAnswer.getText()).isEqualTo(DEFAULT_TEXT);
         assertThat(testAnswer.getTime()).isEqualTo(DEFAULT_TIME);
+        assertThat(testAnswer.isIsCorrect()).isEqualTo(DEFAULT_IS_CORRECT);
+        assertThat(testAnswer.getPoints()).isEqualTo(DEFAULT_POINTS);
     }
 
     @Test
@@ -171,7 +184,9 @@ public class AnswerResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(answer.getId().intValue())))
             .andExpect(jsonPath("$.[*].text").value(hasItem(DEFAULT_TEXT)))
-            .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())));
+            .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())))
+            .andExpect(jsonPath("$.[*].isCorrect").value(hasItem(DEFAULT_IS_CORRECT.booleanValue())))
+            .andExpect(jsonPath("$.[*].points").value(hasItem(DEFAULT_POINTS)));
     }
 
     @Test
@@ -186,7 +201,9 @@ public class AnswerResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(answer.getId().intValue()))
             .andExpect(jsonPath("$.text").value(DEFAULT_TEXT))
-            .andExpect(jsonPath("$.time").value(DEFAULT_TIME.toString()));
+            .andExpect(jsonPath("$.time").value(DEFAULT_TIME.toString()))
+            .andExpect(jsonPath("$.isCorrect").value(DEFAULT_IS_CORRECT.booleanValue()))
+            .andExpect(jsonPath("$.points").value(DEFAULT_POINTS));
     }
 
 
@@ -341,6 +358,163 @@ public class AnswerResourceIT {
 
     @Test
     @Transactional
+    public void getAllAnswersByIsCorrectIsEqualToSomething() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where isCorrect equals to DEFAULT_IS_CORRECT
+        defaultAnswerShouldBeFound("isCorrect.equals=" + DEFAULT_IS_CORRECT);
+
+        // Get all the answerList where isCorrect equals to UPDATED_IS_CORRECT
+        defaultAnswerShouldNotBeFound("isCorrect.equals=" + UPDATED_IS_CORRECT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAnswersByIsCorrectIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where isCorrect not equals to DEFAULT_IS_CORRECT
+        defaultAnswerShouldNotBeFound("isCorrect.notEquals=" + DEFAULT_IS_CORRECT);
+
+        // Get all the answerList where isCorrect not equals to UPDATED_IS_CORRECT
+        defaultAnswerShouldBeFound("isCorrect.notEquals=" + UPDATED_IS_CORRECT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAnswersByIsCorrectIsInShouldWork() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where isCorrect in DEFAULT_IS_CORRECT or UPDATED_IS_CORRECT
+        defaultAnswerShouldBeFound("isCorrect.in=" + DEFAULT_IS_CORRECT + "," + UPDATED_IS_CORRECT);
+
+        // Get all the answerList where isCorrect equals to UPDATED_IS_CORRECT
+        defaultAnswerShouldNotBeFound("isCorrect.in=" + UPDATED_IS_CORRECT);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAnswersByIsCorrectIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where isCorrect is not null
+        defaultAnswerShouldBeFound("isCorrect.specified=true");
+
+        // Get all the answerList where isCorrect is null
+        defaultAnswerShouldNotBeFound("isCorrect.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllAnswersByPointsIsEqualToSomething() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where points equals to DEFAULT_POINTS
+        defaultAnswerShouldBeFound("points.equals=" + DEFAULT_POINTS);
+
+        // Get all the answerList where points equals to UPDATED_POINTS
+        defaultAnswerShouldNotBeFound("points.equals=" + UPDATED_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAnswersByPointsIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where points not equals to DEFAULT_POINTS
+        defaultAnswerShouldNotBeFound("points.notEquals=" + DEFAULT_POINTS);
+
+        // Get all the answerList where points not equals to UPDATED_POINTS
+        defaultAnswerShouldBeFound("points.notEquals=" + UPDATED_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAnswersByPointsIsInShouldWork() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where points in DEFAULT_POINTS or UPDATED_POINTS
+        defaultAnswerShouldBeFound("points.in=" + DEFAULT_POINTS + "," + UPDATED_POINTS);
+
+        // Get all the answerList where points equals to UPDATED_POINTS
+        defaultAnswerShouldNotBeFound("points.in=" + UPDATED_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAnswersByPointsIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where points is not null
+        defaultAnswerShouldBeFound("points.specified=true");
+
+        // Get all the answerList where points is null
+        defaultAnswerShouldNotBeFound("points.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllAnswersByPointsIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where points is greater than or equal to DEFAULT_POINTS
+        defaultAnswerShouldBeFound("points.greaterThanOrEqual=" + DEFAULT_POINTS);
+
+        // Get all the answerList where points is greater than or equal to UPDATED_POINTS
+        defaultAnswerShouldNotBeFound("points.greaterThanOrEqual=" + UPDATED_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAnswersByPointsIsLessThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where points is less than or equal to DEFAULT_POINTS
+        defaultAnswerShouldBeFound("points.lessThanOrEqual=" + DEFAULT_POINTS);
+
+        // Get all the answerList where points is less than or equal to SMALLER_POINTS
+        defaultAnswerShouldNotBeFound("points.lessThanOrEqual=" + SMALLER_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAnswersByPointsIsLessThanSomething() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where points is less than DEFAULT_POINTS
+        defaultAnswerShouldNotBeFound("points.lessThan=" + DEFAULT_POINTS);
+
+        // Get all the answerList where points is less than UPDATED_POINTS
+        defaultAnswerShouldBeFound("points.lessThan=" + UPDATED_POINTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllAnswersByPointsIsGreaterThanSomething() throws Exception {
+        // Initialize the database
+        answerRepository.saveAndFlush(answer);
+
+        // Get all the answerList where points is greater than DEFAULT_POINTS
+        defaultAnswerShouldNotBeFound("points.greaterThan=" + DEFAULT_POINTS);
+
+        // Get all the answerList where points is greater than SMALLER_POINTS
+        defaultAnswerShouldBeFound("points.greaterThan=" + SMALLER_POINTS);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllAnswersByQuestionIsEqualToSomething() throws Exception {
         // Initialize the database
         answerRepository.saveAndFlush(answer);
@@ -387,7 +561,9 @@ public class AnswerResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(answer.getId().intValue())))
             .andExpect(jsonPath("$.[*].text").value(hasItem(DEFAULT_TEXT)))
-            .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())));
+            .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())))
+            .andExpect(jsonPath("$.[*].isCorrect").value(hasItem(DEFAULT_IS_CORRECT.booleanValue())))
+            .andExpect(jsonPath("$.[*].points").value(hasItem(DEFAULT_POINTS)));
 
         // Check, that the count call also returns 1
         restAnswerMockMvc.perform(get("/api/answers/count?sort=id,desc&" + filter))
@@ -436,7 +612,9 @@ public class AnswerResourceIT {
         em.detach(updatedAnswer);
         updatedAnswer
             .text(UPDATED_TEXT)
-            .time(UPDATED_TIME);
+            .time(UPDATED_TIME)
+            .isCorrect(UPDATED_IS_CORRECT)
+            .points(UPDATED_POINTS);
 
         restAnswerMockMvc.perform(put("/api/answers")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -449,6 +627,8 @@ public class AnswerResourceIT {
         Answer testAnswer = answerList.get(answerList.size() - 1);
         assertThat(testAnswer.getText()).isEqualTo(UPDATED_TEXT);
         assertThat(testAnswer.getTime()).isEqualTo(UPDATED_TIME);
+        assertThat(testAnswer.isIsCorrect()).isEqualTo(UPDATED_IS_CORRECT);
+        assertThat(testAnswer.getPoints()).isEqualTo(UPDATED_POINTS);
     }
 
     @Test

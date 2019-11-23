@@ -43,6 +43,8 @@
                 <th scope="col"><span>ID</span></th>
                 <th scope="col"><span>Text</span></th>
                 <th scope="col"><span>Time</span></th>
+                <th scope="col"><span>Is Correct</span></th>
+                <th scope="col"><span>Points</span></th>
                 <th scope="col"><span>User</span></th>
                 <th scope="col"></th>
             </tr>
@@ -52,6 +54,8 @@
                 <td><a [routerLink]="['/answer', answer.id, 'view' ]">{{answer.id}}</a></td>
                 <td>{{answer.text}}</td>
                 <td>{{answer.time.format("DD.MM.YYYY HH:mm:ss")}}</td>
+                <td>{{answer.isCorrect}}</td>
+                <td>{{answer.points}}</td>
                 <td>
                     {{answer.user?.login}}
                 </td>

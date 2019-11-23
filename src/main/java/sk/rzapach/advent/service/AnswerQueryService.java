@@ -91,6 +91,12 @@ public class AnswerQueryService extends QueryService<Answer> {
             if (criteria.getTime() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getTime(), Answer_.time));
             }
+            if (criteria.getIsCorrect() != null) {
+                specification = specification.and(buildSpecification(criteria.getIsCorrect(), Answer_.isCorrect));
+            }
+            if (criteria.getPoints() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getPoints(), Answer_.points));
+            }
             if (criteria.getQuestionId() != null) {
                 specification = specification.and(buildSpecification(criteria.getQuestionId(),
                     root -> root.join(Answer_.question, JoinType.LEFT).get(Question_.id)));

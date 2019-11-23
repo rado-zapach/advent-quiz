@@ -6,7 +6,8 @@
             "relationshipName": "question",
             "otherEntityName": "question",
             "relationshipType": "many-to-one",
-            "otherEntityField": "text"
+            "otherEntityField": "text",
+            "otherEntityRelationshipName": "answers"
         },
         {
             "relationshipName": "user",
@@ -25,6 +26,14 @@
         {
             "fieldName": "time",
             "fieldType": "Instant"
+        },
+        {
+            "fieldName": "isCorrect",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "points",
+            "fieldType": "Integer"
         }
     ],
     "changelogDate": "20191121204829",

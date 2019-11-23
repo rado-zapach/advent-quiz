@@ -29,7 +29,14 @@ public class Answer implements Serializable {
     @Column(name = "time")
     private Instant time;
 
+    @Column(name = "is_correct")
+    private Boolean isCorrect;
+
+    @Column(name = "points")
+    private Integer points;
+
     @ManyToOne
+    @JsonIgnoreProperties("question")
     private Question question;
 
     @ManyToOne
@@ -69,6 +76,32 @@ public class Answer implements Serializable {
 
     public void setTime(Instant time) {
         this.time = time;
+    }
+
+    public Boolean isIsCorrect() {
+        return isCorrect;
+    }
+
+    public Answer isCorrect(Boolean isCorrect) {
+        this.isCorrect = isCorrect;
+        return this;
+    }
+
+    public void setIsCorrect(Boolean isCorrect) {
+        this.isCorrect = isCorrect;
+    }
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public Answer points(Integer points) {
+        this.points = points;
+        return this;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
     }
 
     public Question getQuestion() {
@@ -120,6 +153,8 @@ public class Answer implements Serializable {
             "id=" + getId() +
             ", text='" + getText() + "'" +
             ", time='" + getTime() + "'" +
+            ", isCorrect='" + isIsCorrect() + "'" +
+            ", points=" + getPoints() +
             "}";
     }
 }

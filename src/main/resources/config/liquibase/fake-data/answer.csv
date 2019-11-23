@@ -1,11 +1,11 @@
-id;text;time
-1;mobile Fish;2019-11-21T02:05:44
-2;Savings Account Dam;2019-11-21T18:24:31
-3;Trace;2019-11-21T12:47:56
-4;Metal deposit;2019-11-21T19:27:15
-5;transmitter Implementation Electronics;2019-11-20T20:59:42
-6;Money Market Account;2019-11-21T06:07:42
-7;Grocery Home;2019-11-21T08:12:48
-8;enable Gorgeous Frozen Pants;2019-11-21T15:13:17
-9;Licensed Savings Account;2019-11-21T11:37:44
-10;Planner Canyon;2019-11-21T00:10:10
+id;text;time;is_correct;points
+1;mobile Fish;2019-11-23T01:48:15;true;59685
+2;Dam;2019-11-23T18:07:02;false;45924
+3;seamless Metal deposit;2019-11-23T19:09:46;true;72199
+4;Implementation Electronics Officer;2019-11-23T05:41:50;false;61165
+5;Grocery Home;2019-11-23T07:55:20;true;39986
+6;Gorgeous Frozen Pants;2019-11-23T14:55:48;false;9060
+7;Savings Account syndicate Planner;2019-11-23T09:18:52;false;85994
+8;Yuan Renminbi Centers;2019-11-23T20:11:54;true;94220
+9;South Dakota envisioneer Music;2019-11-23T14:58:31;true;24102
+10;Bahamian Dollar Investment Account;2019-11-23T00:31:12;false;17336
