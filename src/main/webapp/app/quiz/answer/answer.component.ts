@@ -68,6 +68,9 @@ export class AnswerComponent implements OnInit, AfterViewInit, OnDestroy {
     this.activeModal.dismiss('cancel');
   }
 
+  // TODO
+  fetchQuestion() {}
+
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();

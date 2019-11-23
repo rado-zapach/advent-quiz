@@ -1,30 +1,48 @@
 <div class="modal-header">
-    <h4 class="modal-title">{{question.text}}</h4>
+    <h4 class="modal-title">Day {{question.time.date()}}</h4>
     <button aria-label="Close" data-dismiss="modal" class="close" type="button" (click)="activeModal.dismiss('closed')">
         <span aria-hidden="true">x</span>
     </button>
 </div>
 <div class="modal-body">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <form class="form" role="form" (ngSubmit)="onSubmit()" [formGroup]="answerForm">
-                <div class="form-group" [ngSwitch]="isFreeText">
-                    <input *ngSwitchCase="true" type="text" class="form-control" id="answer" name="answer"
-                           placeholder="Your answer"
-                           formControlName="answer">
-                    <ng-container *ngSwitchCase="false">
-                        <div *ngFor="let choice of choices; let i = index" class="form-check">
-                            <input type="radio" class="form-check-input" id="choice-answer-{{i}}" name="answer"
-                                   value="{{choice}}"
+    <ng-container [ngSwitch]="question.text === undefined">
+        <ng-container *ngSwitchCase="true">
+            <p>
+                <fa-icon class="row justify-content-center" [icon]="'question'" size="4x"></fa-icon>
+            </p>
+            <p>
+                <button class="btn btn-primary" (click)="fetchQuestion()">Refresh</button>
+            </p>
+            <div class="alert alert-info">Opens at {{question.time.format("HH:mm:ss")}}</div>
+        </ng-container>
+        <ng-container *ngSwitchCase="false">
+            <p>{{question.text}}</p>
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <form id="answer-form" class="form" role="form" (ngSubmit)="onSubmit()" [formGroup]="answerForm">
+                        <div class="form-group" [ngSwitch]="isFreeText">
+                            <input *ngSwitchCase="true" type="text" class="form-control" id="answer" name="answer"
+                                   placeholder="Your answer"
                                    formControlName="answer">
-                            <label class="form-check-label" for="choice-answer-{{i}}">{{choice}}</label>
+                            <ng-container *ngSwitchCase="false">
+                                <div *ngFor="let choice of choices; let i = index" class="form-check">
+                                    <input type="radio" class="form-check-input" id="choice-answer-{{i}}" name="answer"
+                                           value="{{choice}}"
+                                           formControlName="answer">
+                                    <label class="form-check-label" for="choice-answer-{{i}}">{{choice}}</label>
+                                </div>
+                            </ng-container>
                         </div>
-                    </ng-container>
+                    </form>
                 </div>
-                <div *ngIf="saveCounter > 0" class="alert alert-success">Your answer was saved <span *ngIf="saveCounter > 1">({{saveCounter}}x)</span></div>
-                <p></p>
-                <button type="submit" class="btn btn-primary" [disabled]="isAnswerEmpty">Submit the answer</button>
-            </form>
-        </div>
-    </div>
+            </div>
+            <p>
+                <button type="submit" class="btn btn-primary" form="answer-form" [disabled]="isAnswerEmpty">
+                    Submit the answer
+                </button>
+            </p>
+            <div *ngIf="saveCounter > 0" class="alert alert-success">Your answer was saved <span
+                *ngIf="saveCounter > 1">({{saveCounter}}x)</span></div>
+        </ng-container>
+    </ng-container>
 </div>
