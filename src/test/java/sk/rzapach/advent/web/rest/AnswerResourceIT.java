@@ -6,6 +6,7 @@ import sk.rzapach.advent.domain.Question;
 import sk.rzapach.advent.domain.User;
 import sk.rzapach.advent.repository.AnswerRepository;
 import sk.rzapach.advent.service.AnswerService;
+import sk.rzapach.advent.service.UserService;
 import sk.rzapach.advent.web.rest.errors.ExceptionTranslator;
 import sk.rzapach.advent.service.dto.AnswerCriteria;
 import sk.rzapach.advent.service.AnswerQueryService;
@@ -56,6 +57,9 @@ public class AnswerResourceIT {
     private AnswerQueryService answerQueryService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -77,7 +81,7 @@ public class AnswerResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final AnswerResource answerResource = new AnswerResource(answerService, answerQueryService);
+        final AnswerResource answerResource = new AnswerResource(answerService, answerQueryService, userService);
         this.restAnswerMockMvc = MockMvcBuilders.standaloneSetup(answerResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -169,7 +173,7 @@ public class AnswerResourceIT {
             .andExpect(jsonPath("$.[*].text").value(hasItem(DEFAULT_TEXT)))
             .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getAnswer() throws Exception {

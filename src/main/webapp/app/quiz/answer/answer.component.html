@@ -43,6 +43,7 @@
             </p>
             <div *ngIf="saveCounter > 0" class="alert alert-success">Your answer was saved <span
                 *ngIf="saveCounter > 1">({{saveCounter}}x)</span></div>
+            <div *ngIf="saveDate" class="alert alert-info">Saved on {{saveDate.format("DD.MM.YYYY HH:mm:ss")}}</div>
         </ng-container>
     </ng-container>
 </div>
