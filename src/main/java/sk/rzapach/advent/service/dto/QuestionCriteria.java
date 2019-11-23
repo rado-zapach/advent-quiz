@@ -37,6 +37,8 @@ public class QuestionCriteria implements Serializable, Criteria {
 
     private InstantFilter time;
 
+    private BooleanFilter showAnswer;
+
     private LongFilter answersId;
 
     public QuestionCriteria(){
@@ -49,6 +51,7 @@ public class QuestionCriteria implements Serializable, Criteria {
         this.icon = other.icon == null ? null : other.icon.copy();
         this.answer = other.answer == null ? null : other.answer.copy();
         this.time = other.time == null ? null : other.time.copy();
+        this.showAnswer = other.showAnswer == null ? null : other.showAnswer.copy();
         this.answersId = other.answersId == null ? null : other.answersId.copy();
     }
 
@@ -105,6 +108,14 @@ public class QuestionCriteria implements Serializable, Criteria {
         this.time = time;
     }
 
+    public BooleanFilter getShowAnswer() {
+        return showAnswer;
+    }
+
+    public void setShowAnswer(BooleanFilter showAnswer) {
+        this.showAnswer = showAnswer;
+    }
+
     public LongFilter getAnswersId() {
         return answersId;
     }
@@ -130,6 +141,7 @@ public class QuestionCriteria implements Serializable, Criteria {
             Objects.equals(icon, that.icon) &&
             Objects.equals(answer, that.answer) &&
             Objects.equals(time, that.time) &&
+            Objects.equals(showAnswer, that.showAnswer) &&
             Objects.equals(answersId, that.answersId);
     }
 
@@ -142,6 +154,7 @@ public class QuestionCriteria implements Serializable, Criteria {
         icon,
         answer,
         time,
+        showAnswer,
         answersId
         );
     }
@@ -155,6 +168,7 @@ public class QuestionCriteria implements Serializable, Criteria {
                 (icon != null ? "icon=" + icon + ", " : "") +
                 (answer != null ? "answer=" + answer + ", " : "") +
                 (time != null ? "time=" + time + ", " : "") +
+                (showAnswer != null ? "showAnswer=" + showAnswer + ", " : "") +
                 (answersId != null ? "answersId=" + answersId + ", " : "") +
             "}";
     }

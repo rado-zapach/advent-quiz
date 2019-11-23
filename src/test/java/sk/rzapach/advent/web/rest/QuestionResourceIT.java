@@ -54,6 +54,9 @@ public class QuestionResourceIT {
     private static final Instant DEFAULT_TIME = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final Boolean DEFAULT_SHOW_ANSWER = false;
+    private static final Boolean UPDATED_SHOW_ANSWER = true;
+
     @Autowired
     private QuestionRepository questionRepository;
 
@@ -106,7 +109,8 @@ public class QuestionResourceIT {
             .choices(DEFAULT_CHOICES)
             .icon(DEFAULT_ICON)
             .answer(DEFAULT_ANSWER)
-            .time(DEFAULT_TIME);
+            .time(DEFAULT_TIME)
+            .showAnswer(DEFAULT_SHOW_ANSWER);
         return question;
     }
     /**
@@ -121,7 +125,8 @@ public class QuestionResourceIT {
             .choices(UPDATED_CHOICES)
             .icon(UPDATED_ICON)
             .answer(UPDATED_ANSWER)
-            .time(UPDATED_TIME);
+            .time(UPDATED_TIME)
+            .showAnswer(UPDATED_SHOW_ANSWER);
         return question;
     }
 
@@ -150,6 +155,7 @@ public class QuestionResourceIT {
         assertThat(testQuestion.getIcon()).isEqualTo(DEFAULT_ICON);
         assertThat(testQuestion.getAnswer()).isEqualTo(DEFAULT_ANSWER);
         assertThat(testQuestion.getTime()).isEqualTo(DEFAULT_TIME);
+        assertThat(testQuestion.isShowAnswer()).isEqualTo(DEFAULT_SHOW_ANSWER);
     }
 
     @Test
@@ -205,7 +211,8 @@ public class QuestionResourceIT {
             .andExpect(jsonPath("$.[*].choices").value(hasItem(DEFAULT_CHOICES)))
             .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON)))
             .andExpect(jsonPath("$.[*].answer").value(hasItem(DEFAULT_ANSWER)))
-            .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())));
+            .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())))
+            .andExpect(jsonPath("$.[*].showAnswer").value(hasItem(DEFAULT_SHOW_ANSWER.booleanValue())));
     }
     
     @Test
@@ -223,7 +230,8 @@ public class QuestionResourceIT {
             .andExpect(jsonPath("$.choices").value(DEFAULT_CHOICES))
             .andExpect(jsonPath("$.icon").value(DEFAULT_ICON))
             .andExpect(jsonPath("$.answer").value(DEFAULT_ANSWER))
-            .andExpect(jsonPath("$.time").value(DEFAULT_TIME.toString()));
+            .andExpect(jsonPath("$.time").value(DEFAULT_TIME.toString()))
+            .andExpect(jsonPath("$.showAnswer").value(DEFAULT_SHOW_ANSWER.booleanValue()));
     }
 
 
@@ -612,6 +620,58 @@ public class QuestionResourceIT {
 
     @Test
     @Transactional
+    public void getAllQuestionsByShowAnswerIsEqualToSomething() throws Exception {
+        // Initialize the database
+        questionRepository.saveAndFlush(question);
+
+        // Get all the questionList where showAnswer equals to DEFAULT_SHOW_ANSWER
+        defaultQuestionShouldBeFound("showAnswer.equals=" + DEFAULT_SHOW_ANSWER);
+
+        // Get all the questionList where showAnswer equals to UPDATED_SHOW_ANSWER
+        defaultQuestionShouldNotBeFound("showAnswer.equals=" + UPDATED_SHOW_ANSWER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllQuestionsByShowAnswerIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        questionRepository.saveAndFlush(question);
+
+        // Get all the questionList where showAnswer not equals to DEFAULT_SHOW_ANSWER
+        defaultQuestionShouldNotBeFound("showAnswer.notEquals=" + DEFAULT_SHOW_ANSWER);
+
+        // Get all the questionList where showAnswer not equals to UPDATED_SHOW_ANSWER
+        defaultQuestionShouldBeFound("showAnswer.notEquals=" + UPDATED_SHOW_ANSWER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllQuestionsByShowAnswerIsInShouldWork() throws Exception {
+        // Initialize the database
+        questionRepository.saveAndFlush(question);
+
+        // Get all the questionList where showAnswer in DEFAULT_SHOW_ANSWER or UPDATED_SHOW_ANSWER
+        defaultQuestionShouldBeFound("showAnswer.in=" + DEFAULT_SHOW_ANSWER + "," + UPDATED_SHOW_ANSWER);
+
+        // Get all the questionList where showAnswer equals to UPDATED_SHOW_ANSWER
+        defaultQuestionShouldNotBeFound("showAnswer.in=" + UPDATED_SHOW_ANSWER);
+    }
+
+    @Test
+    @Transactional
+    public void getAllQuestionsByShowAnswerIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        questionRepository.saveAndFlush(question);
+
+        // Get all the questionList where showAnswer is not null
+        defaultQuestionShouldBeFound("showAnswer.specified=true");
+
+        // Get all the questionList where showAnswer is null
+        defaultQuestionShouldNotBeFound("showAnswer.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllQuestionsByAnswersIsEqualToSomething() throws Exception {
         // Initialize the database
         questionRepository.saveAndFlush(question);
@@ -641,7 +701,8 @@ public class QuestionResourceIT {
             .andExpect(jsonPath("$.[*].choices").value(hasItem(DEFAULT_CHOICES)))
             .andExpect(jsonPath("$.[*].icon").value(hasItem(DEFAULT_ICON)))
             .andExpect(jsonPath("$.[*].answer").value(hasItem(DEFAULT_ANSWER)))
-            .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())));
+            .andExpect(jsonPath("$.[*].time").value(hasItem(DEFAULT_TIME.toString())))
+            .andExpect(jsonPath("$.[*].showAnswer").value(hasItem(DEFAULT_SHOW_ANSWER.booleanValue())));
 
         // Check, that the count call also returns 1
         restQuestionMockMvc.perform(get("/api/questions/count?sort=id,desc&" + filter))
@@ -693,7 +754,8 @@ public class QuestionResourceIT {
             .choices(UPDATED_CHOICES)
             .icon(UPDATED_ICON)
             .answer(UPDATED_ANSWER)
-            .time(UPDATED_TIME);
+            .time(UPDATED_TIME)
+            .showAnswer(UPDATED_SHOW_ANSWER);
 
         restQuestionMockMvc.perform(put("/api/questions")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -709,6 +771,7 @@ public class QuestionResourceIT {
         assertThat(testQuestion.getIcon()).isEqualTo(UPDATED_ICON);
         assertThat(testQuestion.getAnswer()).isEqualTo(UPDATED_ANSWER);
         assertThat(testQuestion.getTime()).isEqualTo(UPDATED_TIME);
+        assertThat(testQuestion.isShowAnswer()).isEqualTo(UPDATED_SHOW_ANSWER);
     }
 
     @Test

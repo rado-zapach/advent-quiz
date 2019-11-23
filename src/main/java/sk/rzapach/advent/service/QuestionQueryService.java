@@ -100,6 +100,9 @@ public class QuestionQueryService extends QueryService<Question> {
             if (criteria.getTime() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getTime(), Question_.time));
             }
+            if (criteria.getShowAnswer() != null) {
+                specification = specification.and(buildSpecification(criteria.getShowAnswer(), Question_.showAnswer));
+            }
             if (criteria.getAnswersId() != null) {
                 specification = specification.and(buildSpecification(criteria.getAnswersId(),
                     root -> root.join(Question_.answers, JoinType.LEFT).get(Answer_.id)));

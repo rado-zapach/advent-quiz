@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Question(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', currentDate);
+      elemDefault = new Question(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', currentDate, false);
     });
 
     describe('Service methods', () => {
@@ -75,7 +75,8 @@ describe('Service Tests', () => {
             choices: 'BBBBBB',
             icon: 'BBBBBB',
             answer: 'BBBBBB',
-            time: currentDate.format(DATE_TIME_FORMAT)
+            time: currentDate.format(DATE_TIME_FORMAT),
+            showAnswer: true
           },
           elemDefault
         );
@@ -102,7 +103,8 @@ describe('Service Tests', () => {
             choices: 'BBBBBB',
             icon: 'BBBBBB',
             answer: 'BBBBBB',
-            time: currentDate.format(DATE_TIME_FORMAT)
+            time: currentDate.format(DATE_TIME_FORMAT),
+            showAnswer: true
           },
           elemDefault
         );

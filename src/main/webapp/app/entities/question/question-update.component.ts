@@ -23,7 +23,8 @@ export class QuestionUpdateComponent implements OnInit {
     choices: [],
     icon: [],
     answer: [],
-    time: [null, [Validators.required]]
+    time: [null, [Validators.required]],
+    showAnswer: []
   });
 
   constructor(protected questionService: QuestionService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -42,7 +43,8 @@ export class QuestionUpdateComponent implements OnInit {
       choices: question.choices,
       icon: question.icon,
       answer: question.answer,
-      time: question.time != null ? question.time.format(DATE_TIME_FORMAT) : null
+      time: question.time != null ? question.time.format(DATE_TIME_FORMAT) : null,
+      showAnswer: question.showAnswer
     });
   }
 
@@ -68,7 +70,8 @@ export class QuestionUpdateComponent implements OnInit {
       choices: this.editForm.get(['choices']).value,
       icon: this.editForm.get(['icon']).value,
       answer: this.editForm.get(['answer']).value,
-      time: this.editForm.get(['time']).value != null ? moment(this.editForm.get(['time']).value, DATE_TIME_FORMAT) : undefined
+      time: this.editForm.get(['time']).value != null ? moment(this.editForm.get(['time']).value, DATE_TIME_FORMAT) : undefined,
+      showAnswer: this.editForm.get(['showAnswer']).value
     };
   }
 

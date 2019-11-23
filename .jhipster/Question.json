@@ -32,6 +32,10 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "showAnswer",
+            "fieldType": "Boolean"
         }
     ],
     "changelogDate": "20191121204539",

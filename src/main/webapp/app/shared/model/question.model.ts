@@ -8,6 +8,7 @@ export interface IQuestion {
   icon?: string;
   answer?: string;
   time?: Moment;
+  showAnswer?: boolean;
   answers?: IAnswer[];
 }
 
@@ -19,6 +20,9 @@ export class Question implements IQuestion {
     public icon?: string,
     public answer?: string,
     public time?: Moment,
+    public showAnswer?: boolean,
     public answers?: IAnswer[]
-  ) {}
+  ) {
+    this.showAnswer = this.showAnswer || false;
+  }
 }

@@ -41,6 +41,9 @@ public class Question implements Serializable {
     @Column(name = "time", nullable = false)
     private Instant time;
 
+    @Column(name = "show_answer")
+    private Boolean showAnswer;
+
     @OneToMany(mappedBy = "question")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Answer> answers = new HashSet<>();
@@ -119,6 +122,19 @@ public class Question implements Serializable {
         this.time = time;
     }
 
+    public Boolean isShowAnswer() {
+        return showAnswer;
+    }
+
+    public Question showAnswer(Boolean showAnswer) {
+        this.showAnswer = showAnswer;
+        return this;
+    }
+
+    public void setShowAnswer(Boolean showAnswer) {
+        this.showAnswer = showAnswer;
+    }
+
     public Set<Answer> getAnswers() {
         return answers;
     }
@@ -170,6 +186,7 @@ public class Question implements Serializable {
             ", icon='" + getIcon() + "'" +
             ", answer='" + getAnswer() + "'" +
             ", time='" + getTime() + "'" +
+            ", showAnswer='" + isShowAnswer() + "'" +
             "}";
     }
 }
