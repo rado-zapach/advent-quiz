@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
@@ -7,6 +7,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IAnswer } from 'app/shared/model/answer.model';
 import { AnswerService } from './answer.service';
 import { AnswerDeleteDialogComponent } from './answer-delete-dialog.component';
+import * as moment from 'moment';
+import { QuestionService } from 'app/entities/question/question.service';
+import { IQuestion } from 'app/shared/model/question.model';
 
 @Component({
   selector: 'jhi-answer',
@@ -14,18 +17,41 @@ import { AnswerDeleteDialogComponent } from './answer-delete-dialog.component';
 })
 export class AnswerComponent implements OnInit, OnDestroy {
   answers: IAnswer[];
+  questions: IQuestion[];
+  selectedQuestion: IQuestion;
   eventSubscriber: Subscription;
 
-  constructor(protected answerService: AnswerService, protected eventManager: JhiEventManager, protected modalService: NgbModal) {}
+  constructor(
+    protected answerService: AnswerService,
+    protected eventManager: JhiEventManager,
+    protected modalService: NgbModal,
+    protected questionService: QuestionService
+  ) {}
 
-  loadAll() {
-    this.answerService.query().subscribe((res: HttpResponse<IAnswer[]>) => {
-      this.answers = res.body;
+  loadAllAnswers(question: IQuestion) {
+    this.selectedQuestion = question;
+    this.answerService.query({ 'questionId.equals': question.id }).subscribe((res: HttpResponse<IAnswer[]>) => {
+      const sortedAnswers = res.body.filter(a => a.time).sort((a, b) => moment(b.time).diff(moment(a.time)));
+
+      // TODO:(
+      const latestAnswersFromUsers: IAnswer[] = [];
+      sortedAnswers.forEach(answer => {
+        if (!latestAnswersFromUsers.map(a => a.user.id).includes(answer.user.id)) {
+          latestAnswersFromUsers.push(answer);
+        }
+      });
+      this.answers = latestAnswersFromUsers;
+    });
+  }
+
+  loadAllQuestions() {
+    this.questionService.query().subscribe((res: HttpResponse<IQuestion[]>) => {
+      this.questions = res.body.filter(a => a.time).sort((a, b) => moment(a.time).diff(moment(b.time)));
     });
   }
 
   ngOnInit() {
-    this.loadAll();
+    this.loadAllQuestions();
     this.registerChangeInAnswers();
   }
 
@@ -38,7 +64,7 @@ export class AnswerComponent implements OnInit, OnDestroy {
   }
 
   registerChangeInAnswers() {
-    this.eventSubscriber = this.eventManager.subscribe('answerListModification', () => this.loadAll());
+    this.eventSubscriber = this.eventManager.subscribe('answerListModification', () => this.loadAllAnswers(this.selectedQuestion));
   }
 
   delete(answer: IAnswer) {

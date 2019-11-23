@@ -1,13 +1,35 @@
 <div>
-    <h2 id="page-heading">
-        <span>Answers</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-answer" [routerLink]="['/answer/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
-            <span >
-            Create a new Answer
-            </span>
-        </button>
+    <h2>
+        <span>Question</span>
+        <div ngbDropdown class="d-inline-block float-right">
+            <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Choose a question by date</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button *ngFor="let question of questions" ngbDropdownItem
+                        (click)="loadAllAnswers(question)">{{question.time?.format("DD.MM.YYYY HH:mm:ss")}}</button>
+            </div>
+        </div>
     </h2>
+    <div *ngIf="selectedQuestion" class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col"><span>ID</span></th>
+                <th scope="col"><span>Text</span></th>
+                <th scope="col"><span>Time</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{selectedQuestion.id}}</td>
+                <td><a [routerLink]="['/question', selectedQuestion.id, 'view' ]">{{selectedQuestion.text}}</a></td>
+                <td>{{selectedQuestion.time?.format("DD.MM.YYYY HH:mm:ss")}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 id="page-heading">Answers</h2>
+
     <jhi-alert-error></jhi-alert-error>
     <jhi-alert></jhi-alert>
     <br/>
@@ -18,24 +40,18 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr>
-            <th scope="col" ><span>ID</span></th>
-            <th scope="col" ><span>Text</span></th>
-            <th scope="col" ><span>Time</span></th>
-            <th scope="col" ><span>Question</span></th>
-            <th scope="col" ><span>User</span></th>
-            <th scope="col"></th>
+                <th scope="col"><span>ID</span></th>
+                <th scope="col"><span>Text</span></th>
+                <th scope="col"><span>Time</span></th>
+                <th scope="col"><span>User</span></th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let answer of answers ;trackBy: trackId">
                 <td><a [routerLink]="['/answer', answer.id, 'view' ]">{{answer.id}}</a></td>
                 <td>{{answer.text}}</td>
-                <td>{{answer.time | date:'medium'}}</td>
-                <td>
-                    <div *ngIf="answer.question">
-                        <a [routerLink]="['/question', answer.question?.id, 'view' ]" >{{answer.question?.text}}</a>
-                    </div>
-                </td>
+                <td>{{answer.time.format("DD.MM.YYYY HH:mm:ss")}}</td>
                 <td>
                     {{answer.user?.login}}
                 </td>
