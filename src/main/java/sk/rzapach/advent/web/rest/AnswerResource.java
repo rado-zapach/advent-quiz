@@ -87,7 +87,9 @@ public class AnswerResource {
         }
 
         Optional<Question> question = questionService.findOne(answer.getQuestion().getId());
-        question.ifPresent(q -> answer.setIsCorrect(answer.getText().equals(q.getAnswer())));
+
+        answer.setIsCorrect(false);
+        question.ifPresent(q -> answer.setIsCorrect(q.getAnswer() != null && q.getAnswer().length() != 0 && q.getAnswer().equals(answer.getText())));
 
         Answer result = answerService.save(answer);
         return ResponseEntity.created(new URI("/api/answers/" + result.getId()))
