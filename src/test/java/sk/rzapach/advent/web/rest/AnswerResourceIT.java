@@ -6,6 +6,7 @@ import sk.rzapach.advent.domain.Question;
 import sk.rzapach.advent.domain.User;
 import sk.rzapach.advent.repository.AnswerRepository;
 import sk.rzapach.advent.service.AnswerService;
+import sk.rzapach.advent.service.QuestionService;
 import sk.rzapach.advent.service.UserService;
 import sk.rzapach.advent.web.rest.errors.ExceptionTranslator;
 import sk.rzapach.advent.service.dto.AnswerCriteria;
@@ -67,6 +68,9 @@ public class AnswerResourceIT {
     private UserService userService;
 
     @Autowired
+    private QuestionService questionService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -88,7 +92,7 @@ public class AnswerResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final AnswerResource answerResource = new AnswerResource(answerService, answerQueryService, userService);
+        final AnswerResource answerResource = new AnswerResource(answerService, answerQueryService, userService, questionService);
         this.restAnswerMockMvc = MockMvcBuilders.standaloneSetup(answerResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
