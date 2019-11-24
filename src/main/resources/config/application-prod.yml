@@ -59,10 +59,15 @@ spring:
   liquibase:
     contexts: prod
   mail:
-    host: localhost
-    port: 25
-    username:
-    password:
+    host: smtp.gmail.com
+    port: 587
+    username: adventquizmail@gmail.com #Replace this field with your Gmail username.
+    password: #Replace this field with your Gmail password/App password.
+    protocol: smtp
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+      ssl.trust: smtp.gmail.com
   thymeleaf:
     cache: true
 
@@ -111,7 +116,7 @@ jhipster:
       # security key (this key should be unique for your application, and kept secret)
       key: 67a643990a39e19998760f3053c99877b0f4ab12ad28d89d77efeedbbbbd2c32d6fb16b31fd671363929acd4858f8e23bec2
   mail: # specific JHipster mail property, for standard properties see MailProperties
-    base-url: http://my-server-url-to-change # Modify according to your server's URL
+    base-url: http://159.89.213.24 # Modify according to your server's URL
   metrics:
     logs: # Reports metrics in the logs
       enabled: false
