@@ -5,13 +5,13 @@
     </button>
 </div>
 <div class="modal-body">
-    <ng-container [ngSwitch]="question.text === undefined">
+    <ng-container [ngSwitch]="question.text === ''">
         <ng-container *ngSwitchCase="true">
             <p>
                 <fa-icon class="row justify-content-center" [icon]="'question'" size="4x"></fa-icon>
             </p>
             <p>
-                <button class="btn btn-primary" (click)="fetchQuestion()">Refresh</button>
+                <button class="btn btn-primary" (click)="onRefreshClick()">Refresh</button>
             </p>
             <div class="alert alert-info">Opens at {{question.time.format("HH:mm:ss")}}</div>
         </ng-container>
@@ -36,8 +36,10 @@
                     </form>
                 </div>
             </div>
-            <p>
-                <button type="submit" class="btn btn-primary" form="answer-form" [disabled]="isAnswerEmpty">
+            <div *ngIf="question.showAnswer" class="alert alert-success">{{question.answer}}</div>
+            <p *ngIf="!question.showAnswer">
+                <button type="submit" class="btn btn-primary" form="answer-form"
+                        [disabled]="isAnswerEmpty">
                     Submit the answer
                 </button>
             </p>

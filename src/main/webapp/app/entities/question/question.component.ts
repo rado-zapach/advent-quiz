@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
@@ -20,7 +20,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
 
   loadAll() {
     this.questionService.query().subscribe((res: HttpResponse<IQuestion[]>) => {
-      this.questions = res.body;
+      this.questions = res.body.sort((a, b) => a.time.diff(b.time));
     });
   }
 

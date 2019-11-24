@@ -31,7 +31,7 @@ export class AnswerComponent implements OnInit, OnDestroy {
   loadAllAnswers(question: IQuestion) {
     this.selectedQuestion = question;
     this.answerService.query({ 'questionId.equals': question.id }).subscribe((res: HttpResponse<IAnswer[]>) => {
-      const sortedAnswers = res.body.filter(a => a.time).sort((a, b) => moment(b.time).diff(moment(a.time)));
+      const sortedAnswers = res.body.filter(a => a.time).sort((a, b) => b.time.diff(a.time));
 
       // TODO:(
       const latestAnswersFromUsers: IAnswer[] = [];

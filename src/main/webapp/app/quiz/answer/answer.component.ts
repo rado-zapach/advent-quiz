@@ -54,13 +54,7 @@ export class AnswerComponent implements OnInit, OnDestroy {
     this.fetchQuestion()
       .pipe(switchMap(q => this.fetchAnswer().pipe(map(a => [q, a] as [Question, Answer]))))
       .subscribe(([q, a]) => {
-        this.question = q;
-        this.isFreeText = !this.question.choices || this.question.choices.length === 0;
-        if (!this.isFreeText) {
-          this.choices = this.question.choices.split(';');
-        } else {
-          setTimeout(() => this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#answer'), 'focus', []), 0);
-        }
+        this.questionInit(q);
         if (a) {
           this.answerForm.setValue({ answer: a.text });
           this.saveDate = moment(a.time);
@@ -105,6 +99,20 @@ export class AnswerComponent implements OnInit, OnDestroy {
 
   fetchQuestion(): Observable<Question> {
     return this.questionService.find(this.question.id).pipe(map((response: HttpResponse<Question>) => response.body));
+  }
+
+  onRefreshClick() {
+    this.fetchQuestion().subscribe(q => this.questionInit(q));
+  }
+
+  questionInit(q: Question) {
+    this.question = q;
+    this.isFreeText = !this.question.choices || this.question.choices.length === 0;
+    if (!this.isFreeText) {
+      this.choices = this.question.choices.split(';');
+    } else {
+      setTimeout(() => this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#answer'), 'focus', []), 0);
+    }
   }
 
   ngOnDestroy() {
