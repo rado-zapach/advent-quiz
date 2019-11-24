@@ -9,10 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sk.rzapach.advent.domain.Answer;
+import sk.rzapach.advent.domain.Question;
 import sk.rzapach.advent.domain.User;
 import sk.rzapach.advent.security.AuthoritiesConstants;
 import sk.rzapach.advent.service.AnswerQueryService;
 import sk.rzapach.advent.service.AnswerService;
+import sk.rzapach.advent.service.QuestionService;
 import sk.rzapach.advent.service.UserService;
 import sk.rzapach.advent.service.dto.AnswerCriteria;
 import sk.rzapach.advent.web.rest.errors.BadRequestAlertException;
@@ -40,11 +42,13 @@ public class AnswerResource {
     private final AnswerService answerService;
     private final AnswerQueryService answerQueryService;
     private final UserService userService;
+    private final QuestionService questionService;
 
-    public AnswerResource(AnswerService answerService, AnswerQueryService answerQueryService, UserService userService) {
+    public AnswerResource(AnswerService answerService, AnswerQueryService answerQueryService, UserService userService, QuestionService questionService) {
         this.answerService = answerService;
         this.answerQueryService = answerQueryService;
         this.userService = userService;
+        this.questionService = questionService;
     }
 
     private User getLoggedUser() {
@@ -81,6 +85,9 @@ public class AnswerResource {
             answer.setTime(Instant.now());
             answer.setUser(user);
         }
+
+        Optional<Question> question = questionService.findOne(answer.getQuestion().getId());
+        question.ifPresent(q -> answer.setIsCorrect(answer.getText().equals(q.getAnswer())));
 
         Answer result = answerService.save(answer);
         return ResponseEntity.created(new URI("/api/answers/" + result.getId()))
