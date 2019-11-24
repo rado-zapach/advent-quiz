@@ -3,12 +3,12 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { map } from 'rxjs/operators';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IAnswer } from 'app/shared/model/answer.model';
+import { IQuestion } from 'app/shared/model/question.model';
 
 type EntityResponseType = HttpResponse<IAnswer>;
 type EntityArrayResponseType = HttpResponse<IAnswer[]>;
@@ -16,6 +16,7 @@ type EntityArrayResponseType = HttpResponse<IAnswer[]>;
 @Injectable({ providedIn: 'root' })
 export class AnswerService {
   public resourceUrl = SERVER_API_URL + 'api/answers';
+  public selectedQuestion: IQuestion;
 
   constructor(protected http: HttpClient) {}
 

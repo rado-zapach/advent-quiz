@@ -26,10 +26,16 @@ export class AnswerComponent implements OnInit, OnDestroy {
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
     protected questionService: QuestionService
-  ) {}
+  ) {
+    this.selectedQuestion = this.answerService.selectedQuestion;
+    if (this.selectedQuestion) {
+      this.loadAllAnswers(this.selectedQuestion);
+    }
+  }
 
   loadAllAnswers(question: IQuestion) {
     this.selectedQuestion = question;
+    this.answerService.selectedQuestion = question;
     this.answerService.query({ 'questionId.equals': question.id }).subscribe((res: HttpResponse<IAnswer[]>) => {
       const sortedAnswers = res.body.filter(a => a.time).sort((a, b) => b.time.diff(a.time));
 
