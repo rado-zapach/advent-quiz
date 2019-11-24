@@ -77,4 +77,8 @@ export class AnswerComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(AnswerDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.answer = answer;
   }
+
+  getIcon(b: boolean) {
+    return b ? 'check' : 'times';
+  }
 }

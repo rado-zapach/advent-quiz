@@ -54,7 +54,7 @@
                 <td><a [routerLink]="['/answer', answer.id, 'view' ]">{{answer.id}}</a></td>
                 <td>{{answer.text}}</td>
                 <td>{{answer.time.format("DD.MM.YYYY HH:mm:ss")}}</td>
-                <td>{{answer.isCorrect}}</td>
+                <td><fa-icon [icon]="getIcon(answer.isCorrect)"></fa-icon></td>
                 <td>{{answer.points}}</td>
                 <td>
                     {{answer.user?.login}}
