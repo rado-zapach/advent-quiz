@@ -92,6 +92,7 @@ public class AnswerResource {
         question.ifPresent(q -> answer.setIsCorrect(q.getAnswer() != null && q.getAnswer().length() != 0 && q.getAnswer().equals(answer.getText())));
 
         Answer result = answerService.save(answer);
+        sanitizeAnswer(result);
         return ResponseEntity.created(new URI("/api/answers/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -141,6 +142,7 @@ public class AnswerResource {
         User user = getLoggedUser();
         if (!isAdmin(user)) {
             entityList.removeIf(a -> !user.equals(a.getUser()));
+            entityList.forEach(this::sanitizeAnswer);
         }
 
         return ResponseEntity.ok().body(entityList);
@@ -197,5 +199,12 @@ public class AnswerResource {
 
         answerService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
+    }
+
+    private void sanitizeAnswer(Answer answer) {
+        answer.setIsCorrect(null);
+        answer.setPoints(null);
+        answer.setQuestion(null);
+        answer.setUser(null);
     }
 }
