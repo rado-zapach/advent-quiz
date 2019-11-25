@@ -1,9 +1,10 @@
 <div>
     <h2 id="page-heading">
         <span>Questions</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-question" [routerLink]="['/question/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-question"
+                [routerLink]="['/question/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span >
+            <span>
             Create a new Question
             </span>
         </button>
@@ -18,14 +19,15 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr>
-            <th scope="col" ><span>ID</span></th>
-            <th scope="col" ><span>Text</span></th>
-            <th scope="col" ><span>Choices</span></th>
-            <th scope="col" ><span>Icon</span></th>
-            <th scope="col" ><span>Answer</span></th>
-            <th scope="col" ><span>Time</span></th>
-            <th scope="col" ><span>Show Answer</span></th>
-            <th scope="col"></th>
+                <th scope="col"><span>ID</span></th>
+                <th scope="col"><span>Text</span></th>
+                <th scope="col"><span>Choices</span></th>
+                <th scope="col"><span>Icon</span></th>
+                <th scope="col"><span>Icon preview</span></th>
+                <th scope="col"><span>Answer</span></th>
+                <th scope="col"><span>Time</span></th>
+                <th scope="col"><span>Show Answer</span></th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -33,7 +35,15 @@
                 <td><a [routerLink]="['/question', question.id, 'view' ]">{{question.id}}</a></td>
                 <td>{{question.text}}</td>
                 <td>{{question.choices}}</td>
-                <td>{{question.icon}}</td>
+                <td>
+                    {{question.icon}}
+                </td>
+                <td>
+                    <ng-container [ngSwitch]="question.icon && question.icon.startsWith('http')">
+                        <img style="height: 60px;" *ngSwitchCase="true" [src]="question.icon">
+                        <fa-icon *ngSwitchCase="false" [icon]="question.icon" class="fa-3x"></fa-icon>
+                    </ng-container>
+                </td>
                 <td>{{question.answer}}</td>
                 <td>{{question.time | date:'medium'}}</td>
                 <td>{{question.showAnswer}}</td>
