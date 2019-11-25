@@ -21,12 +21,14 @@
                 <div class="col-md-12">
                     <form id="answer-form" class="form" role="form" (ngSubmit)="onSubmit()" [formGroup]="answerForm">
                         <div class="form-group" [ngSwitch]="isFreeText">
-                            <input *ngSwitchCase="true" type="text" class="form-control" id="answer" name="answer"
+                            <input *ngSwitchCase="true" [attr.disabled]="question.showAnswer" type="text"
+                                   class="form-control" id="answer" name="answer"
                                    placeholder="Your answer"
                                    formControlName="answer">
                             <ng-container *ngSwitchCase="false">
                                 <div *ngFor="let choice of choices; let i = index" class="form-check">
-                                    <input type="radio" class="form-check-input" id="choice-answer-{{i}}" name="answer"
+                                    <input [attr.disabled]="question.showAnswer" type="radio" class="form-check-input"
+                                           id="choice-answer-{{i}}" name="answer"
                                            value="{{choice}}"
                                            formControlName="answer">
                                     <label class="form-check-label" for="choice-answer-{{i}}">{{choice}}</label>
