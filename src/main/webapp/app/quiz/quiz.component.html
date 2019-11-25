@@ -1,7 +1,10 @@
 <div class="quiz">
     <div class="quiz-body">
         <div *ngFor="let question of questions" class="quiz-day" (click)="answerQuestion(question)">
-            <fa-icon [icon]="question.icon" class="fa-3x"></fa-icon>
+            <ng-container [ngSwitch]="question.icon && question.icon.startsWith('http')">
+                <img class="quiz-day__img" *ngSwitchCase="true" [src]="question.icon">
+                <fa-icon *ngSwitchCase="false" [icon]="question.icon" class="fa-3x"></fa-icon>
+            </ng-container>
             <div class="quiz-day__label">{{question.time.date()}}</div>
         </div>
     </div>

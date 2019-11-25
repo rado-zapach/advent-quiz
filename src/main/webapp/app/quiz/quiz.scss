@@ -1,5 +1,5 @@
 .quiz {
-  background-color: indianred;
+  background-color: #e40050;
   display: flex;
   justify-content: center;
   // TODO: move to the main.component
@@ -20,6 +20,13 @@
   justify-content: center;
   flex-direction: column;
   color: whitesmoke;
+  font-weight: bold;
+}
+
+.quiz-day__img {
+  width: 5em;
+  filter: invert(100%);
+  -webkit-filter: invert(100%);
 }
 
 .quiz-day__icon {
