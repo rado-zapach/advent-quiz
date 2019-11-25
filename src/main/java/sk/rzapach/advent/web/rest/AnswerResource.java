@@ -109,9 +109,12 @@ public class AnswerResource {
     @PutMapping("/answers")
     public ResponseEntity<Answer> updateAnswer(@RequestBody Answer answer) throws URISyntaxException {
         log.debug("REST request to update Answer : {}", answer);
-        if (answer.getId() == null) {
+
+        Optional<Answer> a = answerService.findOne(answer.getId());
+        if (!a.isPresent()) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        answer.setTime(a.get().getTime());
 
         if (!isAdmin(getLoggedUser())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
