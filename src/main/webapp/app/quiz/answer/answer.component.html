@@ -11,9 +11,14 @@
                 <fa-icon class="row justify-content-center" [icon]="'question'" size="4x"></fa-icon>
             </p>
             <p>
-                <button class="btn btn-primary" (click)="onRefreshClick()">Refresh</button>
+                <button class="btn btn-primary" (click)="onRefreshClick()">
+                    <fa-icon [icon]="'sync'"></fa-icon>
+                    Refresh
+                </button>
             </p>
-            <div class="alert alert-info">Opens at {{question.time.format("HH:mm:ss")}}</div>
+            <div class="alert alert-info">
+                <fa-icon [icon]="'clock'"></fa-icon>
+                <span>Opens at {{question.time.format("HH:mm:ss")}}</span></div>
         </ng-container>
         <ng-container *ngSwitchCase="false">
             <p>{{question.text}}</p>
@@ -40,16 +45,24 @@
                     </form>
                 </div>
             </div>
-            <div *ngIf="question.showAnswer" class="alert alert-success">{{question.answer}}</div>
+            <div *ngIf="question.showAnswer" class="alert alert-success">
+                <fa-icon [icon]="'check'"></fa-icon>
+                <span>{{question.answer}}</span></div>
             <p *ngIf="!question.showAnswer">
                 <button type="submit" class="btn btn-primary" form="answer-form"
                         [disabled]="isAnswerEmpty">
+                    <fa-icon [icon]="'paper-plane'"></fa-icon>
                     Submit the answer
                 </button>
             </p>
-            <div *ngIf="saveCounter > 0" class="alert alert-success">Your answer was saved <span
-                *ngIf="saveCounter > 1">({{saveCounter}}x)</span></div>
-            <div *ngIf="saveDate" class="alert alert-info">Saved on {{saveDate.format("DD.MM.YYYY HH:mm:ss")}}</div>
+            <div *ngIf="saveCounter > 0" class="alert alert-success">
+                <fa-icon [icon]="'check'"></fa-icon>
+                <span>Your answer was saved <span *ngIf="saveCounter > 1">({{saveCounter}}x)</span>
+                </span>
+            </div>
+            <div *ngIf="saveDate" class="alert alert-info">
+                <fa-icon [icon]="'clock'"></fa-icon>
+                <span>Saved on {{saveDate.format("DD.MM.YYYY HH:mm:ss")}}</span></div>
         </ng-container>
     </ng-container>
 </div>
