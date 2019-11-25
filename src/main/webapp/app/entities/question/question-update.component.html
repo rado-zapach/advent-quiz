@@ -7,20 +7,22 @@
                 <div class="form-group" [hidden]="!editForm.get('id').value">
                     <label for="id">ID</label>
                     <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
+                           readonly/>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_text">Text</label>
+                    <label class="form-control-label" for="field_text">Question</label>
                     <input type="text" class="form-control" name="text" id="field_text"
                            formControlName="text"/>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_choices">Choices</label>
+                    <label class="form-control-label" for="field_choices">Choices (use semicolon ; to create multiple
+                        choices or leave empty for free-text question)</label>
                     <input type="text" class="form-control" name="choices" id="field_choices"
                            formControlName="choices"/>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_icon">Icon</label>
+                    <label class="form-control-label" for="field_icon">Icon (image URL or an icon name from <a
+                        href="https://fontawesome.com/icons?d=gallery">Font Awesome</a>)</label>
                     <input type="text" class="form-control" name="icon" id="field_icon"
                            formControlName="icon"/>
                 </div>
@@ -32,15 +34,17 @@
                 <div class="form-group">
                     <label class="form-control-label" for="field_time">Time</label>
                     <div class="d-flex">
-                        <input id="field_time" type="datetime-local" class="form-control" name="time" formControlName="time" placeholder="YYYY-MM-DD HH:mm"/>
+                        <input id="field_time" type="datetime-local" class="form-control" name="time"
+                               formControlName="time" placeholder="YYYY-MM-DD HH:mm"/>
                     </div>
-                    <div *ngIf="editForm.get('time').invalid && (editForm.get('time').dirty || editForm.get('time').touched)">
+                    <div
+                        *ngIf="editForm.get('time').invalid && (editForm.get('time').dirty || editForm.get('time').touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('time').errors.required">
-                        This field is required.
+                            This field is required.
                         </small>
                         <small class="form-text text-danger"
-                            [hidden]="!editForm.get('time').errors?.ZonedDateTimelocal">
+                               [hidden]="!editForm.get('time').errors?.ZonedDateTimelocal">
                             This field should be a date and time.
                         </small>
                     </div>
@@ -53,10 +57,11 @@
 
             </div>
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving"
+                        class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
                 </button>
             </div>
