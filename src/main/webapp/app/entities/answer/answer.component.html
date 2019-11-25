@@ -5,6 +5,7 @@
             <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Choose a question by date</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button *ngFor="let question of questions" ngbDropdownItem
+                        [ngClass]="selectedQuestion && selectedQuestion.id === question.id ? 'active' : ''"
                         (click)="loadAllAnswers(question)">{{question.time?.format("DD.MM.YYYY HH:mm:ss")}}</button>
             </div>
         </div>
@@ -15,6 +16,7 @@
             <tr>
                 <th scope="col"><span>ID</span></th>
                 <th scope="col"><span>Text</span></th>
+                <th scope="col"><span>Answer</span></th>
                 <th scope="col"><span>Time</span></th>
             </tr>
             </thead>
@@ -22,6 +24,7 @@
             <tr>
                 <td>{{selectedQuestion.id}}</td>
                 <td><a [routerLink]="['/question', selectedQuestion.id, 'view' ]">{{selectedQuestion.text}}</a></td>
+                <td>{{selectedQuestion.answer}}</td>
                 <td>{{selectedQuestion.time?.format("DD.MM.YYYY HH:mm:ss")}}</td>
             </tr>
             </tbody>
@@ -54,7 +57,9 @@
                 <td><a [routerLink]="['/answer', answer.id, 'view' ]">{{answer.id}}</a></td>
                 <td>{{answer.text}}</td>
                 <td>{{answer.time.format("DD.MM.YYYY HH:mm:ss")}}</td>
-                <td><fa-icon [icon]="getIcon(answer.isCorrect)"></fa-icon></td>
+                <td>
+                    <fa-icon [icon]="getIcon(answer.isCorrect)"></fa-icon>
+                </td>
                 <td>{{answer.points}}</td>
                 <td>
                     {{answer.user?.login}}
