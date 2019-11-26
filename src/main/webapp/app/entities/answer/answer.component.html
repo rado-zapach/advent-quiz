@@ -6,7 +6,12 @@
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button *ngFor="let question of questions" ngbDropdownItem
                         [ngClass]="selectedQuestion && selectedQuestion.id === question.id ? 'active' : ''"
-                        (click)="loadAllAnswers(question)">{{question.time?.format("DD.MM.YYYY HH:mm:ss")}}</button>
+                        (click)="loadAllAnswers(question)">{{question.time?.format("DD.MM.YYYY HH:mm:ss")}}
+                </button>
+                <button ngbDropdownItem
+                        [ngClass]="!selectedQuestion ? 'active' : ''"
+                        (click)="loadAllAnswers(undefined)"> All answers
+                </button>
             </div>
         </div>
     </h2>
