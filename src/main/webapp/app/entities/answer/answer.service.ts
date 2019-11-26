@@ -9,6 +9,7 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IAnswer } from 'app/shared/model/answer.model';
 import { IQuestion } from 'app/shared/model/question.model';
+import { Ranking } from 'app/shared/model/ranking.model';
 
 type EntityResponseType = HttpResponse<IAnswer>;
 type EntityArrayResponseType = HttpResponse<IAnswer[]>;
@@ -49,6 +50,10 @@ export class AnswerService {
 
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  ranking(): Observable<HttpResponse<Ranking[]>> {
+    return this.http.get<Ranking[]>(`${this.resourceUrl}/ranking`, { observe: 'response' });
   }
 
   protected convertDateFromClient(answer: IAnswer): IAnswer {

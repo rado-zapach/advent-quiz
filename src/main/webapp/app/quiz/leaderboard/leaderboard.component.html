@@ -1,35 +1,15 @@
 <div class="leaderboard">
-    <table class="advent">
+    <table *ngIf="rankings$ | async as rankings" class="advent">
         <tr>
             <td class="advent" style="border:1;">Rank</td>
             <td class="advent" colspan=2>Name</td>
             <td class="advent">Points</td>
         </tr>
-        <tr class="advent">
-            <td class="advent center">1</td>
-            <td class="advent left" colspan=2>Prvy najprvejsi</td>
-            <td class="advent center">25</td>
-        </tr>
-        <tr class="advent">
-            <td class="advent center">1</td>
-            <td class="advent left" colspan=2>Prvy najprvejsi</td>
-            <td class="advent center">25</td>
-        </tr>
-        <tr class="advent">
-            <td class="advent center">1</td>
-            <td class="advent left" colspan=2>Prvy najprvejsi</td>
-            <td class="advent center">25</td>
-        </tr>
-        <tr class="advent">
-            <td class="advent center">1</td>
-            <td class="advent left" colspan=2>Prvy najprvejsi</td>
-            <td class="advent center">25</td>
-        </tr>
-        <tr class="advent">
-            <td class="advent center">1</td>
-            <td class="advent left" colspan=2>Prvy najprvejsi</td>
-            <td class="advent center">25</td>
-        </tr>
 
+        <tr *ngFor="let r of rankings; let i = index" class="advent">
+            <td class="advent center">{{i + 1}}</td>
+            <td class="advent left" colspan=2>{{r.firstName}} {{r.lastName}} ({{r.login}})</td>
+            <td class="advent center">{{r.points}}</td>
+        </tr>
     </table>
 </div>
