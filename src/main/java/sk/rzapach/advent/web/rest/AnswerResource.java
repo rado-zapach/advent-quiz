@@ -212,6 +212,24 @@ public class AnswerResource {
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 
+    /**
+     * {@code GET  /answers/calculate} : (re)calculates points for all the answers.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the answer, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/answers/calculate")
+    public ResponseEntity calculatePoints() {
+        log.debug("REST request to (re)calculates points for all the answers");
+
+        if (!isAdmin(getLoggedUser())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        } else {
+            List<Answer> scoredAnswers = questionService.scoreAnswers();
+            scoredAnswers.forEach(answerService::save);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
+    }
+
     private void sanitizeAnswer(Answer answer) {
         answer.setIsCorrect(null);
         answer.setPoints(null);

@@ -1,13 +1,15 @@
 package sk.rzapach.advent.service;
 
-import sk.rzapach.advent.domain.Question;
-import sk.rzapach.advent.repository.QuestionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sk.rzapach.advent.domain.Answer;
+import sk.rzapach.advent.domain.Question;
+import sk.rzapach.advent.repository.QuestionRepository;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,5 +71,22 @@ public class QuestionService {
     public void delete(Long id) {
         log.debug("Request to delete Question : {}", id);
         questionRepository.deleteById(id);
+    }
+
+    public List<Answer> scoreAnswers() {
+        List<Answer> scoredAnswers = new ArrayList<>();
+        List<Question> questions = findAll();
+        questions.forEach(q -> {
+            List<Answer> answers = new ArrayList<>(q.getAnswers());
+            answers.removeIf(a -> !a.isIsCorrect());
+            answers.sort(Comparator.comparing(Answer::getTime).reversed());
+            int maxPoints = 5;
+            for (int i = 0; i < answers.size() && i < maxPoints; i++) {
+                Answer a = answers.get(i);
+                a.setPoints(maxPoints - i);
+                scoredAnswers.add(a);
+            }
+        });
+        return scoredAnswers;
     }
 }
