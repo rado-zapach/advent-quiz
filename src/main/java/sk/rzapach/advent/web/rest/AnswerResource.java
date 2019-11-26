@@ -1,5 +1,6 @@
 package sk.rzapach.advent.web.rest;
 
+import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -74,28 +75,38 @@ public class AnswerResource {
         }
 
         User user = getLoggedUser();
-        if (isAdmin(user)) {
-            if (answer.getTime() == null) {
-                answer.setTime(Instant.now());
-            }
-            if (answer.getUser() == null) {
-                answer.setUser(user);
-            }
-        } else {
-            answer.setTime(Instant.now());
-            answer.setUser(user);
-        }
+        Instant now = Instant.now();
+
+        answer.setTime(now);
+        answer.setUser(user);
+        answer.setIsCorrect(false);
+        answer.setPoints(0);
 
         Optional<Question> question = questionService.findOne(answer.getQuestion().getId());
+        if (question.isPresent() && question.get().getTime().isBefore(now) && !question.get().isShowAnswer()) {
+            Question q = question.get();
 
-        answer.setIsCorrect(false);
-        question.ifPresent(q -> answer.setIsCorrect(q.getAnswer() != null && q.getAnswer().length() != 0 && q.getAnswer().equals(answer.getText())));
+            // remove old answer(s)
+            LongFilter questionId = new LongFilter();
+            questionId.setEquals(q.getId());
+            LongFilter userId = new LongFilter();
+            userId.setEquals(user.getId());
+            AnswerCriteria quc = new AnswerCriteria();
+            quc.setQuestionId(questionId);
+            quc.setUserId(userId);
+            List<Answer> userAnswers = answerQueryService.findByCriteria(quc);
+            userAnswers.forEach(a -> answerService.delete(a.getId()));
 
-        Answer result = answerService.save(answer);
-        sanitizeAnswer(result);
-        return ResponseEntity.created(new URI("/api/answers/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+            answer.setIsCorrect(q.getAnswer() != null && q.getAnswer().length() != 0 && q.getAnswer().equals(answer.getText()));
+
+            Answer result = answerService.save(answer);
+            sanitizeAnswer(result);
+            return ResponseEntity.created(new URI("/api/answers/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
+                .body(result);
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
     }
 
     /**
