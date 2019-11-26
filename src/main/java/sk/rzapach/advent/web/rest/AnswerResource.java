@@ -23,8 +23,7 @@ import sk.rzapach.advent.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Instant;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * REST controller for managing {@link sk.rzapach.advent.domain.Answer}.
@@ -213,7 +212,7 @@ public class AnswerResource {
     }
 
     /**
-     * {@code GET  /answers/calculate} : (re)calculates points for all the answers.
+     * {@code GET  /answers/calculate : (re)calculates points for all the answers.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the answer, or with status {@code 404 (Not Found)}.
      */
@@ -227,6 +226,62 @@ public class AnswerResource {
             List<Answer> scoredAnswers = questionService.scoreAnswers();
             scoredAnswers.forEach(answerService::save);
             return ResponseEntity.status(HttpStatus.OK).build();
+        }
+    }
+
+    /**
+     * {@code GET  /answers/ranking : return user ranking based on calculated points.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the answer, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/answers/ranking")
+    public ResponseEntity<List<Ranking>> getRanking() {
+        log.debug("REST request to get user ranking based on calculated points ");
+
+        Map<User, Integer> map = new HashMap<>();
+        List<Answer> scoredAnswers = answerService.findAll();
+        scoredAnswers.removeIf(answer -> answer.getUser() == null || answer.getPoints() == null || answer.getPoints() <= 0);
+        scoredAnswers.forEach(answer -> map.put(answer.getUser(), answer.getPoints() + map.getOrDefault(answer.getUser(), 0)));
+
+        List<Ranking> r = new ArrayList<>();
+        map.forEach((user, points) -> r.add(new Ranking(user, points)));
+
+        return ResponseEntity.ok().body(r);
+    }
+
+    static class Ranking {
+        Long userId;
+        String login;
+        String firstName;
+        String lastName;
+        Integer points;
+
+        Ranking(User u, Integer p) {
+            userId = u.getId();
+            login = u.getLogin();
+            firstName = u.getFirstName();
+            lastName = u.getLastName();
+            points = p;
+        }
+
+        public Long getUserId() {
+            return userId;
+        }
+
+        public String getLogin() {
+            return login;
+        }
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
+
+        public Integer getPoints() {
+            return points;
         }
     }
 
