@@ -28,6 +28,9 @@ export class AnswerComponent implements OnInit, OnDestroy {
     protected questionService: QuestionService
   ) {
     this.selectedQuestion = this.answerService.selectedQuestion;
+    if (this.selectedQuestion) {
+      this.loadAllAnswers(this.selectedQuestion);
+    }
   }
 
   loadAllAnswers(question: IQuestion) {
@@ -35,7 +38,7 @@ export class AnswerComponent implements OnInit, OnDestroy {
     this.answerService.selectedQuestion = question;
     if (question) {
       this.answerService.query({ 'questionId.equals': question.id }).subscribe((res: HttpResponse<IAnswer[]>) => {
-        this.answers = res.body.filter(a => a.time).sort((a, b) => b.time.diff(a.time));
+        this.answers = res.body.filter(a => a.time).sort((a, b) => a.time.diff(b.time));
       });
     } else {
       this.answerService.query().subscribe((res: HttpResponse<IAnswer[]>) => {
