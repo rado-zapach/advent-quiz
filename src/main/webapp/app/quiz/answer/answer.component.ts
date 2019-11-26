@@ -51,6 +51,7 @@ export class AnswerComponent implements OnInit, OnDestroy {
       )
       .subscribe(v => (this.isAnswerEmpty = !v.answer || v.answer.length === 0));
 
+    this.questionInit(this.question);
     this.fetchQuestion()
       .pipe(switchMap(q => this.fetchAnswer().pipe(map(a => [q, a] as [Question, Answer]))))
       .subscribe(([q, a]) => {
