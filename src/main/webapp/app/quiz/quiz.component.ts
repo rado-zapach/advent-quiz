@@ -3,7 +3,6 @@ import { HttpResponse } from '@angular/common/http';
 import { Question } from 'app/shared/model/question.model';
 import { QuestionService } from 'app/entities/question/question.service';
 import { AnswerModalService } from 'app/quiz/answer/answer-modal.service';
-import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'jhi-quiz',
@@ -13,10 +12,9 @@ import { Meta } from '@angular/platform-browser';
 export class QuizComponent implements OnInit, OnDestroy {
   questions: Question[];
 
-  constructor(private questionService: QuestionService, private answerModalService: AnswerModalService, private meta: Meta) {}
+  constructor(private questionService: QuestionService, private answerModalService: AnswerModalService) {}
 
   ngOnInit() {
-    this.meta.addTag({ name: 'viewport', content: 'width=device-width, initial-scale=1.0' });
     this.loadQuestions();
   }
 

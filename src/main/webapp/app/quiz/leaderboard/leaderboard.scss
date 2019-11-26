@@ -1,0 +1,42 @@
+.leaderboard {
+  margin: 0;
+  padding: 0;
+  background-color: #e40050;
+  color: #ffffff;
+  font-family: Helvetica, Verdana, Arial, Sans-serif, serif;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+
+  // deduct the navbar height
+  min-height: calc(100vh - 62px);
+}
+
+table.advent {
+  border: 0;
+  border-spacing: 0;
+  text-align: center;
+  width: 100%;
+}
+
+tr.advent:nth-child(even) {
+  background: #c20044;
+}
+
+td.advent {
+  @media (max-width: 1025px) {
+    font-size: 9pt;
+  }
+
+  padding: 0.5em 1em;
+  font-size: 20pt;
+  font-weight: bold;
+  text-align: center;
+}
+
+td.left {
+  text-align: left;
+}
+
+td.center {
+  text-align: center;
+}

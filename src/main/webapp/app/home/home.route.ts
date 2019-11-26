@@ -7,6 +7,6 @@ export const HOME_ROUTE: Route = {
   component: HomeComponent,
   data: {
     authorities: [],
-    pageTitle: 'The Best Advent Quiz'
+    pageTitle: 'IBL Advent Quiz'
   }
 };
