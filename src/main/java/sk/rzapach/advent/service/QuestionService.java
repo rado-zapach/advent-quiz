@@ -79,7 +79,7 @@ public class QuestionService {
         questions.forEach(q -> {
             List<Answer> answers = new ArrayList<>(q.getAnswers());
             answers.removeIf(a -> !a.isIsCorrect());
-            answers.sort(Comparator.comparing(Answer::getTime).reversed());
+            answers.sort(Comparator.comparing(Answer::getTime));
             int maxPoints = 5;
             for (int i = 0; i < answers.size() && i < maxPoints; i++) {
                 Answer a = answers.get(i);
