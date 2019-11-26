@@ -1,37 +1,53 @@
 .quiz {
+  margin: 0;
+  padding: 0;
   background-color: #e40050;
-  display: flex;
-  justify-content: center;
-  // TODO: move to the main.component
+  color: #ffffff;
+  font-family: Helvetica, Verdana, Arial, Sans-serif, serif;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+
   // deduct the navbar height
-  min-height: calc(100vh - 150px);
+  min-height: calc(100vh - 62px);
 }
 
-.quiz-body {
-  padding: 0 10%;
+.quiz-container {
+  @media (max-width: 1025px) {
+    padding: 2em;
+  }
+
+  padding: 2em 20em;
+  margin: 0;
+  list-style: none;
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+
+  -webkit-flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  align-content: space-around;
 }
 
-.quiz-day {
-  padding: 0 5%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  color: whitesmoke;
+.quiz-item {
+  @media (max-width: 1025px) {
+    font-size: 9pt;
+    padding: 0.2em 1em;
+  }
+
+  padding: 2em 1em;
+  line-height: 200%;
+  color: white;
   font-weight: bold;
+  font-size: 16pt;
+  text-align: center;
 }
 
 .quiz-day__img {
   width: 5em;
   filter: invert(100%);
   -webkit-filter: invert(100%);
-}
-
-.quiz-day__icon {
-}
-
-.quiz-day__label {
-  align-self: center;
 }
