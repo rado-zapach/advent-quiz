@@ -26,14 +26,14 @@
                 <div class="col-md-12">
                     <form id="answer-form" class="form" role="form" (ngSubmit)="onSubmit()" [formGroup]="answerForm">
                         <div class="form-group" [ngSwitch]="isFreeText">
-                            <input *ngSwitchCase="true" [attr.disabled]="question.showAnswer ? true : undefined"
+                            <input *ngSwitchCase="true"
                                    type="text"
                                    class="form-control" id="answer" name="answer"
                                    placeholder="Your answer"
                                    formControlName="answer">
                             <ng-container *ngSwitchCase="false">
                                 <div *ngFor="let choice of choices; let i = index" class="form-check">
-                                    <input [attr.disabled]="question.showAnswer ? true : undefined" type="radio"
+                                    <input type="radio"
                                            class="form-check-input"
                                            id="choice-answer-{{i}}" name="answer"
                                            value="{{choice}}"

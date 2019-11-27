@@ -108,6 +108,7 @@ export class AnswerComponent implements OnInit, OnDestroy {
 
   questionInit(q: Question) {
     this.question = q;
+    this.answerForm.reset({ answer: { value: '', disabled: this.question.showAnswer } });
     this.isFreeText = !this.question.choices || this.question.choices.length === 0;
     if (!this.isFreeText) {
       this.choices = this.question.choices.split(';');
