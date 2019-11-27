@@ -70,6 +70,9 @@ spring:
       ssl.trust: smtp.gmail.com
   thymeleaf:
     cache: true
+  resources:
+    cache:
+      period: 31536000
 
 # ===================================================================
 # To enable TLS in production, generate a certificate using:
