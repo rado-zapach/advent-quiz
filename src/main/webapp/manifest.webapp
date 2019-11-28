@@ -1,6 +1,6 @@
 {
-  "name": "AdventQuiz",
-  "short_name": "AdventQuiz",
+  "name": "IBL Advent Quiz",
+  "short_name": "IBL Advent Quiz",
   "icons": [
       {
           "src": "./content/images/logo-xmas-192.png",
