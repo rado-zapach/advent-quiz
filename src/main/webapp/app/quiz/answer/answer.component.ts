@@ -112,7 +112,7 @@ export class AnswerComponent implements OnInit, OnDestroy {
     this.isFreeText = !this.question.choices || this.question.choices.length === 0;
     if (!this.isFreeText) {
       this.choices = this.question.choices.split(';');
-    } else if (!q.showAnswer) {
+    } else if (!q.showAnswer && q.text && q.text.length > 0) {
       setTimeout(() => this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#answer'), 'focus', []), 0);
     }
   }
