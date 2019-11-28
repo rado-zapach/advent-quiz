@@ -117,7 +117,7 @@
                     <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
                 </ul>
             </li>
-            <li ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active"
+            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic" routerLinkActive="active"
                 [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
                   <span *ngIf="!getImageUrl()">
@@ -158,19 +158,19 @@
                             <span>Sign out</span>
                         </a>
                     </li>
-                    <li *ngSwitchCase="false">
-                        <a class="dropdown-item" (click)="login()" id="login">
-                            <fa-icon icon="sign-in-alt" fixedWidth="true"></fa-icon>
-                            <span>Sign in</span>
-                        </a>
-                    </li>
-                    <li *ngSwitchCase="false">
-                        <a class="dropdown-item" routerLink="account/register" routerLinkActive="active"
-                           (click)="collapseNavbar()">
-                            <fa-icon icon="user-plus" fixedWidth="true"></fa-icon>
-                            <span>Register</span>
-                        </a>
-                    </li>
+<!--                                        <li *ngSwitchCase="false">-->
+<!--                                            <a class="dropdown-item" (click)="login()" id="login">-->
+<!--                                                <fa-icon icon="sign-in-alt" fixedWidth="true"></fa-icon>-->
+<!--                                                <span>Sign in</span>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+                    <!--                    <li *ngSwitchCase="false">-->
+                    <!--                        <a class="dropdown-item" routerLink="account/register" routerLinkActive="active"-->
+                    <!--                           (click)="collapseNavbar()">-->
+                    <!--                            <fa-icon icon="user-plus" fixedWidth="true"></fa-icon>-->
+                    <!--                            <span>Register</span>-->
+                    <!--                        </a>-->
+                    <!--                    </li>-->
                 </ul>
             </li>
         </ul>

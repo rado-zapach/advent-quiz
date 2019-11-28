@@ -7,7 +7,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { LoginService } from 'app/core/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
-import { map } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Component({
@@ -67,6 +67,11 @@ export class NavbarComponent implements OnInit {
   }
 
   getAccountLogin() {
-    return this.isAuthenticated() ? this.accountService.identity().pipe(map(i => i.login)) : of('Account');
+    return this.isAuthenticated()
+      ? this.accountService.identity().pipe(
+          first(),
+          map(i => i.login)
+        )
+      : of('Account');
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject, of } from 'rxjs';
-import { shareReplay, tap, catchError } from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
+import { catchError, first, shareReplay, tap } from 'rxjs/operators';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { Account } from 'app/core/user/account.model';
@@ -13,7 +13,11 @@ export class AccountService {
   private authenticationState = new Subject<any>();
   private accountCache$: Observable<Account>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.identity()
+      .pipe(first())
+      .subscribe();
+  }
 
   fetch(): Observable<Account> {
     return this.http.get<Account>(SERVER_API_URL + 'api/account');
