@@ -72,7 +72,7 @@ spring:
     cache: true
   resources:
     cache:
-      period: 31536000
+      period: 3600
 
 # ===================================================================
 # To enable TLS in production, generate a certificate using:
