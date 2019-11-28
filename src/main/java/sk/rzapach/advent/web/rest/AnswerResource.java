@@ -3,6 +3,7 @@ package sk.rzapach.advent.web.rest;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -96,7 +97,10 @@ public class AnswerResource {
             List<Answer> userAnswers = answerQueryService.findByCriteria(quc);
             userAnswers.forEach(a -> answerService.delete(a.getId()));
 
-            answer.setIsCorrect(q.getAnswer() != null && q.getAnswer().length() != 0 && q.getAnswer().equals(answer.getText()));
+            answer.setIsCorrect(q.getAnswer() != null
+                && answer.getText() != null
+                && q.getAnswer().length() != 0
+                && StringUtils.stripAccents(q.getAnswer().toLowerCase()).equals(StringUtils.stripAccents(answer.getText().toLowerCase())));
 
             Answer result = answerService.save(answer);
             sanitizeAnswer(result);

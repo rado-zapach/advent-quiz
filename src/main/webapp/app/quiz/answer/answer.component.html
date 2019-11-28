@@ -21,33 +21,38 @@
                 <span>Opens at {{question.time.format("HH:mm:ss")}}</span></div>
         </ng-container>
         <ng-container *ngSwitchCase="false">
-            <p>{{question.text}}</p>
+            <p class="formatted-text">{{question.text}}</p>
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     <form id="answer-form" class="form" role="form" (ngSubmit)="onSubmit()" [formGroup]="answerForm">
                         <div class="form-group" [ngSwitch]="isFreeText">
                             <textarea *ngSwitchCase="true"
-                                   class="form-control" id="answer" name="answer"
-                                   placeholder="Your answer"
-                                   formControlName="answer">
+                                      class="form-control"
+                                      [ngClass]="question.showAnswer ? isCorrectAnswer ? 'correct-free-text-answer' : 'incorrect-free-text-answer' : ''"
+                                      id="answer" name="answer" rows="1"
+                                      placeholder="Your answer"
+                                      formControlName="answer">
                             </textarea>
                             <ng-container *ngSwitchCase="false">
-                                <div *ngFor="let choice of choices; let i = index" class="form-check">
+                                <div *ngFor="let choice of choices; let i = index"
+                                     [ngClass]="question.showAnswer && choice === question.answer ? 'form-check alert-success' : 'form-check'">
                                     <input type="radio"
                                            class="form-check-input"
                                            id="choice-answer-{{i}}" name="answer"
                                            value="{{choice}}"
                                            formControlName="answer">
-                                    <label class="form-check-label" for="choice-answer-{{i}}">{{choice}}</label>
+                                    <label style="width: 100%;"
+                                           class="form-check-label"
+                                           for="choice-answer-{{i}}">{{choice}}</label>
                                 </div>
                             </ng-container>
                         </div>
                     </form>
                 </div>
             </div>
-            <div *ngIf="question.showAnswer" class="alert alert-success">
+            <div *ngIf="question.showAnswer && isFreeText && question.answer" class="alert alert-success">
                 <fa-icon [icon]="'check'"></fa-icon>
-                <span>{{question.answer}}</span></div>
+                <span class="formatted-text">{{question.answer}}</span></div>
             <p *ngIf="!question.showAnswer">
                 <button type="submit" class="btn btn-primary" form="answer-form"
                         [disabled]="isAnswerEmpty">

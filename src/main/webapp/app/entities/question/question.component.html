@@ -33,8 +33,8 @@
             <tbody>
             <tr *ngFor="let question of questions ;trackBy: trackId">
                 <td><a [routerLink]="['/question', question.id, 'view' ]">{{question.id}}</a></td>
-                <td>{{question.text}}</td>
-                <td>{{question.choices}}</td>
+                <td class="formatted-text">{{question.text}}</td>
+                <td class="formatted-text">{{question.choices}}</td>
                 <td>
                     {{question.icon}}
                 </td>
@@ -45,7 +45,7 @@
                         <fa-icon *ngSwitchCase="false" [icon]="question.icon" class="fa-3x"></fa-icon>
                     </ng-container>
                 </td>
-                <td>{{question.answer}}</td>
+                <td class="formatted-text">{{question.answer}}</td>
                 <td>{{question.time | date:'medium'}}</td>
                 <td>{{question.showAnswer}}</td>
                 <td class="text-right">

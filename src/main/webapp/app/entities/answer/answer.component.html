@@ -28,8 +28,8 @@
             <tbody>
             <tr>
                 <td>{{selectedQuestion.id}}</td>
-                <td><a [routerLink]="['/question', selectedQuestion.id, 'view' ]">{{selectedQuestion.text}}</a></td>
-                <td>{{selectedQuestion.answer}}</td>
+                <td class="formatted-text"><a [routerLink]="['/question', selectedQuestion.id, 'view' ]">{{selectedQuestion.text}}</a></td>
+                <td class="formatted-text">{{selectedQuestion.answer}}</td>
                 <td>{{selectedQuestion.time?.format("DD.MM.YYYY HH:mm:ss")}}</td>
             </tr>
             </tbody>
@@ -60,7 +60,7 @@
             <tbody>
             <tr *ngFor="let answer of answers ;trackBy: trackId">
                 <td><a [routerLink]="['/answer', answer.id, 'view' ]">{{answer.id}}</a></td>
-                <td>{{answer.text}}</td>
+                <td class="formatted-text">{{answer.text}}</td>
                 <td>{{answer.time.format("DD.MM.YYYY HH:mm:ss")}}</td>
                 <td>
                     <fa-icon [icon]="getIcon(answer.isCorrect)"></fa-icon>

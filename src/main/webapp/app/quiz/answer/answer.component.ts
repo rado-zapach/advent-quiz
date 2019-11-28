@@ -26,6 +26,7 @@ export class AnswerComponent implements OnInit, OnDestroy {
   saveCounter = 0;
   saveDate: Moment;
   isAnswerEmpty: boolean;
+  isCorrectAnswer: boolean;
   destroy$: Subject<void> = new Subject<void>();
 
   answerForm = this.fb.group({
@@ -59,6 +60,7 @@ export class AnswerComponent implements OnInit, OnDestroy {
         if (a) {
           this.answerForm.setValue({ answer: a.text });
           this.saveDate = moment(a.time);
+          this.isCorrectAnswer = a.isCorrect;
         }
       });
   }
@@ -111,7 +113,7 @@ export class AnswerComponent implements OnInit, OnDestroy {
     this.answerForm.reset({ answer: { value: '', disabled: this.question.showAnswer } });
     this.isFreeText = !this.question.choices || this.question.choices.length === 0;
     if (!this.isFreeText) {
-      this.choices = this.question.choices.split(';');
+      this.choices = this.question.choices.split(';').map(i => i.trim());
     } else if (!q.showAnswer && q.text && q.text.length > 0) {
       setTimeout(() => this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#answer'), 'focus', []), 0);
     }

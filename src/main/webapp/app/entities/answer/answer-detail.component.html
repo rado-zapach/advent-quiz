@@ -7,7 +7,7 @@
             <dl class="row-md jh-entity-details">
                 <dt><span>Text</span></dt>
                 <dd>
-                    <span>{{answer.text}}</span>
+                    <span class="formatted-text">{{answer.text}}</span>
                 </dd>
                 <dt><span>Time</span></dt>
                 <dd>
@@ -23,7 +23,7 @@
                 </dd>
                 <dt><span>Question</span></dt>
                 <dd>
-                    <div *ngIf="answer.question">
+                    <div *ngIf="answer.question" class="formatted-text">
                         <a [routerLink]="['/question', answer.question?.id, 'view']">{{answer.question?.text}}</a>
                     </div>
                 </dd>

@@ -5,7 +5,8 @@ import { IQuestion } from 'app/shared/model/question.model';
 
 @Component({
   selector: 'jhi-question-detail',
-  templateUrl: './question-detail.component.html'
+  templateUrl: './question-detail.component.html',
+  styleUrls: ['question.scss']
 })
 export class QuestionDetailComponent implements OnInit {
   question: IQuestion;

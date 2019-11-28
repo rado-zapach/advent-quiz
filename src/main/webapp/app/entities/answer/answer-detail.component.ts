@@ -5,7 +5,8 @@ import { IAnswer } from 'app/shared/model/answer.model';
 
 @Component({
   selector: 'jhi-answer-detail',
-  templateUrl: './answer-detail.component.html'
+  templateUrl: './answer-detail.component.html',
+  styleUrls: ['answer.scss']
 })
 export class AnswerDetailComponent implements OnInit {
   answer: IAnswer;

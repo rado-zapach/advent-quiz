@@ -13,7 +13,8 @@ import { IQuestion } from 'app/shared/model/question.model';
 
 @Component({
   selector: 'jhi-answer',
-  templateUrl: './answer.component.html'
+  templateUrl: './answer.component.html',
+  styleUrls: ['answer.scss']
 })
 export class AnswerComponent implements OnInit, OnDestroy {
   answers: IAnswer[];

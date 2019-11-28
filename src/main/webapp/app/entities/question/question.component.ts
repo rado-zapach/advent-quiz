@@ -10,7 +10,8 @@ import { QuestionDeleteDialogComponent } from './question-delete-dialog.componen
 
 @Component({
   selector: 'jhi-question',
-  templateUrl: './question.component.html'
+  templateUrl: './question.component.html',
+  styleUrls: ['question.scss']
 })
 export class QuestionComponent implements OnInit, OnDestroy {
   questions: IQuestion[];
