@@ -1,6 +1,6 @@
 <div class="quiz">
     <div class="quiz-container">
-        <div *ngFor="let question of questions" class="quiz-item" (click)="answerQuestion(question)">
+        <div *ngFor="let question of questions" class="quiz-item" [ngClass]="question.text === '' ? 'quiz-item quiz-item__disabled' : 'quiz-item'" (click)="answerQuestion(question)">
             <ng-container [ngSwitch]="question.icon && question.icon.includes('.')">
                 <img class="quiz-day__img" *ngSwitchCase="true" [src]="question.icon">
                 <fa-icon *ngSwitchCase="false" [icon]="question.icon" class="fa-3x"></fa-icon>

@@ -8,7 +8,7 @@
   -webkit-font-smoothing: antialiased !important;
 
   // deduct the navbar height
-  min-height: calc(100vh - 63px);
+  min-height: calc(100vh - 48px);
 }
 
 .quiz-container {
@@ -35,15 +35,20 @@
 .quiz-item {
   @media (max-width: 1025px) {
     font-size: 9pt;
-    padding: 0.2em 1em;
+    margin: 0.2em 1em;
   }
 
-  padding: 2em 1em;
+  margin: 2em 1em;
   line-height: 200%;
   color: white;
   font-weight: bold;
   font-size: 16pt;
   text-align: center;
+  cursor: pointer;
+}
+
+.quiz-item__disabled {
+  opacity: 0.6;
 }
 
 .quiz-day__img {
