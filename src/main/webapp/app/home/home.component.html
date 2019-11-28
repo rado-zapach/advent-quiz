@@ -1,9 +1,9 @@
 <ng-container [ngSwitch]="isAuthenticated()">
     <jhi-quiz *ngSwitchCase="true"></jhi-quiz>
 
-    <div class="container-fluid">
+    <div *ngSwitchCase="false" class="container-fluid">
         <div class="card jh-card">
-            <div *ngSwitchCase="false" class="row">
+            <div class="row">
                 <div class="col-md-3">
                     <span class="hipster img-fluid rounded"></span>
                 </div>
