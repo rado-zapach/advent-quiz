@@ -115,6 +115,18 @@ input {
   -webkit-appearance: none;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #e40050 inset !important;
+  font-size: 20pt;
+}
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: #eee !important;
+}
+
 input::placeholder {
   color: #fff;
   opacity: 0.7;
