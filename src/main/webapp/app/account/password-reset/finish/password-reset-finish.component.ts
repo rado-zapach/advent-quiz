@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Renderer, ElementRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,7 +9,8 @@ import { PasswordResetFinishService } from './password-reset-finish.service';
 
 @Component({
   selector: 'jhi-password-reset-finish',
-  templateUrl: './password-reset-finish.component.html'
+  templateUrl: './password-reset-finish.component.html',
+  styleUrls: ['finish.scss']
 })
 export class PasswordResetFinishComponent implements OnInit, AfterViewInit {
   doNotMatch: string;
