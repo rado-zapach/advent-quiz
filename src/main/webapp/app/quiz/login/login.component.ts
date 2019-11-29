@@ -1,16 +1,18 @@
-import { AfterViewInit, Component, ElementRef, Renderer } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, Renderer } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StateStorageService } from 'app/core/auth/state-storage.service';
 import { LoginService } from 'app/core/login/login.service';
 import { JhiEventManager } from 'ng-jhipster';
+import { Subject } from 'rxjs';
+import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'jhi-login',
   templateUrl: './login.component.html',
   styleUrls: ['login.scss']
 })
-export class LoginComponent implements AfterViewInit {
+export class LoginComponent implements AfterViewInit, OnDestroy {
   authenticationError: boolean;
 
   loginForm = this.fb.group({
@@ -18,6 +20,7 @@ export class LoginComponent implements AfterViewInit {
     password: [''],
     rememberMe: [false]
   });
+  destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private eventManager: JhiEventManager,
@@ -40,6 +43,10 @@ export class LoginComponent implements AfterViewInit {
         password: this.loginForm.get('password').value,
         rememberMe: this.loginForm.get('rememberMe').value
       })
+      .pipe(
+        first(),
+        takeUntil(this.destroy$)
+      )
       .subscribe(
         () => {
           this.authenticationError = false;
@@ -70,5 +77,10 @@ export class LoginComponent implements AfterViewInit {
 
   requestResetPassword() {
     this.router.navigate(['/account/reset', 'request']);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

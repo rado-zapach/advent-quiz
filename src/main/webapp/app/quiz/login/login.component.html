@@ -57,6 +57,15 @@
           </svg>
         </div>
       </div>
+
+      <div style="height: 25px;">
+        <div style="margin-left: 56px;">
+          <ng-container *ngIf="authenticationError">
+            <small class="form-text"> <strong>Failed to sign in!</strong></small>
+          </ng-container>
+        </div>
+      </div>
+
       <button type="submit">Let's play!</button>
       <p class="forgot">
         <a class="forgot" (click)="requestResetPassword()">Forgot your password?</a>
