@@ -25,7 +25,7 @@ export class JhiMainComponent implements OnInit {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.titleService.setTitle(this.getPageTitle(this.router.routerState.snapshot.root));
-        this.usePadding = event.url !== '/' && event.url !== '/ranking';
+        this.usePadding = event.url !== '/' && event.url !== '/ranking' && !event.url.startsWith('/account');
       }
       if (event instanceof NavigationError && event.error.status === 404) {
         this.router.navigate(['/404']);
