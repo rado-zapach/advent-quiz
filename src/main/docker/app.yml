@@ -7,9 +7,14 @@ services:
       - SPRING_PROFILES_ACTIVE=prod,swagger
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
       - SPRING_DATASOURCE_URL=jdbc:postgresql://adventquiz-postgresql:5432/AdventQuiz
-      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+      - SPRING_APPLICATION_JSON={
+        "spring.mail.password":"",
+        "jhipster.mail.base-url":""
+        }
     ports:
       - 8080:8080
+    depends_on:
+      - adventquiz-postgresql
   adventquiz-postgresql:
     extends:
       file: postgresql.yml
