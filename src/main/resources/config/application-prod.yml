@@ -119,7 +119,7 @@ jhipster:
       # security key (this key should be unique for your application, and kept secret)
       key: 67a643990a39e19998760f3053c99877b0f4ab12ad28d89d77efeedbbbbd2c32d6fb16b31fd671363929acd4858f8e23bec2
   mail: # specific JHipster mail property, for standard properties see MailProperties
-    base-url: http://159.89.213.24 # Modify according to your server's URL
+    base-url: # Modify according to your server's URL
   metrics:
     logs: # Reports metrics in the logs
       enabled: false

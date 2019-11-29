@@ -175,7 +175,7 @@ public class QuestionResource {
                 question.setText("");
                 question.setChoices("");
             }
-            if (!question.isShowAnswer()) {
+            if (!question.isShowAnswer() || question.isShowAnswer() == null) {
                 question.setAnswer("");
             }
         }
