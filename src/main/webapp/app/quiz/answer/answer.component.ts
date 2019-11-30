@@ -84,10 +84,13 @@ export class AnswerComponent implements OnInit, OnDestroy {
           const chart = am4core.create('chartdiv', am4charts.PieChart3D);
           chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
           chart.data = stats.body;
+          chart.responsive.enabled = true;
+          chart.pixelPerfect = true;
+
           const series = chart.series.push(new am4charts.PieSeries3D());
           series.dataFields.value = 'second';
           series.dataFields.category = 'first';
-
+          series.tooltip.label.wrap = true;
           series.ticks.template.disabled = true;
           series.alignLabels = false;
           series.labels.template.text = "{value.percent.formatNumber('#.0')}%";
@@ -99,7 +102,6 @@ export class AnswerComponent implements OnInit, OnDestroy {
             }
             return radius;
           });
-
           series.labels.template.adapter.add('fill', function(color, target) {
             if (target.dataItem && target.dataItem.values.value.percent < 10) {
               return am4core.color('#000');
