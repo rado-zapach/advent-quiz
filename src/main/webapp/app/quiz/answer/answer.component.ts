@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer } from '@angular/core';
+import { Component, ElementRef, Input, NgZone, OnDestroy, OnInit, Renderer } from '@angular/core';
 import { Question } from 'app/shared/model/question.model';
 import { FormBuilder } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +12,14 @@ import { Moment } from 'moment';
 import { HttpResponse } from '@angular/common/http';
 import { QuestionService } from 'app/entities/question/question.service';
 import { AccountService } from 'app/core/auth/account.service';
+import * as am4core from '@amcharts/amcharts4/core';
+import * as am4charts from '@amcharts/amcharts4/charts';
+
+import animatedTheme from '@amcharts/amcharts4/themes/animated';
+import materialTheme from '@amcharts/amcharts4/themes/material';
+
+am4core.useTheme(animatedTheme);
+am4core.useTheme(materialTheme);
 
 @Component({
   selector: 'jhi-quiz-answer',
@@ -29,6 +37,8 @@ export class AnswerComponent implements OnInit, OnDestroy {
   isCorrectAnswer: boolean;
   destroy$: Subject<void> = new Subject<void>();
 
+  private chart: am4charts.PieChart3D;
+
   answerForm = this.fb.group({
     answer: ['']
   });
@@ -41,7 +51,8 @@ export class AnswerComponent implements OnInit, OnDestroy {
     private jhiAlertService: JhiAlertService,
     private answerService: AnswerService,
     private questionService: QuestionService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private zone: NgZone
   ) {}
 
   ngOnInit() {
@@ -62,7 +73,44 @@ export class AnswerComponent implements OnInit, OnDestroy {
           this.saveDate = moment(a.time);
           this.isCorrectAnswer = a.isCorrect;
         }
+        this.graphInit();
       });
+  }
+
+  graphInit(): void {
+    if (this.question.showAnswer) {
+      this.questionService.getStats(this.question.id).subscribe(stats => {
+        this.zone.runOutsideAngular(() => {
+          const chart = am4core.create('chartdiv', am4charts.PieChart3D);
+          chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+          chart.data = stats.body;
+          const series = chart.series.push(new am4charts.PieSeries3D());
+          series.dataFields.value = 'second';
+          series.dataFields.category = 'first';
+
+          series.ticks.template.disabled = true;
+          series.alignLabels = false;
+          series.labels.template.text = "{value.percent.formatNumber('#.0')}%";
+          series.labels.template.radius = am4core.percent(-40);
+          series.labels.template.fill = am4core.color('white');
+          series.labels.template.adapter.add('radius', function(radius, target) {
+            if (target.dataItem && target.dataItem.values.value.percent < 10) {
+              return 0;
+            }
+            return radius;
+          });
+
+          series.labels.template.adapter.add('fill', function(color, target) {
+            if (target.dataItem && target.dataItem.values.value.percent < 10) {
+              return am4core.color('#000');
+            }
+            return color;
+          });
+
+          this.chart = chart;
+        });
+      });
+    }
   }
 
   onSubmit() {
@@ -122,5 +170,11 @@ export class AnswerComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+
+    this.zone.runOutsideAngular(() => {
+      if (this.chart) {
+        this.chart.dispose();
+      }
+    });
   }
 }
