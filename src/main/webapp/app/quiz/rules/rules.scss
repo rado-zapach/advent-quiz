@@ -12,13 +12,22 @@
 
   @media (max-width: 991.98px) {
     padding: 2em;
-    font-size: 9pt;
   }
   @media (min-width: 992px) and (max-width: 1366px) {
     padding: 2em 10em;
-    font-size: 12pt;
   }
   padding: 2em 20em;
   text-align: justify;
+}
+
+.rules-container {
+  @media (max-width: 991.98px) {
+    font-size: 9pt;
+  }
+
+  @media (min-width: 992px) and (max-width: 1366px) {
+    font-size: 12pt;
+  }
   font-size: 20pt;
+  text-align: justify;
 }
