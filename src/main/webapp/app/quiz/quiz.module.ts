@@ -6,6 +6,7 @@ import { LeaderboardComponent } from 'app/quiz/leaderboard/leaderboard.component
 import { LoginComponent } from 'app/quiz/login/login.component';
 import { QuizComponent } from 'app/quiz/quiz.component';
 import { AdventQuizSharedModule } from 'app/shared/shared.module';
+import { RulesComponent } from 'app/quiz/rules/rules.component';
 
 @NgModule({
   imports: [
@@ -17,11 +18,18 @@ import { AdventQuizSharedModule } from 'app/shared/shared.module';
         data: {
           pageTitle: 'IBL Advent Quiz Ranking'
         }
+      },
+      {
+        path: 'rules',
+        component: RulesComponent,
+        data: {
+          pageTitle: 'IBL Advent Quiz Rules'
+        }
       }
     ])
   ],
   providers: [AnswerModalService],
-  declarations: [QuizComponent, AnswerComponent, LeaderboardComponent, LoginComponent],
+  declarations: [QuizComponent, AnswerComponent, LeaderboardComponent, LoginComponent, RulesComponent],
   exports: [QuizComponent, LoginComponent],
   entryComponents: [AnswerComponent]
 })
