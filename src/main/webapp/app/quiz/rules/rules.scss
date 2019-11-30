@@ -1,0 +1,12 @@
+.rules {
+  background: #e40050;
+
+  color: #ffffff;
+  font-family: Helvetica, Verdana, Arial, Sans-serif, serif;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  -webkit-text-stroke-width: 0.1px;
+
+  // deduct the navbar height
+  min-height: calc(100vh - 48px);
+}

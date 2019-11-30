@@ -23,8 +23,12 @@ tr.advent:nth-child(even) {
 }
 
 td.advent {
-  @media (max-width: 1025px) {
+  @media (max-width: 991.98px) {
     font-size: 9pt;
+  }
+
+  @media (min-width: 992px) and (max-width: 1366px) {
+    font-size: 12pt;
   }
 
   padding: 0.5em 1em;
