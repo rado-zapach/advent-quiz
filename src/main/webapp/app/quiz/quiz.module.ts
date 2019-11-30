@@ -7,6 +7,7 @@ import { LoginComponent } from 'app/quiz/login/login.component';
 import { QuizComponent } from 'app/quiz/quiz.component';
 import { AdventQuizSharedModule } from 'app/shared/shared.module';
 import { RulesComponent } from 'app/quiz/rules/rules.component';
+import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 
 @NgModule({
   imports: [
@@ -16,15 +17,19 @@ import { RulesComponent } from 'app/quiz/rules/rules.component';
         path: 'ranking',
         component: LeaderboardComponent,
         data: {
+          authorities: ['ROLE_USER'],
           pageTitle: 'IBL Advent Quiz Ranking'
-        }
+        },
+        canActivate: [UserRouteAccessService]
       },
       {
         path: 'rules',
         component: RulesComponent,
         data: {
+          authorities: ['ROLE_USER'],
           pageTitle: 'IBL Advent Quiz Rules'
-        }
+        },
+        canActivate: [UserRouteAccessService]
       }
     ])
   ],

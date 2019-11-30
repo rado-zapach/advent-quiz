@@ -29,7 +29,7 @@ export const answerRoute: Routes = [
     path: '',
     component: AnswerComponent,
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'Answers'
     },
     canActivate: [UserRouteAccessService]
@@ -41,7 +41,7 @@ export const answerRoute: Routes = [
       answer: AnswerResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'Answers'
     },
     canActivate: [UserRouteAccessService]
@@ -53,7 +53,7 @@ export const answerRoute: Routes = [
       answer: AnswerResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'Answers'
     },
     canActivate: [UserRouteAccessService]
@@ -65,7 +65,7 @@ export const answerRoute: Routes = [
       answer: AnswerResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: ['ROLE_ADMIN'],
       pageTitle: 'Answers'
     },
     canActivate: [UserRouteAccessService]
