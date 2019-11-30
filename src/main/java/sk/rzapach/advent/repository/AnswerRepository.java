@@ -1,7 +1,10 @@
 package sk.rzapach.advent.repository;
-import sk.rzapach.advent.domain.Answer;
-import org.springframework.data.jpa.repository.*;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import sk.rzapach.advent.domain.Answer;
 
 import java.util.List;
 
@@ -15,4 +18,5 @@ public interface AnswerRepository extends JpaRepository<Answer, Long>, JpaSpecif
     @Query("select answer from Answer answer where answer.user.login = ?#{principal.username}")
     List<Answer> findByUserIsCurrentUser();
 
+    List<Answer> findAllByQuestionId(Long question_id);
 }

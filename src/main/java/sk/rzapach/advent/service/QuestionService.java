@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sk.rzapach.advent.domain.Answer;
 import sk.rzapach.advent.domain.Question;
+import sk.rzapach.advent.repository.AnswerRepository;
 import sk.rzapach.advent.repository.QuestionRepository;
 
 import java.util.*;
@@ -22,9 +23,11 @@ public class QuestionService {
     private final Logger log = LoggerFactory.getLogger(QuestionService.class);
 
     private final QuestionRepository questionRepository;
+    private final AnswerRepository answerRepository;
 
-    public QuestionService(QuestionRepository questionRepository) {
+    public QuestionService(QuestionRepository questionRepository, AnswerRepository answerRepository) {
         this.questionRepository = questionRepository;
+        this.answerRepository = answerRepository;
     }
 
     /**
@@ -74,20 +77,18 @@ public class QuestionService {
 
     public List<Answer> scoreAnswers(Long questionId) {
         List<Answer> answers = new ArrayList<>();
-        Optional<Question> question = findOne(questionId);
-        if (question.isPresent()) {
-            answers = new ArrayList<>(question.get().getAnswers());
-            answers.forEach(a -> a.setPoints(0));
-            List<Answer> scoredAnswers = answers.stream()
-                .filter(a -> Boolean.TRUE.equals(a.isIsCorrect()))
-                .sorted(Comparator.comparing(Answer::getTime))
-                .collect(Collectors.toList());
-            int maxPoints = 5;
-            for (int i = 0; i < scoredAnswers.size() && i < maxPoints; i++) {
-                Long aId = scoredAnswers.get(i).getId();
-                int points = maxPoints - i;
-                answers.stream().filter(a -> a.getId().equals(aId)).findFirst().get().setPoints(points);
-            }
+        answers = answerRepository.findAllByQuestionId(questionId);
+
+        answers.forEach(a -> a.setPoints(0));
+        List<Answer> scoredAnswers = answers.stream()
+            .filter(a -> Boolean.TRUE.equals(a.isIsCorrect()))
+            .sorted(Comparator.comparing(Answer::getTime))
+            .collect(Collectors.toList());
+        int maxPoints = 5;
+        for (int i = 0; i < scoredAnswers.size() && i < maxPoints; i++) {
+            Long aId = scoredAnswers.get(i).getId();
+            int points = maxPoints - i;
+            answers.stream().filter(a -> a.getId().equals(aId)).findFirst().get().setPoints(points);
         }
         return answers;
     }
@@ -97,7 +98,7 @@ public class QuestionService {
         Map<String, Integer> stats = new HashMap<>();
         Optional<Question> question = findOne(id);
         if (question.isPresent() && Boolean.TRUE.equals(question.get().isShowAnswer())) {
-            Set<Answer> answers = question.get().getAnswers();
+            List<Answer> answers = answerRepository.findAllByQuestionId(id);
             if (question.get().getText() == null || question.get().getText().length() == 0) {
                 answers.forEach(a -> {
                     if (Boolean.TRUE.equals(a.isIsCorrect())) {
