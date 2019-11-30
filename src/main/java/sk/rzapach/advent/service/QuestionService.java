@@ -99,7 +99,7 @@ public class QuestionService {
         Optional<Question> question = findOne(id);
         if (question.isPresent() && Boolean.TRUE.equals(question.get().isShowAnswer())) {
             List<Answer> answers = answerRepository.findAllByQuestionId(id);
-            if (question.get().getText() == null || question.get().getText().length() == 0) {
+            if (question.get().getAnswer() == null || question.get().getAnswer().length() == 0) {
                 answers.forEach(a -> {
                     if (Boolean.TRUE.equals(a.isIsCorrect())) {
                         stats.put("Correct", stats.getOrDefault("Correct", 0) + 1);

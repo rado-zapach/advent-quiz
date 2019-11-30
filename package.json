@@ -8,6 +8,7 @@
     "node_modules"
   ],
   "dependencies": {
+    "@amcharts/amcharts4": "^4.7.11",
     "@angular/common": "8.2.4",
     "@angular/compiler": "8.2.4",
     "@angular/core": "8.2.4",

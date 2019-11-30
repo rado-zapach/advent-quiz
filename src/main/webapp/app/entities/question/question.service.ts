@@ -3,12 +3,12 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { map } from 'rxjs/operators';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IQuestion } from 'app/shared/model/question.model';
+import { QuestionStats } from 'app/shared/model/question-stats.model';
 
 type EntityResponseType = HttpResponse<IQuestion>;
 type EntityArrayResponseType = HttpResponse<IQuestion[]>;
@@ -48,6 +48,10 @@ export class QuestionService {
 
   delete(id: number): Observable<HttpResponse<any>> {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  getStats(id: number): Observable<HttpResponse<QuestionStats[]>> {
+    return this.http.get<QuestionStats[]>(`${this.resourceUrl}/${id}/stats`, { observe: 'response' });
   }
 
   protected convertDateFromClient(question: IQuestion): IQuestion {
