@@ -2,7 +2,7 @@
     <h2>
         <span>Question</span>
         <div ngbDropdown class="d-inline-block float-right">
-            <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Choose a question by date</button>
+            <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Select a question by date</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button *ngFor="let question of questions" ngbDropdownItem
                         [ngClass]="selectedQuestion && selectedQuestion.id === question.id ? 'active' : ''"
@@ -13,6 +13,7 @@
                         (click)="loadAllAnswers(undefined)"> All answers
                 </button>
             </div>
+            <button class="btn btn-primary" (click)="calculatePoints()" [disabled]="!selectedQuestion">Calculate points for the selected question</button>
         </div>
     </h2>
     <div *ngIf="selectedQuestion" class="table-responsive">

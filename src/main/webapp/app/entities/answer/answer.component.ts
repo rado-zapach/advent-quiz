@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiAlertService, JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IAnswer } from 'app/shared/model/answer.model';
@@ -26,7 +26,8 @@ export class AnswerComponent implements OnInit, OnDestroy {
     protected answerService: AnswerService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
-    protected questionService: QuestionService
+    protected questionService: QuestionService,
+    protected jhiAlertService: JhiAlertService
   ) {
     this.selectedQuestion = this.answerService.selectedQuestion;
     if (this.selectedQuestion) {
@@ -78,5 +79,14 @@ export class AnswerComponent implements OnInit, OnDestroy {
 
   getIcon(b: boolean) {
     return b ? 'check' : 'times';
+  }
+
+  calculatePoints(): void {
+    if (this.selectedQuestion) {
+      this.answerService.calculatePoints(this.selectedQuestion.id).subscribe(() => {
+        this.loadAllAnswers(this.selectedQuestion);
+        this.jhiAlertService.success('Points calculated, please check if they are correct.');
+      });
+    }
   }
 }

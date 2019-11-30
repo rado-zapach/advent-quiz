@@ -52,6 +52,10 @@ export class AnswerService {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  calculatePoints(questionId: number): Observable<HttpResponse<any>> {
+    return this.http.get<any>(`${this.resourceUrl}/calculate/${questionId}`, { observe: 'response' });
+  }
+
   ranking(): Observable<HttpResponse<Ranking[]>> {
     return this.http.get<Ranking[]>(`${this.resourceUrl}/ranking`, { observe: 'response' });
   }
