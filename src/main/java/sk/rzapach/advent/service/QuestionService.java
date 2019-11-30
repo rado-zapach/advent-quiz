@@ -72,21 +72,24 @@ public class QuestionService {
         questionRepository.deleteById(id);
     }
 
-    public List<Answer> scoreAnswers() {
-        List<Answer> scoredAnswers = new ArrayList<>();
-        List<Question> questions = findAll();
-        questions.forEach(q -> {
-            List<Answer> answers = new ArrayList<>(q.getAnswers());
-            answers.removeIf(a -> !a.isIsCorrect());
-            answers.sort(Comparator.comparing(Answer::getTime));
+    public List<Answer> scoreAnswers(Long questionId) {
+        List<Answer> answers = new ArrayList<>();
+        Optional<Question> question = findOne(questionId);
+        if (question.isPresent()) {
+            answers = new ArrayList<>(question.get().getAnswers());
+            answers.forEach(a -> a.setPoints(0));
+            List<Answer> scoredAnswers = answers.stream()
+                .filter(a -> Boolean.TRUE.equals(a.isIsCorrect()))
+                .sorted(Comparator.comparing(Answer::getTime))
+                .collect(Collectors.toList());
             int maxPoints = 5;
-            for (int i = 0; i < answers.size() && i < maxPoints; i++) {
-                Answer a = answers.get(i);
-                a.setPoints(maxPoints - i);
-                scoredAnswers.add(a);
+            for (int i = 0; i < scoredAnswers.size() && i < maxPoints; i++) {
+                Long aId = scoredAnswers.get(i).getId();
+                int points = maxPoints - i;
+                answers.stream().filter(a -> a.getId().equals(aId)).findFirst().get().setPoints(points);
             }
-        });
-        return scoredAnswers;
+        }
+        return answers;
     }
 
     @Transactional(readOnly = true)
