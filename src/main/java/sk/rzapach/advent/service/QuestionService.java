@@ -2,16 +2,15 @@ package sk.rzapach.advent.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sk.rzapach.advent.domain.Answer;
 import sk.rzapach.advent.domain.Question;
 import sk.rzapach.advent.repository.QuestionRepository;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Question}.
@@ -88,5 +87,27 @@ public class QuestionService {
             }
         });
         return scoredAnswers;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Pair<String, Integer>> getQuestionAnswerStats(Long id) {
+        Map<String, Integer> stats = new HashMap<>();
+        Optional<Question> question = findOne(id);
+        if (question.isPresent() && Boolean.TRUE.equals(question.get().isShowAnswer())) {
+            Set<Answer> answers = question.get().getAnswers();
+            if (question.get().getText() == null || question.get().getText().length() == 0) {
+                answers.forEach(a -> {
+                    if (Boolean.TRUE.equals(a.isIsCorrect())) {
+                        stats.put("Correct", stats.getOrDefault("Correct", 0) + 1);
+                    } else {
+                        stats.put("Incorrect", stats.getOrDefault("Incorrect", 0) + 1);
+                    }
+                });
+            } else {
+                answers.forEach(a -> stats.put(a.getText(), stats.getOrDefault(a.getText(), 0) + 1));
+            }
+        }
+
+        return stats.entrySet().stream().map(e -> Pair.of(e.getKey(), e.getValue())).collect(Collectors.toList());
     }
 }

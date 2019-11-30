@@ -5,6 +5,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -149,6 +150,19 @@ public class QuestionResource {
         Optional<Question> question = questionService.findOne(id);
         question.ifPresent(this::sanitizeQuestion);
         return ResponseUtil.wrapOrNotFound(question);
+    }
+
+    /**
+     * {@code GET  /questions/:id} : get the answer stats for "id" question.
+     *
+     * @param id the id of the question to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the answer stats, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/questions/{id}/stats")
+    public ResponseEntity<List<Pair<String, Integer>>> getQuestionStats(@PathVariable Long id) {
+        log.debug("REST request to get answer stats for Question : {}", id);
+
+        return ResponseEntity.ok().body(questionService.getQuestionAnswerStats(id));
     }
 
     /**
