@@ -37,6 +37,11 @@ public class AnswerService {
         return answerRepository.save(answer);
     }
 
+    public Iterable<Answer> saveAll(Iterable<Answer> answers) {
+        log.debug("Request to save Answers : {}", answers);
+        return answerRepository.saveAll(answers);
+    }
+
     /**
      * Get all the answers.
      *

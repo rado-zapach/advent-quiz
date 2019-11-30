@@ -220,16 +220,16 @@ public class AnswerResource {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the answer, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/answers/calculate")
-    public ResponseEntity calculatePoints() {
+    @GetMapping("/answers/calculate/{questionId}")
+    public ResponseEntity<Integer> calculatePoints(@PathVariable Long questionId) {
         log.debug("REST request to (re)calculates points for all the answers");
 
         if (!isAdmin(getLoggedUser())) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         } else {
-            List<Answer> scoredAnswers = questionService.scoreAnswers();
-            scoredAnswers.forEach(answerService::save);
-            return ResponseEntity.status(HttpStatus.OK).build();
+            List<Answer> scoredAnswers = questionService.scoreAnswers(questionId);
+            answerService.saveAll(scoredAnswers);
+            return ResponseEntity.ok().body(scoredAnswers.size());
         }
     }
 
@@ -244,7 +244,12 @@ public class AnswerResource {
 
         Map<User, Integer> map = new HashMap<>();
         List<Answer> scoredAnswers = answerService.findAll();
-        scoredAnswers.removeIf(answer -> answer.getUser() == null || answer.getPoints() == null || answer.getPoints() <= 0);
+        scoredAnswers.removeIf(answer -> answer.getUser() == null
+            || answer.getPoints() == null
+            || answer.getPoints() <= 0
+            || answer.getQuestion() == null
+            || Boolean.FALSE.equals(answer.getQuestion().isShowAnswer())
+        );
         scoredAnswers.forEach(answer -> map.put(answer.getUser(), answer.getPoints() + map.getOrDefault(answer.getUser(), 0)));
 
         List<Ranking> r = new ArrayList<>();
