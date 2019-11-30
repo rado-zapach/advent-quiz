@@ -290,8 +290,10 @@ public class AnswerResource {
     }
 
     private void sanitizeAnswer(Answer answer) {
-        answer.setIsCorrect(null);
-        answer.setPoints(null);
+        if (answer.getQuestion() != null && !answer.getQuestion().isShowAnswer()) {
+            answer.setIsCorrect(null);
+            answer.setPoints(null);
+        }
         answer.setQuestion(null);
         answer.setUser(null);
     }
