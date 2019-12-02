@@ -8,8 +8,8 @@ services:
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
       - SPRING_DATASOURCE_URL=jdbc:postgresql://adventquiz-postgresql:5432/AdventQuiz
       - SPRING_APPLICATION_JSON={
-        "spring.mail.password":"AdventQuiz1234",
-        "jhipster.mail.base-url":"https://advent.iblsoft.com"
+        "spring.mail.password":"",
+        "jhipster.mail.base-url":""
         }
     ports:
       - 8080:8080
