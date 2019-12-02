@@ -91,6 +91,7 @@ export class AnswerComponent implements OnInit, OnDestroy {
           series.dataFields.value = 'second';
           series.dataFields.category = 'first';
           series.tooltip.label.wrap = true;
+
           series.ticks.template.disabled = true;
           series.alignLabels = false;
           series.labels.template.text = "{value.percent.formatNumber('#.0')}%";
@@ -102,12 +103,19 @@ export class AnswerComponent implements OnInit, OnDestroy {
             }
             return radius;
           });
-          series.labels.template.adapter.add('fill', function(color, target) {
-            if (target.dataItem && target.dataItem.values.value.percent < 10) {
-              return am4core.color('#000');
-            }
-            return color;
-          });
+
+          chart.legend = new am4charts.Legend();
+          chart.legend.labels.template.truncate = true;
+          chart.legend.itemContainers.template.clickable = false;
+          chart.legend.itemContainers.template.focusable = false;
+          chart.legend.itemContainers.template.cursorOverStyle = am4core.MouseCursorStyle.default;
+          chart.legend.marginBottom = 20;
+          chart.legend.valueLabels.template.text = '';
+          chart.legend.itemContainers.template.height = 30;
+
+          const slice = series.slices.template;
+          slice.states.getKey('hover').properties.scale = 1;
+          slice.states.getKey('active').properties.shiftRadius = 0;
 
           this.chart = chart;
         });
