@@ -9,6 +9,7 @@ Before you can build this project, you must install and configure the following 
 1. [Node.js]
 2. [yarn]
 3. Java 11
+4. docker and docker-compose (recommended) or PostgreSQL
 
 After installing Node, you should be able to run the following command to install development tools.
 You will only need to run this command when dependencies change in [package.json](package.json).
@@ -20,10 +21,34 @@ We use yarn scripts and [Webpack][] as our build system.
 Run the following commands in two separate terminals to create a blissful development experience where your browser
 auto-refreshes when files change on your hard drive.
 
+    docker-compose -f src/main/docker/postgresql.yml up
     ./mvnw
     yarn start
 
 ## Building for production
+
+## Using Docker to simplify development (recommended)
+
+You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
+
+For example, to start a postgresql database in a docker container, run:
+
+    docker-compose -f src/main/docker/postgresql.yml up -d
+
+To stop it and remove the container, run:
+
+    docker-compose -f src/main/docker/postgresql.yml down
+
+You can also fully dockerize your application and all the services that it depends on.
+To achieve this, first build a docker image of your app by running:
+
+    ./mvnw package -Pprod jib:dockerBuild
+
+Then run:
+
+    docker-compose -f src/main/docker/app.yml up -d
+
+For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`jhipster docker-compose`), which is able to generate docker configurations for one or several JHipster applications.
 
 ### Packaging as jar
 
@@ -86,28 +111,6 @@ or
 
 For more information, refer to the [Code quality page][].
 
-## Using Docker to simplify development (optional)
-
-You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
-
-For example, to start a postgresql database in a docker container, run:
-
-    docker-compose -f src/main/docker/postgresql.yml up -d
-
-To stop it and remove the container, run:
-
-    docker-compose -f src/main/docker/postgresql.yml down
-
-You can also fully dockerize your application and all the services that it depends on.
-To achieve this, first build a docker image of your app by running:
-
-    ./mvnw -Pprod jib:dockerBuild
-
-Then run:
-
-    docker-compose -f src/main/docker/app.yml up -d
-
-For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`jhipster docker-compose`), which is able to generate docker configurations for one or several JHipster applications.
 
 ## Continuous Integration (optional)
 
