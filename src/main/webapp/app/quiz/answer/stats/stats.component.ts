@@ -1,11 +1,12 @@
 import { AfterViewInit, Component, Input, NgZone, OnDestroy } from '@angular/core';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
+
+import animatedTheme from '@amcharts/amcharts4/themes/animated';
 import materialTheme from '@amcharts/amcharts4/themes/material';
 import { QuestionService } from 'app/entities/question/question.service';
-import { Answer } from 'app/shared/model/answer.model';
-import { AnswerService } from 'app/entities/answer/answer.service';
 
+am4core.useTheme(animatedTheme);
 am4core.useTheme(materialTheme);
 
 @Component({
@@ -18,19 +19,10 @@ export class StatsComponent implements AfterViewInit, OnDestroy {
   public questionId;
   private answersChart: am4charts.PieChart3D;
 
-  answerTimes = [];
-  page = 1;
-  pageSize = 5;
-  collectionSize = 0;
-
-  constructor(private questionService: QuestionService, private answerService: AnswerService, private zone: NgZone) {}
+  constructor(private questionService: QuestionService, private zone: NgZone) {}
 
   ngAfterViewInit() {
     this.answersGraphInit();
-    this.answerService.answerTimes(this.questionId).subscribe(r => {
-      this.answerTimes = r.body.sort((a, b) => a.time.diff(b.time));
-      this.collectionSize = this.answerTimes.length;
-    });
   }
 
   answersGraphInit(): void {
@@ -74,15 +66,6 @@ export class StatsComponent implements AfterViewInit, OnDestroy {
         this.answersChart = chart;
       });
     });
-  }
-
-  get answerTimesPaged(): Answer[] {
-    return this.answerTimes
-      .map((at, i) => {
-        at.id = i + 1;
-        return at;
-      })
-      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
   ngOnDestroy() {

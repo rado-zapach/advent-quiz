@@ -21,11 +21,17 @@
                 <span>Opens at {{question.time.format("HH:mm:ss")}}</span></div>
         </ng-container>
         <ng-container *ngSwitchCase="false">
-            <p class="formatted-text">{{question.text}}</p>
-            <div class="row justify-content-center">
-                <div class="col-md-12">
-                    <form id="answer-form" class="form" role="form" (ngSubmit)="onSubmit()" [formGroup]="answerForm">
-                        <div class="form-group" [ngSwitch]="isFreeText">
+            <ng-container *ngIf="question.showAnswer; then questionTabs else questionSimple"></ng-container>
+        </ng-container>
+    </ng-container>
+</div>
+
+<ng-template #questionSimple>
+    <p class="formatted-text">{{question.text}}</p>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <form id="answer-form" class="form" role="form" (ngSubmit)="onSubmit()" [formGroup]="answerForm">
+                <div class="form-group" [ngSwitch]="isFreeText">
                             <textarea *ngSwitchCase="true"
                                       class="form-control"
                                       [ngClass]="question.showAnswer ? isCorrectAnswer ? 'correct-free-text-answer' : 'incorrect-free-text-answer' : ''"
@@ -33,47 +39,61 @@
                                       placeholder="Your answer"
                                       formControlName="answer">
                             </textarea>
-                            <ng-container *ngSwitchCase="false">
-                                <div *ngFor="let choice of choices; let i = index"
-                                     [ngClass]="question.showAnswer && choice === question.answer ? 'form-check alert-success' : 'form-check'">
-                                    <input type="radio"
-                                           class="form-check-input"
-                                           id="choice-answer-{{i}}" name="answer"
-                                           value="{{choice}}"
-                                           formControlName="answer">
-                                    <label style="width: 100%;"
-                                           class="form-check-label"
-                                           for="choice-answer-{{i}}">{{choice}}</label>
-                                </div>
-                            </ng-container>
+                    <ng-container *ngSwitchCase="false">
+                        <div *ngFor="let choice of choices; let i = index"
+                             [ngClass]="question.showAnswer && choice === question.answer ? 'form-check alert-success' : 'form-check'">
+                            <input type="radio"
+                                   class="form-check-input"
+                                   id="choice-answer-{{i}}" name="answer"
+                                   value="{{choice}}"
+                                   formControlName="answer">
+                            <label style="width: 100%;"
+                                   class="form-check-label"
+                                   for="choice-answer-{{i}}">{{choice}}</label>
                         </div>
-                    </form>
+                    </ng-container>
                 </div>
-            </div>
-            <div *ngIf="question.showAnswer && isFreeText && question.answer" class="alert alert-success">
-                <fa-icon [icon]="'check'"></fa-icon>
-                <span class="formatted-text">{{question.answer}}</span></div>
-            <p *ngIf="!question.showAnswer">
-                <button type="submit" class="btn btn-primary" form="answer-form"
-                        [disabled]="isAnswerEmpty">
-                    <fa-icon [icon]="'paper-plane'"></fa-icon>
-                    Submit the answer
-                </button>
-            </p>
-            <div *ngIf="saveCounter > 0" class="alert alert-success">
-                <fa-icon [icon]="'check'"></fa-icon>
-                <span>Your answer was saved <span *ngIf="saveCounter > 1">({{saveCounter}}x)</span>
+            </form>
+        </div>
+    </div>
+    <div *ngIf="question.showAnswer && isFreeText && question.answer" class="alert alert-success">
+        <fa-icon [icon]="'check'"></fa-icon>
+        <span class="formatted-text">{{question.answer}}</span></div>
+    <p *ngIf="!question.showAnswer">
+        <button type="submit" class="btn btn-primary" form="answer-form"
+                [disabled]="isAnswerEmpty">
+            <fa-icon [icon]="'paper-plane'"></fa-icon>
+            Submit the answer
+        </button>
+    </p>
+    <div *ngIf="saveCounter > 0" class="alert alert-success">
+        <fa-icon [icon]="'check'"></fa-icon>
+        <span>Your answer was saved <span *ngIf="saveCounter > 1">({{saveCounter}}x)</span>
                 </span>
-            </div>
-            <div *ngIf="saveDate" class="alert alert-info">
-                <fa-icon [icon]="'clock'"></fa-icon>
-                <span>Saved on {{saveDate.format("DD.MM.YYYY HH:mm:ss")}}</span>
-            </div>
+    </div>
+    <div *ngIf="saveDate" class="alert alert-info">
+        <fa-icon [icon]="'clock'"></fa-icon>
+        <span>Saved on {{saveDate.format("DD.MM.YYYY HH:mm:ss")}}</span>
+    </div>
+</ng-template>
 
-            <ng-container *ngIf="question.showAnswer">
+<ng-template #questionTabs>
+    <ngb-tabset [type]="'pills'" [justify]="'justified'">
+        <ngb-tab title="Question">
+            <ng-template ngbTabContent>
+                <p></p>
+                <ng-container *ngTemplateOutlet="questionSimple"></ng-container>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Answers">
+            <ng-template ngbTabContent>
                 <jhi-stats [questionId]="question.id"></jhi-stats>
-            </ng-container>
-
-        </ng-container>
-    </ng-container>
-</div>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Times">
+            <ng-template ngbTabContent>
+                <jhi-times [questionId]="question.id"></jhi-times>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
+</ng-template>
