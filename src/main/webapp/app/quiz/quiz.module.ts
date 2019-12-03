@@ -8,6 +8,7 @@ import { QuizComponent } from 'app/quiz/quiz.component';
 import { AdventQuizSharedModule } from 'app/shared/shared.module';
 import { RulesComponent } from 'app/quiz/rules/rules.component';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
+import { StatsComponent } from 'app/quiz/answer/stats/stats.component';
 
 @NgModule({
   imports: [
@@ -34,7 +35,7 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access-service'
     ])
   ],
   providers: [AnswerModalService],
-  declarations: [QuizComponent, AnswerComponent, LeaderboardComponent, LoginComponent, RulesComponent],
+  declarations: [QuizComponent, AnswerComponent, LeaderboardComponent, LoginComponent, RulesComponent, StatsComponent],
   exports: [QuizComponent, LoginComponent],
   entryComponents: [AnswerComponent]
 })
