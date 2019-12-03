@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Answer } from 'app/shared/model/answer.model';
 import { AnswerService } from 'app/entities/answer/answer.service';
 
@@ -7,7 +7,7 @@ import { AnswerService } from 'app/entities/answer/answer.service';
   templateUrl: './times.component.html',
   styleUrls: ['times.scss']
 })
-export class TimesComponent implements AfterViewInit {
+export class TimesComponent implements OnInit {
   @Input()
   public questionId;
 
@@ -18,7 +18,7 @@ export class TimesComponent implements AfterViewInit {
 
   constructor(private answerService: AnswerService) {}
 
-  ngAfterViewInit() {
+  ngOnInit(): void {
     this.answerService.answerTimes(this.questionId).subscribe(r => {
       this.answerTimes = r.body.sort((a, b) => a.time.diff(b.time));
       this.collectionSize = this.answerTimes.length;
