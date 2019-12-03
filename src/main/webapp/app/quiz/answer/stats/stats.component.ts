@@ -1,14 +1,11 @@
 import { AfterViewInit, Component, Input, NgZone, OnDestroy } from '@angular/core';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
-
-import animatedTheme from '@amcharts/amcharts4/themes/animated';
 import materialTheme from '@amcharts/amcharts4/themes/material';
 import { QuestionService } from 'app/entities/question/question.service';
 import { Answer } from 'app/shared/model/answer.model';
 import { AnswerService } from 'app/entities/answer/answer.service';
 
-am4core.useTheme(animatedTheme);
 am4core.useTheme(materialTheme);
 
 @Component({
@@ -23,7 +20,7 @@ export class StatsComponent implements AfterViewInit, OnDestroy {
 
   answerTimes = [];
   page = 1;
-  pageSize = 4;
+  pageSize = 5;
   collectionSize = 0;
 
   constructor(private questionService: QuestionService, private answerService: AnswerService, private zone: NgZone) {}
