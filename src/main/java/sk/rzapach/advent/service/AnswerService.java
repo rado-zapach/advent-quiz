@@ -1,12 +1,11 @@
 package sk.rzapach.advent.service;
 
-import sk.rzapach.advent.domain.Answer;
-import sk.rzapach.advent.repository.AnswerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sk.rzapach.advent.domain.Answer;
+import sk.rzapach.advent.repository.AnswerRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -53,6 +52,11 @@ public class AnswerService {
         return answerRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
+    public List<Answer> findAllByQuestionId(Long questionId) {
+        log.debug("Request to get all Answers by questionId {}", questionId);
+        return answerRepository.findAllByQuestionId(questionId);
+    }
 
     /**
      * Get one answer by id.

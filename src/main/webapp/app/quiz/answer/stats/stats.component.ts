@@ -1,10 +1,12 @@
-import { Component, Input, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, NgZone, OnDestroy } from '@angular/core';
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 
 import animatedTheme from '@amcharts/amcharts4/themes/animated';
 import materialTheme from '@amcharts/amcharts4/themes/material';
 import { QuestionService } from 'app/entities/question/question.service';
+import { Answer } from 'app/shared/model/answer.model';
+import { AnswerService } from 'app/entities/answer/answer.service';
 
 am4core.useTheme(animatedTheme);
 am4core.useTheme(materialTheme);
@@ -14,22 +16,30 @@ am4core.useTheme(materialTheme);
   templateUrl: './stats.component.html',
   styleUrls: ['stats.scss']
 })
-export class StatsComponent implements OnInit, OnDestroy {
+export class StatsComponent implements AfterViewInit, OnDestroy {
   @Input()
   public questionId;
-  private chart: am4charts.PieChart3D;
+  private answersChart: am4charts.PieChart3D;
 
-  constructor(private questionService: QuestionService, private zone: NgZone) {}
+  answerTimes = [];
+  page = 1;
+  pageSize = 4;
+  collectionSize = 0;
 
-  ngOnInit() {
-    this.graphInit();
+  constructor(private questionService: QuestionService, private answerService: AnswerService, private zone: NgZone) {}
+
+  ngAfterViewInit() {
+    this.answersGraphInit();
+    this.answerService.answerTimes(this.questionId).subscribe(r => {
+      this.answerTimes = r.body.sort((a, b) => a.time.diff(b.time));
+      this.collectionSize = this.answerTimes.length;
+    });
   }
 
-  graphInit(): void {
+  answersGraphInit(): void {
     this.questionService.getStats(this.questionId).subscribe(stats => {
       this.zone.runOutsideAngular(() => {
-        const chart = am4core.create('chartdiv', am4charts.PieChart3D);
-        chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+        const chart = am4core.create('answers-chart', am4charts.PieChart3D);
         chart.data = stats.body;
         chart.responsive.enabled = true;
         chart.pixelPerfect = true;
@@ -64,15 +74,24 @@ export class StatsComponent implements OnInit, OnDestroy {
         slice.states.getKey('hover').properties.scale = 1;
         slice.states.getKey('active').properties.shiftRadius = 0;
 
-        this.chart = chart;
+        this.answersChart = chart;
       });
     });
   }
 
+  get answerTimesPaged(): Answer[] {
+    return this.answerTimes
+      .map((at, i) => {
+        at.id = i + 1;
+        return at;
+      })
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
+
   ngOnDestroy() {
     this.zone.runOutsideAngular(() => {
-      if (this.chart) {
-        this.chart.dispose();
+      if (this.answersChart) {
+        this.answersChart.dispose();
       }
     });
   }

@@ -215,6 +215,29 @@ public class AnswerResource {
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString())).build();
     }
 
+    @GetMapping("/answers/times/{questionId}")
+    public ResponseEntity<List<Answer>> getAnswersTimes(@PathVariable Long questionId) {
+        log.debug("REST request to get answer times for a question");
+
+        Optional<Question> q = questionService.findOne(questionId);
+        if (!q.isPresent() || Boolean.FALSE.equals(q.get().isShowAnswer())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        } else {
+            List<Answer> entityList = answerService.findAllByQuestionId(questionId);
+            entityList.forEach(e -> {
+                User u = new User();
+                u.setLogin(e.getUser().getLogin());
+                u.setFirstName(e.getUser().getFirstName());
+                u.setLastName(e.getUser().getLastName());
+
+                e.setText("");
+                e.setQuestion(null);
+                e.setUser(u);
+            });
+            return ResponseEntity.ok().body(entityList);
+        }
+    }
+
     /**
      * {@code GET  /answers/calculate : (re)calculates points for all the answers.
      *

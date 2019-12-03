@@ -52,6 +52,12 @@ export class AnswerService {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  answerTimes(questionId: number): Observable<EntityArrayResponseType> {
+    return this.http
+      .get<IAnswer[]>(`${this.resourceUrl}/times/${questionId}`, { observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
   calculatePoints(questionId: number): Observable<HttpResponse<any>> {
     return this.http.get<any>(`${this.resourceUrl}/calculate/${questionId}`, { observe: 'response' });
   }
