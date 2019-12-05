@@ -269,7 +269,6 @@ public class AnswerResource {
         List<Answer> scoredAnswers = answerService.findAll();
         scoredAnswers.removeIf(answer -> answer.getUser() == null
             || answer.getPoints() == null
-            || answer.getPoints() <= 0
             || answer.getQuestion() == null
             || Boolean.FALSE.equals(answer.getQuestion().isShowAnswer())
         );
