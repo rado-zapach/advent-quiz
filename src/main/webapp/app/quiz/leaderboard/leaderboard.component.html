@@ -1,15 +1,19 @@
 <div class="leaderboard">
     <table *ngIf="rankings$ | async as rankings" class="advent">
         <tr>
-            <td class="advent" style="border:1;">Rank</td>
+            <td class="advent">Rank</td>
             <td class="advent" colspan=2>Name</td>
             <td class="advent">Points</td>
+            <td class="advent" title="Scored / Correct / Answered">Answers</td>
+            <td class="advent" title="Average response time for all the scored answers">Average time</td>
         </tr>
 
         <tr *ngFor="let r of rankings; let i = index" class="advent">
             <td class="advent center">{{i + 1}}</td>
             <td class="advent left" colspan=2>{{r.firstName}} {{r.lastName}}</td>
             <td class="advent center">{{r.points}}</td>
+            <td class="advent center" title="Scored / Correct / Answered">{{r.scoredAnswers}}/{{r.correctAnswers}}/{{r.allAnswers}}</td>
+            <td class="advent center" title="Average response time for all the scored answers">{{formatAverageTime(r.averageScoredAnswerTimeMs)}}</td>
         </tr>
     </table>
 </div>

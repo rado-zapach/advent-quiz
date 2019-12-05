@@ -1,7 +1,10 @@
 export interface Ranking {
-  userId: number;
   login: string;
   firstName: string;
   lastName: string;
   points: number;
+  scoredAnswers: number;
+  correctAnswers: number;
+  allAnswers: number;
+  averageScoredAnswerTimeMs: number;
 }

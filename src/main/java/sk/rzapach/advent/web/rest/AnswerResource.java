@@ -25,6 +25,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Instant;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing {@link sk.rzapach.advent.domain.Answer}.
@@ -265,38 +266,48 @@ public class AnswerResource {
     public ResponseEntity<List<Ranking>> getRanking() {
         log.debug("REST request to get user ranking based on calculated points ");
 
-        Map<User, Integer> map = new HashMap<>();
-        List<Answer> scoredAnswers = answerService.findAll();
-        scoredAnswers.removeIf(answer -> answer.getUser() == null
-            || answer.getPoints() == null
-            || answer.getQuestion() == null
-            || Boolean.FALSE.equals(answer.getQuestion().isShowAnswer())
-        );
-        scoredAnswers.forEach(answer -> map.put(answer.getUser(), answer.getPoints() + map.getOrDefault(answer.getUser(), 0)));
+        Map<Long, Ranking> map = new HashMap<>();
+        List<Answer> validAnswers = answerService.findAll()
+            .stream()
+            .filter(answer -> answer.getUser() != null
+                && answer.getPoints() != null
+                && answer.getQuestion() != null
+                && Boolean.TRUE.equals(answer.getQuestion().isShowAnswer()))
+            .collect(Collectors.toList());
+        validAnswers.forEach(answer -> {
+            User u = answer.getUser();
+            if (!map.containsKey(u.getId())) {
+                map.put(u.getId(), new Ranking(u));
+            }
+            Ranking r = map.get(u.getId());
+            r.points += answer.getPoints();
+            r.allAnswers++;
+            if (Boolean.TRUE.equals(answer.isIsCorrect())) {
+                r.correctAnswers++;
+            }
+            if (answer.getPoints() > 0) {
+                r.scoredAnswers++;
+                r.scoredAnswerTimes.add(answer.getTime().toEpochMilli() - answer.getQuestion().getTime().toEpochMilli());
+            }
+        });
 
-        List<Ranking> r = new ArrayList<>();
-        map.forEach((user, points) -> r.add(new Ranking(user, points)));
-
-        return ResponseEntity.ok().body(r);
+        return ResponseEntity.ok().body(new ArrayList<Ranking>(map.values()));
     }
 
     static class Ranking {
-        Long userId;
         String login;
         String firstName;
         String lastName;
-        Integer points;
+        Integer points = 0;
+        Integer scoredAnswers = 0;
+        Integer correctAnswers = 0;
+        Integer allAnswers = 0;
+        List<Long> scoredAnswerTimes = new ArrayList<>();
 
-        Ranking(User u, Integer p) {
-            userId = u.getId();
+        Ranking(User u) {
             login = u.getLogin();
             firstName = u.getFirstName();
             lastName = u.getLastName();
-            points = p;
-        }
-
-        public Long getUserId() {
-            return userId;
         }
 
         public String getLogin() {
@@ -313,6 +324,22 @@ public class AnswerResource {
 
         public Integer getPoints() {
             return points;
+        }
+
+        public Integer getScoredAnswers() {
+            return scoredAnswers;
+        }
+
+        public Integer getCorrectAnswers() {
+            return correctAnswers;
+        }
+
+        public Integer getAllAnswers() {
+            return allAnswers;
+        }
+
+        public Long getAverageScoredAnswerTimeMs() {
+            return scoredAnswerTimes.size() == 0 ? 0 : scoredAnswerTimes.stream().reduce(0L, Long::sum) / scoredAnswerTimes.size();
         }
     }
 

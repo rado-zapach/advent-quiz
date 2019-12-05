@@ -30,7 +30,10 @@ tr.advent:nth-child(even) {
 }
 
 td.advent {
-  @media (max-width: 991.98px) {
+  @media (max-width: 410.98px) {
+    font-size: 7pt;
+  }
+  @media (min-width: 411px) and (max-width: 991.98px) {
     font-size: 9pt;
   }
 
