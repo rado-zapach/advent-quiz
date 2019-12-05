@@ -18,7 +18,7 @@ export class LoginComponent implements AfterViewInit, OnDestroy {
   loginForm = this.fb.group({
     username: [''],
     password: [''],
-    rememberMe: [false]
+    rememberMe: [true]
   });
   destroy$: Subject<void> = new Subject<void>();
 
