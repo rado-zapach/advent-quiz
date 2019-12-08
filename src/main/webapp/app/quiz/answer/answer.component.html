@@ -27,7 +27,8 @@
 </div>
 
 <ng-template #questionSimple>
-    <p class="formatted-text">{{question.text}}</p>
+    <div class="formatted-text" [innerHTML]="question.text"></div>
+    <p></p>
     <div class="row justify-content-center">
         <div class="col-md-12">
             <form id="answer-form" class="form" role="form" (ngSubmit)="onSubmit()" [formGroup]="answerForm">
