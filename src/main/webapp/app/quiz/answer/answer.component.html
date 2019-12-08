@@ -38,7 +38,7 @@
                                       [ngClass]="question.showAnswer ? isCorrectAnswer ? 'correct-free-text-answer' : 'incorrect-free-text-answer' : ''"
                                       id="answer" name="answer" rows="1"
                                       placeholder="Your answer"
-                                      formControlName="answer">
+                                      formControlName="answer" (keypress)="submitOnEnter($event)">
                             </textarea>
                     <ng-container *ngSwitchCase="false">
                         <div *ngFor="let choice of choices; let i = index"
@@ -62,9 +62,9 @@
         <span class="formatted-text">{{question.answer}}</span></div>
     <p *ngIf="!question.showAnswer">
         <button type="submit" class="btn btn-primary" form="answer-form"
-                [disabled]="isAnswerEmpty">
+                [disabled]="isAnswerEmptyOrUnchanged">
             <fa-icon [icon]="'paper-plane'"></fa-icon>
-            Submit the answer
+            Save the answer
         </button>
     </p>
     <div *ngIf="saveCounter > 0" class="alert alert-success">

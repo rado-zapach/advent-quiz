@@ -25,8 +25,9 @@ export class AnswerComponent implements OnInit, OnDestroy {
   choices: string[];
   saveCounter = 0;
   saveDate: Moment;
-  isAnswerEmpty: boolean;
+  isAnswerEmptyOrUnchanged: boolean;
   isCorrectAnswer: boolean;
+  originalAnswer: string;
   destroy$: Subject<void> = new Subject<void>();
 
   answerForm = this.fb.group({
@@ -50,7 +51,7 @@ export class AnswerComponent implements OnInit, OnDestroy {
         startWith(this.answerForm),
         takeUntil(this.destroy$)
       )
-      .subscribe(v => (this.isAnswerEmpty = !v.answer || v.answer.length === 0));
+      .subscribe(v => (this.isAnswerEmptyOrUnchanged = !v.answer || v.answer.length === 0 || v.answer === this.originalAnswer));
 
     this.questionInit(this.question);
     this.fetchQuestion()
@@ -58,6 +59,7 @@ export class AnswerComponent implements OnInit, OnDestroy {
       .subscribe(([q, a]) => {
         this.questionInit(q);
         if (a) {
+          this.originalAnswer = a.text;
           this.answerForm.setValue({ answer: a.text });
           this.saveDate = moment(a.time);
           this.isCorrectAnswer = a.isCorrect;
@@ -66,6 +68,9 @@ export class AnswerComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    this.isAnswerEmptyOrUnchanged = true;
+    this.originalAnswer = this.answerForm.get(['answer']).value;
+
     const answer = {
       ...new Answer(),
       text: this.answerForm.get(['answer']).value,
@@ -116,6 +121,13 @@ export class AnswerComponent implements OnInit, OnDestroy {
       this.choices = this.question.choices.split(';').map(i => i.trim());
     } else if (!q.showAnswer && q.text && q.text.length > 0) {
       setTimeout(() => this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#answer'), 'focus', []), 0);
+    }
+  }
+
+  submitOnEnter(e: KeyboardEvent) {
+    if (!e.shiftKey && !e.altKey && e.key === 'Enter') {
+      this.onSubmit();
+      e.preventDefault();
     }
   }
 
