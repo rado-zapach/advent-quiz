@@ -16,8 +16,7 @@ import { AccountService } from 'app/core/auth/account.service';
 @Component({
   selector: 'jhi-quiz-answer',
   templateUrl: './answer.component.html',
-  styleUrls: ['answer.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['answer.scss']
 })
 export class AnswerComponent implements OnInit, OnDestroy {
   @Input()

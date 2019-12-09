@@ -10,6 +10,7 @@ import { RulesComponent } from 'app/quiz/rules/rules.component';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { StatsComponent } from 'app/quiz/answer/stats/stats.component';
 import { TimesComponent } from 'app/quiz/answer/times/times.component';
+import { SanitizerPipe } from 'app/quiz/answer/sanitizer-pipe';
 
 @NgModule({
   imports: [
@@ -36,7 +37,16 @@ import { TimesComponent } from 'app/quiz/answer/times/times.component';
     ])
   ],
   providers: [AnswerModalService],
-  declarations: [QuizComponent, AnswerComponent, LeaderboardComponent, LoginComponent, RulesComponent, StatsComponent, TimesComponent],
+  declarations: [
+    QuizComponent,
+    AnswerComponent,
+    LeaderboardComponent,
+    LoginComponent,
+    RulesComponent,
+    StatsComponent,
+    TimesComponent,
+    SanitizerPipe
+  ],
   exports: [QuizComponent, LoginComponent],
   entryComponents: [AnswerComponent]
 })
