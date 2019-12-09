@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, Renderer, ViewEncapsulation } from '@angular/core';
 import { Question } from 'app/shared/model/question.model';
 import { FormBuilder } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -16,7 +16,8 @@ import { AccountService } from 'app/core/auth/account.service';
 @Component({
   selector: 'jhi-quiz-answer',
   templateUrl: './answer.component.html',
-  styleUrls: ['answer.scss']
+  styleUrls: ['answer.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AnswerComponent implements OnInit, OnDestroy {
   @Input()
