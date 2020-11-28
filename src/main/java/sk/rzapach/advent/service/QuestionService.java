@@ -84,6 +84,7 @@ public class QuestionService {
             .filter(a -> Boolean.TRUE.equals(a.isIsCorrect()))
             .sorted(Comparator.comparing(Answer::getTime))
             .collect(Collectors.toList());
+        scoredAnswers.forEach(a -> a.setPoints(1));
         int maxPoints = 5;
         for (int i = 0; i < scoredAnswers.size() && i < maxPoints; i++) {
             Long aId = scoredAnswers.get(i).getId();
