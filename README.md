@@ -22,8 +22,11 @@ Run the following commands in two separate terminals to create a blissful develo
 auto-refreshes when files change on your hard drive.
 
     docker-compose -f src/main/docker/postgresql.yml up
-    ./mvnw
     yarn start
+
+Run the backend Spring Boot app. Main class is `sk.rzapach.advent.AdventQuizApp`
+
+Go to `localhost:9000` Use `admin/admin` or `user/user` to log in.
 
 ## Building for production
 
