@@ -7,22 +7,23 @@ This application was generated using JHipster 6.5.1, you can find documentation 
 Before you can build this project, you must install and configure the following dependencies on your machine:
 
 1. [Node.js]
-2. [yarn]
+2. pnpm
 3. Java 11
-4. docker and docker-compose (recommended) or PostgreSQL
+4. docker and docker compose (recommended) or PostgreSQL
 
 After installing Node, you should be able to run the following command to install development tools.
 You will only need to run this command when dependencies change in [package.json](package.json).
 
-    yarn install
+    pnpm install
 
-We use yarn scripts and [Webpack][] as our build system.
+We use pnpm scripts and [Webpack][] as our build system.
 
 Run the following commands in two separate terminals to create a blissful development experience where your browser
 auto-refreshes when files change on your hard drive.
 
-    docker-compose -f src/main/docker/postgresql.yml up
-    yarn start
+    docker compose -f src/main/docker/postgresql.yml up
+    NODE_OPTIONS=--openssl-legacy-provider pnpm start
+    run java project in idea
 
 Run the backend Spring Boot app. Main class is `sk.rzapach.advent.AdventQuizApp`
 
@@ -84,7 +85,7 @@ To launch your application's tests, run:
 
 Unit tests are run by [Jest][] and written with [Jasmine][]. They're located in [src/test/javascript/](src/test/javascript/) and can be run with:
 
-    yarn test
+    pnpm test
 
 For more information, refer to the [Running tests page][].
 
@@ -127,7 +128,6 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [code quality page]: https://www.jhipster.tech/documentation-archive/v6.5.1/code-quality/
 [setting up continuous integration]: https://www.jhipster.tech/documentation-archive/v6.5.1/setting-up-ci/
 [node.js]: https://nodejs.org/
-[yarn]: https://yarnpkg.org/
 [webpack]: https://webpack.github.io/
 [angular cli]: https://cli.angular.io/
 [browsersync]: https://www.browsersync.io/
