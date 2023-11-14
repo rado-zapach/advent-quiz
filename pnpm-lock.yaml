@@ -29,6 +29,9 @@ dependencies:
   '@angular/router':
     specifier: ^17.0.0
     version: 17.0.0(@angular/common@17.0.0)(@angular/core@17.0.0)(@angular/platform-browser@17.0.0)(rxjs@7.8.0)
+  '@aws-amplify/api-graphql':
+    specifier: ^3.4.12
+    version: 3.4.12(react-native@0.72.6)
   '@aws-amplify/ui-angular':
     specifier: ^4.0.9
     version: 4.0.9(@angular/core@17.0.0)(aws-amplify@5.3.12)
@@ -41,6 +44,9 @@ dependencies:
   tslib:
     specifier: ^2.3.0
     version: 2.3.0
+  zen-observable-ts:
+    specifier: 0.8.19
+    version: 0.8.19
   zone.js:
     specifier: ~0.14.2
     version: 0.14.2
@@ -48,7 +54,7 @@ dependencies:
 devDependencies:
   '@angular-devkit/build-angular':
     specifier: ^17.0.0
-    version: 17.0.0(@angular/compiler-cli@17.0.0)(karma@6.4.0)(typescript@5.2.2)
+    version: 17.0.0(@angular/compiler-cli@17.0.0)(@types/node@20.9.0)(karma@6.4.0)(typescript@5.2.2)
   '@angular/cli':
     specifier: ^17.0.0
     version: 17.0.0
@@ -58,6 +64,9 @@ devDependencies:
   '@types/jasmine':
     specifier: ~5.1.0
     version: 5.1.0
+  '@types/node':
+    specifier: ^20.9.0
+    version: 20.9.0
   jasmine-core:
     specifier: ~5.1.0
     version: 5.1.0
@@ -99,7 +108,7 @@ packages:
       - chokidar
     dev: true
 
-  /@angular-devkit/build-angular@17.0.0(@angular/compiler-cli@17.0.0)(karma@6.4.0)(typescript@5.2.2):
+  /@angular-devkit/build-angular@17.0.0(@angular/compiler-cli@17.0.0)(@types/node@20.9.0)(karma@6.4.0)(typescript@5.2.2):
     resolution: {integrity: sha512-hkV8k4moAnUquac2Dz5XPd5izDDgEF82NeUkSwizcTaqlJqYOdmWASMsXyVBzdrTmDtFKQiphfA96i7eo5MlvA==}
     engines: {node: ^18.13.0 || >=20.9.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
     peerDependencies:
@@ -196,7 +205,7 @@ packages:
       tslib: 2.6.2
       typescript: 5.2.2
       undici: 5.27.2
-      vite: 4.5.0(less@4.2.0)(sass@1.69.5)(terser@5.24.0)
+      vite: 4.5.0(@types/node@20.9.0)(less@4.2.0)(sass@1.69.5)(terser@5.24.0)
       webpack: 5.89.0(esbuild@0.19.5)
       webpack-dev-middleware: 6.1.1(webpack@5.89.0)
       webpack-dev-server: 4.15.1(webpack@5.89.0)
@@ -692,7 +701,7 @@ packages:
     resolution: {integrity: sha512-8K0b1672qbv05chSoKpwGZ3fhvVp28Fg3AVHVkEHFl2lTLChO7wD/hTyyo8ING7uc31uZRt7bNra/hA74Td7Tw==}
     dependencies:
       '@aws-crypto/util': 1.2.2
-      '@aws-sdk/types': 3.6.1
+      '@aws-sdk/types': 3.186.0
       tslib: 1.14.1
     dev: false
 
@@ -723,7 +732,7 @@ packages:
       '@aws-crypto/sha256-js': 1.2.2
       '@aws-crypto/supports-web-crypto': 1.0.0
       '@aws-crypto/util': 1.2.2
-      '@aws-sdk/types': 3.6.1
+      '@aws-sdk/types': 3.186.0
       '@aws-sdk/util-locate-window': 3.310.0
       tslib: 1.14.1
     dev: false
@@ -737,7 +746,7 @@ packages:
       '@aws-crypto/util': 2.0.2
       '@aws-sdk/types': 3.186.0
       '@aws-sdk/util-locate-window': 3.310.0
-      '@aws-sdk/util-utf8-browser': 3.186.0
+      '@aws-sdk/util-utf8-browser': 3.259.0
       tslib: 1.14.1
     dev: false
 
@@ -745,7 +754,7 @@ packages:
     resolution: {integrity: sha512-Nr1QJIbW/afYYGzYvrF70LtaHrIRtd4TNAglX8BvlfxJLZ45SAmueIKYl5tWoNBPzp65ymXGFK0Bb1vZUpuc9g==}
     dependencies:
       '@aws-crypto/util': 1.2.2
-      '@aws-sdk/types': 3.6.1
+      '@aws-sdk/types': 3.186.0
       tslib: 1.14.1
     dev: false
 
@@ -772,7 +781,7 @@ packages:
   /@aws-crypto/util@1.2.2:
     resolution: {integrity: sha512-H8PjG5WJ4wz0UXAFXeJjWCW1vkvIJ3qUUD+rGRwJ2/hj+xT58Qle2MTql/2MGzkU+1JLAFuR6aJpLAjHwhmwwg==}
     dependencies:
-      '@aws-sdk/types': 3.6.1
+      '@aws-sdk/types': 3.186.0
       '@aws-sdk/util-utf8-browser': 3.259.0
       tslib: 1.14.1
     dev: false
@@ -781,7 +790,7 @@ packages:
     resolution: {integrity: sha512-Lgu5v/0e/BcrZ5m/IWqzPUf3UYFTy/PpeED+uc9SWUR1iZQL8XXbGQg10UfllwwBryO3hFF5dizK+78aoXC1eA==}
     dependencies:
       '@aws-sdk/types': 3.186.0
-      '@aws-sdk/util-utf8-browser': 3.186.0
+      '@aws-sdk/util-utf8-browser': 3.259.0
       tslib: 1.14.1
     dev: false
 
@@ -5893,7 +5902,7 @@ packages:
     peerDependencies:
       vite: ^3.0.0 || ^4.0.0
     dependencies:
-      vite: 4.5.0(less@4.2.0)(sass@1.69.5)(terser@5.24.0)
+      vite: 4.5.0(@types/node@20.9.0)(less@4.2.0)(sass@1.69.5)(terser@5.24.0)
     dev: true
 
   /@webassemblyjs/ast@1.11.6:
@@ -9056,7 +9065,7 @@ packages:
     dependencies:
       copy-anything: 2.0.6
       parse-node-version: 1.0.1
-      tslib: 2.3.0
+      tslib: 2.6.2
     optionalDependencies:
       errno: 0.1.8
       graceful-fs: 4.2.11
@@ -11009,7 +11018,7 @@ packages:
   /rxjs@7.8.1:
     resolution: {integrity: sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==}
     dependencies:
-      tslib: 2.3.0
+      tslib: 2.6.2
     dev: true
 
   /safe-buffer@5.1.2:
@@ -12016,7 +12025,7 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
 
-  /vite@4.5.0(less@4.2.0)(sass@1.69.5)(terser@5.24.0):
+  /vite@4.5.0(@types/node@20.9.0)(less@4.2.0)(sass@1.69.5)(terser@5.24.0):
     resolution: {integrity: sha512-ulr8rNLA6rkyFAlVWw2q5YJ91v098AFQ2R0PRFwPzREXOUJQPtFUG0t+/ZikhaOCDqFoDhN6/v8Sq0o4araFAw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -12044,6 +12053,7 @@ packages:
       terser:
         optional: true
     dependencies:
+      '@types/node': 20.9.0
       esbuild: 0.18.20
       less: 4.2.0
       postcss: 8.4.31
