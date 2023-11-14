@@ -10,6 +10,7 @@ mutation CreateTodo(
     description
     createdAt
     updatedAt
+    owner
     __typename
   }
 }
@@ -24,6 +25,7 @@ mutation UpdateTodo(
     description
     createdAt
     updatedAt
+    owner
     __typename
   }
 }
@@ -38,6 +40,7 @@ mutation DeleteTodo(
     description
     createdAt
     updatedAt
+    owner
     __typename
   }
 }

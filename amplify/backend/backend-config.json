@@ -1,10 +1,25 @@
 {
   "api": {
     "adventquiz": {
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "adventquiz6a5522dc"
+        }
+      ],
       "output": {
         "authConfig": {
-          "additionalAuthenticationProviders": [],
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authadventquiz6a5522dc"
+              }
+            }
+          ],
           "defaultAuthentication": {
             "apiKeyConfig": {
               "apiKeyExpirationDays": 7
