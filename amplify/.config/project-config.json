@@ -6,7 +6,7 @@
     "framework": "angular",
     "config": {
       "SourceDir": "src",
-      "DistributionDir": "dist/advent-quiz",
+      "DistributionDir": "dist/advent-quiz/browser",
       "BuildCommand": "npm run-script build",
       "StartCommand": "ng serve"
     }
