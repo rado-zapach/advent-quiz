@@ -1,15 +1,15 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-adventquiz-dev-203130-authRole",
-      "UnauthRoleArn": "arn:aws:iam::259500569824:role/amplify-adventquiz-dev-203130-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::259500569824:role/amplify-adventquiz-dev-203130-authRole",
+      "AuthRoleName": "amplify-adventquiz-dev-124024-authRole",
+      "UnauthRoleArn": "arn:aws:iam::259500569824:role/amplify-adventquiz-dev-124024-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::259500569824:role/amplify-adventquiz-dev-124024-authRole",
       "Region": "eu-central-1",
-      "DeploymentBucketName": "amplify-adventquiz-dev-203130-deployment",
-      "UnauthRoleName": "amplify-adventquiz-dev-203130-unauthRole",
-      "StackName": "amplify-adventquiz-dev-203130",
-      "StackId": "arn:aws:cloudformation:eu-central-1:259500569824:stack/amplify-adventquiz-dev-203130/c07168f0-7fff-11ee-b26b-0ab754bc9cbf",
-      "AmplifyAppId": "d129d5z9lvfr58"
+      "DeploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
+      "UnauthRoleName": "amplify-adventquiz-dev-124024-unauthRole",
+      "StackName": "amplify-adventquiz-dev-124024",
+      "StackId": "arn:aws:cloudformation:eu-central-1:259500569824:stack/amplify-adventquiz-dev-124024/9ae93aa0-82e2-11ee-8e5a-029134e32e31",
+      "AmplifyAppId": "dwj086uzt62ft"
     }
   }
 }
