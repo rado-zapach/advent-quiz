@@ -17,6 +17,12 @@
       },
       "auth": {
         "adventquiz6a5522dc": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dwj086uzt62ft",
+          "type": "manual"
+        }
       }
     }
   }
