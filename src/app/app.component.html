@@ -1,3 +1,9 @@
+<div>
+  <button (click)="openGoogleAuth()">Open Google</button>
+  <button (click)="signOut()">Sign Out</button>
+  <div>{{user$|async}}</div>
+</div>
+
 <div class="form-body">
   <form
     autocomplete="off"
