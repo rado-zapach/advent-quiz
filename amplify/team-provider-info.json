@@ -10,6 +10,11 @@
       "StackName": "amplify-adventquiz-dev-124024",
       "StackId": "arn:aws:cloudformation:eu-central-1:259500569824:stack/amplify-adventquiz-dev-124024/9ae93aa0-82e2-11ee-8e5a-029134e32e31",
       "AmplifyAppId": "dwj086uzt62ft"
+    },
+    "categories": {
+      "api": {
+        "adventquiz": {}
+      }
     }
   }
 }
