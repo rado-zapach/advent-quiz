@@ -71,7 +71,6 @@ export const onCreateQuestion = /* GraphQL */ `subscription OnCreateQuestion($fi
     correctAnswer
     openTime
     closeTime
-    showAnswer
     answers {
       nextToken
       __typename
@@ -94,7 +93,6 @@ export const onUpdateQuestion = /* GraphQL */ `subscription OnUpdateQuestion($fi
     correctAnswer
     openTime
     closeTime
-    showAnswer
     answers {
       nextToken
       __typename
@@ -117,7 +115,6 @@ export const onDeleteQuestion = /* GraphQL */ `subscription OnDeleteQuestion($fi
     correctAnswer
     openTime
     closeTime
-    showAnswer
     answers {
       nextToken
       __typename
@@ -149,7 +146,6 @@ export const onCreateAnswer = /* GraphQL */ `subscription OnCreateAnswer(
       correctAnswer
       openTime
       closeTime
-      showAnswer
       createdAt
       updatedAt
       __typename
@@ -182,7 +178,6 @@ export const onUpdateAnswer = /* GraphQL */ `subscription OnUpdateAnswer(
       correctAnswer
       openTime
       closeTime
-      showAnswer
       createdAt
       updatedAt
       __typename
@@ -215,7 +210,6 @@ export const onDeleteAnswer = /* GraphQL */ `subscription OnDeleteAnswer(
       correctAnswer
       openTime
       closeTime
-      showAnswer
       createdAt
       updatedAt
       __typename

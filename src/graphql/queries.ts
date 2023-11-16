@@ -49,7 +49,6 @@ export const getQuestion = /* GraphQL */ `query GetQuestion($id: ID!) {
     correctAnswer
     openTime
     closeTime
-    showAnswer
     answers {
       nextToken
       __typename
@@ -77,7 +76,6 @@ export const listQuestions = /* GraphQL */ `query ListQuestions(
       correctAnswer
       openTime
       closeTime
-      showAnswer
       createdAt
       updatedAt
       __typename
@@ -105,7 +103,6 @@ export const getAnswer = /* GraphQL */ `query GetAnswer($id: ID!) {
       correctAnswer
       openTime
       closeTime
-      showAnswer
       createdAt
       updatedAt
       __typename

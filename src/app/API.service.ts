@@ -87,7 +87,6 @@ export type CreateQuestionInput = {
   correctAnswer: string,
   openTime: string,
   closeTime: string,
-  showAnswer: boolean,
 };
 
 export type ModelQuestionConditionInput = {
@@ -97,17 +96,9 @@ export type ModelQuestionConditionInput = {
   correctAnswer?: ModelStringInput | null,
   openTime?: ModelStringInput | null,
   closeTime?: ModelStringInput | null,
-  showAnswer?: ModelBooleanInput | null,
   and?: Array< ModelQuestionConditionInput | null > | null,
   or?: Array< ModelQuestionConditionInput | null > | null,
   not?: ModelQuestionConditionInput | null,
-};
-
-export type ModelBooleanInput = {
-  ne?: boolean | null,
-  eq?: boolean | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
 };
 
 export type Question = {
@@ -119,7 +110,6 @@ export type Question = {
   correctAnswer: string,
   openTime: string,
   closeTime: string,
-  showAnswer: boolean,
   answers?: ModelAnswerConnection | null,
   createdAt: string,
   updatedAt: string,
@@ -152,7 +142,6 @@ export type UpdateQuestionInput = {
   correctAnswer?: string | null,
   openTime?: string | null,
   closeTime?: string | null,
-  showAnswer?: boolean | null,
 };
 
 export type DeleteQuestionInput = {
@@ -177,6 +166,13 @@ export type ModelAnswerConditionInput = {
   or?: Array< ModelAnswerConditionInput | null > | null,
   not?: ModelAnswerConditionInput | null,
   questionAnswersId?: ModelIDInput | null,
+};
+
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
 };
 
 export type ModelIntInput = {
@@ -285,7 +281,6 @@ export type ModelQuestionFilterInput = {
   correctAnswer?: ModelStringInput | null,
   openTime?: ModelStringInput | null,
   closeTime?: ModelStringInput | null,
-  showAnswer?: ModelBooleanInput | null,
   and?: Array< ModelQuestionFilterInput | null > | null,
   or?: Array< ModelQuestionFilterInput | null > | null,
   not?: ModelQuestionFilterInput | null,
@@ -372,14 +367,8 @@ export type ModelSubscriptionQuestionFilterInput = {
   correctAnswer?: ModelSubscriptionStringInput | null,
   openTime?: ModelSubscriptionStringInput | null,
   closeTime?: ModelSubscriptionStringInput | null,
-  showAnswer?: ModelSubscriptionBooleanInput | null,
   and?: Array< ModelSubscriptionQuestionFilterInput | null > | null,
   or?: Array< ModelSubscriptionQuestionFilterInput | null > | null,
-};
-
-export type ModelSubscriptionBooleanInput = {
-  ne?: boolean | null,
-  eq?: boolean | null,
 };
 
 export type ModelSubscriptionAnswerFilterInput = {
@@ -389,6 +378,11 @@ export type ModelSubscriptionAnswerFilterInput = {
   points?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionAnswerFilterInput | null > | null,
   or?: Array< ModelSubscriptionAnswerFilterInput | null > | null,
+};
+
+export type ModelSubscriptionBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
 };
 
 export type ModelSubscriptionIntInput = {
@@ -479,7 +473,6 @@ export type CreateQuestionMutation = {
     correctAnswer: string,
     openTime: string,
     closeTime: string,
-    showAnswer: boolean,
     answers?:  {
       __typename: "ModelAnswerConnection",
       nextToken?: string | null,
@@ -504,7 +497,6 @@ export type UpdateQuestionMutation = {
     correctAnswer: string,
     openTime: string,
     closeTime: string,
-    showAnswer: boolean,
     answers?:  {
       __typename: "ModelAnswerConnection",
       nextToken?: string | null,
@@ -529,7 +521,6 @@ export type DeleteQuestionMutation = {
     correctAnswer: string,
     openTime: string,
     closeTime: string,
-    showAnswer: boolean,
     answers?:  {
       __typename: "ModelAnswerConnection",
       nextToken?: string | null,
@@ -561,7 +552,6 @@ export type CreateAnswerMutation = {
       correctAnswer: string,
       openTime: string,
       closeTime: string,
-      showAnswer: boolean,
       createdAt: string,
       updatedAt: string,
     },
@@ -593,7 +583,6 @@ export type UpdateAnswerMutation = {
       correctAnswer: string,
       openTime: string,
       closeTime: string,
-      showAnswer: boolean,
       createdAt: string,
       updatedAt: string,
     },
@@ -625,7 +614,6 @@ export type DeleteAnswerMutation = {
       correctAnswer: string,
       openTime: string,
       closeTime: string,
-      showAnswer: boolean,
       createdAt: string,
       updatedAt: string,
     },
@@ -741,7 +729,6 @@ export type GetQuestionQuery = {
     correctAnswer: string,
     openTime: string,
     closeTime: string,
-    showAnswer: boolean,
     answers?:  {
       __typename: "ModelAnswerConnection",
       nextToken?: string | null,
@@ -769,7 +756,6 @@ export type ListQuestionsQuery = {
       correctAnswer: string,
       openTime: string,
       closeTime: string,
-      showAnswer: boolean,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -798,7 +784,6 @@ export type GetAnswerQuery = {
       correctAnswer: string,
       openTime: string,
       closeTime: string,
-      showAnswer: boolean,
       createdAt: string,
       updatedAt: string,
     },
@@ -937,7 +922,6 @@ export type OnCreateQuestionSubscription = {
     correctAnswer: string,
     openTime: string,
     closeTime: string,
-    showAnswer: boolean,
     answers?:  {
       __typename: "ModelAnswerConnection",
       nextToken?: string | null,
@@ -961,7 +945,6 @@ export type OnUpdateQuestionSubscription = {
     correctAnswer: string,
     openTime: string,
     closeTime: string,
-    showAnswer: boolean,
     answers?:  {
       __typename: "ModelAnswerConnection",
       nextToken?: string | null,
@@ -985,7 +968,6 @@ export type OnDeleteQuestionSubscription = {
     correctAnswer: string,
     openTime: string,
     closeTime: string,
-    showAnswer: boolean,
     answers?:  {
       __typename: "ModelAnswerConnection",
       nextToken?: string | null,
@@ -1017,7 +999,6 @@ export type OnCreateAnswerSubscription = {
       correctAnswer: string,
       openTime: string,
       closeTime: string,
-      showAnswer: boolean,
       createdAt: string,
       updatedAt: string,
     },
@@ -1049,7 +1030,6 @@ export type OnUpdateAnswerSubscription = {
       correctAnswer: string,
       openTime: string,
       closeTime: string,
-      showAnswer: boolean,
       createdAt: string,
       updatedAt: string,
     },
@@ -1081,7 +1061,6 @@ export type OnDeleteAnswerSubscription = {
       correctAnswer: string,
       openTime: string,
       closeTime: string,
-      showAnswer: boolean,
       createdAt: string,
       updatedAt: string,
     },

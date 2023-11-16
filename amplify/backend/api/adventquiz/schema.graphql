@@ -7,7 +7,9 @@ type Todo @model @auth(rules: [{allow: owner}]) {
     description: String
 }
 
-type Question @model @auth(rules: [{allow: private, operations: [read]}]) {
+type Question
+    @model
+    @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["Admin"]}]) {
     id: ID!
     text: String!
     choices: String!
@@ -15,17 +17,18 @@ type Question @model @auth(rules: [{allow: private, operations: [read]}]) {
     correctAnswer: String!
     openTime: AWSDateTime!
     closeTime: AWSDateTime!
-    showAnswer: Boolean!
     answers: [Answer!]! @hasMany
 }
 
-type Answer @model @auth(rules: [{allow: owner}]) {
+type Answer
+    @model
+    @auth(rules: [{allow: owner, operations: [read]}, {allow: groups, groups: ["Admin"]}]) {
     id: ID!
-    owner: String @auth(rules: [{allow: owner, operations: [read]}])
-    text: String!
-    isCorrect: Boolean! @auth(rules: [{allow: owner, operations: [read]}])
-    points: Int! @auth(rules: [{allow: owner, operations: [read]}])
-    question: Question! @belongsTo
+    owner: String
+    text: String! @auth(rules: [{allow: owner}, {allow: groups, groups: ["Admin"]}])
+    isCorrect: Boolean!
+    points: Int!
+    question: Question!
 }
 
 type Ranking @model @auth(rules: [{allow: private, operations: [read]}]) {
