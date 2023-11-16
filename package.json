@@ -18,13 +18,10 @@
     "@angular/platform-browser": "^17.0.0",
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
-    "@aws-amplify/api-graphql": "^3.4.12",
-    "@aws-amplify/auth": "^5.6.6",
-    "@aws-amplify/ui-angular": "^4.0.9",
-    "aws-amplify": "^5.3.12",
+    "@aws-amplify/ui-angular": "^5.0.0",
+    "aws-amplify": "^6.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zen-observable-ts": "0.8.19",
     "zone.js": "~0.14.2"
   },
   "devDependencies": {

@@ -2,14 +2,16 @@ projects:
   adventquiz:
     schemaPath: src/graphql/schema.json
     includes:
-      - src/graphql/**/*.graphql
+      - src/graphql/**/*.ts
     excludes:
       - ./amplify/**
+      - src/app/API.service.ts
     extensions:
       amplify:
-        codeGenTarget: angular
+        codeGenTarget: typescript
         generatedFileName: src/app/API.service.ts
         docsFilePath: src/graphql
+        maxDepth: 2
 extensions:
   amplify:
     version: 3
