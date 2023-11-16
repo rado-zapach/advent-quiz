@@ -1,29 +1,29 @@
 {
-    "dev": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-adventquiz-dev-124024-authRole",
-            "UnauthRoleArn": "arn:aws:iam::259500569824:role/amplify-adventquiz-dev-124024-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::259500569824:role/amplify-adventquiz-dev-124024-authRole",
-            "Region": "eu-central-1",
-            "DeploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-            "UnauthRoleName": "amplify-adventquiz-dev-124024-unauthRole",
-            "StackName": "amplify-adventquiz-dev-124024",
-            "StackId": "arn:aws:cloudformation:eu-central-1:259500569824:stack/amplify-adventquiz-dev-124024/9ae93aa0-82e2-11ee-8e5a-029134e32e31",
-            "AmplifyAppId": "dwj086uzt62ft"
-        },
-        "categories": {
-            "api": {
-                "adventquiz": {}
-            },
-            "auth": {
-                "adventquiz6a5522dc": {}
-            },
-            "hosting": {
-                "amplifyhosting": {
-                    "appId": "dwj086uzt62ft",
-                    "type": "manual"
-                }
-            }
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-adventquiz-dev-124024-authRole",
+      "UnauthRoleArn": "arn:aws:iam::259500569824:role/amplify-adventquiz-dev-124024-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::259500569824:role/amplify-adventquiz-dev-124024-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
+      "UnauthRoleName": "amplify-adventquiz-dev-124024-unauthRole",
+      "StackName": "amplify-adventquiz-dev-124024",
+      "StackId": "arn:aws:cloudformation:eu-central-1:259500569824:stack/amplify-adventquiz-dev-124024/9ae93aa0-82e2-11ee-8e5a-029134e32e31",
+      "AmplifyAppId": "dwj086uzt62ft"
+    },
+    "categories": {
+      "api": {
+        "adventquiz": {}
+      },
+      "auth": {
+        "adventquiz6a5522dc": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dwj086uzt62ft",
+          "type": "manual"
         }
+      }
     }
+  }
 }

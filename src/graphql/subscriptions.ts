@@ -2,10 +2,10 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from '../app/API.service';
+import * as APITypes from "../app/API.service";
 type GeneratedSubscription<InputType, OutputType> = string & {
-    __generatedSubscriptionInput: InputType;
-    __generatedSubscriptionOutput: OutputType;
+  __generatedSubscriptionInput: InputType;
+  __generatedSubscriptionOutput: OutputType;
 };
 
 export const onCreateTodo = /* GraphQL */ `subscription OnCreateTodo(
@@ -23,8 +23,8 @@ export const onCreateTodo = /* GraphQL */ `subscription OnCreateTodo(
   }
 }
 ` as GeneratedSubscription<
-    APITypes.OnCreateTodoSubscriptionVariables,
-    APITypes.OnCreateTodoSubscription
+  APITypes.OnCreateTodoSubscriptionVariables,
+  APITypes.OnCreateTodoSubscription
 >;
 export const onUpdateTodo = /* GraphQL */ `subscription OnUpdateTodo(
   $filter: ModelSubscriptionTodoFilterInput
@@ -41,8 +41,8 @@ export const onUpdateTodo = /* GraphQL */ `subscription OnUpdateTodo(
   }
 }
 ` as GeneratedSubscription<
-    APITypes.OnUpdateTodoSubscriptionVariables,
-    APITypes.OnUpdateTodoSubscription
+  APITypes.OnUpdateTodoSubscriptionVariables,
+  APITypes.OnUpdateTodoSubscription
 >;
 export const onDeleteTodo = /* GraphQL */ `subscription OnDeleteTodo(
   $filter: ModelSubscriptionTodoFilterInput
@@ -59,6 +59,6 @@ export const onDeleteTodo = /* GraphQL */ `subscription OnDeleteTodo(
   }
 }
 ` as GeneratedSubscription<
-    APITypes.OnDeleteTodoSubscriptionVariables,
-    APITypes.OnDeleteTodoSubscription
+  APITypes.OnDeleteTodoSubscriptionVariables,
+  APITypes.OnDeleteTodoSubscription
 >;

@@ -2,10 +2,10 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from '../app/API.service';
+import * as APITypes from "../app/API.service";
 type GeneratedQuery<InputType, OutputType> = string & {
-    __generatedQueryInput: InputType;
-    __generatedQueryOutput: OutputType;
+  __generatedQueryInput: InputType;
+  __generatedQueryOutput: OutputType;
 };
 
 export const getTodo = /* GraphQL */ `query GetTodo($id: ID!) {

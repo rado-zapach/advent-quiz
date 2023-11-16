@@ -2,10 +2,10 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from '../app/API.service';
+import * as APITypes from "../app/API.service";
 type GeneratedMutation<InputType, OutputType> = string & {
-    __generatedMutationInput: InputType;
-    __generatedMutationOutput: OutputType;
+  __generatedMutationInput: InputType;
+  __generatedMutationOutput: OutputType;
 };
 
 export const createTodo = /* GraphQL */ `mutation CreateTodo(
@@ -22,7 +22,10 @@ export const createTodo = /* GraphQL */ `mutation CreateTodo(
     __typename
   }
 }
-` as GeneratedMutation<APITypes.CreateTodoMutationVariables, APITypes.CreateTodoMutation>;
+` as GeneratedMutation<
+  APITypes.CreateTodoMutationVariables,
+  APITypes.CreateTodoMutation
+>;
 export const updateTodo = /* GraphQL */ `mutation UpdateTodo(
   $input: UpdateTodoInput!
   $condition: ModelTodoConditionInput
@@ -37,7 +40,10 @@ export const updateTodo = /* GraphQL */ `mutation UpdateTodo(
     __typename
   }
 }
-` as GeneratedMutation<APITypes.UpdateTodoMutationVariables, APITypes.UpdateTodoMutation>;
+` as GeneratedMutation<
+  APITypes.UpdateTodoMutationVariables,
+  APITypes.UpdateTodoMutation
+>;
 export const deleteTodo = /* GraphQL */ `mutation DeleteTodo(
   $input: DeleteTodoInput!
   $condition: ModelTodoConditionInput
@@ -52,4 +58,7 @@ export const deleteTodo = /* GraphQL */ `mutation DeleteTodo(
     __typename
   }
 }
-` as GeneratedMutation<APITypes.DeleteTodoMutationVariables, APITypes.DeleteTodoMutation>;
+` as GeneratedMutation<
+  APITypes.DeleteTodoMutationVariables,
+  APITypes.DeleteTodoMutation
+>;
