@@ -1,5 +1,37 @@
+# https://docs.amplify.aws/angular/build-a-backend/graphqlapi/customize-authorization-rules/
+
 type Todo @model @auth(rules: [{allow: owner}]) {
     id: ID!
+    owner: String @auth(rules: [{allow: owner, operations: [read]}])
     name: String!
     description: String
+}
+
+type Question @model @auth(rules: [{allow: private, operations: [read]}]) {
+    id: ID!
+    text: String!
+    choices: String!
+    icon: String!
+    correctAnswer: String!
+    openTime: AWSDateTime!
+    closeTime: AWSDateTime!
+    showAnswer: Boolean!
+    answers: [Answer!]! @hasMany
+}
+
+type Answer @model @auth(rules: [{allow: owner}]) {
+    id: ID!
+    owner: String @auth(rules: [{allow: owner, operations: [read]}])
+    text: String!
+    isCorrect: Boolean! @auth(rules: [{allow: owner, operations: [read]}])
+    points: Int! @auth(rules: [{allow: owner, operations: [read]}])
+    question: Question! @belongsTo
+}
+
+type Ranking @model @auth(rules: [{allow: private, operations: [read]}]) {
+    id: ID!
+    user: String!
+    points: Int!
+    correctAnswers: Int!
+    allAnswers: Int!
 }
