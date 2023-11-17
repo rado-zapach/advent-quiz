@@ -5,7 +5,7 @@ import {generateClient} from 'aws-amplify/api';
 import * as mutations from '../../graphql/mutations';
 import * as queries from '../../graphql/queries';
 import * as subscriptions from '../../graphql/subscriptions';
-import {ListTodosQuery, Todo} from '../API.service';
+import {CreateTodoInput, Todo} from '../API.service';
 
 @Component({
     standalone: true,
@@ -15,8 +15,7 @@ import {ListTodosQuery, Todo} from '../API.service';
     styleUrls: ['./todos.component.scss'],
 })
 export class TodosComponent implements OnInit {
-    // @ts-ignore
-    public todos: ListTodosQuery['listTodos']['items'] = [];
+    public todos: Todo[] = [];
     public createForm: FormGroup;
     public client = generateClient();
 
@@ -33,7 +32,7 @@ export class TodosComponent implements OnInit {
             .pipe(takeUntilDestroyed())
             .subscribe({
                 next: event => {
-                    const newTodo: Todo = event.data.onCreateTodo;
+                    const newTodo = event.data.onCreateTodo;
                     this.todos = [newTodo, ...this.todos];
                 },
             });
@@ -51,7 +50,7 @@ export class TodosComponent implements OnInit {
         }
     }
 
-    public async onCreate(todo: Todo) {
+    public async onCreate(todo: CreateTodoInput) {
         try {
             const response = await this.client.graphql({
                 query: mutations.createTodo,
