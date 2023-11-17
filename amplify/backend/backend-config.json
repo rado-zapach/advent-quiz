@@ -69,6 +69,7 @@
       "service": "Cognito-UserPool-Groups"
     }
   },
+  "function": {},
   "hosting": {
     "amplifyhosting": {
       "providerPlugin": "awscloudformation",

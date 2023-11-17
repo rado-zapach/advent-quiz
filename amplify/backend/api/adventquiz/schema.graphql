@@ -21,7 +21,7 @@ type Answer
     text: String! @auth(rules: [{allow: owner}, {allow: groups, groups: ["Admins"]}])
     isCorrect: Boolean!
     points: Int!
-    question: Question!
+    question: Question! @belongsTo
 }
 
 type Ranking @model @auth(rules: [{allow: private, operations: [read]}]) {
