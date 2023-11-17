@@ -1,3 +1,4 @@
+<h1>Questions</h1>
 <div class="mat-elevation-z8">
     <mat-table matSort matSortActive="openTime" matSortDirection="asc" [dataSource]="dataSource">
         <ng-container matColumnDef="text">
@@ -134,4 +135,4 @@
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
 </div>
-<button mat-raised-button (click)="onCreate()">Add question</button>
+<button class="add-question" mat-raised-button (click)="onCreate()">Add question</button>
