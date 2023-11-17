@@ -1,12 +1,12 @@
 import {CommonModule} from '@angular/common';
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from "@angular/core";
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {RouterLink, RouterOutlet} from "@angular/router";
-import {AmplifyAuthenticatorModule} from '@aws-amplify/ui-angular';
+import {RouterLink, RouterOutlet} from '@angular/router';
+import {UserService} from './user.service';
 
 @Component({
     selector: 'app-root',
@@ -14,7 +14,6 @@ import {AmplifyAuthenticatorModule} from '@aws-amplify/ui-angular';
     imports: [
         CommonModule,
         RouterOutlet,
-        AmplifyAuthenticatorModule,
         MatToolbarModule,
         MatButtonModule,
         MatIconModule,
@@ -24,5 +23,9 @@ import {AmplifyAuthenticatorModule} from '@aws-amplify/ui-angular';
     ],
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {}
+export class AppComponent {
+    public readonly userService = inject(UserService);
+    public user$ = this.userService.getUser();
+}
