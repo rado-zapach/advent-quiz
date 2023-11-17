@@ -28,7 +28,7 @@ export const routes: Routes = [
                     import('./admin/questions/questions.component').then(m => m.QuestionsComponent),
             },
             {
-                path: 'answers',
+                path: 'answers/:id',
                 loadComponent: () =>
                     import('./admin/answers/answers.component').then(m => m.AnswersComponent),
             },

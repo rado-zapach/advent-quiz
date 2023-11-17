@@ -9,7 +9,7 @@ type Todo @model @auth(rules: [{allow: owner}]) {
 
 type Question
     @model
-    @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["Admin"]}]) {
+    @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["Admins"]}]) {
     id: ID!
     text: String!
     choices: String!
@@ -22,10 +22,10 @@ type Question
 
 type Answer
     @model
-    @auth(rules: [{allow: owner, operations: [read]}, {allow: groups, groups: ["Admin"]}]) {
+    @auth(rules: [{allow: owner, operations: [read]}, {allow: groups, groups: ["Admins"]}]) {
     id: ID!
     owner: String
-    text: String! @auth(rules: [{allow: owner}, {allow: groups, groups: ["Admin"]}])
+    text: String! @auth(rules: [{allow: owner}, {allow: groups, groups: ["Admins"]}])
     isCorrect: Boolean!
     points: Int!
     question: Question!

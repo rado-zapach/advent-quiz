@@ -1,1 +1,67 @@
-<p>questions works!</p>
+<div class="example-container mat-elevation-z8">
+    <button mat-raised-button (click)="onToggleEditMode()">Toggle edit</button>
+    <button mat-raised-button (click)="onCreate()">Add question</button>
+
+    <mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="text">
+            <mat-header-cell *matHeaderCellDef> Text </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.text }} </mat-cell>
+        </ng-container>
+
+        <!--        <ng-container matColumnDef="name">-->
+        <!--            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>-->
+        <!--            <mat-cell *matCellDef="let element">-->
+        <!--                <ng-container *ngIf="isEditMode">-->
+        <!--                    <mat-form-field floatLabel="auto">-->
+        <!--                        <input matInput placeholder="Name" [value]="element.name" />-->
+        <!--                    </mat-form-field>-->
+        <!--                    <button mat-icon-button matTooltip="Save"><mat-icon>done</mat-icon></button>-->
+        <!--                </ng-container>-->
+        <!--                <ng-container *ngIf="!isEditMode"> {{ element.name }} </ng-container>-->
+        <!--            </mat-cell>-->
+        <!--        </ng-container>-->
+
+        <ng-container matColumnDef="choices">
+            <mat-header-cell *matHeaderCellDef> Choices </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.choices }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="icon">
+            <mat-header-cell *matHeaderCellDef> Icon </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.icon }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="correctAnswer">
+            <mat-header-cell *matHeaderCellDef> Correct answer </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.correctAnswer }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="openTime">
+            <mat-header-cell *matHeaderCellDef> Open time </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.openTime }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="closeTime">
+            <mat-header-cell *matHeaderCellDef> Close time </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.closeTime }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-icon-button [matMenuTriggerFor]="actionsMenu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #actionsMenu>
+                    <button mat-menu-item (click)="onDelete(element.id)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete</span>
+                    </button>
+                </mat-menu>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+</div>
