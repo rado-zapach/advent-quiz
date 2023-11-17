@@ -16,7 +16,8 @@
         "adventquiz": {}
       },
       "auth": {
-        "adventquiz6a5522dc": {}
+        "adventquiz6a5522dc": {},
+        "userPoolGroups": {}
       },
       "hosting": {
         "amplifyhosting": {
