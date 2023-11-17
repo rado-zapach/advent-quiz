@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
@@ -7,6 +7,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {RouterLink} from '@angular/router';
@@ -30,12 +31,13 @@ import {Question, UpdateQuestionInput} from '../../API.service';
         MatInputModule,
         FormsModule,
         MatMenuModule,
+        MatSortModule,
     ],
     templateUrl: './questions.component.html',
     styleUrl: './questions.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuestionsComponent implements OnInit {
+export class QuestionsComponent implements OnInit, AfterViewInit {
     public readonly client = generateClient();
     public readonly displayedColumns = [
         'text',
@@ -83,6 +85,14 @@ export class QuestionsComponent implements OnInit {
             });
     }
 
+    @ViewChild(MatSort) sort: MatSort | undefined;
+
+    public ngAfterViewInit() {
+        if (this.sort) {
+            this.dataSource.sort = this.sort;
+        }
+    }
+
     public async ngOnInit() {
         const response = await this.client.graphql({
             query: queries.listQuestions,
@@ -99,8 +109,8 @@ export class QuestionsComponent implements OnInit {
                     choices: '',
                     icon: '',
                     correctAnswer: '',
-                    openTime: new Date().toISOString(),
-                    closeTime: new Date().toISOString(),
+                    openTime: new Date(`2023-12-01T09:30:00`).toISOString(),
+                    closeTime: new Date(`2023-12-01T22:00:00`).toISOString(),
                 },
             },
         });

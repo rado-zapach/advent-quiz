@@ -1,7 +1,5 @@
-<div class="example-container mat-elevation-z8">
-    <button mat-raised-button (click)="onCreate()">Add question</button>
-
-    <mat-table [dataSource]="dataSource">
+<div class="mat-elevation-z8">
+    <mat-table matSort matSortActive="openTime" matSortDirection="asc" [dataSource]="dataSource">
         <ng-container matColumnDef="text">
             <mat-header-cell *matHeaderCellDef> Text </mat-header-cell>
             <mat-cell *matCellDef="let element">
@@ -71,12 +69,16 @@
         </ng-container>
 
         <ng-container matColumnDef="openTime">
-            <mat-header-cell *matHeaderCellDef> Open time </mat-header-cell>
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Open time </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 @if (editQuestion?.id === element.id && editQuestion) {
-                  <mat-form-field>
-                    <input matInput type="datetime-local" [(ngModel)]="editQuestion.openTime" >
-                  </mat-form-field>
+                    <mat-form-field>
+                        <textarea
+                            matInput
+                            [cdkTextareaAutosize]="true"
+                            [(ngModel)]="editQuestion.openTime"
+                        ></textarea>
+                    </mat-form-field>
                 } @else {
                     {{ element.openTime }}
                 }
@@ -84,7 +86,7 @@
         </ng-container>
 
         <ng-container matColumnDef="closeTime">
-            <mat-header-cell *matHeaderCellDef> Close time </mat-header-cell>
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Close time </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 @if (editQuestion?.id === element.id && editQuestion) {
                     <mat-form-field>
@@ -132,3 +134,4 @@
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
 </div>
+<button mat-raised-button (click)="onCreate()">Add question</button>
