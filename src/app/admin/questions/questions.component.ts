@@ -6,16 +6,15 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
-import {MatMenuModule} from "@angular/material/menu";
+import {MatMenuModule} from '@angular/material/menu';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {RouterLink} from '@angular/router';
 import {generateClient} from 'aws-amplify/api';
-import {deleteQuestion} from "../../../graphql/mutations";
 import * as mutations from '../../../graphql/mutations';
 import * as queries from '../../../graphql/queries';
 import * as subscriptions from '../../../graphql/subscriptions';
-import {Question} from '../../API.service';
+import {Question, UpdateQuestionInput} from '../../API.service';
 
 @Component({
     selector: 'app-questions',
@@ -48,7 +47,7 @@ export class QuestionsComponent implements OnInit {
         'actions',
     ];
     public dataSource = new MatTableDataSource<Question>([]);
-    isEditMode: boolean = false;
+    public editQuestion: UpdateQuestionInput | undefined;
 
     public constructor() {
         this.client
@@ -85,56 +84,65 @@ export class QuestionsComponent implements OnInit {
     }
 
     public async ngOnInit() {
-        try {
-            const response = await this.client.graphql({
-                query: queries.listQuestions,
-            });
-            this.dataSource.data = response.data.listQuestions.items;
-        } catch (e) {
-            console.log('error fetching todos', e);
-        }
+        const response = await this.client.graphql({
+            query: queries.listQuestions,
+        });
+        this.dataSource.data = response.data.listQuestions.items;
     }
 
     public async onCreate() {
-        try {
-            const response = await this.client.graphql({
-                query: mutations.createQuestion,
-                variables: {
-                    input: {
-                        text: '----',
-                        choices: '',
-                        icon: '',
-                        correctAnswer: '',
-                        openTime: new Date().toISOString(),
-                        closeTime: new Date().toISOString(),
-                    },
+        await this.client.graphql({
+            query: mutations.createQuestion,
+            variables: {
+                input: {
+                    text: '----',
+                    choices: '',
+                    icon: '',
+                    correctAnswer: '',
+                    openTime: new Date().toISOString(),
+                    closeTime: new Date().toISOString(),
                 },
-            });
-            console.log('item created!', response);
-        } catch (e) {
-            console.log('error creating todo...', e);
+            },
+        });
+    }
+
+    public async onUpdate() {
+        if (!this.editQuestion) {
+            return;
         }
+        await this.client.graphql({
+            query: mutations.updateQuestion,
+            variables: {
+                input: this.editQuestion,
+            },
+        });
+        this.editQuestion = undefined;
     }
 
     public async onDelete(id: string) {
-        try {
-            const response = await this.client.graphql({
-                query: mutations.deleteQuestion,
-                variables: {
-                    input: {
-                        id,
-                    },
+        await this.client.graphql({
+            query: mutations.deleteQuestion,
+            variables: {
+                input: {
+                    id,
                 },
-            });
-            console.log('item deleted!', response);
-        } catch (e) {
-            console.log('error deleting todo...', e);
+            },
+        });
+    }
+
+    public onStartEdit(q: Question | undefined): void {
+        if (!q) {
+            this.editQuestion = undefined;
+            return;
         }
+        this.editQuestion = {
+            id: q.id,
+            text: q.text,
+            choices: q.choices,
+            icon: q.icon,
+            closeTime: q.closeTime,
+            correctAnswer: q.correctAnswer,
+            openTime: q.openTime,
+        };
     }
-
-    onToggleEditMode(): void {
-        this.isEditMode = !this.isEditMode;
-    }
-
-  protected readonly deleteQuestion = deleteQuestion;
 }

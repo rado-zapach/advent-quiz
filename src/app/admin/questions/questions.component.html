@@ -1,63 +1,130 @@
 <div class="example-container mat-elevation-z8">
-    <button mat-raised-button (click)="onToggleEditMode()">Toggle edit</button>
     <button mat-raised-button (click)="onCreate()">Add question</button>
 
     <mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="text">
             <mat-header-cell *matHeaderCellDef> Text </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.text }} </mat-cell>
+            <mat-cell *matCellDef="let element">
+                @if (editQuestion?.id === element.id && editQuestion) {
+                    <mat-form-field>
+                        <textarea
+                            matInput
+                            [cdkTextareaAutosize]="true"
+                            [(ngModel)]="editQuestion.text"
+                        ></textarea>
+                    </mat-form-field>
+                } @else {
+                    {{ element.text }}
+                }
+            </mat-cell>
         </ng-container>
-
-        <!--        <ng-container matColumnDef="name">-->
-        <!--            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>-->
-        <!--            <mat-cell *matCellDef="let element">-->
-        <!--                <ng-container *ngIf="isEditMode">-->
-        <!--                    <mat-form-field floatLabel="auto">-->
-        <!--                        <input matInput placeholder="Name" [value]="element.name" />-->
-        <!--                    </mat-form-field>-->
-        <!--                    <button mat-icon-button matTooltip="Save"><mat-icon>done</mat-icon></button>-->
-        <!--                </ng-container>-->
-        <!--                <ng-container *ngIf="!isEditMode"> {{ element.name }} </ng-container>-->
-        <!--            </mat-cell>-->
-        <!--        </ng-container>-->
 
         <ng-container matColumnDef="choices">
             <mat-header-cell *matHeaderCellDef> Choices </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.choices }} </mat-cell>
+            <mat-cell *matCellDef="let element">
+                @if (editQuestion?.id === element.id && editQuestion) {
+                    <mat-form-field>
+                        <textarea
+                            matInput
+                            [cdkTextareaAutosize]="true"
+                            [(ngModel)]="editQuestion.choices"
+                        ></textarea>
+                    </mat-form-field>
+                } @else {
+                    {{ element.choices }}
+                }
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="icon">
             <mat-header-cell *matHeaderCellDef> Icon </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.icon }} </mat-cell>
+            <mat-cell *matCellDef="let element">
+                @if (editQuestion?.id === element.id && editQuestion) {
+                    <mat-form-field>
+                        <textarea
+                            matInput
+                            [cdkTextareaAutosize]="true"
+                            [(ngModel)]="editQuestion.icon"
+                        ></textarea>
+                    </mat-form-field>
+                } @else {
+                    {{ element.icon }}
+                }
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="correctAnswer">
             <mat-header-cell *matHeaderCellDef> Correct answer </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.correctAnswer }} </mat-cell>
+            <mat-cell *matCellDef="let element">
+                @if (editQuestion?.id === element.id && editQuestion) {
+                    <mat-form-field>
+                        <textarea
+                            matInput
+                            [cdkTextareaAutosize]="true"
+                            [(ngModel)]="editQuestion.correctAnswer"
+                        ></textarea>
+                    </mat-form-field>
+                } @else {
+                    {{ element.correctAnswer }}
+                }
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="openTime">
             <mat-header-cell *matHeaderCellDef> Open time </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.openTime }} </mat-cell>
+            <mat-cell *matCellDef="let element">
+                @if (editQuestion?.id === element.id && editQuestion) {
+                  <mat-form-field>
+                    <input matInput type="datetime-local" [(ngModel)]="editQuestion.openTime" >
+                  </mat-form-field>
+                } @else {
+                    {{ element.openTime }}
+                }
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="closeTime">
             <mat-header-cell *matHeaderCellDef> Close time </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.closeTime }} </mat-cell>
+            <mat-cell *matCellDef="let element">
+                @if (editQuestion?.id === element.id && editQuestion) {
+                    <mat-form-field>
+                        <textarea
+                            matInput
+                            [cdkTextareaAutosize]="true"
+                            [(ngModel)]="editQuestion.closeTime"
+                        ></textarea>
+                    </mat-form-field>
+                } @else {
+                    {{ element.closeTime }}
+                }
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                <button mat-icon-button [matMenuTriggerFor]="actionsMenu">
-                    <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #actionsMenu>
-                    <button mat-menu-item (click)="onDelete(element.id)">
-                        <mat-icon>delete</mat-icon>
-                        <span>Delete</span>
+                @if (editQuestion?.id !== element.id) {
+                    <button mat-icon-button matTooltip="Edit" (click)="onStartEdit(element)">
+                        <mat-icon>edit</mat-icon>
                     </button>
-                </mat-menu>
+
+                    <button mat-icon-button matTooltip="More" [matMenuTriggerFor]="actionsMenu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #actionsMenu>
+                        <button mat-menu-item (click)="onDelete(element.id)">
+                            <mat-icon>delete</mat-icon>
+                            <span>Delete</span>
+                        </button>
+                    </mat-menu>
+                } @else {
+                    <button mat-icon-button matTooltip="Cancel" (click)="onStartEdit(undefined)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Save" (click)="onUpdate()">
+                        <mat-icon>done</mat-icon>
+                    </button>
+                }
             </mat-cell>
         </ng-container>
 
