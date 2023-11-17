@@ -2,20 +2,26 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateTodoInput = {
+export type CreateQuestionInput = {
   id?: string | null,
-  owner?: string | null,
-  name: string,
-  description?: string | null,
+  text: string,
+  choices: string,
+  icon: string,
+  correctAnswer: string,
+  openTime: string,
+  closeTime: string,
 };
 
-export type ModelTodoConditionInput = {
-  owner?: ModelStringInput | null,
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelTodoConditionInput | null > | null,
-  or?: Array< ModelTodoConditionInput | null > | null,
-  not?: ModelTodoConditionInput | null,
+export type ModelQuestionConditionInput = {
+  text?: ModelStringInput | null,
+  choices?: ModelStringInput | null,
+  icon?: ModelStringInput | null,
+  correctAnswer?: ModelStringInput | null,
+  openTime?: ModelStringInput | null,
+  closeTime?: ModelStringInput | null,
+  and?: Array< ModelQuestionConditionInput | null > | null,
+  or?: Array< ModelQuestionConditionInput | null > | null,
+  not?: ModelQuestionConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -56,49 +62,6 @@ export type ModelSizeInput = {
   ge?: number | null,
   gt?: number | null,
   between?: Array< number | null > | null,
-};
-
-export type Todo = {
-  __typename: "Todo",
-  id: string,
-  owner?: string | null,
-  name: string,
-  description?: string | null,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type UpdateTodoInput = {
-  id: string,
-  owner?: string | null,
-  name?: string | null,
-  description?: string | null,
-};
-
-export type DeleteTodoInput = {
-  id: string,
-};
-
-export type CreateQuestionInput = {
-  id?: string | null,
-  text: string,
-  choices: string,
-  icon: string,
-  correctAnswer: string,
-  openTime: string,
-  closeTime: string,
-};
-
-export type ModelQuestionConditionInput = {
-  text?: ModelStringInput | null,
-  choices?: ModelStringInput | null,
-  icon?: ModelStringInput | null,
-  correctAnswer?: ModelStringInput | null,
-  openTime?: ModelStringInput | null,
-  closeTime?: ModelStringInput | null,
-  and?: Array< ModelQuestionConditionInput | null > | null,
-  or?: Array< ModelQuestionConditionInput | null > | null,
-  not?: ModelQuestionConditionInput | null,
 };
 
 export type Question = {
@@ -257,22 +220,6 @@ export type DeleteRankingInput = {
   id: string,
 };
 
-export type ModelTodoFilterInput = {
-  id?: ModelIDInput | null,
-  owner?: ModelStringInput | null,
-  name?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  and?: Array< ModelTodoFilterInput | null > | null,
-  or?: Array< ModelTodoFilterInput | null > | null,
-  not?: ModelTodoFilterInput | null,
-};
-
-export type ModelTodoConnection = {
-  __typename: "ModelTodoConnection",
-  items:  Array<Todo | null >,
-  nextToken?: string | null,
-};
-
 export type ModelQuestionFilterInput = {
   id?: ModelIDInput | null,
   text?: ModelStringInput | null,
@@ -321,12 +268,16 @@ export type ModelRankingConnection = {
   nextToken?: string | null,
 };
 
-export type ModelSubscriptionTodoFilterInput = {
+export type ModelSubscriptionQuestionFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  description?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionTodoFilterInput | null > | null,
-  or?: Array< ModelSubscriptionTodoFilterInput | null > | null,
+  text?: ModelSubscriptionStringInput | null,
+  choices?: ModelSubscriptionStringInput | null,
+  icon?: ModelSubscriptionStringInput | null,
+  correctAnswer?: ModelSubscriptionStringInput | null,
+  openTime?: ModelSubscriptionStringInput | null,
+  closeTime?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionQuestionFilterInput | null > | null,
+  or?: Array< ModelSubscriptionQuestionFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -357,18 +308,6 @@ export type ModelSubscriptionStringInput = {
   beginsWith?: string | null,
   in?: Array< string | null > | null,
   notIn?: Array< string | null > | null,
-};
-
-export type ModelSubscriptionQuestionFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  text?: ModelSubscriptionStringInput | null,
-  choices?: ModelSubscriptionStringInput | null,
-  icon?: ModelSubscriptionStringInput | null,
-  correctAnswer?: ModelSubscriptionStringInput | null,
-  openTime?: ModelSubscriptionStringInput | null,
-  closeTime?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionQuestionFilterInput | null > | null,
-  or?: Array< ModelSubscriptionQuestionFilterInput | null > | null,
 };
 
 export type ModelSubscriptionAnswerFilterInput = {
@@ -405,57 +344,6 @@ export type ModelSubscriptionRankingFilterInput = {
   allAnswers?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionRankingFilterInput | null > | null,
   or?: Array< ModelSubscriptionRankingFilterInput | null > | null,
-};
-
-export type CreateTodoMutationVariables = {
-  input: CreateTodoInput,
-  condition?: ModelTodoConditionInput | null,
-};
-
-export type CreateTodoMutation = {
-  createTodo?:  {
-    __typename: "Todo",
-    id: string,
-    owner?: string | null,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateTodoMutationVariables = {
-  input: UpdateTodoInput,
-  condition?: ModelTodoConditionInput | null,
-};
-
-export type UpdateTodoMutation = {
-  updateTodo?:  {
-    __typename: "Todo",
-    id: string,
-    owner?: string | null,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteTodoMutationVariables = {
-  input: DeleteTodoInput,
-  condition?: ModelTodoConditionInput | null,
-};
-
-export type DeleteTodoMutation = {
-  deleteTodo?:  {
-    __typename: "Todo",
-    id: string,
-    owner?: string | null,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
 };
 
 export type CreateQuestionMutationVariables = {
@@ -677,44 +565,6 @@ export type DeleteRankingMutation = {
   } | null,
 };
 
-export type GetTodoQueryVariables = {
-  id: string,
-};
-
-export type GetTodoQuery = {
-  getTodo?:  {
-    __typename: "Todo",
-    id: string,
-    owner?: string | null,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListTodosQueryVariables = {
-  filter?: ModelTodoFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListTodosQuery = {
-  listTodos?:  {
-    __typename: "ModelTodoConnection",
-    items:  Array< {
-      __typename: "Todo",
-      id: string,
-      owner?: string | null,
-      name: string,
-      description?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
 export type GetQuestionQueryVariables = {
   id: string,
 };
@@ -854,57 +704,6 @@ export type ListRankingsQuery = {
       updatedAt: string,
     } | null >,
     nextToken?: string | null,
-  } | null,
-};
-
-export type OnCreateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnCreateTodoSubscription = {
-  onCreateTodo?:  {
-    __typename: "Todo",
-    id: string,
-    owner?: string | null,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnUpdateTodoSubscription = {
-  onUpdateTodo?:  {
-    __typename: "Todo",
-    id: string,
-    owner?: string | null,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnDeleteTodoSubscription = {
-  onDeleteTodo?:  {
-    __typename: "Todo",
-    id: string,
-    owner?: string | null,
-    name: string,
-    description?: string | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 

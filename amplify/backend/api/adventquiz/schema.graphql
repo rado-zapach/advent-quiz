@@ -1,12 +1,5 @@
 # https://docs.amplify.aws/angular/build-a-backend/graphqlapi/customize-authorization-rules/
 
-type Todo @model @auth(rules: [{allow: owner}]) {
-    id: ID!
-    owner: String @auth(rules: [{allow: owner, operations: [read]}])
-    name: String!
-    description: String
-}
-
 type Question
     @model
     @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["Admins"]}]) {

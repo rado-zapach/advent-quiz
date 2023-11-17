@@ -8,60 +8,6 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateTodo = /* GraphQL */ `subscription OnCreateTodo(
-  $filter: ModelSubscriptionTodoFilterInput
-  $owner: String
-) {
-  onCreateTodo(filter: $filter, owner: $owner) {
-    id
-    owner
-    name
-    description
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateTodoSubscriptionVariables,
-  APITypes.OnCreateTodoSubscription
->;
-export const onUpdateTodo = /* GraphQL */ `subscription OnUpdateTodo(
-  $filter: ModelSubscriptionTodoFilterInput
-  $owner: String
-) {
-  onUpdateTodo(filter: $filter, owner: $owner) {
-    id
-    owner
-    name
-    description
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdateTodoSubscriptionVariables,
-  APITypes.OnUpdateTodoSubscription
->;
-export const onDeleteTodo = /* GraphQL */ `subscription OnDeleteTodo(
-  $filter: ModelSubscriptionTodoFilterInput
-  $owner: String
-) {
-  onDeleteTodo(filter: $filter, owner: $owner) {
-    id
-    owner
-    name
-    description
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeleteTodoSubscriptionVariables,
-  APITypes.OnDeleteTodoSubscription
->;
 export const onCreateQuestion = /* GraphQL */ `subscription OnCreateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
   onCreateQuestion(filter: $filter) {
     id
