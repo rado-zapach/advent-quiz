@@ -1,2 +1,22 @@
-<p>calendar works!</p>
-<button mat-raised-button (click)="getQuestions()">Get questions</button>
+@for (q of questions(); track q.id) {
+    <button
+        class="question-container"
+        mat-button
+        (click)="openQuestion(q.id)"
+        [disabled]="!q.text"
+        [ngClass]="{disabled: !q.text}"
+    >
+        <div class="question">
+            <img
+                [ngSrc]="'assets/icons/004-candle.png'"
+                alt=""
+                height="128"
+                width="128"
+                priority="high"
+            />
+            <span>{{ q.day }}</span>
+        </div>
+    </button>
+} @empty {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+}
