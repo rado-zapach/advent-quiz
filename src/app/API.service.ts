@@ -87,6 +87,7 @@ export type ModelAnswerConnection = {
 export type Answer = {
   __typename: "Answer",
   id: string,
+  owner: string,
   text: string,
   isCorrect?: boolean | null,
   points?: number | null,
@@ -112,6 +113,7 @@ export type DeleteQuestionInput = {
 
 export type CreateAnswerInput = {
   id?: string | null,
+  owner: string,
   text: string,
   isCorrect?: boolean | null,
   points?: number | null,
@@ -119,6 +121,7 @@ export type CreateAnswerInput = {
 };
 
 export type ModelAnswerConditionInput = {
+  owner?: ModelStringInput | null,
   text?: ModelStringInput | null,
   isCorrect?: ModelBooleanInput | null,
   points?: ModelIntInput | null,
@@ -165,6 +168,7 @@ export type ModelIDInput = {
 
 export type UpdateAnswerInput = {
   id: string,
+  owner?: string | null,
   text?: string | null,
   isCorrect?: boolean | null,
   points?: number | null,
@@ -172,47 +176,6 @@ export type UpdateAnswerInput = {
 };
 
 export type DeleteAnswerInput = {
-  id: string,
-};
-
-export type CreateRankingInput = {
-  id?: string | null,
-  user: string,
-  points: number,
-  correctAnswers: number,
-  allAnswers: number,
-};
-
-export type ModelRankingConditionInput = {
-  user?: ModelStringInput | null,
-  points?: ModelIntInput | null,
-  correctAnswers?: ModelIntInput | null,
-  allAnswers?: ModelIntInput | null,
-  and?: Array< ModelRankingConditionInput | null > | null,
-  or?: Array< ModelRankingConditionInput | null > | null,
-  not?: ModelRankingConditionInput | null,
-};
-
-export type Ranking = {
-  __typename: "Ranking",
-  id: string,
-  user: string,
-  points: number,
-  correctAnswers: number,
-  allAnswers: number,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type UpdateRankingInput = {
-  id: string,
-  user?: string | null,
-  points?: number | null,
-  correctAnswers?: number | null,
-  allAnswers?: number | null,
-};
-
-export type DeleteRankingInput = {
   id: string,
 };
 
@@ -247,6 +210,7 @@ export type ModelQuestionConnection = {
 
 export type ModelAnswerFilterInput = {
   id?: ModelIDInput | null,
+  owner?: ModelStringInput | null,
   text?: ModelStringInput | null,
   isCorrect?: ModelBooleanInput | null,
   points?: ModelIntInput | null,
@@ -254,23 +218,6 @@ export type ModelAnswerFilterInput = {
   or?: Array< ModelAnswerFilterInput | null > | null,
   not?: ModelAnswerFilterInput | null,
   questionAnswersId?: ModelIDInput | null,
-};
-
-export type ModelRankingFilterInput = {
-  id?: ModelIDInput | null,
-  user?: ModelStringInput | null,
-  points?: ModelIntInput | null,
-  correctAnswers?: ModelIntInput | null,
-  allAnswers?: ModelIntInput | null,
-  and?: Array< ModelRankingFilterInput | null > | null,
-  or?: Array< ModelRankingFilterInput | null > | null,
-  not?: ModelRankingFilterInput | null,
-};
-
-export type ModelRankingConnection = {
-  __typename: "ModelRankingConnection",
-  items:  Array<Ranking | null >,
-  nextToken?: string | null,
 };
 
 export type ModelSubscriptionQuestionFilterInput = {
@@ -339,16 +286,6 @@ export type ModelSubscriptionIntInput = {
   between?: Array< number | null > | null,
   in?: Array< number | null > | null,
   notIn?: Array< number | null > | null,
-};
-
-export type ModelSubscriptionRankingFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  user?: ModelSubscriptionStringInput | null,
-  points?: ModelSubscriptionIntInput | null,
-  correctAnswers?: ModelSubscriptionIntInput | null,
-  allAnswers?: ModelSubscriptionIntInput | null,
-  and?: Array< ModelSubscriptionRankingFilterInput | null > | null,
-  or?: Array< ModelSubscriptionRankingFilterInput | null > | null,
 };
 
 export type CreateQuestionMutationVariables = {
@@ -432,6 +369,7 @@ export type CreateAnswerMutation = {
   createAnswer?:  {
     __typename: "Answer",
     id: string,
+    owner: string,
     text: string,
     isCorrect?: boolean | null,
     points?: number | null,
@@ -462,6 +400,7 @@ export type UpdateAnswerMutation = {
   updateAnswer?:  {
     __typename: "Answer",
     id: string,
+    owner: string,
     text: string,
     isCorrect?: boolean | null,
     points?: number | null,
@@ -492,6 +431,7 @@ export type DeleteAnswerMutation = {
   deleteAnswer?:  {
     __typename: "Answer",
     id: string,
+    owner: string,
     text: string,
     isCorrect?: boolean | null,
     points?: number | null,
@@ -510,60 +450,6 @@ export type DeleteAnswerMutation = {
     createdAt: string,
     updatedAt: string,
     questionAnswersId?: string | null,
-  } | null,
-};
-
-export type CreateRankingMutationVariables = {
-  input: CreateRankingInput,
-  condition?: ModelRankingConditionInput | null,
-};
-
-export type CreateRankingMutation = {
-  createRanking?:  {
-    __typename: "Ranking",
-    id: string,
-    user: string,
-    points: number,
-    correctAnswers: number,
-    allAnswers: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateRankingMutationVariables = {
-  input: UpdateRankingInput,
-  condition?: ModelRankingConditionInput | null,
-};
-
-export type UpdateRankingMutation = {
-  updateRanking?:  {
-    __typename: "Ranking",
-    id: string,
-    user: string,
-    points: number,
-    correctAnswers: number,
-    allAnswers: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteRankingMutationVariables = {
-  input: DeleteRankingInput,
-  condition?: ModelRankingConditionInput | null,
-};
-
-export type DeleteRankingMutation = {
-  deleteRanking?:  {
-    __typename: "Ranking",
-    id: string,
-    user: string,
-    points: number,
-    correctAnswers: number,
-    allAnswers: number,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -638,6 +524,7 @@ export type GetAnswerQuery = {
   getAnswer?:  {
     __typename: "Answer",
     id: string,
+    owner: string,
     text: string,
     isCorrect?: boolean | null,
     points?: number | null,
@@ -671,52 +558,13 @@ export type ListAnswersQuery = {
     items:  Array< {
       __typename: "Answer",
       id: string,
+      owner: string,
       text: string,
       isCorrect?: boolean | null,
       points?: number | null,
       createdAt: string,
       updatedAt: string,
       questionAnswersId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetRankingQueryVariables = {
-  id: string,
-};
-
-export type GetRankingQuery = {
-  getRanking?:  {
-    __typename: "Ranking",
-    id: string,
-    user: string,
-    points: number,
-    correctAnswers: number,
-    allAnswers: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListRankingsQueryVariables = {
-  filter?: ModelRankingFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListRankingsQuery = {
-  listRankings?:  {
-    __typename: "ModelRankingConnection",
-    items:  Array< {
-      __typename: "Ranking",
-      id: string,
-      user: string,
-      points: number,
-      correctAnswers: number,
-      allAnswers: number,
-      createdAt: string,
-      updatedAt: string,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -793,12 +641,14 @@ export type OnDeleteQuestionSubscription = {
 
 export type OnCreateAnswerSubscriptionVariables = {
   filter?: ModelSubscriptionAnswerFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnCreateAnswerSubscription = {
   onCreateAnswer?:  {
     __typename: "Answer",
     id: string,
+    owner: string,
     text: string,
     isCorrect?: boolean | null,
     points?: number | null,
@@ -822,12 +672,14 @@ export type OnCreateAnswerSubscription = {
 
 export type OnUpdateAnswerSubscriptionVariables = {
   filter?: ModelSubscriptionAnswerFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnUpdateAnswerSubscription = {
   onUpdateAnswer?:  {
     __typename: "Answer",
     id: string,
+    owner: string,
     text: string,
     isCorrect?: boolean | null,
     points?: number | null,
@@ -851,12 +703,14 @@ export type OnUpdateAnswerSubscription = {
 
 export type OnDeleteAnswerSubscriptionVariables = {
   filter?: ModelSubscriptionAnswerFilterInput | null,
+  owner?: string | null,
 };
 
 export type OnDeleteAnswerSubscription = {
   onDeleteAnswer?:  {
     __typename: "Answer",
     id: string,
+    owner: string,
     text: string,
     isCorrect?: boolean | null,
     points?: number | null,
@@ -875,56 +729,5 @@ export type OnDeleteAnswerSubscription = {
     createdAt: string,
     updatedAt: string,
     questionAnswersId?: string | null,
-  } | null,
-};
-
-export type OnCreateRankingSubscriptionVariables = {
-  filter?: ModelSubscriptionRankingFilterInput | null,
-};
-
-export type OnCreateRankingSubscription = {
-  onCreateRanking?:  {
-    __typename: "Ranking",
-    id: string,
-    user: string,
-    points: number,
-    correctAnswers: number,
-    allAnswers: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateRankingSubscriptionVariables = {
-  filter?: ModelSubscriptionRankingFilterInput | null,
-};
-
-export type OnUpdateRankingSubscription = {
-  onUpdateRanking?:  {
-    __typename: "Ranking",
-    id: string,
-    user: string,
-    points: number,
-    correctAnswers: number,
-    allAnswers: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteRankingSubscriptionVariables = {
-  filter?: ModelSubscriptionRankingFilterInput | null,
-};
-
-export type OnDeleteRankingSubscription = {
-  onDeleteRanking?:  {
-    __typename: "Ranking",
-    id: string,
-    user: string,
-    points: number,
-    correctAnswers: number,
-    allAnswers: number,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };

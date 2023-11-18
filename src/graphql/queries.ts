@@ -74,6 +74,7 @@ export const listQuestions = /* GraphQL */ `query ListQuestions(
 export const getAnswer = /* GraphQL */ `query GetAnswer($id: ID!) {
   getAnswer(id: $id) {
     id
+    owner
     text
     isCorrect
     points
@@ -104,6 +105,7 @@ export const listAnswers = /* GraphQL */ `query ListAnswers(
   listAnswers(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      owner
       text
       isCorrect
       points
@@ -119,44 +121,4 @@ export const listAnswers = /* GraphQL */ `query ListAnswers(
 ` as GeneratedQuery<
   APITypes.ListAnswersQueryVariables,
   APITypes.ListAnswersQuery
->;
-export const getRanking = /* GraphQL */ `query GetRanking($id: ID!) {
-  getRanking(id: $id) {
-    id
-    user
-    points
-    correctAnswers
-    allAnswers
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.GetRankingQueryVariables,
-  APITypes.GetRankingQuery
->;
-export const listRankings = /* GraphQL */ `query ListRankings(
-  $filter: ModelRankingFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listRankings(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      user
-      points
-      correctAnswers
-      allAnswers
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ListRankingsQueryVariables,
-  APITypes.ListRankingsQuery
 >;

@@ -89,6 +89,7 @@ export const createAnswer = /* GraphQL */ `mutation CreateAnswer(
 ) {
   createAnswer(input: $input, condition: $condition) {
     id
+    owner
     text
     isCorrect
     points
@@ -120,6 +121,7 @@ export const updateAnswer = /* GraphQL */ `mutation UpdateAnswer(
 ) {
   updateAnswer(input: $input, condition: $condition) {
     id
+    owner
     text
     isCorrect
     points
@@ -151,6 +153,7 @@ export const deleteAnswer = /* GraphQL */ `mutation DeleteAnswer(
 ) {
   deleteAnswer(input: $input, condition: $condition) {
     id
+    owner
     text
     isCorrect
     points
@@ -175,61 +178,4 @@ export const deleteAnswer = /* GraphQL */ `mutation DeleteAnswer(
 ` as GeneratedMutation<
   APITypes.DeleteAnswerMutationVariables,
   APITypes.DeleteAnswerMutation
->;
-export const createRanking = /* GraphQL */ `mutation CreateRanking(
-  $input: CreateRankingInput!
-  $condition: ModelRankingConditionInput
-) {
-  createRanking(input: $input, condition: $condition) {
-    id
-    user
-    points
-    correctAnswers
-    allAnswers
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.CreateRankingMutationVariables,
-  APITypes.CreateRankingMutation
->;
-export const updateRanking = /* GraphQL */ `mutation UpdateRanking(
-  $input: UpdateRankingInput!
-  $condition: ModelRankingConditionInput
-) {
-  updateRanking(input: $input, condition: $condition) {
-    id
-    user
-    points
-    correctAnswers
-    allAnswers
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.UpdateRankingMutationVariables,
-  APITypes.UpdateRankingMutation
->;
-export const deleteRanking = /* GraphQL */ `mutation DeleteRanking(
-  $input: DeleteRankingInput!
-  $condition: ModelRankingConditionInput
-) {
-  deleteRanking(input: $input, condition: $condition) {
-    id
-    user
-    points
-    correctAnswers
-    allAnswers
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.DeleteRankingMutationVariables,
-  APITypes.DeleteRankingMutation
 >;

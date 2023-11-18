@@ -74,9 +74,13 @@ export const onDeleteQuestion = /* GraphQL */ `subscription OnDeleteQuestion($fi
   APITypes.OnDeleteQuestionSubscriptionVariables,
   APITypes.OnDeleteQuestionSubscription
 >;
-export const onCreateAnswer = /* GraphQL */ `subscription OnCreateAnswer($filter: ModelSubscriptionAnswerFilterInput) {
-  onCreateAnswer(filter: $filter) {
+export const onCreateAnswer = /* GraphQL */ `subscription OnCreateAnswer(
+  $filter: ModelSubscriptionAnswerFilterInput
+  $owner: String
+) {
+  onCreateAnswer(filter: $filter, owner: $owner) {
     id
+    owner
     text
     isCorrect
     points
@@ -102,9 +106,13 @@ export const onCreateAnswer = /* GraphQL */ `subscription OnCreateAnswer($filter
   APITypes.OnCreateAnswerSubscriptionVariables,
   APITypes.OnCreateAnswerSubscription
 >;
-export const onUpdateAnswer = /* GraphQL */ `subscription OnUpdateAnswer($filter: ModelSubscriptionAnswerFilterInput) {
-  onUpdateAnswer(filter: $filter) {
+export const onUpdateAnswer = /* GraphQL */ `subscription OnUpdateAnswer(
+  $filter: ModelSubscriptionAnswerFilterInput
+  $owner: String
+) {
+  onUpdateAnswer(filter: $filter, owner: $owner) {
     id
+    owner
     text
     isCorrect
     points
@@ -130,9 +138,13 @@ export const onUpdateAnswer = /* GraphQL */ `subscription OnUpdateAnswer($filter
   APITypes.OnUpdateAnswerSubscriptionVariables,
   APITypes.OnUpdateAnswerSubscription
 >;
-export const onDeleteAnswer = /* GraphQL */ `subscription OnDeleteAnswer($filter: ModelSubscriptionAnswerFilterInput) {
-  onDeleteAnswer(filter: $filter) {
+export const onDeleteAnswer = /* GraphQL */ `subscription OnDeleteAnswer(
+  $filter: ModelSubscriptionAnswerFilterInput
+  $owner: String
+) {
+  onDeleteAnswer(filter: $filter, owner: $owner) {
     id
+    owner
     text
     isCorrect
     points
@@ -157,52 +169,4 @@ export const onDeleteAnswer = /* GraphQL */ `subscription OnDeleteAnswer($filter
 ` as GeneratedSubscription<
   APITypes.OnDeleteAnswerSubscriptionVariables,
   APITypes.OnDeleteAnswerSubscription
->;
-export const onCreateRanking = /* GraphQL */ `subscription OnCreateRanking($filter: ModelSubscriptionRankingFilterInput) {
-  onCreateRanking(filter: $filter) {
-    id
-    user
-    points
-    correctAnswers
-    allAnswers
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateRankingSubscriptionVariables,
-  APITypes.OnCreateRankingSubscription
->;
-export const onUpdateRanking = /* GraphQL */ `subscription OnUpdateRanking($filter: ModelSubscriptionRankingFilterInput) {
-  onUpdateRanking(filter: $filter) {
-    id
-    user
-    points
-    correctAnswers
-    allAnswers
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdateRankingSubscriptionVariables,
-  APITypes.OnUpdateRankingSubscription
->;
-export const onDeleteRanking = /* GraphQL */ `subscription OnDeleteRanking($filter: ModelSubscriptionRankingFilterInput) {
-  onDeleteRanking(filter: $filter) {
-    id
-    user
-    points
-    correctAnswers
-    allAnswers
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeleteRankingSubscriptionVariables,
-  APITypes.OnDeleteRankingSubscription
 >;

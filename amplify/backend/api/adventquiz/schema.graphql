@@ -16,16 +16,49 @@ type Question
     answers: [Answer!] @hasMany
 }
 
-type Answer @model @auth(rules: [{allow: groups, groups: ["Admins"]}]) {
+type Answer
+    @model
+    @auth(
+        rules: [{allow: owner}, {allow: groups, groups: ["Admins"]}, {allow: private, provider: iam}]
+    ) {
     id: ID!
+    owner: String!
+        @auth(
+            rules: [
+                {allow: owner, operations: [create, read]}
+                {allow: groups, groups: ["Admins"]}
+                {allow: private, provider: iam}
+            ]
+        )
     text: String!
     isCorrect: Boolean
+        @auth(
+            rules: [
+                {allow: owner, operations: [read]}
+                {allow: groups, groups: ["Admins"]}
+                {allow: private, provider: iam}
+            ]
+        )
     points: Int
-    question: Question! @belongsTo
+        @auth(
+            rules: [
+                {allow: owner, operations: [read]}
+                {allow: groups, groups: ["Admins"]}
+                {allow: private, provider: iam}
+            ]
+        )
+    question: Question!
+        @belongsTo
+        @auth(
+            rules: [
+                {allow: owner, operations: [read]}
+                {allow: groups, groups: ["Admins"]}
+                {allow: private, provider: iam}
+            ]
+        )
 }
 
-type Ranking @model @auth(rules: [{allow: private, operations: [read]}]) {
-    id: ID!
+type Ranking {
     user: String!
     points: Int!
     correctAnswers: Int!
