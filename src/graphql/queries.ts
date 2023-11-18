@@ -8,6 +8,21 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
+export const playerQuestionList = /* GraphQL */ `query PlayerQuestionList {
+  playerQuestionList {
+    id
+    text
+    choices
+    icon
+    correctAnswer
+    openTime
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.PlayerQuestionListQueryVariables,
+  APITypes.PlayerQuestionListQuery
+>;
 export const getQuestion = /* GraphQL */ `query GetQuestion($id: ID!) {
   getQuestion(id: $id) {
     id
@@ -59,7 +74,6 @@ export const listQuestions = /* GraphQL */ `query ListQuestions(
 export const getAnswer = /* GraphQL */ `query GetAnswer($id: ID!) {
   getAnswer(id: $id) {
     id
-    owner
     text
     isCorrect
     points
@@ -90,7 +104,6 @@ export const listAnswers = /* GraphQL */ `query ListAnswers(
   listAnswers(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      owner
       text
       isCorrect
       points

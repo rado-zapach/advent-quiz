@@ -20,5 +20,14 @@ export type AmplifyDependentResourcesAttributes = {
     "userPoolGroups": {
       "AdminsGroupRole": "string"
     }
+  },
+  "function": {
+    "playerQuestionList": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    }
   }
 }

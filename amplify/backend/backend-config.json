@@ -12,7 +12,11 @@
       ],
       "output": {
         "authConfig": {
-          "additionalAuthenticationProviders": [],
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
@@ -69,7 +73,23 @@
       "service": "Cognito-UserPool-Groups"
     }
   },
-  "function": {},
+  "function": {
+    "playerQuestionList": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "adventquiz"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
   "hosting": {
     "amplifyhosting": {
       "providerPlugin": "awscloudformation",
@@ -78,6 +98,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_playerQuestionList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerQuestionList"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerQuestionList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerQuestionList"
+        }
+      ]
+    },
     "AMPLIFY_hosting_amplifyhosting_appId": {
       "usedBy": [
         {

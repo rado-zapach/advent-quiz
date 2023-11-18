@@ -24,6 +24,12 @@
           "appId": "dwj086uzt62ft",
           "type": "manual"
         }
+      },
+      "function": {
+        "playerQuestionList": {
+          "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
+          "s3Key": "amplify-builds/playerQuestionList-4358646a6a754f585139-build.zip"
+        }
       }
     }
   }

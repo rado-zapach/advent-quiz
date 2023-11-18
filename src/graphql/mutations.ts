@@ -89,7 +89,6 @@ export const createAnswer = /* GraphQL */ `mutation CreateAnswer(
 ) {
   createAnswer(input: $input, condition: $condition) {
     id
-    owner
     text
     isCorrect
     points
@@ -121,7 +120,6 @@ export const updateAnswer = /* GraphQL */ `mutation UpdateAnswer(
 ) {
   updateAnswer(input: $input, condition: $condition) {
     id
-    owner
     text
     isCorrect
     points
@@ -153,7 +151,6 @@ export const deleteAnswer = /* GraphQL */ `mutation DeleteAnswer(
 ) {
   deleteAnswer(input: $input, condition: $condition) {
     id
-    owner
     text
     isCorrect
     points

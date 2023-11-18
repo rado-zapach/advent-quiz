@@ -1,6 +1,8 @@
 # https://docs.amplify.aws/angular/build-a-backend/graphqlapi/customize-authorization-rules/
 
-type Question @model @auth(rules: [{allow: groups, groups: ["Admins"]}]) {
+type Question
+    @model
+    @auth(rules: [{allow: groups, groups: ["Admins"]}, {allow: private, provider: iam}]) {
     id: ID!
     #   set to null if (group !== Admins && currTime < openTime)
     text: String!
@@ -28,4 +30,17 @@ type Ranking @model @auth(rules: [{allow: private, operations: [read]}]) {
     points: Int!
     correctAnswers: Int!
     allAnswers: Int!
+}
+
+type PlayerQuestion {
+    id: ID!
+    text: String
+    choices: String
+    icon: String!
+    correctAnswer: String
+    openTime: AWSDateTime!
+}
+
+type Query {
+    playerQuestionList: [PlayerQuestion!]! @function(name: "playerQuestionList-${env}")
 }
