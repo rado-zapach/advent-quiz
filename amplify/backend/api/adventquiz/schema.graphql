@@ -1,8 +1,6 @@
 # https://docs.amplify.aws/angular/build-a-backend/graphqlapi/customize-authorization-rules/
 
-type Question
-    @model
-    @auth(rules: [{allow: private, operations: [read]}, {allow: groups, groups: ["Admins"]}]) {
+type Question @model @auth(rules: [{allow: groups, groups: ["Admins"]}]) {
     id: ID!
     #   set to null if (group !== Admins && currTime < openTime)
     text: String!
@@ -16,14 +14,11 @@ type Question
     answers: [Answer!] @hasMany
 }
 
-type Answer
-    @model
-    @auth(rules: [{allow: owner, operations: [read]}, {allow: groups, groups: ["Admins"]}]) {
+type Answer @model @auth(rules: [{allow: groups, groups: ["Admins"]}]) {
     id: ID!
-    owner: String
-    text: String! @auth(rules: [{allow: owner}, {allow: groups, groups: ["Admins"]}])
-    isCorrect: Boolean!
-    points: Int!
+    text: String!
+    isCorrect: Boolean
+    points: Int
     question: Question! @belongsTo
 }
 
