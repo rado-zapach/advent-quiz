@@ -4,12 +4,9 @@ type Question
     @model
     @auth(rules: [{allow: groups, groups: ["Admins"]}, {allow: private, provider: iam}]) {
     id: ID!
-    #   set to null if (group !== Admins && currTime < openTime)
     text: String!
-    #   set to null if (group !== Admins && currTime < openTime)
     choices: String!
     icon: String!
-    #   set to null if (group !== Admins && currTime < closeTime)
     correctAnswer: String!
     openTime: AWSDateTime!
     closeTime: AWSDateTime!
