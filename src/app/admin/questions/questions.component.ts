@@ -59,7 +59,6 @@ export class QuestionsComponent implements OnInit, AfterViewInit {
             .pipe(takeUntilDestroyed())
             .subscribe(event => {
                 const q = event.data.onCreateQuestion;
-                // @ts-ignore
                 this.dataSource.data = [q, ...this.dataSource.data];
             });
 
@@ -70,7 +69,6 @@ export class QuestionsComponent implements OnInit, AfterViewInit {
             .pipe(takeUntilDestroyed())
             .subscribe(event => {
                 const q = event.data.onUpdateQuestion;
-                // @ts-ignore
                 this.dataSource.data = [q, ...this.dataSource.data.filter(i => i.id !== q.id)];
             });
 

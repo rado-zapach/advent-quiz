@@ -10,7 +10,6 @@ type Question
     correctAnswer: String!
     openTime: AWSDateTime!
     closeTime: AWSDateTime!
-    answers: [Answer!] @hasMany
 }
 
 type Answer @model @auth(rules: [{allow: groups, groups: ["Admins"]}, {allow: private, provider: iam}]) {

@@ -27,10 +27,6 @@ export const createQuestion = /* GraphQL */ `mutation CreateQuestion(
     correctAnswer
     openTime
     closeTime
-    answers {
-      nextToken
-      __typename
-    }
     createdAt
     updatedAt
     __typename
@@ -52,10 +48,6 @@ export const updateQuestion = /* GraphQL */ `mutation UpdateQuestion(
     correctAnswer
     openTime
     closeTime
-    answers {
-      nextToken
-      __typename
-    }
     createdAt
     updatedAt
     __typename
@@ -77,10 +69,6 @@ export const deleteQuestion = /* GraphQL */ `mutation DeleteQuestion(
     correctAnswer
     openTime
     closeTime
-    answers {
-      nextToken
-      __typename
-    }
     createdAt
     updatedAt
     __typename
@@ -103,7 +91,6 @@ export const createAnswer = /* GraphQL */ `mutation CreateAnswer(
     questionId
     createdAt
     updatedAt
-    questionAnswersId
     __typename
   }
 }
@@ -124,7 +111,6 @@ export const updateAnswer = /* GraphQL */ `mutation UpdateAnswer(
     questionId
     createdAt
     updatedAt
-    questionAnswersId
     __typename
   }
 }
@@ -145,7 +131,6 @@ export const deleteAnswer = /* GraphQL */ `mutation DeleteAnswer(
     questionId
     createdAt
     updatedAt
-    questionAnswersId
     __typename
   }
 }
