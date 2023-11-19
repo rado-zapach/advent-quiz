@@ -187,6 +187,7 @@ export type PlayerQuestion = {
   icon: string,
   correctAnswer?: string | null,
   openTime: string,
+  closeTime: string,
 };
 
 export type ModelQuestionFilterInput = {
@@ -465,6 +466,7 @@ export type PlayerQuestionListQuery = {
     icon: string,
     correctAnswer?: string | null,
     openTime: string,
+    closeTime: string,
   } >,
 };
 

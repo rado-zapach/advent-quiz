@@ -69,6 +69,7 @@ type PlayerQuestion {
     icon: String!
     correctAnswer: String
     openTime: AWSDateTime!
+    closeTime: AWSDateTime!
 }
 
 type Query {

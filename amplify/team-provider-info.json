@@ -28,7 +28,7 @@
       "function": {
         "playerQuestionList": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerQuestionList-4358646a6a754f585139-build.zip"
+          "s3Key": "amplify-builds/playerQuestionList-6a6a5a336e6c32703479-build.zip"
         }
       }
     }

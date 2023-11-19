@@ -7,11 +7,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {generateClient} from 'aws-amplify/api';
 import * as queries from '../../graphql/queries';
 import {PlayerQuestion} from '../API.service';
+import {CompPlayerQuestion} from '../comp-player-question';
 import {QuestionComponent} from '../question/question.component';
-
-interface Question extends PlayerQuestion {
-    day: number;
-}
 
 @Component({
     selector: 'app-calendar',
@@ -31,7 +28,7 @@ interface Question extends PlayerQuestion {
 export class CalendarComponent implements OnInit {
     public dialog = inject(MatDialog);
     public readonly client = generateClient();
-    public questions = signal<Question[]>([]);
+    public questions = signal<CompPlayerQuestion[]>([]);
 
     public async ngOnInit(): Promise<void> {
         const response = await this.client.graphql({
@@ -45,7 +42,7 @@ export class CalendarComponent implements OnInit {
         this.questions.set(questions);
     }
 
-    public openQuestion(id: string): void {
-        this.dialog.open(QuestionComponent);
+    public openQuestion(q: PlayerQuestion): void {
+        this.dialog.open(QuestionComponent, {data: q});
     }
 }

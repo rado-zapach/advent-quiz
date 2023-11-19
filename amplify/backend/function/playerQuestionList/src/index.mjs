@@ -67,6 +67,7 @@ export const handler = async event => {
                     id: i.id,
                     icon: i.icon,
                     openTime: i.openTime,
+                    closeTime: i.closeTime,
                     text: i.text,
                     choices: i.choices,
                 };
@@ -75,6 +76,7 @@ export const handler = async event => {
                 id: i.id,
                 icon: i.icon,
                 openTime: i.openTime,
+                closeTime: i.closeTime,
                 text: i.text,
                 choices: i.choices,
                 correctAnswer: i.correctAnswer,
@@ -84,6 +86,7 @@ export const handler = async event => {
             id: i.id,
             icon: i.icon,
             openTime: i.openTime,
+            closeTime: i.closeTime,
         };
     });
 

@@ -16,6 +16,7 @@ export const playerQuestionList = /* GraphQL */ `query PlayerQuestionList {
     icon
     correctAnswer
     openTime
+    closeTime
     __typename
   }
 }
