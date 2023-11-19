@@ -81,18 +81,7 @@ export const onCreateAnswer = /* GraphQL */ `subscription OnCreateAnswer($filter
     text
     isCorrect
     points
-    question {
-      id
-      text
-      choices
-      icon
-      correctAnswer
-      openTime
-      closeTime
-      createdAt
-      updatedAt
-      __typename
-    }
+    questionId
     createdAt
     updatedAt
     questionAnswersId
@@ -110,18 +99,7 @@ export const onUpdateAnswer = /* GraphQL */ `subscription OnUpdateAnswer($filter
     text
     isCorrect
     points
-    question {
-      id
-      text
-      choices
-      icon
-      correctAnswer
-      openTime
-      closeTime
-      createdAt
-      updatedAt
-      __typename
-    }
+    questionId
     createdAt
     updatedAt
     questionAnswersId
@@ -139,18 +117,7 @@ export const onDeleteAnswer = /* GraphQL */ `subscription OnDeleteAnswer($filter
     text
     isCorrect
     points
-    question {
-      id
-      text
-      choices
-      icon
-      correctAnswer
-      openTime
-      closeTime
-      createdAt
-      updatedAt
-      __typename
-    }
+    questionId
     createdAt
     updatedAt
     questionAnswersId

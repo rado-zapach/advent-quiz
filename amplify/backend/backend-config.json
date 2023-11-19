@@ -74,9 +74,21 @@
     }
   },
   "function": {
+    "adventquiznodemodules": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer"
+    },
     "playerQuestionList": {
       "build": true,
       "dependsOn": [
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "adventquiznodemodules"
+        },
         {
           "attributes": [
             "GraphQLAPIIdOutput",
@@ -92,6 +104,13 @@
     "playerSaveAnswer": {
       "build": true,
       "dependsOn": [
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "adventquiznodemodules"
+        },
         {
           "attributes": [
             "GraphQLAPIIdOutput",
@@ -120,6 +139,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_adventquiznodemodules_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "adventquiznodemodules"
+        }
+      ]
+    },
+    "AMPLIFY_function_adventquiznodemodules_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "adventquiznodemodules"
+        }
+      ]
+    },
     "AMPLIFY_function_playerQuestionList_deploymentBucketName": {
       "usedBy": [
         {

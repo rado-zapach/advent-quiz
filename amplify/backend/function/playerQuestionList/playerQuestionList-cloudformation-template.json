@@ -23,6 +23,10 @@
     "apiadventquizGraphQLAPIEndpointOutput": {
       "Type": "String",
       "Default": "apiadventquizGraphQLAPIEndpointOutput"
+    },
+    "functionadventquiznodemodulesArn": {
+      "Type": "String",
+      "Default": "functionadventquiznodemodulesArn"
     }
   },
   "Conditions": {
@@ -93,7 +97,11 @@
           ]
         },
         "Runtime": "nodejs18.x",
-        "Layers": [],
+        "Layers": [
+          {
+            "Ref": "functionadventquiznodemodulesArn"
+          }
+        ],
         "Timeout": 25
       }
     },

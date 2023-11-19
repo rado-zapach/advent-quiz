@@ -19,7 +19,7 @@ type Answer @model @auth(rules: [{allow: groups, groups: ["Admins"]}, {allow: pr
     text: String!
     isCorrect: Boolean
     points: Int
-    question: Question! @belongsTo
+    questionId: String!
 }
 
 type Ranking {

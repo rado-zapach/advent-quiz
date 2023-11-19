@@ -26,34 +26,32 @@ const query = /* GraphQL */ `
     }
 `;
 
+const endpoint = new URL(GRAPHQL_ENDPOINT);
+const signer = new SignatureV4({
+    credentials: defaultProvider(),
+    region: AWS_REGION,
+    service: "appsync",
+    sha256: Sha256,
+});
+const requestToBeSigned = new HttpRequest({
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        host: endpoint.host,
+    },
+    hostname: endpoint.host,
+    body: JSON.stringify({query}),
+    path: endpoint.pathname,
+});
+
 export const handler = async event => {
     console.log(`EVENT: ${JSON.stringify(event)}`);
 
-    const endpoint = new URL(GRAPHQL_ENDPOINT);
-
-    const signer = new SignatureV4({
-        credentials: defaultProvider(),
-        region: AWS_REGION,
-        service: "appsync",
-        sha256: Sha256,
-    });
-
-    const requestToBeSigned = new HttpRequest({
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            host: endpoint.host,
-        },
-        hostname: endpoint.host,
-        body: JSON.stringify({query}),
-        path: endpoint.pathname,
-    });
-
     const signed = await signer.sign(requestToBeSigned);
     const request = new Request(GRAPHQL_ENDPOINT, signed);
-
     const response = await fetch(request);
     const body = await response.json();
+
     const now = new Date().getTime();
     const items = body.data.listQuestions.items.map(i => {
         const openTime = new Date(i.openTime).getTime();
@@ -87,6 +85,5 @@ export const handler = async event => {
         };
     });
 
-    // console.log(JSON.stringify(body.data.listQuestions.items, undefined, 2));
     return items;
 };

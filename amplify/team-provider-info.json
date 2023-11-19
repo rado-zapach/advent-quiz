@@ -28,11 +28,15 @@
       "function": {
         "playerQuestionList": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerQuestionList-666b2b53574152337031-build.zip"
+          "s3Key": "amplify-builds/playerQuestionList-485453794c635065322f-build.zip"
         },
         "playerSaveAnswer": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerSaveAnswer-76332b70416d44636231-build.zip"
+          "s3Key": "amplify-builds/playerSaveAnswer-536659745453594d6b77-build.zip"
+        },
+        "adventquiznodemodules": {
+          "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
+          "s3Key": "amplify-builds/adventquiznodemodules-LambdaLayerVersion3d91a9a7-build.zip"
         }
       }
     }

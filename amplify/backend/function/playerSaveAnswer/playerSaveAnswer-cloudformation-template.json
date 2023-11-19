@@ -27,6 +27,10 @@
     "authadventquiz6a5522dcUserPoolId": {
       "Type": "String",
       "Default": "authadventquiz6a5522dcUserPoolId"
+    },
+    "functionadventquiznodemodulesArn": {
+      "Type": "String",
+      "Default": "functionadventquiznodemodulesArn"
     }
   },
   "Conditions": {
@@ -100,7 +104,11 @@
           ]
         },
         "Runtime": "nodejs18.x",
-        "Layers": [],
+        "Layers": [
+          {
+            "Ref": "functionadventquiznodemodulesArn"
+          }
+        ],
         "Timeout": 25
       }
     },
