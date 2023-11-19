@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "api": {
+      "adventquiz": [
+        "Query",
+        "Mutation"
+      ]
+    },
+    "auth": {
+      "adventquiz6a5522dc": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

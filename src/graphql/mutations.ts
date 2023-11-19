@@ -8,6 +8,13 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
+export const playerSaveAnswer = /* GraphQL */ `mutation PlayerSaveAnswer($questionId: String!, $text: String!) {
+  playerSaveAnswer(questionId: $questionId, text: $text)
+}
+` as GeneratedMutation<
+  APITypes.PlayerSaveAnswerMutationVariables,
+  APITypes.PlayerSaveAnswerMutation
+>;
 export const createQuestion = /* GraphQL */ `mutation CreateQuestion(
   $input: CreateQuestionInput!
   $condition: ModelQuestionConditionInput
@@ -89,7 +96,7 @@ export const createAnswer = /* GraphQL */ `mutation CreateAnswer(
 ) {
   createAnswer(input: $input, condition: $condition) {
     id
-    owner
+    player
     text
     isCorrect
     points
@@ -121,7 +128,7 @@ export const updateAnswer = /* GraphQL */ `mutation UpdateAnswer(
 ) {
   updateAnswer(input: $input, condition: $condition) {
     id
-    owner
+    player
     text
     isCorrect
     points
@@ -153,7 +160,7 @@ export const deleteAnswer = /* GraphQL */ `mutation DeleteAnswer(
 ) {
   deleteAnswer(input: $input, condition: $condition) {
     id
-    owner
+    player
     text
     isCorrect
     points

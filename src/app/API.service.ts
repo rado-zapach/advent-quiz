@@ -87,7 +87,7 @@ export type ModelAnswerConnection = {
 export type Answer = {
   __typename: "Answer",
   id: string,
-  owner: string,
+  player: string,
   text: string,
   isCorrect?: boolean | null,
   points?: number | null,
@@ -113,7 +113,7 @@ export type DeleteQuestionInput = {
 
 export type CreateAnswerInput = {
   id?: string | null,
-  owner: string,
+  player: string,
   text: string,
   isCorrect?: boolean | null,
   points?: number | null,
@@ -121,7 +121,7 @@ export type CreateAnswerInput = {
 };
 
 export type ModelAnswerConditionInput = {
-  owner?: ModelStringInput | null,
+  player?: ModelStringInput | null,
   text?: ModelStringInput | null,
   isCorrect?: ModelBooleanInput | null,
   points?: ModelIntInput | null,
@@ -168,7 +168,7 @@ export type ModelIDInput = {
 
 export type UpdateAnswerInput = {
   id: string,
-  owner?: string | null,
+  player?: string | null,
   text?: string | null,
   isCorrect?: boolean | null,
   points?: number | null,
@@ -211,7 +211,7 @@ export type ModelQuestionConnection = {
 
 export type ModelAnswerFilterInput = {
   id?: ModelIDInput | null,
-  owner?: ModelStringInput | null,
+  player?: ModelStringInput | null,
   text?: ModelStringInput | null,
   isCorrect?: ModelBooleanInput | null,
   points?: ModelIntInput | null,
@@ -265,6 +265,7 @@ export type ModelSubscriptionStringInput = {
 
 export type ModelSubscriptionAnswerFilterInput = {
   id?: ModelSubscriptionIDInput | null,
+  player?: ModelSubscriptionStringInput | null,
   text?: ModelSubscriptionStringInput | null,
   isCorrect?: ModelSubscriptionBooleanInput | null,
   points?: ModelSubscriptionIntInput | null,
@@ -287,6 +288,15 @@ export type ModelSubscriptionIntInput = {
   between?: Array< number | null > | null,
   in?: Array< number | null > | null,
   notIn?: Array< number | null > | null,
+};
+
+export type PlayerSaveAnswerMutationVariables = {
+  questionId: string,
+  text: string,
+};
+
+export type PlayerSaveAnswerMutation = {
+  playerSaveAnswer: string,
 };
 
 export type CreateQuestionMutationVariables = {
@@ -370,7 +380,7 @@ export type CreateAnswerMutation = {
   createAnswer?:  {
     __typename: "Answer",
     id: string,
-    owner: string,
+    player: string,
     text: string,
     isCorrect?: boolean | null,
     points?: number | null,
@@ -401,7 +411,7 @@ export type UpdateAnswerMutation = {
   updateAnswer?:  {
     __typename: "Answer",
     id: string,
-    owner: string,
+    player: string,
     text: string,
     isCorrect?: boolean | null,
     points?: number | null,
@@ -432,7 +442,7 @@ export type DeleteAnswerMutation = {
   deleteAnswer?:  {
     __typename: "Answer",
     id: string,
-    owner: string,
+    player: string,
     text: string,
     isCorrect?: boolean | null,
     points?: number | null,
@@ -526,7 +536,7 @@ export type GetAnswerQuery = {
   getAnswer?:  {
     __typename: "Answer",
     id: string,
-    owner: string,
+    player: string,
     text: string,
     isCorrect?: boolean | null,
     points?: number | null,
@@ -560,7 +570,7 @@ export type ListAnswersQuery = {
     items:  Array< {
       __typename: "Answer",
       id: string,
-      owner: string,
+      player: string,
       text: string,
       isCorrect?: boolean | null,
       points?: number | null,
@@ -643,14 +653,13 @@ export type OnDeleteQuestionSubscription = {
 
 export type OnCreateAnswerSubscriptionVariables = {
   filter?: ModelSubscriptionAnswerFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnCreateAnswerSubscription = {
   onCreateAnswer?:  {
     __typename: "Answer",
     id: string,
-    owner: string,
+    player: string,
     text: string,
     isCorrect?: boolean | null,
     points?: number | null,
@@ -674,14 +683,13 @@ export type OnCreateAnswerSubscription = {
 
 export type OnUpdateAnswerSubscriptionVariables = {
   filter?: ModelSubscriptionAnswerFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnUpdateAnswerSubscription = {
   onUpdateAnswer?:  {
     __typename: "Answer",
     id: string,
-    owner: string,
+    player: string,
     text: string,
     isCorrect?: boolean | null,
     points?: number | null,
@@ -705,14 +713,13 @@ export type OnUpdateAnswerSubscription = {
 
 export type OnDeleteAnswerSubscriptionVariables = {
   filter?: ModelSubscriptionAnswerFilterInput | null,
-  owner?: string | null,
 };
 
 export type OnDeleteAnswerSubscription = {
   onDeleteAnswer?:  {
     __typename: "Answer",
     id: string,
-    owner: string,
+    player: string,
     text: string,
     isCorrect?: boolean | null,
     points?: number | null,

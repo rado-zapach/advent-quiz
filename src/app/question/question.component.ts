@@ -37,15 +37,12 @@ export class QuestionComponent {
 
     public async onSubmitAnswer(answer: string): Promise<void> {
         const result = await this.client.graphql({
-            query: mutations.createAnswer,
+            query: mutations.playerSaveAnswer,
             variables: {
-                input: {
-                    owner: 'test',
-                    text: answer,
-                    questionAnswersId: this.q.id,
-                },
+                questionId: this.q.id,
+                text: answer,
             },
         });
-        console.log(result.data.createAnswer);
+        console.log(result);
     }
 }

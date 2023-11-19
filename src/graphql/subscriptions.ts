@@ -74,13 +74,10 @@ export const onDeleteQuestion = /* GraphQL */ `subscription OnDeleteQuestion($fi
   APITypes.OnDeleteQuestionSubscriptionVariables,
   APITypes.OnDeleteQuestionSubscription
 >;
-export const onCreateAnswer = /* GraphQL */ `subscription OnCreateAnswer(
-  $filter: ModelSubscriptionAnswerFilterInput
-  $owner: String
-) {
-  onCreateAnswer(filter: $filter, owner: $owner) {
+export const onCreateAnswer = /* GraphQL */ `subscription OnCreateAnswer($filter: ModelSubscriptionAnswerFilterInput) {
+  onCreateAnswer(filter: $filter) {
     id
-    owner
+    player
     text
     isCorrect
     points
@@ -106,13 +103,10 @@ export const onCreateAnswer = /* GraphQL */ `subscription OnCreateAnswer(
   APITypes.OnCreateAnswerSubscriptionVariables,
   APITypes.OnCreateAnswerSubscription
 >;
-export const onUpdateAnswer = /* GraphQL */ `subscription OnUpdateAnswer(
-  $filter: ModelSubscriptionAnswerFilterInput
-  $owner: String
-) {
-  onUpdateAnswer(filter: $filter, owner: $owner) {
+export const onUpdateAnswer = /* GraphQL */ `subscription OnUpdateAnswer($filter: ModelSubscriptionAnswerFilterInput) {
+  onUpdateAnswer(filter: $filter) {
     id
-    owner
+    player
     text
     isCorrect
     points
@@ -138,13 +132,10 @@ export const onUpdateAnswer = /* GraphQL */ `subscription OnUpdateAnswer(
   APITypes.OnUpdateAnswerSubscriptionVariables,
   APITypes.OnUpdateAnswerSubscription
 >;
-export const onDeleteAnswer = /* GraphQL */ `subscription OnDeleteAnswer(
-  $filter: ModelSubscriptionAnswerFilterInput
-  $owner: String
-) {
-  onDeleteAnswer(filter: $filter, owner: $owner) {
+export const onDeleteAnswer = /* GraphQL */ `subscription OnDeleteAnswer($filter: ModelSubscriptionAnswerFilterInput) {
+  onDeleteAnswer(filter: $filter) {
     id
-    owner
+    player
     text
     isCorrect
     points

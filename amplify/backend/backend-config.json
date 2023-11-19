@@ -88,6 +88,28 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "playerSaveAnswer": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "adventquiz"
+        },
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "adventquiz6a5522dc"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "hosting": {
@@ -111,6 +133,22 @@
         {
           "category": "function",
           "resourceName": "playerQuestionList"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerSaveAnswer_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerSaveAnswer"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerSaveAnswer_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerSaveAnswer"
         }
       ]
     },

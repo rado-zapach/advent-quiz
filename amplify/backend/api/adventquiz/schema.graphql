@@ -13,46 +13,13 @@ type Question
     answers: [Answer!] @hasMany
 }
 
-type Answer
-    @model
-    @auth(
-        rules: [{allow: owner}, {allow: groups, groups: ["Admins"]}, {allow: private, provider: iam}]
-    ) {
+type Answer @model @auth(rules: [{allow: groups, groups: ["Admins"]}, {allow: private, provider: iam}]) {
     id: ID!
-    owner: String!
-        @auth(
-            rules: [
-                {allow: owner, operations: [create, read]}
-                {allow: groups, groups: ["Admins"]}
-                {allow: private, provider: iam}
-            ]
-        )
+    player: String!
     text: String!
     isCorrect: Boolean
-        @auth(
-            rules: [
-                {allow: owner, operations: [read]}
-                {allow: groups, groups: ["Admins"]}
-                {allow: private, provider: iam}
-            ]
-        )
     points: Int
-        @auth(
-            rules: [
-                {allow: owner, operations: [read]}
-                {allow: groups, groups: ["Admins"]}
-                {allow: private, provider: iam}
-            ]
-        )
-    question: Question!
-        @belongsTo
-        @auth(
-            rules: [
-                {allow: owner, operations: [read]}
-                {allow: groups, groups: ["Admins"]}
-                {allow: private, provider: iam}
-            ]
-        )
+    question: Question! @belongsTo
 }
 
 type Ranking {
@@ -74,4 +41,9 @@ type PlayerQuestion {
 
 type Query {
     playerQuestionList: [PlayerQuestion!]! @function(name: "playerQuestionList-${env}")
+}
+
+type Mutation {
+    playerSaveAnswer(questionId: String!, text: String!): String!
+        @function(name: "playerSaveAnswer-${env}")
 }

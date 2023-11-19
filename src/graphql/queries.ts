@@ -75,7 +75,7 @@ export const listQuestions = /* GraphQL */ `query ListQuestions(
 export const getAnswer = /* GraphQL */ `query GetAnswer($id: ID!) {
   getAnswer(id: $id) {
     id
-    owner
+    player
     text
     isCorrect
     points
@@ -106,7 +106,7 @@ export const listAnswers = /* GraphQL */ `query ListAnswers(
   listAnswers(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      owner
+      player
       text
       isCorrect
       points
