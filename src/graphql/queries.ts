@@ -153,3 +153,14 @@ export const playerAnswer = /* GraphQL */ `query PlayerAnswer($questionId: ID!) 
   APITypes.PlayerAnswerQueryVariables,
   APITypes.PlayerAnswerQuery
 >;
+export const playerAttributesList = /* GraphQL */ `query PlayerAttributesList {
+  playerAttributesList {
+    username
+    email
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.PlayerAttributesListQueryVariables,
+  APITypes.PlayerAttributesListQuery
+>;

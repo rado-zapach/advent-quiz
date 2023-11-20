@@ -229,6 +229,12 @@ export type PlayerAnswer = {
   questionId: string,
 };
 
+export type PlayerAttributes = {
+  __typename: "PlayerAttributes",
+  username: string,
+  email: string,
+};
+
 export type ModelSubscriptionQuestionFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   text?: ModelSubscriptionStringInput | null,
@@ -574,6 +580,17 @@ export type PlayerAnswerQuery = {
     points?: number | null,
     questionId: string,
   } | null,
+};
+
+export type PlayerAttributesListQueryVariables = {
+};
+
+export type PlayerAttributesListQuery = {
+  playerAttributesList:  Array< {
+    __typename: "PlayerAttributes",
+    username: string,
+    email: string,
+  } >,
 };
 
 export type OnCreateQuestionSubscriptionVariables = {

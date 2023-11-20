@@ -49,6 +49,10 @@
         "playerAnswer": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
           "s3Key": "amplify-builds/playerAnswer-5a787937383049435846-build.zip"
+        },
+        "playerAttributesList": {
+          "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
+          "s3Key": "amplify-builds/playerAttributesList-78447636667976393770-build.zip"
         }
       }
     }

@@ -123,6 +123,27 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "playerAttributesList": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "adventquiz6a5522dc"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "adventquiznodemodules"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "playerQuestion": {
       "build": true,
       "dependsOn": [
@@ -243,6 +264,22 @@
         {
           "category": "function",
           "resourceName": "playerAnswer"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerAttributesList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerAttributesList"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerAttributesList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerAttributesList"
         }
       ]
     },

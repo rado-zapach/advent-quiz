@@ -47,6 +47,11 @@ type PlayerAnswer {
     questionId: String!
 }
 
+type PlayerAttributes {
+    username: String!
+    email: String!
+}
+
 type Query {
     playerQuestionList: [PlayerQuestion!]!
         @auth(rules: [{allow: private}])
@@ -60,6 +65,9 @@ type Query {
     playerAnswer(questionId: ID!): PlayerAnswer
         @auth(rules: [{allow: private}])
         @function(name: "playerAnswer-${env}")
+    playerAttributesList: [PlayerAttributes!]!
+        @auth(rules: [{allow: private}])
+        @function(name: "playerAttributesList-${env}")
 }
 
 type Mutation {
