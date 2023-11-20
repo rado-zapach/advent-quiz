@@ -57,7 +57,7 @@ type Query {
     playerAnswerList(questionId: ID!): [PlayerAnswer!]!
         @auth(rules: [{allow: private}])
         @function(name: "playerAnswerList-${env}")
-    playerAnswer(questionId: ID!): PlayerAnswer!
+    playerAnswer(questionId: ID!): PlayerAnswer
         @auth(rules: [{allow: private}])
         @function(name: "playerAnswer-${env}")
 }

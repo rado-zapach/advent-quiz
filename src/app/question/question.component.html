@@ -1,34 +1,37 @@
-@switch (question().state) {
-    @case (State.BEFORE) {
-        <h2 mat-dialog-title>Day {{ question().day }}</h2>
-        <mat-dialog-content class="mat-typography">
+<h2 mat-dialog-title>Day {{ question().day }}</h2>
+<mat-dialog-content class="mat-typography">
+    @switch (question().state) {
+        @case (State.BEFORE) {
             <span>Opens in {{ timeRemaining$ | async }}</span>
-        </mat-dialog-content>
-        <mat-dialog-actions align="end">
-            <button mat-button mat-dialog-close>Close</button>
-        </mat-dialog-actions>
-    }
-    @case (State.OPEN) {
-        <h2 mat-dialog-title>Day {{ question().day }} {{ timeRemaining$ | async }}</h2>
-        <mat-dialog-content class="mat-typography">
+        }
+        @case (State.OPEN) {
             <div class="formatted-text" [innerHTML]="question().text | sanitizer"></div>
             <mat-form-field>
-                <textarea #answer matInput [cdkTextareaAutosize]="true"></textarea>
+                <textarea
+                    #answerTextArea
+                    [value]="answer()?.text ?? ''"
+                    matInput
+                    [cdkTextareaAutosize]="true"
+                ></textarea>
             </mat-form-field>
-            <span>Closes in {{ timeRemaining$ | async }}</span>
-        </mat-dialog-content>
-        <mat-dialog-actions align="end">
-            <button mat-button (click)="onSubmitAnswer(answer.value)">Submit</button>
-            <button mat-button mat-dialog-close>Close</button>
-        </mat-dialog-actions>
-    }
-    @case (State.CLOSED) {
-        <mat-dialog-content class="mat-typography">
+            <button mat-raised-button (click)="onSubmitAnswer(answerTextArea.value)">Submit</button>
+            <div>Closes in {{ timeRemaining$ | async }}</div>
+        }
+        @case (State.CLOSED) {
             <div class="formatted-text" [innerHTML]="question().text | sanitizer"></div>
+            <div>Correct answer:</div>
             <div class="formatted-text" [innerHTML]="question().correctAnswer | sanitizer"></div>
-        </mat-dialog-content>
-        <mat-dialog-actions align="end">
-            <button mat-button mat-dialog-close>Close</button>
-        </mat-dialog-actions>
+            <div>Your answer:</div>
+            @if (answer(); as answer) {
+                <div>{{ answer?.text }}</div>
+                <div>Points:</div>
+                <div>{{ answer?.points ?? 0 }}</div>
+            } @else {
+                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            }
+        }
     }
-}
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

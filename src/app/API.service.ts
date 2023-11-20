@@ -219,6 +219,16 @@ export type PlayerQuestion = {
   closeTime: string,
 };
 
+export type PlayerAnswer = {
+  __typename: "PlayerAnswer",
+  id: string,
+  player: string,
+  text: string,
+  isCorrect?: boolean | null,
+  points?: number | null,
+  questionId: string,
+};
+
 export type ModelSubscriptionQuestionFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   text?: ModelSubscriptionStringInput | null,
@@ -532,6 +542,38 @@ export type PlayerQuestionQuery = {
     openTime: string,
     closeTime: string,
   },
+};
+
+export type PlayerAnswerListQueryVariables = {
+  questionId: string,
+};
+
+export type PlayerAnswerListQuery = {
+  playerAnswerList:  Array< {
+    __typename: "PlayerAnswer",
+    id: string,
+    player: string,
+    text: string,
+    isCorrect?: boolean | null,
+    points?: number | null,
+    questionId: string,
+  } >,
+};
+
+export type PlayerAnswerQueryVariables = {
+  questionId: string,
+};
+
+export type PlayerAnswerQuery = {
+  playerAnswer?:  {
+    __typename: "PlayerAnswer",
+    id: string,
+    player: string,
+    text: string,
+    isCorrect?: boolean | null,
+    points?: number | null,
+    questionId: string,
+  } | null,
 };
 
 export type OnCreateQuestionSubscriptionVariables = {

@@ -214,6 +214,38 @@
         }
       ]
     },
+    "AMPLIFY_function_playerAnswerList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerAnswerList"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerAnswerList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerAnswerList"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerAnswer_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerAnswer"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerAnswer_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerAnswer"
+        }
+      ]
+    },
     "AMPLIFY_function_playerQuestionList_deploymentBucketName": {
       "usedBy": [
         {

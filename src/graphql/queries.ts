@@ -123,3 +123,33 @@ export const playerQuestion = /* GraphQL */ `query PlayerQuestion($questionId: I
   APITypes.PlayerQuestionQueryVariables,
   APITypes.PlayerQuestionQuery
 >;
+export const playerAnswerList = /* GraphQL */ `query PlayerAnswerList($questionId: ID!) {
+  playerAnswerList(questionId: $questionId) {
+    id
+    player
+    text
+    isCorrect
+    points
+    questionId
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.PlayerAnswerListQueryVariables,
+  APITypes.PlayerAnswerListQuery
+>;
+export const playerAnswer = /* GraphQL */ `query PlayerAnswer($questionId: ID!) {
+  playerAnswer(questionId: $questionId) {
+    id
+    player
+    text
+    isCorrect
+    points
+    questionId
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.PlayerAnswerQueryVariables,
+  APITypes.PlayerAnswerQuery
+>;
