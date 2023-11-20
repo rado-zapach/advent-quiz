@@ -6,10 +6,10 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
-import {
-    AdminGetUserCommand,
-    CognitoIdentityProviderClient,
-} from "@aws-sdk/client-cognito-identity-provider";
+// import {
+//     AdminGetUserCommand,
+//     CognitoIdentityProviderClient,
+// } from "@aws-sdk/client-cognito-identity-provider";
 import crypto from "@aws-crypto/sha256-js";
 import {defaultProvider} from "@aws-sdk/credential-provider-node";
 import {SignatureV4} from "@aws-sdk/signature-v4";
@@ -77,16 +77,17 @@ export const handler = async event => {
 
     const questionId = event.arguments.questionId;
     const text = event.arguments.text;
+    const player = event.identity.username;
 
-    const username = event.identity.username;
-    const client = new CognitoIdentityProviderClient();
-    const input = {
-        UserPoolId: process.env.AUTH_ADVENTQUIZ6A5522DC_USERPOOLID,
-        Username: username,
-    };
-    const command = new AdminGetUserCommand(input);
-    const response = await client.send(command);
-    const player = response.UserAttributes.find(a => a.Name === "email").Value;
+    // const username = event.identity.username;
+    // const client = new CognitoIdentityProviderClient();
+    // const input = {
+    //     UserPoolId: process.env.AUTH_ADVENTQUIZ6A5522DC_USERPOOLID,
+    //     Username: username,
+    // };
+    // const command = new AdminGetUserCommand(input);
+    // const response = await client.send(command);
+    // const player = response.UserAttributes.find(a => a.Name === "email").Value;
 
     const answersAndQuestion = await MakeRequest(findQuery(questionId, player));
     const answers = answersAndQuestion.data.listAnswers.items;

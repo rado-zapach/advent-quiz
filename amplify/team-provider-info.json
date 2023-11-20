@@ -32,7 +32,7 @@
         },
         "playerSaveAnswer": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerSaveAnswer-6d7036505370424d6832-build.zip"
+          "s3Key": "amplify-builds/playerSaveAnswer-6861414243596c792f30-build.zip"
         },
         "adventquiznodemodules": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
