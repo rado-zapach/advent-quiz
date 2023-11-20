@@ -38,11 +38,32 @@ type PlayerQuestion {
     closeTime: AWSDateTime!
 }
 
+type PlayerAnswer {
+    id: ID!
+    player: String!
+    text: String!
+    isCorrect: Boolean
+    points: Int
+    questionId: String!
+}
+
 type Query {
-    playerQuestionList: [PlayerQuestion!]! @function(name: "playerQuestionList-${env}")
+    playerQuestionList: [PlayerQuestion!]!
+        @auth(rules: [{allow: private}])
+        @function(name: "playerQuestionList-${env}")
+    playerQuestion(questionId: ID!): PlayerQuestion!
+        @auth(rules: [{allow: private}])
+        @function(name: "playerQuestion-${env}")
+    playerAnswerList(questionId: ID!): [PlayerAnswer!]!
+        @auth(rules: [{allow: private}])
+        @function(name: "playerAnswerList-${env}")
+    playerAnswer(questionId: ID!): PlayerAnswer!
+        @auth(rules: [{allow: private}])
+        @function(name: "playerAnswer-${env}")
 }
 
 type Mutation {
-    playerSaveAnswer(questionId: String!, text: String!): String!
+    playerSaveAnswer(questionId: ID!, text: String!): String!
+        @auth(rules: [{allow: private}])
         @function(name: "playerSaveAnswer-${env}")
 }

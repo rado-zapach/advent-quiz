@@ -59,12 +59,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "playerSaveAnswer",
+            "playerQuestion",
             {
               "Fn::Join": [
                 "",
                 [
-                  "playerSaveAnswer",
+                  "playerQuestion",
                   "-",
                   {
                     "Ref": "env"
@@ -111,12 +111,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "adventquizLambdaRolef5eb6b2a",
+            "adventquizLambdaRole10f9cba9",
             {
               "Fn::Join": [
                 "",
                 [
-                  "adventquizLambdaRolef5eb6b2a",
+                  "adventquizLambdaRole10f9cba9",
                   "-",
                   {
                     "Ref": "env"
@@ -225,26 +225,6 @@
                         "Ref": "apiadventquizGraphQLAPIIdOutput"
                       },
                       "/types/Query/*"
-                    ]
-                  ]
-                },
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:appsync:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":apis/",
-                      {
-                        "Ref": "apiadventquizGraphQLAPIIdOutput"
-                      },
-                      "/types/Mutation/*"
                     ]
                   ]
                 }

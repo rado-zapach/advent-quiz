@@ -155,17 +155,6 @@ export type DeleteAnswerInput = {
   id: string,
 };
 
-export type PlayerQuestion = {
-  __typename: "PlayerQuestion",
-  id: string,
-  text?: string | null,
-  choices?: string | null,
-  icon: string,
-  correctAnswer?: string | null,
-  openTime: string,
-  closeTime: string,
-};
-
 export type ModelQuestionFilterInput = {
   id?: ModelIDInput | null,
   text?: ModelStringInput | null,
@@ -217,6 +206,17 @@ export type ModelAnswerConnection = {
   __typename: "ModelAnswerConnection",
   items:  Array<Answer | null >,
   nextToken?: string | null,
+};
+
+export type PlayerQuestion = {
+  __typename: "PlayerQuestion",
+  id: string,
+  text?: string | null,
+  choices?: string | null,
+  icon: string,
+  correctAnswer?: string | null,
+  openTime: string,
+  closeTime: string,
 };
 
 export type ModelSubscriptionQuestionFilterInput = {
@@ -287,15 +287,6 @@ export type ModelSubscriptionIntInput = {
   between?: Array< number | null > | null,
   in?: Array< number | null > | null,
   notIn?: Array< number | null > | null,
-};
-
-export type PlayerSaveAnswerMutationVariables = {
-  questionId: string,
-  text: string,
-};
-
-export type PlayerSaveAnswerMutation = {
-  playerSaveAnswer: string,
 };
 
 export type CreateQuestionMutationVariables = {
@@ -415,20 +406,13 @@ export type DeleteAnswerMutation = {
   } | null,
 };
 
-export type PlayerQuestionListQueryVariables = {
+export type PlayerSaveAnswerMutationVariables = {
+  questionId: string,
+  text: string,
 };
 
-export type PlayerQuestionListQuery = {
-  playerQuestionList:  Array< {
-    __typename: "PlayerQuestion",
-    id: string,
-    text?: string | null,
-    choices?: string | null,
-    icon: string,
-    correctAnswer?: string | null,
-    openTime: string,
-    closeTime: string,
-  } >,
+export type PlayerSaveAnswerMutation = {
+  playerSaveAnswer: string,
 };
 
 export type GetQuestionQueryVariables = {
@@ -515,6 +499,39 @@ export type ListAnswersQuery = {
     } | null >,
     nextToken?: string | null,
   } | null,
+};
+
+export type PlayerQuestionListQueryVariables = {
+};
+
+export type PlayerQuestionListQuery = {
+  playerQuestionList:  Array< {
+    __typename: "PlayerQuestion",
+    id: string,
+    text?: string | null,
+    choices?: string | null,
+    icon: string,
+    correctAnswer?: string | null,
+    openTime: string,
+    closeTime: string,
+  } >,
+};
+
+export type PlayerQuestionQueryVariables = {
+  questionId: string,
+};
+
+export type PlayerQuestionQuery = {
+  playerQuestion:  {
+    __typename: "PlayerQuestion",
+    id: string,
+    text?: string | null,
+    choices?: string | null,
+    icon: string,
+    correctAnswer?: string | null,
+    openTime: string,
+    closeTime: string,
+  },
 };
 
 export type OnCreateQuestionSubscriptionVariables = {

@@ -3,7 +3,6 @@
         class="question-container"
         mat-button
         (click)="openQuestion(q)"
-        [disabled]="!q.text"
         [ngClass]="{disabled: !q.text}"
     >
         <div class="question">

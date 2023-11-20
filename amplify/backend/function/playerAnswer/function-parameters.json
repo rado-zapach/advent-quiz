@@ -2,8 +2,7 @@
   "permissions": {
     "api": {
       "adventquiz": [
-        "Query",
-        "Mutation"
+        "Query"
       ]
     }
   },

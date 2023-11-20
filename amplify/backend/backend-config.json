@@ -79,6 +79,72 @@
       "providerPlugin": "awscloudformation",
       "service": "LambdaLayer"
     },
+    "playerAnswer": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "adventquiz"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "adventquiznodemodules"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "playerAnswerList": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "adventquiz"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "adventquiznodemodules"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "playerQuestion": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "adventquiz"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "adventquiznodemodules"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "playerQuestionList": {
       "build": true,
       "dependsOn": [
@@ -106,13 +172,6 @@
       "dependsOn": [
         {
           "attributes": [
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "adventquiznodemodules"
-        },
-        {
-          "attributes": [
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput"
           ],
@@ -121,10 +180,10 @@
         },
         {
           "attributes": [
-            "UserPoolId"
+            "Arn"
           ],
-          "category": "auth",
-          "resourceName": "adventquiz6a5522dc"
+          "category": "function",
+          "resourceName": "adventquiznodemodules"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -168,6 +227,22 @@
         {
           "category": "function",
           "resourceName": "playerQuestionList"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerQuestion_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerQuestion"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerQuestion_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerQuestion"
         }
       ]
     },

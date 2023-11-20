@@ -1,11 +1,34 @@
-<h2 mat-dialog-title>Day {{ q.day }}</h2>
-<mat-dialog-content class="mat-typography">
-    <div class="formatted-text" [innerHTML]="q.text | sanitizer"></div>
-    <mat-form-field>
-        <textarea #answer matInput [cdkTextareaAutosize]="true"></textarea>
-    </mat-form-field>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-    <button mat-button (click)="onSubmitAnswer(answer.value)">Submit</button>
-    <!--    <button mat-button mat-dialog-close>Cancel</button>-->
-</mat-dialog-actions>
+@switch (question().state) {
+    @case (State.BEFORE) {
+        <h2 mat-dialog-title>Day {{ question().day }}</h2>
+        <mat-dialog-content class="mat-typography">
+            <span>Opens in {{ timeRemaining$ | async }}</span>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button mat-button mat-dialog-close>Close</button>
+        </mat-dialog-actions>
+    }
+    @case (State.OPEN) {
+        <h2 mat-dialog-title>Day {{ question().day }} {{ timeRemaining$ | async }}</h2>
+        <mat-dialog-content class="mat-typography">
+            <div class="formatted-text" [innerHTML]="question().text | sanitizer"></div>
+            <mat-form-field>
+                <textarea #answer matInput [cdkTextareaAutosize]="true"></textarea>
+            </mat-form-field>
+            <span>Closes in {{ timeRemaining$ | async }}</span>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button mat-button (click)="onSubmitAnswer(answer.value)">Submit</button>
+            <button mat-button mat-dialog-close>Close</button>
+        </mat-dialog-actions>
+    }
+    @case (State.CLOSED) {
+        <mat-dialog-content class="mat-typography">
+            <div class="formatted-text" [innerHTML]="question().text | sanitizer"></div>
+            <div class="formatted-text" [innerHTML]="question().correctAnswer | sanitizer"></div>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button mat-button mat-dialog-close>Close</button>
+        </mat-dialog-actions>
+    }
+}

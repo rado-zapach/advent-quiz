@@ -25,6 +25,13 @@ export type AmplifyDependentResourcesAttributes = {
     "adventquiznodemodules": {
       "Arn": "string"
     },
+    "playerQuestion": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "playerQuestionList": {
       "Arn": "string",
       "LambdaExecutionRole": "string",

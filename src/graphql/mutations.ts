@@ -8,13 +8,6 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
-export const playerSaveAnswer = /* GraphQL */ `mutation PlayerSaveAnswer($questionId: String!, $text: String!) {
-  playerSaveAnswer(questionId: $questionId, text: $text)
-}
-` as GeneratedMutation<
-  APITypes.PlayerSaveAnswerMutationVariables,
-  APITypes.PlayerSaveAnswerMutation
->;
 export const createQuestion = /* GraphQL */ `mutation CreateQuestion(
   $input: CreateQuestionInput!
   $condition: ModelQuestionConditionInput
@@ -137,4 +130,11 @@ export const deleteAnswer = /* GraphQL */ `mutation DeleteAnswer(
 ` as GeneratedMutation<
   APITypes.DeleteAnswerMutationVariables,
   APITypes.DeleteAnswerMutation
+>;
+export const playerSaveAnswer = /* GraphQL */ `mutation PlayerSaveAnswer($questionId: ID!, $text: String!) {
+  playerSaveAnswer(questionId: $questionId, text: $text)
+}
+` as GeneratedMutation<
+  APITypes.PlayerSaveAnswerMutationVariables,
+  APITypes.PlayerSaveAnswerMutation
 >;
