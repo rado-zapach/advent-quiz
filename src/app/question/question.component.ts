@@ -15,7 +15,7 @@ import * as mutations from '../../graphql/mutations';
 import * as queries from '../../graphql/queries';
 import {PlayerAnswer, PlayerQuestion} from '../API.service';
 import {CompPlayerQuestion} from '../comp-player-question';
-import {SanitizerPipe} from './sanitizer-pipe';
+import {SanitizerPipe} from './sanitizer.pipe';
 
 enum State {
     BEFORE = 'before',

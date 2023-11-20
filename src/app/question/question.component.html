@@ -22,13 +22,9 @@
             <div>Correct answer:</div>
             <div class="formatted-text" [innerHTML]="question().correctAnswer | sanitizer"></div>
             <div>Your answer:</div>
-            @if (answer(); as answer) {
-                <div>{{ answer?.text }}</div>
-                <div>Points:</div>
-                <div>{{ answer?.points ?? 0 }}</div>
-            } @else {
-                <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-            }
+            <div>{{ answer()?.text }}</div>
+            <div>Points:</div>
+            <div>{{ answer()?.points ?? 0 }}</div>
         }
     }
 </mat-dialog-content>

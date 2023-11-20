@@ -84,7 +84,6 @@ export class QuestionsComponent implements OnInit, AfterViewInit {
     }
 
     @ViewChild(MatSort) sort: MatSort | undefined;
-
     public ngAfterViewInit() {
         if (this.sort) {
             this.dataSource.sort = this.sort;

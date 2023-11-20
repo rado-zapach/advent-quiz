@@ -110,7 +110,13 @@
                     <button mat-icon-button matTooltip="Edit" (click)="onStartEdit(element)">
                         <mat-icon>edit</mat-icon>
                     </button>
-
+                    <button
+                        mat-icon-button
+                        matTooltip="Answers"
+                        [routerLink]="['../answers', element.id]"
+                    >
+                        <mat-icon>group</mat-icon>
+                    </button>
                     <button mat-icon-button matTooltip="More" [matMenuTriggerFor]="actionsMenu">
                         <mat-icon>more_vert</mat-icon>
                     </button>

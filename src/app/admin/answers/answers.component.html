@@ -1,1 +1,88 @@
-<p>answers works!</p>
+<h1>Answers for day {{ question()?.day }}</h1>
+<div>
+    <h2>Question</h2>
+    <div class="formatted-text" [innerHTML]="question()?.text | sanitizer"></div>
+    <h2>Correct answer</h2>
+    <div>{{ question()?.correctAnswer }}</div>
+</div>
+<div class="mat-elevation-z8">
+    <mat-table matSort matSortActive="player" matSortDirection="asc" [dataSource]="dataSource">
+        <ng-container matColumnDef="player">
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Player </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{ element.player | playerEmail | async }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="text">
+            <mat-header-cell *matHeaderCellDef> Text </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{ element.text }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="isCorrect">
+            <mat-header-cell *matHeaderCellDef> Correct </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                @if (editAnswer?.id === element.id && editAnswer) {
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="editAnswer.isCorrect" />
+                    </mat-form-field>
+                } @else {
+                    {{ element.isCorrect }}
+                }
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="points">
+            <mat-header-cell *matHeaderCellDef> Points </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                @if (editAnswer?.id === element.id && editAnswer) {
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="editAnswer.points" />
+                    </mat-form-field>
+                } @else {
+                    {{ element.points }}
+                }
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="updatedAt">
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Time </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                {{ element.updatedAt }}
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                @if (editAnswer?.id !== element.id) {
+                    <button mat-icon-button matTooltip="Edit" (click)="onStartEdit(element)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <!--                    <button mat-icon-button matTooltip="More" [matMenuTriggerFor]="actionsMenu">-->
+                    <!--                        <mat-icon>more_vert</mat-icon>-->
+                    <!--                    </button>-->
+                    <!--                    <mat-menu #actionsMenu>-->
+                    <!--                        <button mat-menu-item (click)="onDelete(element.id)">-->
+                    <!--                            <mat-icon>delete</mat-icon>-->
+                    <!--                            <span>Delete</span>-->
+                    <!--                        </button>-->
+                    <!--                    </mat-menu>-->
+                } @else {
+                    <button mat-icon-button matTooltip="Cancel" (click)="onStartEdit(undefined)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Save" (click)="onUpdate()">
+                        <mat-icon>done</mat-icon>
+                    </button>
+                }
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+</div>
+<!--<button class="add-question" mat-raised-button (click)="onCreate()">Add question</button>-->
