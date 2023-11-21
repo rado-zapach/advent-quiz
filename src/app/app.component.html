@@ -2,8 +2,8 @@
     <mat-toolbar>
         <button mat-icon-button matTooltip="Home" routerLink="">
             <mat-icon>home</mat-icon>
+            <span>IBL Advent Quiz</span>
         </button>
-        <span>IBL Advent Quiz</span>
         <span class="spacer"></span>
         <button mat-icon-button matTooltip="Leaderboard" routerLink="leaderboard">
             <mat-icon>leaderboard</mat-icon>
@@ -16,14 +16,16 @@
         </button>
 
         <mat-menu #accountMenu>
-            <button mat-menu-item routerLink="admin/init-questions">
-                <mat-icon>add</mat-icon>
-                <span>Create questions</span>
-            </button>
-            <button mat-menu-item routerLink="admin/questions">
-                <mat-icon>quiz</mat-icon>
-                <span>Questions</span>
-            </button>
+            @if (user.isAdmin) {
+                <button mat-menu-item routerLink="admin/init-questions">
+                    <mat-icon>add</mat-icon>
+                    <span>Create questions</span>
+                </button>
+                <button mat-menu-item routerLink="admin/questions">
+                    <mat-icon>quiz</mat-icon>
+                    <span>Questions</span>
+                </button>
+            }
 
             <button mat-menu-item (click)="userService.signOut()">
                 <mat-icon>logout</mat-icon>
