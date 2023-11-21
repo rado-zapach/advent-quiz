@@ -5,10 +5,6 @@
 	REGION
 Amplify Params - DO NOT EDIT */
 
-// import {
-//     AdminGetUserCommand,
-//     CognitoIdentityProviderClient,
-// } from "@aws-sdk/client-cognito-identity-provider";
 import crypto from "@aws-crypto/sha256-js";
 import {defaultProvider} from "@aws-sdk/credential-provider-node";
 import {SignatureV4} from "@aws-sdk/signature-v4";
@@ -78,16 +74,6 @@ export const handler = async event => {
     const text = event.arguments.text;
     const player = event.identity.username;
 
-    // const username = event.identity.username;
-    // const client = new CognitoIdentityProviderClient();
-    // const input = {
-    //     UserPoolId: process.env.AUTH_ADVENTQUIZ6A5522DC_USERPOOLID,
-    //     Username: username,
-    // };
-    // const command = new AdminGetUserCommand(input);
-    // const response = await client.send(command);
-    // const player = response.UserAttributes.find(a => a.Name === "email").Value;
-
     const answersAndQuestion = await MakeRequest(findQuery(questionId, player));
     const answers = answersAndQuestion.data.listAnswers.items;
     const question = answersAndQuestion.data.getQuestion;
@@ -100,19 +86,15 @@ export const handler = async event => {
         throw new Error(`Question is not open!`);
     }
 
-    switch (answers.length) {
-        case 0: {
-            const id = await MakeRequest(createQuery(player, text, questionId));
-            return id.data.createAnswer.id;
-        }
-        case 1: {
-            const answerId = answers[0].id;
-            const id = await MakeRequest(updateQuery(answerId, text));
-            return id.data.updateAnswer.id;
-        }
-        default:
-            throw new Error(
-                `Too many answers ${answers.length} for player ${player} and question ${questionId}`
-            );
+    if (answers.length <= 0) {
+        const id = await MakeRequest(createQuery(player, text, questionId));
+        return id.data.createAnswer.id;
     }
+
+    if (answers.length > 1) {
+        answers.sort((a, b) => new Date(b.openTime).getTime() - new Date(a.openTime).getTime());
+    }
+    const answerId = answers[0].id;
+    const id = await MakeRequest(updateQuery(answerId, text));
+    return id.data.updateAnswer.id;
 };

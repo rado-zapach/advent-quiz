@@ -64,11 +64,11 @@ export const handler = async event => {
     const closeTime = new Date(question.closeTime).getTime();
     const isClosed = now >= closeTime;
 
-    if (answers.length > 1) {
-        throw new Error("Too many answers!");
-    }
     if (answers.length <= 0) {
         return null;
+    }
+    if (answers.length > 1) {
+        answers.sort((a, b) => new Date(b.openTime).getTime() - new Date(a.openTime).getTime());
     }
     const a = answers[0];
 
