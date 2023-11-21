@@ -60,7 +60,7 @@
         "adventquiz6a5522dcPreSignup": {
           "DOMAINALLOWLIST": "iblsoft.com",
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/adventquiz6a5522dcPreSignup-467a6465476930755670-build.zip"
+          "s3Key": "amplify-builds/adventquiz6a5522dcPreSignup-6648484e444e78344748-build.zip"
         }
       }
     }
