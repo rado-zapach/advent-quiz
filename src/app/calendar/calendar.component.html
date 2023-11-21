@@ -1,4 +1,8 @@
-@for (q of questions(); track q.id) {
+<div class="container">
+  <div class="cube">
+  @for (q of questions(); track q.id; let i = $index) {
+
+    <div class="face" [ngClass]="'box' + (i+1)">
     <button
         class="question-container"
         mat-button
@@ -16,6 +20,9 @@
             <span>{{ q.day }}</span>
         </div>
     </button>
+    </div>
 } @empty {
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 }
+  </div>
+</div>
