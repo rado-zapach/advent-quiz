@@ -1,0 +1,30 @@
+.login-screen {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  gap: 60px;
+  justify-content: center;
+  align-items: center;
+}
+.login-logo {
+  height: 100px;
+}
+.button {
+    -webkit-appearance: none;
+    width: auto;
+    min-width: 100pt;
+    border-radius: 24pt;
+    text-align: center;
+    padding: 15pt 40pt;
+    margin-top: 25pt;
+    background-color: #9f0031;
+    color: #fff;
+    font-size: 14pt;
+    font-weight: 500;
+    border: none;
+    outline: 0;
+}
+.login-footer {
+  color: #fff;
+  font-size: 14pt;
+}
