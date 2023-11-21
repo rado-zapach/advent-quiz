@@ -14,7 +14,6 @@ import {filter, first, interval, map, switchMap, takeWhile, timer} from 'rxjs';
 import * as mutations from '../../graphql/mutations';
 import * as queries from '../../graphql/queries';
 import {PlayerAnswer, PlayerQuestion} from '../API.service';
-import {CompPlayerQuestion} from '../comp-player-question';
 import {SanitizerPipe} from './sanitizer.pipe';
 
 enum State {
@@ -23,7 +22,8 @@ enum State {
     CLOSED = 'closed',
 }
 
-interface Question extends CompPlayerQuestion {
+interface Question extends PlayerQuestion {
+    day: number;
     state: State;
 }
 
@@ -61,7 +61,7 @@ export class QuestionComponent implements OnInit {
     public readonly answer = signal<PlayerAnswer | undefined>(undefined);
     public answerText: string | undefined;
 
-    public constructor(@Inject(MAT_DIALOG_DATA) q: CompPlayerQuestion) {
+    public constructor(@Inject(MAT_DIALOG_DATA) q: Question) {
         this.question = signal<Question>({
             ...q,
             state: GetState(q),

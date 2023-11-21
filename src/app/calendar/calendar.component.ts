@@ -7,8 +7,16 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {generateClient} from 'aws-amplify/api';
 import * as queries from '../../graphql/queries';
 import {PlayerQuestion} from '../API.service';
-import {CompPlayerQuestion} from '../comp-player-question';
 import {QuestionComponent} from '../question/question.component';
+
+export interface Question extends PlayerQuestion {
+    day: number;
+    position: number;
+}
+
+const questionPositions = [
+    24, 1, 10, 17, 23, 8, 9, 21, 14, 3, 6, 19, 12, 18, 11, 15, 2, 22, 5, 16, 4, 13, 7, 20,
+];
 
 @Component({
     selector: 'app-calendar',
@@ -28,16 +36,21 @@ import {QuestionComponent} from '../question/question.component';
 export class CalendarComponent implements OnInit {
     public dialog = inject(MatDialog);
     public readonly client = generateClient();
-    public questions = signal<CompPlayerQuestion[]>([]);
+    public questions = signal<Question[]>([]);
 
     public async ngOnInit(): Promise<void> {
         const response = await this.client.graphql({
             query: queries.playerQuestionList,
         });
-        const questions = response.data.playerQuestionList.map(q => ({
-            ...q,
-            day: new Date(q.openTime).getDate(),
-        }));
+        const questions = response.data.playerQuestionList.map(q => {
+            const day = new Date(q.openTime).getDate();
+            const position = questionPositions.indexOf(day) + 1;
+            return {
+                ...q,
+                day,
+                position,
+            };
+        });
         questions.sort((a, b) => new Date(a.openTime).getTime() - new Date(b.openTime).getTime());
         this.questions.set(questions);
     }
