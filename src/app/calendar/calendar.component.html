@@ -1,28 +1,21 @@
 <div class="container">
-  <div class="cube">
-  @for (q of questions(); track q.id; let i = $index) {
-
-    <div class="face" [ngClass]="'box' + (i+1)">
-    <button
-        class="question-container"
-        mat-button
-        (click)="openQuestion(q)"
-        [ngClass]="{disabled: !q.text}"
-    >
-        <div class="question">
-            <img
-                [ngSrc]="'assets/icons/004-candle.png'"
-                alt=""
-                height="128"
-                width="128"
-                priority="high"
-            />
-            <span>{{ q.day }}</span>
-        </div>
-    </button>
+    <div class="cube">
+        @for (q of questions(); track q.id; let i = $index) {
+            <div class="face" [ngClass]="'box' + (i + 1)">
+                <button
+                    class="question-container"
+                    mat-button
+                    (click)="openQuestion(q)"
+                    [ngClass]="{disabled: !q.text}"
+                >
+                    <div class="question">
+                        <img [ngSrc]="q.icon" alt="" height="128" width="128" priority="high" />
+                        <span>{{ q.day }}</span>
+                    </div>
+                </button>
+            </div>
+        } @empty {
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        }
     </div>
-} @empty {
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-}
-  </div>
 </div>

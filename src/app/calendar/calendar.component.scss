@@ -1,140 +1,139 @@
 $box-width: 130px;
 $box-height: 130px;
 
-@mixin box( $rotation, $col, $row ) {
+@mixin box($rotation, $col, $row) {
     $x: $col * 130;
     $y: $row * 130;
     transform: rotateY(#{$rotation}deg) translateZ(100px) translateY(#{$y}px) translateX(#{$x}px);
 }
 
 .question-container {
-  width: auto;
-  height: auto;
-  margin: 12px;
+    width: auto;
+    height: auto;
+    margin: 12px;
 }
 
 .question {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 .disabled {
-  opacity: 0.5;
+    opacity: 0.5;
 }
 
 mat-progress-bar {
-  margin-top: 12px;
+    margin-top: 12px;
 }
 
 .container {
-  width: $box-width;
-  height: $box-height;
-  perspective: 800px;
-  margin: 100px auto 0;
+    width: $box-width;
+    height: $box-height;
+    perspective: 800px;
+    margin: 100px auto 0;
 }
 
 .cube {
-  transform-style: preserve-3d;
-  width: 100%;
-  height: 100%;
-  position: relative;
+    transform-style: preserve-3d;
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 
 .face {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  //background: orange;
-  //opacity: 0.9;
-  //border: 5px solid black;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    //background: orange;
+    //opacity: 0.9;
+    //border: 5px solid black;
 }
 
 // row 1
 .box1 {
-  @include box(0, 0, 0);
+    @include box(0, 0, 0);
 }
 
 // row 2
 .box2 {
-  @include box(-9, -0.5, 1)
+    @include box(-9, -0.5, 1);
 }
 .box3 {
-  @include box(9, 0.5, 1);
+    @include box(9, 0.5, 1);
 }
 
 // row 3
 .box4 {
-  @include box(-7, -1, 2);
+    @include box(-7, -1, 2);
 }
 .box5 {
-  @include box(0, 0, 2);
+    @include box(0, 0, 2);
 }
 .box6 {
-  @include box(7, 1, 2);
+    @include box(7, 1, 2);
 }
 
 // row 4
 .box7 {
-  @include box(-10, -1.5, 3);
+    @include box(-10, -1.5, 3);
 }
 .box8 {
-  @include box(-4, -0.5, 3);
+    @include box(-4, -0.5, 3);
 }
 .box9 {
-  @include box(4, 0.5, 3);
+    @include box(4, 0.5, 3);
 }
 .box10 {
-  @include box(10, 1.5, 3);
+    @include box(10, 1.5, 3);
 }
 
 // row 5
 .box11 {
-  @include box(-17, -2, 4);
+    @include box(-17, -2, 4);
 }
 .box12 {
-  @include box(-6, -1, 4);
+    @include box(-6, -1, 4);
 }
 .box13 {
-  @include box(0, 0, 4);
+    @include box(0, 0, 4);
 }
 .box14 {
-  @include box(6, 1, 4);
+    @include box(6, 1, 4);
 }
 .box15 {
-  @include box(17, 2, 4);
+    @include box(17, 2, 4);
 }
 
 // row 6
 .box16 {
-  @include box(-17, -2.5, 5);
+    @include box(-17, -2.5, 5);
 }
 .box17 {
-  @include box(-12, -1.5, 5);
+    @include box(-12, -1.5, 5);
 }
 .box18 {
-  @include box(-5, -0.5, 5);
+    @include box(-5, -0.5, 5);
 }
 .box19 {
-  @include box(5, 0.5, 5);
+    @include box(5, 0.5, 5);
 }
 .box20 {
-  @include box(12, 1.5, 5);
+    @include box(12, 1.5, 5);
 }
 .box21 {
-  @include box(17, 2.5, 5);
+    @include box(17, 2.5, 5);
 }
 
 .box22 {
-  @include box(5, -3, 4);
+    @include box(5, -3, 4);
 }
 .box23 {
-  @include box(12, -3.7, 4);
+    @include box(12, -3.7, 4);
 }
 .box24 {
-  @include box(-8, 3.2, 4);
+    @include box(-8, 3.2, 4);
 }
-

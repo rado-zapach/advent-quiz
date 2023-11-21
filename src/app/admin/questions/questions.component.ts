@@ -38,7 +38,7 @@ import {Question, UpdateQuestionInput} from '../../API.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuestionsComponent implements OnInit, AfterViewInit {
-    public readonly client = generateClient();
+    private readonly client = generateClient();
     public readonly displayedColumns = [
         'text',
         'choices',
@@ -95,22 +95,6 @@ export class QuestionsComponent implements OnInit, AfterViewInit {
             query: queries.listQuestions,
         });
         this.dataSource.data = response.data.listQuestions.items;
-    }
-
-    public async onCreate() {
-        await this.client.graphql({
-            query: mutations.createQuestion,
-            variables: {
-                input: {
-                    text: '----',
-                    choices: '',
-                    icon: '',
-                    correctAnswer: '',
-                    openTime: new Date(`2023-12-01T09:30:00`).toISOString(),
-                    closeTime: new Date(`2023-12-01T22:00:00`).toISOString(),
-                },
-            },
-        });
     }
 
     public async onUpdate() {

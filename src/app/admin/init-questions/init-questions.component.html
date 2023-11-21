@@ -1,0 +1,15 @@
+<div>
+    <mat-form-field>
+        <mat-label>Start date</mat-label>
+        <input matInput [(ngModel)]="startDate" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Close offset hours</mat-label>
+        <input matInput [(ngModel)]="closeOffsetHours" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Questions count</mat-label>
+        <input matInput [(ngModel)]="questionsCount" />
+    </mat-form-field>
+    <button mat-raised-button (click)="onCreate()">Create questions</button>
+</div>
