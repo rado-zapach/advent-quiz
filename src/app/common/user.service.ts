@@ -31,7 +31,11 @@ export class UserService {
     }
 
     public async signIn(): Promise<void> {
-        return await signInWithRedirect({provider: 'Google'});
+        try {
+            return await signInWithRedirect({provider: 'Google'});
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     public async signOut(): Promise<void> {

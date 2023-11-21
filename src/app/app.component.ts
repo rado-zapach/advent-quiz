@@ -1,12 +1,12 @@
 import {CommonModule} from '@angular/common';
-import {ChangeDetectionStrategy, Component, inject} from "@angular/core";
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {RouterLink, RouterOutlet} from '@angular/router';
-import {UserService} from "./common/user.service";
+import {UserService} from './common/user.service';
 
 @Component({
     selector: 'app-root',
