@@ -14,7 +14,7 @@ import {filter, first, interval, map, switchMap, takeWhile, timer} from 'rxjs';
 import * as mutations from '../../graphql/mutations';
 import * as queries from '../../graphql/queries';
 import {PlayerAnswer, PlayerQuestion} from '../API.service';
-import {SanitizerPipe} from "../common/sanitizer.pipe";
+import {SanitizerPipe} from '../common/sanitizer.pipe';
 
 enum State {
     BEFORE = 'before',
@@ -107,7 +107,8 @@ export class QuestionComponent implements OnInit {
                 const now = new Date().getTime();
                 const openTime = new Date(q.openTime).getTime();
                 const closeTime = new Date(q.closeTime).getTime();
-                return Math.max(closeTime - now, openTime - now) / 1000;
+                const t = now < openTime ? openTime - now : closeTime - now;
+                return t / 1000;
             }),
             takeWhile(s => s >= 0),
             map(sec => {
