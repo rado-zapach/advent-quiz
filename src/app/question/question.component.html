@@ -5,7 +5,7 @@
             <span>Opens in {{ timeRemaining$ | async }}</span>
         }
         @case (State.OPEN) {
-            <div class="formatted-text" [innerHTML]="question().text | sanitizer"></div>
+            <div class="whitespace-pre-wrap" [innerHTML]="question().text | sanitizer"></div>
             <mat-form-field>
                 <textarea
                     #answerTextArea
@@ -18,9 +18,9 @@
             <div>Closes in {{ timeRemaining$ | async }}</div>
         }
         @case (State.CLOSED) {
-            <div class="formatted-text" [innerHTML]="question().text | sanitizer"></div>
+            <div class="whitespace-pre-wrap" [innerHTML]="question().text | sanitizer"></div>
             <div>Correct answer:</div>
-            <div class="formatted-text" [innerHTML]="question().correctAnswer | sanitizer"></div>
+            <div class="whitespace-pre-wrap" [innerHTML]="question().correctAnswer | sanitizer"></div>
             <div>Your answer:</div>
             <div>{{ answer()?.text }}</div>
             <div>Points:</div>

@@ -1,7 +1,7 @@
 <h1>Answers for day {{ question()?.day }}</h1>
 <div>
     <h2>Question</h2>
-    <div class="formatted-text" [innerHTML]="question()?.text | sanitizer"></div>
+    <div class="whitespace-pre-wrap" [innerHTML]="question()?.text | sanitizer"></div>
     <h2>Correct answer</h2>
     <div>{{ question()?.correctAnswer }}</div>
 </div>
