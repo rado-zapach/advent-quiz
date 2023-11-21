@@ -8,3 +8,29 @@ Helpful resources:
 -   Amplify CLI documentation: https://docs.amplify.aws/cli
 -   More details on this folder & generated files: https://docs.amplify.aws/cli/reference/files
 -   Join Amplify's community: https://amplify.aws/community/
+
+
+# Amplify installation
+
+Run `amplify pull` or `amplify init`
+
+```
+[rzapach@nb097 advent-quiz]$ amplify pull
+? Select the authentication method you want to use: AWS profile
+
+For more information on AWS Profiles, see:
+https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
+
+? Please choose the profile you want to use advent-amplify
+? Which app are you working on? dwj086uzt62ft
+Backend environment 'dev' found. Initializing...
+? Choose your default editor: IntelliJ IDEA
+✔ Choose the type of app that you're building · javascript
+Please tell us about your project
+? What javascript framework are you using angular
+? Source Directory Path:  src
+? Distribution Directory Path: dist/advent-quiz/browser
+? Build Command:  npm run-script build
+? Start Command: ng serve
+? Do you plan on modifying this backend? Yes
+```
