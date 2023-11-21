@@ -24,8 +24,8 @@ import * as mutations from '../../../graphql/mutations';
 import * as queries from '../../../graphql/queries';
 import * as subscriptions from '../../../graphql/subscriptions';
 import {Answer, Question, UpdateAnswerInput} from '../../API.service';
-import {PlayerEmailPipe} from '../../player-email.pipe';
-import {SanitizerPipe} from '../../question/sanitizer.pipe';
+import {PlayerEmailPipe} from "../../common/player-email.pipe";
+import {SanitizerPipe} from "../../common/sanitizer.pipe";
 
 interface QuestionWithDay extends Question {
     day: number;

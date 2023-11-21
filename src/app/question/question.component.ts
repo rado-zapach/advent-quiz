@@ -14,7 +14,7 @@ import {filter, first, interval, map, switchMap, takeWhile, timer} from 'rxjs';
 import * as mutations from '../../graphql/mutations';
 import * as queries from '../../graphql/queries';
 import {PlayerAnswer, PlayerQuestion} from '../API.service';
-import {SanitizerPipe} from './sanitizer.pipe';
+import {SanitizerPipe} from "../common/sanitizer.pipe";
 
 enum State {
     BEFORE = 'before',
