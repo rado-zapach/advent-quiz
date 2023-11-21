@@ -59,6 +59,7 @@ export const getAnswer = /* GraphQL */ `query GetAnswer($id: ID!) {
     text
     isCorrect
     points
+    saveTime
     questionId
     createdAt
     updatedAt
@@ -78,6 +79,7 @@ export const listAnswers = /* GraphQL */ `query ListAnswers(
       text
       isCorrect
       points
+      saveTime
       questionId
       createdAt
       updatedAt
@@ -130,6 +132,7 @@ export const playerAnswerList = /* GraphQL */ `query PlayerAnswerList($questionI
     text
     isCorrect
     points
+    saveTime
     questionId
     __typename
   }
@@ -145,6 +148,7 @@ export const playerAnswer = /* GraphQL */ `query PlayerAnswer($questionId: ID!) 
     text
     isCorrect
     points
+    saveTime
     questionId
     __typename
   }

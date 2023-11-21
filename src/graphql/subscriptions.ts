@@ -69,6 +69,7 @@ export const onCreateAnswer = /* GraphQL */ `subscription OnCreateAnswer($filter
     text
     isCorrect
     points
+    saveTime
     questionId
     createdAt
     updatedAt
@@ -86,6 +87,7 @@ export const onUpdateAnswer = /* GraphQL */ `subscription OnUpdateAnswer($filter
     text
     isCorrect
     points
+    saveTime
     questionId
     createdAt
     updatedAt
@@ -103,6 +105,7 @@ export const onDeleteAnswer = /* GraphQL */ `subscription OnDeleteAnswer($filter
     text
     isCorrect
     points
+    saveTime
     questionId
     createdAt
     updatedAt

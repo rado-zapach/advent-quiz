@@ -81,6 +81,7 @@ export const createAnswer = /* GraphQL */ `mutation CreateAnswer(
     text
     isCorrect
     points
+    saveTime
     questionId
     createdAt
     updatedAt
@@ -101,6 +102,7 @@ export const updateAnswer = /* GraphQL */ `mutation UpdateAnswer(
     text
     isCorrect
     points
+    saveTime
     questionId
     createdAt
     updatedAt
@@ -121,6 +123,7 @@ export const deleteAnswer = /* GraphQL */ `mutation DeleteAnswer(
     text
     isCorrect
     points
+    saveTime
     questionId
     createdAt
     updatedAt
