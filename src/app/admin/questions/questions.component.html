@@ -13,7 +13,7 @@
                         ></textarea>
                     </mat-form-field>
                 } @else {
-                    {{ element.text }}
+                    <div class="whitespace-pre-wrap" [innerHTML]="element.text | sanitizer"></div>
                 }
             </mat-cell>
         </ng-container>
@@ -81,7 +81,7 @@
                         ></textarea>
                     </mat-form-field>
                 } @else {
-                    {{ element.openTime }}
+                    {{ element.openTime | date:'dd.MM.yyyy HH:mm' }}
                 }
             </mat-cell>
         </ng-container>
@@ -98,7 +98,7 @@
                         ></textarea>
                     </mat-form-field>
                 } @else {
-                    {{ element.closeTime }}
+                    {{ element.closeTime | date:'dd.MM.yyyy HH:mm' }}
                 }
             </mat-cell>
         </ng-container>

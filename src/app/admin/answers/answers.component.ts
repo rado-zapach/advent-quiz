@@ -10,6 +10,7 @@ import {
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
@@ -47,6 +48,7 @@ interface QuestionWithDay extends Question {
         MatTooltipModule,
         SanitizerPipe,
         PlayerEmailPipe,
+        MatCheckboxModule,
     ],
     templateUrl: './answers.component.html',
     styleUrl: './answers.component.scss',

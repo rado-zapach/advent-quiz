@@ -16,6 +16,7 @@ import * as mutations from '../../../graphql/mutations';
 import * as queries from '../../../graphql/queries';
 import * as subscriptions from '../../../graphql/subscriptions';
 import {Question, UpdateQuestionInput} from '../../API.service';
+import {SanitizerPipe} from "../../common/sanitizer.pipe";
 
 @Component({
     selector: 'app-questions',
@@ -32,6 +33,7 @@ import {Question, UpdateQuestionInput} from '../../API.service';
         FormsModule,
         MatMenuModule,
         MatSortModule,
+        SanitizerPipe,
     ],
     templateUrl: './questions.component.html',
     styleUrl: './questions.component.scss',

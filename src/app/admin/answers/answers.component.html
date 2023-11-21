@@ -22,24 +22,26 @@
         </ng-container>
 
         <ng-container matColumnDef="isCorrect">
-            <mat-header-cell *matHeaderCellDef> Correct </mat-header-cell>
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Correct </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 @if (editAnswer?.id === element.id && editAnswer) {
-                    <mat-form-field>
-                        <input matInput [(ngModel)]="editAnswer.isCorrect" />
-                    </mat-form-field>
+                        <mat-checkbox [(ngModel)]="editAnswer.isCorrect"></mat-checkbox>
                 } @else {
-                    {{ element.isCorrect }}
+                    @if (element.isCorrect) {
+                        <mat-icon>done</mat-icon>
+                    } @else {
+                        <mat-icon>close</mat-icon>
+                    }
                 }
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="points">
-            <mat-header-cell *matHeaderCellDef> Points </mat-header-cell>
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Points </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 @if (editAnswer?.id === element.id && editAnswer) {
                     <mat-form-field>
-                        <input matInput [(ngModel)]="editAnswer.points" />
+                        <input type="number" matInput [(ngModel)]="editAnswer.points" />
                     </mat-form-field>
                 } @else {
                     {{ element.points }}
@@ -50,7 +52,7 @@
         <ng-container matColumnDef="updatedAt">
             <mat-header-cell mat-sort-header *matHeaderCellDef> Time </mat-header-cell>
             <mat-cell *matCellDef="let element">
-                {{ element.updatedAt }}
+                {{ element.updatedAt | date: "HH:mm:ss" }}
             </mat-cell>
         </ng-container>
 
