@@ -29,14 +29,14 @@ const findQuery = (questionId, player) => /* GraphQL */ `
 `;
 const createQuery = (player, text, questionId) => /* GraphQL */ `
     mutation MyMutation {
-      createAnswer(input: {player: "${player}", text: "${text}", questionId: "${questionId}"}) {
+      createAnswer(input: {player: "${player}", text: "${text}", questionId: "${questionId}"}, saveTime: "${new Date().toISOString()}") {
         id
       }
     }
   `;
 const updateQuery = (answerId, text) => /* GraphQL */ `
   mutation MyMutation {
-    updateAnswer(input: {id: "${answerId}", text: "${text}"}) {
+    updateAnswer(input: {id: "${answerId}", text: "${text}", saveTime: "${new Date().toISOString()}"}) {
       id
     }
   }

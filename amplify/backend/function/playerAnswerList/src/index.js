@@ -40,6 +40,7 @@ const findQuery = (questionId, player) => /* GraphQL */ `
         text
         isCorrect
         points
+        saveTime
         questionId
         createdAt
         updatedAt

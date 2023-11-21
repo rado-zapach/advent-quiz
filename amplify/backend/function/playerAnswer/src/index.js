@@ -40,6 +40,7 @@ const findQuery = (questionId, player) => /* GraphQL */ `
         text
         isCorrect
         points
+        saveTime
         questionId
         createdAt
         updatedAt
@@ -78,6 +79,7 @@ export const handler = async event => {
         text: a.text,
         isCorrect: isClosed ? a.isCorrect : null,
         points: isClosed ? a.points : null,
+        saveTime: a.saveTime,
         questionId: a.questionId,
         createdAt: a.createdAt,
         updatedAt: a.updatedAt,
