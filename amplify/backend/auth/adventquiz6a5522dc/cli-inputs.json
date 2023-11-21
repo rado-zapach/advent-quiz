@@ -29,14 +29,23 @@
       "email"
     ],
     "userpoolClientReadAttributes": [
-      "email"
+      "email",
+      "family_name",
+      "middle_name",
+      "gender",
+      "given_name",
+      "name",
+      "nickname",
+      "preferred_username",
+      "picture",
+      "profile"
     ],
     "userpoolClientLambdaRole": "advent6a5522dc_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": false,
+    "userpoolClientSetAttributes": true,
     "sharedId": "6a5522dc",
     "resourceName": "adventquiz6a5522dc",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "defaultSocial",
+    "useDefault": "manual",
     "hostedUI": true,
     "hostedUIDomainName": "adventquiz6a5522dc-6a5522dc",
     "authProvidersUserPool": [
@@ -62,7 +71,33 @@
       ]
     },
     "breakCircularDependency": true,
-    "dependsOn": [],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:4200/\",\"https://dev.dwj086uzt62ft.amplifyapp.com/\",\"https://advent.iblsoft.com/\"],\"LogoutURLs\":[\"http://localhost:4200/\",\"https://dev.dwj086uzt62ft.amplifyapp.com/\",\"https://advent.iblsoft.com/\"]}"
+    "dependsOn": [
+      {
+        "category": "function",
+        "resourceName": "adventquiz6a5522dcPreSignup",
+        "triggerProvider": "Cognito",
+        "attributes": [
+          "Arn",
+          "Name"
+        ]
+      }
+    ],
+    "thirdPartyAuth": true,
+    "authProviders": [
+      "accounts.google.com"
+    ],
+    "userPoolGroups": true,
+    "adminQueries": false,
+    "triggers": {
+      "PreSignup": [
+        "email-filter-allowlist"
+      ]
+    },
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:4200/\",\"https://dev.dwj086uzt62ft.amplifyapp.com/\",\"https://advent.iblsoft.com/\"],\"LogoutURLs\":[\"http://localhost:4200/\",\"https://dev.dwj086uzt62ft.amplifyapp.com/\",\"https://advent.iblsoft.com/\"]}",
+    "parentStack": {
+      "Ref": "AWS::StackId"
+    },
+    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"PreSignUp\",\n    \"lambdaFunctionName\": \"adventquiz6a5522dcPreSignup\"\n  }\n]",
+    "permissions": []
   }
 }

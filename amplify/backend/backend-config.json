@@ -32,7 +32,17 @@
   "auth": {
     "adventquiz6a5522dc": {
       "customAuth": false,
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "adventquiz6a5522dcPreSignup",
+          "triggerProvider": "Cognito"
+        }
+      ],
       "frontendAuthConfig": {
         "mfaConfiguration": "OFF",
         "mfaTypes": [
@@ -74,6 +84,11 @@
     }
   },
   "function": {
+    "adventquiz6a5522dcPreSignup": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "adventquiznodemodules": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -216,6 +231,168 @@
       "providerPlugin": "awscloudformation",
       "service": "amplifyhosting",
       "type": "manual"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_auth_adventquiz6a5522dc_googleClientId": {
+      "usedBy": [
+        {
+          "category": "auth",
+          "resourceName": "adventquiz6a5522dc"
+        }
+      ]
+    },
+    "AMPLIFY_function_adventquiz6a5522dcPreSignup_DOMAINALLOWLIST": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "adventquiz6a5522dcPreSignup"
+        }
+      ]
+    },
+    "AMPLIFY_function_adventquiz6a5522dcPreSignup_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "adventquiz6a5522dcPreSignup"
+        }
+      ]
+    },
+    "AMPLIFY_function_adventquiz6a5522dcPreSignup_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "adventquiz6a5522dcPreSignup"
+        }
+      ]
+    },
+    "AMPLIFY_function_adventquiznodemodules_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "adventquiznodemodules"
+        }
+      ]
+    },
+    "AMPLIFY_function_adventquiznodemodules_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "adventquiznodemodules"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerAnswerList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerAnswerList"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerAnswerList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerAnswerList"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerAnswer_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerAnswer"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerAnswer_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerAnswer"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerAttributesList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerAttributesList"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerAttributesList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerAttributesList"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerQuestionList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerQuestionList"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerQuestionList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerQuestionList"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerQuestion_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerQuestion"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerQuestion_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerQuestion"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerSaveAnswer_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerSaveAnswer"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerSaveAnswer_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerSaveAnswer"
+        }
+      ]
+    },
+    "AMPLIFY_hosting_amplifyhosting_appId": {
+      "usedBy": [
+        {
+          "category": "hosting",
+          "resourceName": "amplifyhosting"
+        }
+      ]
+    },
+    "AMPLIFY_hosting_amplifyhosting_type": {
+      "usedBy": [
+        {
+          "category": "hosting",
+          "resourceName": "amplifyhosting"
+        }
+      ]
     }
   }
 }

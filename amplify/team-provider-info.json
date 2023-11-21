@@ -9,14 +9,17 @@
       "UnauthRoleName": "amplify-adventquiz-dev-124024-unauthRole",
       "StackName": "amplify-adventquiz-dev-124024",
       "StackId": "arn:aws:cloudformation:eu-central-1:259500569824:stack/amplify-adventquiz-dev-124024/9ae93aa0-82e2-11ee-8e5a-029134e32e31",
-      "AmplifyAppId": "dwj086uzt62ft"
+      "AmplifyAppId": "dwj086uzt62ft",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-adventquiz-dev-124024-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "api": {
         "adventquiz": {}
       },
       "auth": {
-        "adventquiz6a5522dc": {},
+        "adventquiz6a5522dc": {
+          "googleClientId": "566980257250-hpb1nhgtaq8vja2i6oe0273ic5oa73ir.apps.googleusercontent.com"
+        },
         "userPoolGroups": {}
       },
       "hosting": {
@@ -32,7 +35,7 @@
         },
         "playerSaveAnswer": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerSaveAnswer-516e3370795a56493374-build.zip"
+          "s3Key": "amplify-builds/playerSaveAnswer-587879587a306d385277-build.zip"
         },
         "adventquiznodemodules": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
@@ -44,15 +47,20 @@
         },
         "playerAnswerList": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerAnswerList-5a3872594d4872413054-build.zip"
+          "s3Key": "amplify-builds/playerAnswerList-67616c454b4258353935-build.zip"
         },
         "playerAnswer": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerAnswer-7065364f46666479472f-build.zip"
+          "s3Key": "amplify-builds/playerAnswer-66365678424135516c32-build.zip"
         },
         "playerAttributesList": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
           "s3Key": "amplify-builds/playerAttributesList-78447636667976393770-build.zip"
+        },
+        "adventquiz6a5522dcPreSignup": {
+          "DOMAINALLOWLIST": "iblsoft.com",
+          "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
+          "s3Key": "amplify-builds/adventquiz6a5522dcPreSignup-467a6465476930755670-build.zip"
         }
       }
     }
