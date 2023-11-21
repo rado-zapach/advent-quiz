@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {fetchUserAttributes, getCurrentUser, signInWithRedirect, signOut} from 'aws-amplify/auth';
+import {catchError, combineLatest, map, Observable, of, shareReplay} from 'rxjs';
 
 interface User {
     id: string;
@@ -8,26 +9,24 @@ interface User {
 
 @Injectable({providedIn: 'root'})
 export class UserService {
-    public async getUser(): Promise<User | undefined> {
-        try {
-            const {username, userId, signInDetails} = await getCurrentUser();
-            const attributes = await fetchUserAttributes();
+    public readonly user$: Observable<User | undefined> = combineLatest([
+        getCurrentUser(),
+        fetchUserAttributes(),
+    ]).pipe(
+        map(data => {
+            const {username, userId, signInDetails} = data[0];
+            const attributes = data[1];
             return {
                 id: userId,
                 email: attributes.email,
             };
-        } catch (err) {
-            return undefined;
-        }
-    }
+        }),
+        catchError(e => of(undefined)),
+        shareReplay(1)
+    );
 
-    public async isSignedIn(): Promise<boolean> {
-        try {
-            await getCurrentUser();
-            return true;
-        } catch (e) {
-            return false;
-        }
+    public isSignedIn(): Observable<boolean> {
+        return this.user$.pipe(map(u => !!u));
     }
 
     public async signIn(): Promise<void> {

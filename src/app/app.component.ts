@@ -27,5 +27,4 @@ import {UserService} from './common/user.service';
 })
 export class AppComponent {
     public readonly userService = inject(UserService);
-    public user$ = this.userService.getUser();
 }

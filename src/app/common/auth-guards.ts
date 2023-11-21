@@ -1,12 +1,14 @@
 import {inject} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot} from '@angular/router';
+import {map} from 'rxjs';
 import {UserService} from './user.service';
 
-export const isSignedInGuard: CanActivateFn = async (
+export const isSignedInGuard: CanActivateFn = (
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
 ) => {
     const router = inject(Router);
-    const isSignedIn = await inject(UserService).isSignedIn();
-    return isSignedIn ? true : router.createUrlTree(['/login']);
+    return inject(UserService)
+        .isSignedIn()
+        .pipe(map(is => (is ? true : router.createUrlTree(['/login']))));
 };

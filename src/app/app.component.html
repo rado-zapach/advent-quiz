@@ -1,33 +1,35 @@
-<mat-toolbar *ngIf="user$ | async as user">
-    <button mat-icon-button matTooltip="Home" routerLink="">
-        <mat-icon>home</mat-icon>
-    </button>
-    <span>IBL Advent Quiz</span>
-    <span class="spacer"></span>
-    <button mat-icon-button matTooltip="Leaderboard" routerLink="leaderboard">
-        <mat-icon>leaderboard</mat-icon>
-    </button>
-    <button mat-icon-button matTooltip="Rules" routerLink="rules">
-        <mat-icon>gavel</mat-icon>
-    </button>
-    <button mat-icon-button [matTooltip]="user.email ?? user.id" [matMenuTriggerFor]="accountMenu">
-        <mat-icon>account_circle</mat-icon>
-    </button>
-
-    <mat-menu #accountMenu>
-        <button mat-menu-item routerLink="admin/init-questions">
-            <mat-icon>add</mat-icon>
-            <span>Create questions</span>
+@if (userService.user$ | async; as user) {
+    <mat-toolbar>
+        <button mat-icon-button matTooltip="Home" routerLink="">
+            <mat-icon>home</mat-icon>
         </button>
-        <button mat-menu-item routerLink="admin/questions">
-            <mat-icon>quiz</mat-icon>
-            <span>Questions</span>
+        <span>IBL Advent Quiz</span>
+        <span class="spacer"></span>
+        <button mat-icon-button matTooltip="Leaderboard" routerLink="leaderboard">
+            <mat-icon>leaderboard</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Rules" routerLink="rules">
+            <mat-icon>gavel</mat-icon>
+        </button>
+        <button mat-icon-button [matTooltip]="user.email ?? user.id" [matMenuTriggerFor]="accountMenu">
+            <mat-icon>account_circle</mat-icon>
         </button>
 
-        <button mat-menu-item (click)="userService.signOut()">
-            <mat-icon>logout</mat-icon>
-            <span>Sign out</span>
-        </button>
-    </mat-menu>
-</mat-toolbar>
+        <mat-menu #accountMenu>
+            <button mat-menu-item routerLink="admin/init-questions">
+                <mat-icon>add</mat-icon>
+                <span>Create questions</span>
+            </button>
+            <button mat-menu-item routerLink="admin/questions">
+                <mat-icon>quiz</mat-icon>
+                <span>Questions</span>
+            </button>
+
+            <button mat-menu-item (click)="userService.signOut()">
+                <mat-icon>logout</mat-icon>
+                <span>Sign out</span>
+            </button>
+        </mat-menu>
+    </mat-toolbar>
+}
 <router-outlet></router-outlet>
