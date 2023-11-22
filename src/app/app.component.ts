@@ -7,6 +7,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {UserService} from './common/user.service';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
     selector: 'app-root',
@@ -19,6 +22,9 @@ import {UserService} from './common/user.service';
         MatIconModule,
         MatTooltipModule,
         MatMenuModule,
+        MatSidenavModule,
+        MatChipsModule,
+        MatDividerModule,
         RouterLink,
     ],
     templateUrl: './app.component.html',

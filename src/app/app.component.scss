@@ -1,3 +1,39 @@
 .spacer {
     flex: 1 1 auto;
 }
+.example-container {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+mat-sidenav-content {
+  display: flex;
+  height: 100%;
+  background-color: #e40050;
+}
+
+.example-sidenav {
+  padding: 24px;
+}
+
+.app-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.app-menu button {
+  flex: 1;
+  justify-content: flex-start;
+}
+
+.btn-menu {
+  color: #fff !important;
+}
+
+.btn-menu mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}

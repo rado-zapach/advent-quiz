@@ -1,37 +1,53 @@
-@if (userService.user$ | async; as user) {
-    <mat-toolbar>
-        <button mat-icon-button matTooltip="Home" routerLink="">
-            <mat-icon>home</mat-icon>
-            <span>IBL Advent Quiz</span>
+@if (userService.user$ | async;as user) {
+  <mat-sidenav-container class="example-container" [autosize]="true">
+    <mat-sidenav #drawer class="example-sidenav" mode="side">
+      <div class="app-menu">
+        <mat-chip>{{ user.email }}</mat-chip>
+        <mat-divider></mat-divider>
+
+        <button mat-button matTooltip="Home" routerLink="">
+          <mat-icon>home</mat-icon>
+          <span>IBL Advent Quiz</span>
         </button>
-        <span class="spacer"></span>
-        <button mat-icon-button matTooltip="Leaderboard" routerLink="leaderboard">
-            <mat-icon>leaderboard</mat-icon>
+        <button mat-button matTooltip="Leaderboard" routerLink="leaderboard">
+          <mat-icon>leaderboard</mat-icon>
+          <span>Leaderboard</span>
         </button>
-        <button mat-icon-button matTooltip="Rules" routerLink="rules">
-            <mat-icon>gavel</mat-icon>
-        </button>
-        <button mat-icon-button [matTooltip]="user.email ?? user.id" [matMenuTriggerFor]="accountMenu">
-            <mat-icon>account_circle</mat-icon>
+        <button mat-button matTooltip="Rules" routerLink="rules">
+          <mat-icon>gavel</mat-icon>
+          <span>Rules</span>
         </button>
 
-        <mat-menu #accountMenu>
-            @if (user.isAdmin) {
-<!--                <button mat-menu-item routerLink="admin/init-questions">-->
-<!--                    <mat-icon>add</mat-icon>-->
-<!--                    <span>Create questions</span>-->
-<!--                </button>-->
-                <button mat-menu-item routerLink="admin/questions">
-                    <mat-icon>quiz</mat-icon>
-                    <span>Questions</span>
-                </button>
-            }
+        @if (user.isAdmin) {
+          <!--                <button mat-menu-item routerLink="admin/init-questions">-->
+            <!--                    <mat-icon>add</mat-icon>-->
+            <!--                    <span>Create questions</span>-->
+            <!--                </button>-->
+          <button mat-button routerLink="admin/questions">
+            <mat-icon>quiz</mat-icon>
+            <span>Questions</span>
+          </button>
+        }
 
-            <button mat-menu-item (click)="userService.signOut()">
-                <mat-icon>logout</mat-icon>
-                <span>Sign out</span>
-            </button>
-        </mat-menu>
-    </mat-toolbar>
+        <button mat-button (click)="userService.signOut()">
+          <mat-icon>logout</mat-icon>
+          <span>Sign out</span>
+        </button>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <button mat-button (click)="drawer.toggle()" class="btn-menu">
+        @if (drawer.opened) {
+          <mat-icon>close</mat-icon>
+        } @else {
+          <mat-icon>menu</mat-icon>
+        }
+      </button>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+} @else {
+  <router-outlet></router-outlet>
 }
-<router-outlet></router-outlet>
+
