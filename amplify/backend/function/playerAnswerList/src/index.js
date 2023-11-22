@@ -31,19 +31,13 @@ async function MakeRequest(query) {
     return await response.json();
 }
 
-const findQuery = (questionId, player) => /* GraphQL */ `
+const findQuery = questionId => /* GraphQL */ `
   query MyQuery {
     listAnswers(filter: {questionId: {eq: "${questionId}"}}) {
       items {
         id
         player
-        text
         isCorrect
-        points
-        saveTime
-        questionId
-        createdAt
-        updatedAt
       }
     }
     getQuestion(id: "${questionId}") {

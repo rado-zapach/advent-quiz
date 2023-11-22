@@ -10,12 +10,12 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {generateClient} from 'aws-amplify/api';
 import {filter, first, interval, map, switchMap, takeWhile, timer} from 'rxjs';
 import * as mutations from '../../graphql/mutations';
 import * as queries from '../../graphql/queries';
 import {PlayerAnswer, PlayerQuestion} from '../API.service';
+import {PlayerEmailPipe} from '../common/player-email.pipe';
 import {SanitizerPipe} from '../common/sanitizer.pipe';
 
 enum State {
@@ -51,7 +51,7 @@ function GetState(q: PlayerQuestion) {
         MatProgressBarModule,
         MatIconModule,
         MatListModule,
-        MatProgressSpinnerModule,
+        PlayerEmailPipe,
     ],
     templateUrl: './question.component.html',
     styleUrl: './question.component.scss',
@@ -63,8 +63,8 @@ export class QuestionComponent implements OnInit {
     public readonly timeRemaining$;
     public readonly State = State;
     public readonly answer = signal<PlayerAnswer | undefined>(undefined);
-    public answerText: string | undefined;
-    public isAnswerSavingOrLoading: boolean = true;
+    public readonly isLoading = signal(true);
+    public readonly answerList = signal<PlayerAnswer[] | undefined>(undefined);
 
     public constructor(@Inject(MAT_DIALOG_DATA) q: Question) {
         this.question = signal<Question>({
@@ -147,13 +147,26 @@ export class QuestionComponent implements OnInit {
         const answer = result.data.playerAnswer;
         if (answer) {
             this.answer.set(answer);
-            this.answerText = answer.text;
         }
-        this.isAnswerSavingOrLoading = false;
+
+        if (this.question().state === State.OPEN) {
+            this.isLoading.set(false);
+            return;
+        }
+
+        const result2 = await this.client.graphql({
+            query: queries.playerAnswerList,
+            variables: {
+                questionId: this.question().id,
+            },
+        });
+        const answerList = result2.data.playerAnswerList;
+        this.answerList.set(answerList);
+        this.isLoading.set(false);
     }
 
     public async onSubmitAnswer(answer: string): Promise<void> {
-        this.isAnswerSavingOrLoading = true;
+        this.isLoading.set(true);
         await this.client.graphql({
             query: mutations.playerSaveAnswer,
             variables: {
@@ -161,6 +174,6 @@ export class QuestionComponent implements OnInit {
                 text: answer,
             },
         });
-        this.isAnswerSavingOrLoading = false;
+        this.isLoading.set(false);
     }
 }

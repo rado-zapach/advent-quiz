@@ -35,7 +35,7 @@ const createQuery = (player, text, questionId) => ({
         mutation MyMutation(
             $player: String!
             $text: String!
-            $questionId: ID!
+            $questionId: String!
             $saveTime: AWSDateTime!
         ) {
             createAnswer(

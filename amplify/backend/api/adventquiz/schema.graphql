@@ -42,11 +42,11 @@ type PlayerQuestion {
 type PlayerAnswer {
     id: ID!
     player: String!
-    text: String!
+    text: String
     isCorrect: Boolean
     points: Int
-    saveTime: AWSDateTime!
-    questionId: String!
+    saveTime: AWSDateTime
+    questionId: String
 }
 
 type PlayerAttributes {

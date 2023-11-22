@@ -14,18 +14,18 @@
                         [value]="answer()?.text ?? ''"
                         matInput
                         [cdkTextareaAutosize]="true"
-                        [disabled]="isAnswerSavingOrLoading"
+                        [disabled]="isLoading()"
                     ></textarea>
                 </mat-form-field>
                 <button
                     mat-raised-button
                     color="primary"
                     (click)="onSubmitAnswer(answerTextArea.value)"
-                    [disabled]="isAnswerSavingOrLoading"
+                    [disabled]="isLoading()"
                 >
                     Submit
                 </button>
-                @if (isAnswerSavingOrLoading) {
+                @if (isLoading()) {
                     <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
                 }
                 <div class="mt-2">Closes in {{ timeRemaining$ | async }}</div>
@@ -48,17 +48,35 @@
             <mat-list>
                 <mat-list-item>
                     <mat-icon matListItemIcon>task_alt</mat-icon>
-                    <div matListItemTitle>Correct answer</div>
-                    <div
-                        matListItemLine
-                        class="whitespace-pre-wrap"
-                        [innerHTML]="question().correctAnswer | sanitizer"
-                    ></div>
+                    <span matListItemTitle>Correct answer</span>
+                    <span matListItemLine>{{ question().correctAnswer }}</span>
                 </mat-list-item>
                 <mat-list-item>
                     <mat-icon matListItemIcon>military_tech</mat-icon>
-                    <div matListItemTitle>Your points</div>
-                    {{ answer()?.points }}
+                    <span matListItemTitle>Your points</span>
+                    @if (!isLoading()) {
+                        <span matListItemLine>{{ answer()?.points }} </span>
+                    } @else {
+                        <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+                    }
+                </mat-list-item>
+
+                <mat-list-item>
+                    <mat-icon matListItemIcon>group</mat-icon>
+                    <span matListItemTitle>Players</span>
+                    @if (isLoading()) {
+                        <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+                    }
+                    @for (a of answerList(); track a.id) {
+                        <span matListItemLine>
+                            {{ a.player | playerEmail | async }}
+                            @if (a.isCorrect) {
+                                <mat-icon class="pt-1.5">done</mat-icon>
+                            } @else {
+                                <mat-icon class="pt-1.5">close</mat-icon>
+                            }
+                        </span>
+                    }
                 </mat-list-item>
             </mat-list>
         }

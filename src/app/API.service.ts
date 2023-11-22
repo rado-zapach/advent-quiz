@@ -228,11 +228,11 @@ export type PlayerAnswer = {
   __typename: "PlayerAnswer",
   id: string,
   player: string,
-  text: string,
+  text?: string | null,
   isCorrect?: boolean | null,
   points?: number | null,
-  saveTime: string,
-  questionId: string,
+  saveTime?: string | null,
+  questionId?: string | null,
 };
 
 export type PlayerAttributes = {
@@ -571,11 +571,11 @@ export type PlayerAnswerListQuery = {
     __typename: "PlayerAnswer",
     id: string,
     player: string,
-    text: string,
+    text?: string | null,
     isCorrect?: boolean | null,
     points?: number | null,
-    saveTime: string,
-    questionId: string,
+    saveTime?: string | null,
+    questionId?: string | null,
   } >,
 };
 
@@ -588,11 +588,11 @@ export type PlayerAnswerQuery = {
     __typename: "PlayerAnswer",
     id: string,
     player: string,
-    text: string,
+    text?: string | null,
     isCorrect?: boolean | null,
     points?: number | null,
-    saveTime: string,
-    questionId: string,
+    saveTime?: string | null,
+    questionId?: string | null,
   } | null,
 };
 
