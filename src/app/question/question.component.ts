@@ -8,7 +8,9 @@ import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+import {MatListModule} from '@angular/material/list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {generateClient} from 'aws-amplify/api';
 import {filter, first, interval, map, switchMap, takeWhile, timer} from 'rxjs';
 import * as mutations from '../../graphql/mutations';
@@ -48,6 +50,8 @@ function GetState(q: PlayerQuestion) {
         TextFieldModule,
         MatProgressBarModule,
         MatIconModule,
+        MatListModule,
+        MatProgressSpinnerModule,
     ],
     templateUrl: './question.component.html',
     styleUrl: './question.component.scss',
@@ -60,6 +64,7 @@ export class QuestionComponent implements OnInit {
     public readonly State = State;
     public readonly answer = signal<PlayerAnswer | undefined>(undefined);
     public answerText: string | undefined;
+    public isAnswerSavingOrLoading: boolean = true;
 
     public constructor(@Inject(MAT_DIALOG_DATA) q: Question) {
         this.question = signal<Question>({
@@ -144,15 +149,18 @@ export class QuestionComponent implements OnInit {
             this.answer.set(answer);
             this.answerText = answer.text;
         }
+        this.isAnswerSavingOrLoading = false;
     }
 
     public async onSubmitAnswer(answer: string): Promise<void> {
-        const result = await this.client.graphql({
+        this.isAnswerSavingOrLoading = true;
+        await this.client.graphql({
             query: mutations.playerSaveAnswer,
             variables: {
                 questionId: this.question().id,
                 text: answer,
             },
         });
+        this.isAnswerSavingOrLoading = false;
     }
 }

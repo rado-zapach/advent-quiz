@@ -14,33 +14,58 @@ const {Sha256} = crypto;
 const GRAPHQL_ENDPOINT = process.env.API_ADVENTQUIZ_GRAPHQLAPIENDPOINTOUTPUT;
 const AWS_REGION = process.env.AWS_REGION || "us-east-1";
 
-const findQuery = (questionId, player) => /* GraphQL */ `
+const findQuery = (questionId, player) => ({
+    query: /* GraphQL */ `
     query MyQuery {
-        listAnswers(filter: {questionId: {eq: "${questionId}"}, and: {player: {eq: "${player}"}}}) {
-            items {
+      listAnswers(filter: {questionId: {eq: "${questionId}"}, and: {player: {eq: "${player}"}}}) {
+        items {
+          id
+        }
+      }
+      getQuestion(id: "${questionId}") {
+        openTime
+        closeTime
+      }
+    }
+  `,
+});
+
+const createQuery = (player, text, questionId) => ({
+    query: /* GraphQL */ `
+        mutation MyMutation(
+            $player: String!
+            $text: String!
+            $questionId: ID!
+            $saveTime: AWSDateTime!
+        ) {
+            createAnswer(
+                input: {player: $player, text: $text, questionId: $questionId, saveTime: $saveTime}
+            ) {
                 id
             }
         }
-        getQuestion(id: "${questionId}") {
-          openTime
-          closeTime
+    `,
+    variables: {
+        player,
+        text,
+        questionId,
+        saveTime: new Date().toISOString(),
+    },
+});
+const updateQuery = (answerId, text) => ({
+    query: /* GraphQL */ `
+        mutation MyMutation($answerId: ID!, $text: String!, $saveTime: AWSDateTime!) {
+            updateAnswer(input: {id: $answerId, text: $text, saveTime: $saveTime}) {
+                id
+            }
         }
-    }
-`;
-const createQuery = (player, text, questionId) => /* GraphQL */ `
-    mutation MyMutation {
-      createAnswer(input: {player: "${player}", text: "${text}", questionId: "${questionId}"}, saveTime: "${new Date().toISOString()}") {
-        id
-      }
-    }
-  `;
-const updateQuery = (answerId, text) => /* GraphQL */ `
-  mutation MyMutation {
-    updateAnswer(input: {id: "${answerId}", text: "${text}", saveTime: "${new Date().toISOString()}"}) {
-      id
-    }
-  }
-`;
+    `,
+    variables: {
+        answerId,
+        text,
+        saveTime: new Date().toISOString(),
+    },
+});
 
 const endpoint = new URL(GRAPHQL_ENDPOINT);
 const signer = new SignatureV4({
@@ -58,7 +83,7 @@ async function MakeRequest(query) {
             host: endpoint.host,
         },
         hostname: endpoint.host,
-        body: JSON.stringify({query}),
+        body: JSON.stringify(query),
         path: endpoint.pathname,
     });
     const signed = await signer.sign(requestToBeSigned);
