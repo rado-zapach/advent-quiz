@@ -1,4 +1,4 @@
-import {CommonModule} from '@angular/common';
+import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FormsModule} from '@angular/forms';
@@ -34,6 +34,7 @@ import {SanitizerPipe} from "../../common/sanitizer.pipe";
         MatMenuModule,
         MatSortModule,
         SanitizerPipe,
+        NgOptimizedImage,
     ],
     templateUrl: './questions.component.html',
     styleUrl: './questions.component.scss',

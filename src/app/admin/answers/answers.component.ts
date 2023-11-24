@@ -10,7 +10,7 @@ import {
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
-import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
@@ -25,8 +25,10 @@ import * as mutations from '../../../graphql/mutations';
 import * as queries from '../../../graphql/queries';
 import * as subscriptions from '../../../graphql/subscriptions';
 import {Answer, Question, UpdateAnswerInput} from '../../API.service';
-import {PlayerEmailPipe} from "../../common/player-email.pipe";
-import {SanitizerPipe} from "../../common/sanitizer.pipe";
+import {PlayerEmailPipe} from '../../common/player-email.pipe';
+import {SanitizerPipe} from '../../common/sanitizer.pipe';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 interface QuestionWithDay extends Question {
     day: number;
@@ -49,6 +51,8 @@ interface QuestionWithDay extends Question {
         SanitizerPipe,
         PlayerEmailPipe,
         MatCheckboxModule,
+        MatSlideToggleModule,
+        MatExpansionModule,
     ],
     templateUrl: './answers.component.html',
     styleUrl: './answers.component.scss',
@@ -146,6 +150,7 @@ export class AnswersComponent implements AfterViewInit {
     }
 
     @ViewChild(MatSort) sort: MatSort | undefined;
+
     public ngAfterViewInit() {
         if (this.sort) {
             this.dataSource.sort = this.sort;
@@ -192,6 +197,18 @@ export class AnswersComponent implements AfterViewInit {
         });
     }
 
+    public async onIsCorrectToggle(id: string, isCorrect: boolean) {
+        await this.client.graphql({
+            query: mutations.updateAnswer,
+            variables: {
+                input: {
+                    id,
+                    isCorrect,
+                },
+            },
+        });
+    }
+
     public onStartEdit(a: Answer | undefined): void {
         if (!a) {
             this.editAnswer = undefined;
@@ -200,7 +217,30 @@ export class AnswersComponent implements AfterViewInit {
         this.editAnswer = {
             id: a.id,
             points: a.points,
-            isCorrect: a.isCorrect,
         };
+    }
+
+    public async onComputePoints(allPoints: string, maxPlayerPoints: string): Promise<void> {
+        const correctAnswersCount = this.dataSource.data.filter(a => a.isCorrect).length;
+        const playerPoints = Math.min(
+            parseInt(maxPlayerPoints),
+            parseInt(allPoints) / correctAnswersCount
+        );
+        const queries = this.dataSource.data.map(a => {
+            const points = a.isCorrect ? playerPoints : 0;
+            if (points === a.points) {
+                return;
+            }
+            return this.client.graphql({
+                query: mutations.updateAnswer,
+                variables: {
+                    input: {
+                        id: a.id,
+                        points,
+                    },
+                },
+            });
+        });
+        await Promise.all(queries);
     }
 }

@@ -2,7 +2,7 @@
 <div class="mat-elevation-z8">
     <mat-table matSort matSortActive="openTime" matSortDirection="asc" [dataSource]="dataSource">
         <ng-container matColumnDef="text">
-            <mat-header-cell *matHeaderCellDef> Text </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Text</mat-header-cell>
             <mat-cell *matCellDef="let element">
                 @if (editQuestion?.id === element.id && editQuestion) {
                     <mat-form-field>
@@ -19,7 +19,7 @@
         </ng-container>
 
         <ng-container matColumnDef="choices">
-            <mat-header-cell *matHeaderCellDef> Choices </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Choices</mat-header-cell>
             <mat-cell *matCellDef="let element">
                 @if (editQuestion?.id === element.id && editQuestion) {
                     <mat-form-field>
@@ -36,7 +36,7 @@
         </ng-container>
 
         <ng-container matColumnDef="icon">
-            <mat-header-cell *matHeaderCellDef> Icon </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Icon</mat-header-cell>
             <mat-cell *matCellDef="let element">
                 @if (editQuestion?.id === element.id && editQuestion) {
                     <mat-form-field>
@@ -47,13 +47,15 @@
                         ></textarea>
                     </mat-form-field>
                 } @else {
-                    {{ element.icon }}
+                    <div class="red-color">
+                        <img [ngSrc]="element.icon" alt="" height="64" width="64" priority="high" />
+                    </div>
                 }
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="correctAnswer">
-            <mat-header-cell *matHeaderCellDef> Correct answer </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Correct answer</mat-header-cell>
             <mat-cell *matCellDef="let element">
                 @if (editQuestion?.id === element.id && editQuestion) {
                     <mat-form-field>
@@ -70,7 +72,7 @@
         </ng-container>
 
         <ng-container matColumnDef="openTime">
-            <mat-header-cell mat-sort-header *matHeaderCellDef> Open time </mat-header-cell>
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Open time</mat-header-cell>
             <mat-cell *matCellDef="let element">
                 @if (editQuestion?.id === element.id && editQuestion) {
                     <mat-form-field>
@@ -81,13 +83,13 @@
                         ></textarea>
                     </mat-form-field>
                 } @else {
-                    {{ element.openTime | date:'dd.MM.yyyy HH:mm' }}
+                    {{ element.openTime | date: "dd.MM.yyyy HH:mm" }}
                 }
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="closeTime">
-            <mat-header-cell mat-sort-header *matHeaderCellDef> Close time </mat-header-cell>
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Close time</mat-header-cell>
             <mat-cell *matCellDef="let element">
                 @if (editQuestion?.id === element.id && editQuestion) {
                     <mat-form-field>
@@ -98,13 +100,13 @@
                         ></textarea>
                     </mat-form-field>
                 } @else {
-                    {{ element.closeTime | date:'dd.MM.yyyy HH:mm' }}
+                    {{ element.closeTime | date: "dd.MM.yyyy HH:mm" }}
                 }
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Actions</mat-header-cell>
             <mat-cell *matCellDef="let element">
                 @if (editQuestion?.id !== element.id) {
                     <button mat-icon-button matTooltip="Edit" (click)="onStartEdit(element)">
