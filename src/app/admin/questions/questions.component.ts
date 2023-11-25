@@ -17,6 +17,7 @@ import * as queries from '../../../graphql/queries';
 import * as subscriptions from '../../../graphql/subscriptions';
 import {Question, UpdateQuestionInput} from '../../API.service';
 import {SanitizerPipe} from "../../common/sanitizer.pipe";
+import {MatRadioModule} from "@angular/material/radio";
 
 @Component({
     selector: 'app-questions',
@@ -35,6 +36,7 @@ import {SanitizerPipe} from "../../common/sanitizer.pipe";
         MatSortModule,
         SanitizerPipe,
         NgOptimizedImage,
+        MatRadioModule,
     ],
     templateUrl: './questions.component.html',
     styleUrl: './questions.component.scss',

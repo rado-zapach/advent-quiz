@@ -29,8 +29,16 @@
                             [(ngModel)]="editQuestion.choices"
                         ></textarea>
                     </mat-form-field>
-                } @else {
-                    {{ element.choices }}
+                    <mat-icon
+                        fontIcon="info"
+                        matTooltip="Use a new line (enter) to create multiple choices"
+                    ></mat-icon>
+                } @else if (element.choices) {
+                    <mat-radio-group class="flex flex-col" [disabled]="true">
+                        @for (q of element.choices.split("\n"); track q) {
+                            <mat-radio-button [value]="q">{{ q }}</mat-radio-button>
+                        }
+                    </mat-radio-group>
                 }
             </mat-cell>
         </ng-container>

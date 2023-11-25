@@ -17,6 +17,7 @@ import * as queries from '../../graphql/queries';
 import {PlayerAnswer, PlayerQuestion} from '../API.service';
 import {PlayerEmailPipe} from '../common/player-email.pipe';
 import {SanitizerPipe} from '../common/sanitizer.pipe';
+import {MatRadioModule} from '@angular/material/radio';
 
 enum State {
     BEFORE = 'before',
@@ -52,6 +53,7 @@ function GetState(q: PlayerQuestion) {
         MatIconModule,
         MatListModule,
         PlayerEmailPipe,
+        MatRadioModule,
     ],
     templateUrl: './question.component.html',
     styleUrl: './question.component.scss',
@@ -65,6 +67,7 @@ export class QuestionComponent implements OnInit {
     public readonly answer = signal<PlayerAnswer | undefined>(undefined);
     public readonly isLoading = signal(true);
     public readonly answerList = signal<PlayerAnswer[] | undefined>(undefined);
+    public answerText: string | undefined;
 
     public constructor(@Inject(MAT_DIALOG_DATA) q: Question) {
         this.question = signal<Question>({
@@ -147,6 +150,7 @@ export class QuestionComponent implements OnInit {
         const answer = result.data.playerAnswer;
         if (answer) {
             this.answer.set(answer);
+            this.answerText = answer.text ?? '';
         }
 
         if (this.question().state === State.OPEN) {
@@ -165,13 +169,13 @@ export class QuestionComponent implements OnInit {
         this.isLoading.set(false);
     }
 
-    public async onSubmitAnswer(answer: string): Promise<void> {
+    public async onSubmitAnswer(): Promise<void> {
         this.isLoading.set(true);
         await this.client.graphql({
             query: mutations.playerSaveAnswer,
             variables: {
                 questionId: this.question().id,
-                text: answer,
+                text: this.answerText ?? '',
             },
         });
         this.isLoading.set(false);
