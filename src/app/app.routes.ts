@@ -1,5 +1,5 @@
-import {Routes} from "@angular/router";
-import {isSignedInGuard} from "./common/auth-guards";
+import {Routes} from '@angular/router';
+import {isSignedInGuard} from './common/auth-guards';
 
 export const routes: Routes = [
     {
@@ -32,11 +32,13 @@ export const routes: Routes = [
         path: 'admin',
         canActivate: [isSignedInGuard],
         children: [
-          {
-            path: 'init-questions',
-            loadComponent: () =>
-              import('./admin/init-questions/init-questions.component').then(m => m.InitQuestionsComponent),
-          },
+            {
+                path: 'init-questions',
+                loadComponent: () =>
+                    import('./admin/init-questions/init-questions.component').then(
+                        m => m.InitQuestionsComponent
+                    ),
+            },
             {
                 path: 'questions',
                 loadComponent: () =>

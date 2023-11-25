@@ -1,16 +1,14 @@
 {
-  "trigger": true,
-  "modules": [
-    "email-filter-allowlist"
-  ],
-  "parentResource": "adventquiz6a5522dc",
-  "functionName": "adventquiz6a5522dcPreSignup",
-  "resourceName": "adventquiz6a5522dcPreSignup",
-  "parentStack": "auth",
-  "triggerEnvs": "[]",
-  "triggerDir": "/snapshot/amplify-cli/build/node_modules/@aws-amplify/amplify-category-auth/provider-utils/awscloudformation/triggers/PreSignup",
-  "triggerTemplate": "PreSignup.json.ejs",
-  "triggerEventPath": "PreSignup.event.json",
-  "roleName": "adventquiz6a5522dcPreSignup",
-  "skipEdit": true
+    "trigger": true,
+    "modules": ["email-filter-allowlist"],
+    "parentResource": "adventquiz6a5522dc",
+    "functionName": "adventquiz6a5522dcPreSignup",
+    "resourceName": "adventquiz6a5522dcPreSignup",
+    "parentStack": "auth",
+    "triggerEnvs": "[]",
+    "triggerDir": "/snapshot/amplify-cli/build/node_modules/@aws-amplify/amplify-category-auth/provider-utils/awscloudformation/triggers/PreSignup",
+    "triggerTemplate": "PreSignup.json.ejs",
+    "triggerEventPath": "PreSignup.event.json",
+    "roleName": "adventquiz6a5522dcPreSignup",
+    "skipEdit": true
 }

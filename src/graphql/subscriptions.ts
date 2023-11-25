@@ -2,13 +2,14 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from "../app/API.service";
+import * as APITypes from '../app/API.service';
 type GeneratedSubscription<InputType, OutputType> = string & {
-  __generatedSubscriptionInput: InputType;
-  __generatedSubscriptionOutput: OutputType;
+    __generatedSubscriptionInput: InputType;
+    __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateQuestion = /* GraphQL */ `subscription OnCreateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
+export const onCreateQuestion =
+    /* GraphQL */ `subscription OnCreateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
   onCreateQuestion(filter: $filter) {
     id
     text
@@ -23,10 +24,11 @@ export const onCreateQuestion = /* GraphQL */ `subscription OnCreateQuestion($fi
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateQuestionSubscriptionVariables,
-  APITypes.OnCreateQuestionSubscription
->;
-export const onUpdateQuestion = /* GraphQL */ `subscription OnUpdateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
+        APITypes.OnCreateQuestionSubscriptionVariables,
+        APITypes.OnCreateQuestionSubscription
+    >;
+export const onUpdateQuestion =
+    /* GraphQL */ `subscription OnUpdateQuestion($filter: ModelSubscriptionQuestionFilterInput) {
   onUpdateQuestion(filter: $filter) {
     id
     text
@@ -41,10 +43,11 @@ export const onUpdateQuestion = /* GraphQL */ `subscription OnUpdateQuestion($fi
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateQuestionSubscriptionVariables,
-  APITypes.OnUpdateQuestionSubscription
->;
-export const onDeleteQuestion = /* GraphQL */ `subscription OnDeleteQuestion($filter: ModelSubscriptionQuestionFilterInput) {
+        APITypes.OnUpdateQuestionSubscriptionVariables,
+        APITypes.OnUpdateQuestionSubscription
+    >;
+export const onDeleteQuestion =
+    /* GraphQL */ `subscription OnDeleteQuestion($filter: ModelSubscriptionQuestionFilterInput) {
   onDeleteQuestion(filter: $filter) {
     id
     text
@@ -59,10 +62,11 @@ export const onDeleteQuestion = /* GraphQL */ `subscription OnDeleteQuestion($fi
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteQuestionSubscriptionVariables,
-  APITypes.OnDeleteQuestionSubscription
->;
-export const onCreateAnswer = /* GraphQL */ `subscription OnCreateAnswer($filter: ModelSubscriptionAnswerFilterInput) {
+        APITypes.OnDeleteQuestionSubscriptionVariables,
+        APITypes.OnDeleteQuestionSubscription
+    >;
+export const onCreateAnswer =
+    /* GraphQL */ `subscription OnCreateAnswer($filter: ModelSubscriptionAnswerFilterInput) {
   onCreateAnswer(filter: $filter) {
     id
     player
@@ -77,10 +81,11 @@ export const onCreateAnswer = /* GraphQL */ `subscription OnCreateAnswer($filter
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateAnswerSubscriptionVariables,
-  APITypes.OnCreateAnswerSubscription
->;
-export const onUpdateAnswer = /* GraphQL */ `subscription OnUpdateAnswer($filter: ModelSubscriptionAnswerFilterInput) {
+        APITypes.OnCreateAnswerSubscriptionVariables,
+        APITypes.OnCreateAnswerSubscription
+    >;
+export const onUpdateAnswer =
+    /* GraphQL */ `subscription OnUpdateAnswer($filter: ModelSubscriptionAnswerFilterInput) {
   onUpdateAnswer(filter: $filter) {
     id
     player
@@ -95,10 +100,11 @@ export const onUpdateAnswer = /* GraphQL */ `subscription OnUpdateAnswer($filter
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateAnswerSubscriptionVariables,
-  APITypes.OnUpdateAnswerSubscription
->;
-export const onDeleteAnswer = /* GraphQL */ `subscription OnDeleteAnswer($filter: ModelSubscriptionAnswerFilterInput) {
+        APITypes.OnUpdateAnswerSubscriptionVariables,
+        APITypes.OnUpdateAnswerSubscription
+    >;
+export const onDeleteAnswer =
+    /* GraphQL */ `subscription OnDeleteAnswer($filter: ModelSubscriptionAnswerFilterInput) {
   onDeleteAnswer(filter: $filter) {
     id
     player
@@ -113,6 +119,6 @@ export const onDeleteAnswer = /* GraphQL */ `subscription OnDeleteAnswer($filter
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteAnswerSubscriptionVariables,
-  APITypes.OnDeleteAnswerSubscription
->;
+        APITypes.OnDeleteAnswerSubscriptionVariables,
+        APITypes.OnDeleteAnswerSubscription
+    >;

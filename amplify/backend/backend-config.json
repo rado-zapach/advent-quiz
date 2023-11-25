@@ -1,398 +1,351 @@
 {
-  "api": {
-    "adventquiz": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "UserPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "adventquiz6a5522dc"
+    "api": {
+        "adventquiz": {
+            "dependsOn": [
+                {
+                    "attributes": ["UserPoolId"],
+                    "category": "auth",
+                    "resourceName": "adventquiz6a5522dc"
+                }
+            ],
+            "output": {
+                "authConfig": {
+                    "additionalAuthenticationProviders": [
+                        {
+                            "authenticationType": "AWS_IAM"
+                        }
+                    ],
+                    "defaultAuthentication": {
+                        "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+                        "userPoolConfig": {
+                            "userPoolId": "authadventquiz6a5522dc"
+                        }
+                    }
+                }
+            },
+            "providerPlugin": "awscloudformation",
+            "service": "AppSync"
         }
-      ],
-      "output": {
-        "authConfig": {
-          "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "AWS_IAM"
-            }
-          ],
-          "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authadventquiz6a5522dc"
-            }
-          }
+    },
+    "auth": {
+        "adventquiz6a5522dc": {
+            "customAuth": false,
+            "dependsOn": [
+                {
+                    "attributes": ["Arn", "Name"],
+                    "category": "function",
+                    "resourceName": "adventquiz6a5522dcPreSignup",
+                    "triggerProvider": "Cognito"
+                }
+            ],
+            "frontendAuthConfig": {
+                "mfaConfiguration": "OFF",
+                "mfaTypes": ["SMS"],
+                "passwordProtectionSettings": {
+                    "passwordPolicyCharacters": [],
+                    "passwordPolicyMinLength": 8
+                },
+                "signupAttributes": ["EMAIL"],
+                "socialProviders": ["GOOGLE"],
+                "usernameAttributes": [],
+                "verificationMechanisms": ["EMAIL"]
+            },
+            "providerPlugin": "awscloudformation",
+            "service": "Cognito"
+        },
+        "userPoolGroups": {
+            "dependsOn": [
+                {
+                    "attributes": ["UserPoolId", "AppClientIDWeb", "AppClientID", "IdentityPoolId"],
+                    "category": "auth",
+                    "resourceName": "adventquiz6a5522dc"
+                }
+            ],
+            "providerPlugin": "awscloudformation",
+            "service": "Cognito-UserPool-Groups"
         }
-      },
-      "providerPlugin": "awscloudformation",
-      "service": "AppSync"
+    },
+    "function": {
+        "adventquiz6a5522dcPreSignup": {
+            "build": true,
+            "providerPlugin": "awscloudformation",
+            "service": "Lambda"
+        },
+        "adventquiznodemodules": {
+            "build": true,
+            "providerPlugin": "awscloudformation",
+            "service": "LambdaLayer"
+        },
+        "playerAnswer": {
+            "build": true,
+            "dependsOn": [
+                {
+                    "attributes": ["GraphQLAPIIdOutput", "GraphQLAPIEndpointOutput"],
+                    "category": "api",
+                    "resourceName": "adventquiz"
+                },
+                {
+                    "attributes": ["Arn"],
+                    "category": "function",
+                    "resourceName": "adventquiznodemodules"
+                }
+            ],
+            "providerPlugin": "awscloudformation",
+            "service": "Lambda"
+        },
+        "playerAnswerList": {
+            "build": true,
+            "dependsOn": [
+                {
+                    "attributes": ["GraphQLAPIIdOutput", "GraphQLAPIEndpointOutput"],
+                    "category": "api",
+                    "resourceName": "adventquiz"
+                },
+                {
+                    "attributes": ["Arn"],
+                    "category": "function",
+                    "resourceName": "adventquiznodemodules"
+                }
+            ],
+            "providerPlugin": "awscloudformation",
+            "service": "Lambda"
+        },
+        "playerAttributesList": {
+            "build": true,
+            "dependsOn": [
+                {
+                    "attributes": ["UserPoolId"],
+                    "category": "auth",
+                    "resourceName": "adventquiz6a5522dc"
+                },
+                {
+                    "attributes": ["Arn"],
+                    "category": "function",
+                    "resourceName": "adventquiznodemodules"
+                }
+            ],
+            "providerPlugin": "awscloudformation",
+            "service": "Lambda"
+        },
+        "playerQuestion": {
+            "build": true,
+            "dependsOn": [
+                {
+                    "attributes": ["GraphQLAPIIdOutput", "GraphQLAPIEndpointOutput"],
+                    "category": "api",
+                    "resourceName": "adventquiz"
+                },
+                {
+                    "attributes": ["Arn"],
+                    "category": "function",
+                    "resourceName": "adventquiznodemodules"
+                }
+            ],
+            "providerPlugin": "awscloudformation",
+            "service": "Lambda"
+        },
+        "playerQuestionList": {
+            "build": true,
+            "dependsOn": [
+                {
+                    "attributes": ["Arn"],
+                    "category": "function",
+                    "resourceName": "adventquiznodemodules"
+                },
+                {
+                    "attributes": ["GraphQLAPIIdOutput", "GraphQLAPIEndpointOutput"],
+                    "category": "api",
+                    "resourceName": "adventquiz"
+                }
+            ],
+            "providerPlugin": "awscloudformation",
+            "service": "Lambda"
+        },
+        "playerSaveAnswer": {
+            "build": true,
+            "dependsOn": [
+                {
+                    "attributes": ["GraphQLAPIIdOutput", "GraphQLAPIEndpointOutput"],
+                    "category": "api",
+                    "resourceName": "adventquiz"
+                },
+                {
+                    "attributes": ["Arn"],
+                    "category": "function",
+                    "resourceName": "adventquiznodemodules"
+                }
+            ],
+            "providerPlugin": "awscloudformation",
+            "service": "Lambda"
+        }
+    },
+    "hosting": {
+        "amplifyhosting": {
+            "providerPlugin": "awscloudformation",
+            "service": "amplifyhosting",
+            "type": "manual"
+        }
+    },
+    "parameters": {
+        "AMPLIFY_auth_adventquiz6a5522dc_googleClientId": {
+            "usedBy": [
+                {
+                    "category": "auth",
+                    "resourceName": "adventquiz6a5522dc"
+                }
+            ]
+        },
+        "AMPLIFY_function_adventquiz6a5522dcPreSignup_DOMAINALLOWLIST": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "adventquiz6a5522dcPreSignup"
+                }
+            ]
+        },
+        "AMPLIFY_function_adventquiz6a5522dcPreSignup_deploymentBucketName": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "adventquiz6a5522dcPreSignup"
+                }
+            ]
+        },
+        "AMPLIFY_function_adventquiz6a5522dcPreSignup_s3Key": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "adventquiz6a5522dcPreSignup"
+                }
+            ]
+        },
+        "AMPLIFY_function_adventquiznodemodules_deploymentBucketName": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "adventquiznodemodules"
+                }
+            ]
+        },
+        "AMPLIFY_function_adventquiznodemodules_s3Key": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "adventquiznodemodules"
+                }
+            ]
+        },
+        "AMPLIFY_function_playerAnswerList_deploymentBucketName": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "playerAnswerList"
+                }
+            ]
+        },
+        "AMPLIFY_function_playerAnswerList_s3Key": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "playerAnswerList"
+                }
+            ]
+        },
+        "AMPLIFY_function_playerAnswer_deploymentBucketName": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "playerAnswer"
+                }
+            ]
+        },
+        "AMPLIFY_function_playerAnswer_s3Key": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "playerAnswer"
+                }
+            ]
+        },
+        "AMPLIFY_function_playerAttributesList_deploymentBucketName": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "playerAttributesList"
+                }
+            ]
+        },
+        "AMPLIFY_function_playerAttributesList_s3Key": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "playerAttributesList"
+                }
+            ]
+        },
+        "AMPLIFY_function_playerQuestionList_deploymentBucketName": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "playerQuestionList"
+                }
+            ]
+        },
+        "AMPLIFY_function_playerQuestionList_s3Key": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "playerQuestionList"
+                }
+            ]
+        },
+        "AMPLIFY_function_playerQuestion_deploymentBucketName": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "playerQuestion"
+                }
+            ]
+        },
+        "AMPLIFY_function_playerQuestion_s3Key": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "playerQuestion"
+                }
+            ]
+        },
+        "AMPLIFY_function_playerSaveAnswer_deploymentBucketName": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "playerSaveAnswer"
+                }
+            ]
+        },
+        "AMPLIFY_function_playerSaveAnswer_s3Key": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "playerSaveAnswer"
+                }
+            ]
+        },
+        "AMPLIFY_hosting_amplifyhosting_appId": {
+            "usedBy": [
+                {
+                    "category": "hosting",
+                    "resourceName": "amplifyhosting"
+                }
+            ]
+        },
+        "AMPLIFY_hosting_amplifyhosting_type": {
+            "usedBy": [
+                {
+                    "category": "hosting",
+                    "resourceName": "amplifyhosting"
+                }
+            ]
+        }
     }
-  },
-  "auth": {
-    "adventquiz6a5522dc": {
-      "customAuth": false,
-      "dependsOn": [
-        {
-          "attributes": [
-            "Arn",
-            "Name"
-          ],
-          "category": "function",
-          "resourceName": "adventquiz6a5522dcPreSignup",
-          "triggerProvider": "Cognito"
-        }
-      ],
-      "frontendAuthConfig": {
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyCharacters": [],
-          "passwordPolicyMinLength": 8
-        },
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "socialProviders": [
-          "GOOGLE"
-        ],
-        "usernameAttributes": [],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
-      },
-      "providerPlugin": "awscloudformation",
-      "service": "Cognito"
-    },
-    "userPoolGroups": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "UserPoolId",
-            "AppClientIDWeb",
-            "AppClientID",
-            "IdentityPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "adventquiz6a5522dc"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Cognito-UserPool-Groups"
-    }
-  },
-  "function": {
-    "adventquiz6a5522dcPreSignup": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "adventquiznodemodules": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "LambdaLayer"
-    },
-    "playerAnswer": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ],
-          "category": "api",
-          "resourceName": "adventquiz"
-        },
-        {
-          "attributes": [
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "adventquiznodemodules"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "playerAnswerList": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ],
-          "category": "api",
-          "resourceName": "adventquiz"
-        },
-        {
-          "attributes": [
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "adventquiznodemodules"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "playerAttributesList": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "UserPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "adventquiz6a5522dc"
-        },
-        {
-          "attributes": [
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "adventquiznodemodules"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "playerQuestion": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ],
-          "category": "api",
-          "resourceName": "adventquiz"
-        },
-        {
-          "attributes": [
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "adventquiznodemodules"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "playerQuestionList": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "adventquiznodemodules"
-        },
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ],
-          "category": "api",
-          "resourceName": "adventquiz"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
-    "playerSaveAnswer": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ],
-          "category": "api",
-          "resourceName": "adventquiz"
-        },
-        {
-          "attributes": [
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "adventquiznodemodules"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
-  "hosting": {
-    "amplifyhosting": {
-      "providerPlugin": "awscloudformation",
-      "service": "amplifyhosting",
-      "type": "manual"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_auth_adventquiz6a5522dc_googleClientId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "adventquiz6a5522dc"
-        }
-      ]
-    },
-    "AMPLIFY_function_adventquiz6a5522dcPreSignup_DOMAINALLOWLIST": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "adventquiz6a5522dcPreSignup"
-        }
-      ]
-    },
-    "AMPLIFY_function_adventquiz6a5522dcPreSignup_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "adventquiz6a5522dcPreSignup"
-        }
-      ]
-    },
-    "AMPLIFY_function_adventquiz6a5522dcPreSignup_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "adventquiz6a5522dcPreSignup"
-        }
-      ]
-    },
-    "AMPLIFY_function_adventquiznodemodules_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "adventquiznodemodules"
-        }
-      ]
-    },
-    "AMPLIFY_function_adventquiznodemodules_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "adventquiznodemodules"
-        }
-      ]
-    },
-    "AMPLIFY_function_playerAnswerList_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "playerAnswerList"
-        }
-      ]
-    },
-    "AMPLIFY_function_playerAnswerList_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "playerAnswerList"
-        }
-      ]
-    },
-    "AMPLIFY_function_playerAnswer_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "playerAnswer"
-        }
-      ]
-    },
-    "AMPLIFY_function_playerAnswer_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "playerAnswer"
-        }
-      ]
-    },
-    "AMPLIFY_function_playerAttributesList_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "playerAttributesList"
-        }
-      ]
-    },
-    "AMPLIFY_function_playerAttributesList_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "playerAttributesList"
-        }
-      ]
-    },
-    "AMPLIFY_function_playerQuestionList_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "playerQuestionList"
-        }
-      ]
-    },
-    "AMPLIFY_function_playerQuestionList_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "playerQuestionList"
-        }
-      ]
-    },
-    "AMPLIFY_function_playerQuestion_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "playerQuestion"
-        }
-      ]
-    },
-    "AMPLIFY_function_playerQuestion_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "playerQuestion"
-        }
-      ]
-    },
-    "AMPLIFY_function_playerSaveAnswer_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "playerSaveAnswer"
-        }
-      ]
-    },
-    "AMPLIFY_function_playerSaveAnswer_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "playerSaveAnswer"
-        }
-      ]
-    },
-    "AMPLIFY_hosting_amplifyhosting_appId": {
-      "usedBy": [
-        {
-          "category": "hosting",
-          "resourceName": "amplifyhosting"
-        }
-      ]
-    },
-    "AMPLIFY_hosting_amplifyhosting_type": {
-      "usedBy": [
-        {
-          "category": "hosting",
-          "resourceName": "amplifyhosting"
-        }
-      ]
-    }
-  }
 }

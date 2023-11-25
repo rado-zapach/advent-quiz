@@ -1,111 +1,109 @@
 {
-  "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Lambda layer resource stack creation using Amplify CLI",
-  "Parameters": {
-    "env": {
-      "Type": "String"
-    },
-    "deploymentBucketName": {
-      "Type": "String"
-    },
-    "s3Key": {
-      "Type": "String"
-    },
-    "description": {
-      "Type": "String",
-      "Default": ""
-    },
-    "runtimes": {
-      "Type": "List<String>"
-    }
-  },
-  "Resources": {
-    "LambdaLayerVersion3d91a9a7": {
-      "Type": "AWS::Lambda::LayerVersion",
-      "Properties": {
-        "CompatibleRuntimes": {
-          "Ref": "runtimes"
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Lambda layer resource stack creation using Amplify CLI",
+    "Parameters": {
+        "env": {
+            "Type": "String"
         },
-        "Content": {
-          "S3Bucket": {
-            "Ref": "deploymentBucketName"
-          },
-          "S3Key": {
-            "Ref": "s3Key"
-          }
+        "deploymentBucketName": {
+            "Type": "String"
         },
-        "Description": {
-          "Ref": "description"
+        "s3Key": {
+            "Type": "String"
         },
-        "LayerName": {
-          "Fn::Sub": [
-            "adventquiznodemodules-${env}",
-            {
-              "env": {
-                "Ref": "env"
-              }
+        "description": {
+            "Type": "String",
+            "Default": ""
+        },
+        "runtimes": {
+            "Type": "List<String>"
+        }
+    },
+    "Resources": {
+        "LambdaLayerVersion3d91a9a7": {
+            "Type": "AWS::Lambda::LayerVersion",
+            "Properties": {
+                "CompatibleRuntimes": {
+                    "Ref": "runtimes"
+                },
+                "Content": {
+                    "S3Bucket": {
+                        "Ref": "deploymentBucketName"
+                    },
+                    "S3Key": {
+                        "Ref": "s3Key"
+                    }
+                },
+                "Description": {
+                    "Ref": "description"
+                },
+                "LayerName": {
+                    "Fn::Sub": [
+                        "adventquiznodemodules-${env}",
+                        {
+                            "env": {
+                                "Ref": "env"
+                            }
+                        }
+                    ]
+                }
+            },
+            "DeletionPolicy": "Delete",
+            "UpdateReplacePolicy": "Retain"
+        },
+        "LambdaLayerPermissionPrivate3d91a9a7": {
+            "Type": "AWS::Lambda::LayerVersionPermission",
+            "Properties": {
+                "Action": "lambda:GetLayerVersion",
+                "LayerVersionArn": {
+                    "Ref": "LambdaLayerVersion3d91a9a7"
+                },
+                "Principal": {
+                    "Ref": "AWS::AccountId"
+                }
             }
-          ]
-        }
-      },
-      "DeletionPolicy": "Delete",
-      "UpdateReplacePolicy": "Retain"
-    },
-    "LambdaLayerPermissionPrivate3d91a9a7": {
-      "Type": "AWS::Lambda::LayerVersionPermission",
-      "Properties": {
-        "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": {
-          "Ref": "LambdaLayerVersion3d91a9a7"
         },
-        "Principal": {
-          "Ref": "AWS::AccountId"
-        }
-      }
-    },
-    "LambdaLayerVersionffd373dd": {
-      "Type": "AWS::Lambda::LayerVersion",
-      "Properties": {
-        "CompatibleRuntimes": [
-          "nodejs18.x"
-        ],
-        "Content": {
-          "S3Bucket": {
-            "Ref": "deploymentBucketName"
-          },
-          "S3Key": "amplify-builds/adventquiznodemodules-LambdaLayerVersionffd373dd-build.zip"
+        "LambdaLayerVersionffd373dd": {
+            "Type": "AWS::Lambda::LayerVersion",
+            "Properties": {
+                "CompatibleRuntimes": ["nodejs18.x"],
+                "Content": {
+                    "S3Bucket": {
+                        "Ref": "deploymentBucketName"
+                    },
+                    "S3Key": "amplify-builds/adventquiznodemodules-LambdaLayerVersionffd373dd-build.zip"
+                },
+                "Description": "Updated layer version 2023-11-19T10:48:43.807Z",
+                "LayerName": {
+                    "Fn::Sub": [
+                        "adventquiznodemodules-${env}",
+                        {
+                            "env": {
+                                "Ref": "env"
+                            }
+                        }
+                    ]
+                }
+            },
+            "DeletionPolicy": "Delete",
+            "UpdateReplacePolicy": "Retain"
         },
-        "Description": "Updated layer version 2023-11-19T10:48:43.807Z",
-        "LayerName": {
-          "Fn::Sub": [
-            "adventquiznodemodules-${env}",
-            {
-              "env": {
-                "Ref": "env"
-              }
+        "LambdaLayerPermissionPrivateffd373dd": {
+            "Type": "AWS::Lambda::LayerVersionPermission",
+            "Properties": {
+                "Action": "lambda:GetLayerVersion",
+                "LayerVersionArn": "arn:aws:lambda:eu-central-1:259500569824:layer:adventquiznodemodules-dev:1",
+                "Principal": {
+                    "Ref": "AWS::AccountId"
+                }
             }
-          ]
         }
-      },
-      "DeletionPolicy": "Delete",
-      "UpdateReplacePolicy": "Retain"
     },
-    "LambdaLayerPermissionPrivateffd373dd": {
-      "Type": "AWS::Lambda::LayerVersionPermission",
-      "Properties": {
-        "Action": "lambda:GetLayerVersion",
-        "LayerVersionArn": "arn:aws:lambda:eu-central-1:259500569824:layer:adventquiznodemodules-dev:1",
-        "Principal": {
-          "Ref": "AWS::AccountId"
+    "Outputs": {
+        "Arn": {
+            "Value": {
+                "Ref": "LambdaLayerVersion3d91a9a7"
+            }
         }
-      }
     }
-  },
-  "Outputs": {
-    "Arn": {
-      "Value": {
-        "Ref": "LambdaLayerVersion3d91a9a7"
-      }
-    }
-  }
 }

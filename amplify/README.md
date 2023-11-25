@@ -9,7 +9,6 @@ Helpful resources:
 -   More details on this folder & generated files: https://docs.amplify.aws/cli/reference/files
 -   Join Amplify's community: https://amplify.aws/community/
 
-
 # Amplify installation
 
 Run `amplify pull` or `amplify init`

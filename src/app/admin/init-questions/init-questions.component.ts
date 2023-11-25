@@ -7,8 +7,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {generateClient} from 'aws-amplify/api';
 import * as mutations from '../../../graphql/mutations';
-import {MatExpansionModule} from "@angular/material/expansion";
-import {SanitizerPipe} from "../../common/sanitizer.pipe";
+import {MatExpansionModule} from '@angular/material/expansion';
+import {SanitizerPipe} from '../../common/sanitizer.pipe';
 
 @Component({
     selector: 'app-init-questions',

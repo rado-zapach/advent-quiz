@@ -1,4 +1,4 @@
-import {CommonModule, NgOptimizedImage} from "@angular/common";
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FormsModule} from '@angular/forms';
@@ -16,8 +16,8 @@ import * as mutations from '../../../graphql/mutations';
 import * as queries from '../../../graphql/queries';
 import * as subscriptions from '../../../graphql/subscriptions';
 import {Question, UpdateQuestionInput} from '../../API.service';
-import {SanitizerPipe} from "../../common/sanitizer.pipe";
-import {MatRadioModule} from "@angular/material/radio";
+import {SanitizerPipe} from '../../common/sanitizer.pipe';
+import {MatRadioModule} from '@angular/material/radio';
 
 @Component({
     selector: 'app-questions',

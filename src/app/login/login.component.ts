@@ -1,7 +1,7 @@
 import {CommonModule} from '@angular/common';
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
-import {UserService} from "../common/user.service";
+import {UserService} from '../common/user.service';
 
 @Component({
     selector: 'app-login',

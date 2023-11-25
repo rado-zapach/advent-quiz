@@ -1,17 +1,17 @@
 {
-  "version": 1,
-  "serviceConfiguration": {
-    "apiName": "adventquiz",
-    "serviceName": "AppSync",
-    "defaultAuthType": {
-      "mode": "AMAZON_COGNITO_USER_POOLS",
-      "cognitoUserPoolId": "authadventquiz6a5522dc"
-    },
-    "additionalAuthTypes": [
-      {
-        "mode": "AWS_IAM"
-      }
-    ],
-    "conflictResolution": {}
-  }
+    "version": 1,
+    "serviceConfiguration": {
+        "apiName": "adventquiz",
+        "serviceName": "AppSync",
+        "defaultAuthType": {
+            "mode": "AMAZON_COGNITO_USER_POOLS",
+            "cognitoUserPoolId": "authadventquiz6a5522dc"
+        },
+        "additionalAuthTypes": [
+            {
+                "mode": "AWS_IAM"
+            }
+        ],
+        "conflictResolution": {}
+    }
 }

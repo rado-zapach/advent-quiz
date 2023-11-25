@@ -3,720 +3,717 @@
 //  This file was automatically generated and should not be edited.
 
 export type CreateQuestionInput = {
-  id?: string | null,
-  text: string,
-  choices: string,
-  icon: string,
-  correctAnswer: string,
-  openTime: string,
-  closeTime: string,
+    id?: string | null;
+    text: string;
+    choices: string;
+    icon: string;
+    correctAnswer: string;
+    openTime: string;
+    closeTime: string;
 };
 
 export type ModelQuestionConditionInput = {
-  text?: ModelStringInput | null,
-  choices?: ModelStringInput | null,
-  icon?: ModelStringInput | null,
-  correctAnswer?: ModelStringInput | null,
-  openTime?: ModelStringInput | null,
-  closeTime?: ModelStringInput | null,
-  and?: Array< ModelQuestionConditionInput | null > | null,
-  or?: Array< ModelQuestionConditionInput | null > | null,
-  not?: ModelQuestionConditionInput | null,
+    text?: ModelStringInput | null;
+    choices?: ModelStringInput | null;
+    icon?: ModelStringInput | null;
+    correctAnswer?: ModelStringInput | null;
+    openTime?: ModelStringInput | null;
+    closeTime?: ModelStringInput | null;
+    and?: Array<ModelQuestionConditionInput | null> | null;
+    or?: Array<ModelQuestionConditionInput | null> | null;
+    not?: ModelQuestionConditionInput | null;
 };
 
 export type ModelStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
+    ne?: string | null;
+    eq?: string | null;
+    le?: string | null;
+    lt?: string | null;
+    ge?: string | null;
+    gt?: string | null;
+    contains?: string | null;
+    notContains?: string | null;
+    between?: Array<string | null> | null;
+    beginsWith?: string | null;
+    attributeExists?: boolean | null;
+    attributeType?: ModelAttributeTypes | null;
+    size?: ModelSizeInput | null;
 };
 
 export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null",
+    binary = 'binary',
+    binarySet = 'binarySet',
+    bool = 'bool',
+    list = 'list',
+    map = 'map',
+    number = 'number',
+    numberSet = 'numberSet',
+    string = 'string',
+    stringSet = 'stringSet',
+    _null = '_null',
 }
 
-
 export type ModelSizeInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
+    ne?: number | null;
+    eq?: number | null;
+    le?: number | null;
+    lt?: number | null;
+    ge?: number | null;
+    gt?: number | null;
+    between?: Array<number | null> | null;
 };
 
 export type Question = {
-  __typename: "Question",
-  id: string,
-  text: string,
-  choices: string,
-  icon: string,
-  correctAnswer: string,
-  openTime: string,
-  closeTime: string,
-  createdAt: string,
-  updatedAt: string,
+    __typename: 'Question';
+    id: string;
+    text: string;
+    choices: string;
+    icon: string;
+    correctAnswer: string;
+    openTime: string;
+    closeTime: string;
+    createdAt: string;
+    updatedAt: string;
 };
 
 export type UpdateQuestionInput = {
-  id: string,
-  text?: string | null,
-  choices?: string | null,
-  icon?: string | null,
-  correctAnswer?: string | null,
-  openTime?: string | null,
-  closeTime?: string | null,
+    id: string;
+    text?: string | null;
+    choices?: string | null;
+    icon?: string | null;
+    correctAnswer?: string | null;
+    openTime?: string | null;
+    closeTime?: string | null;
 };
 
 export type DeleteQuestionInput = {
-  id: string,
+    id: string;
 };
 
 export type CreateAnswerInput = {
-  id?: string | null,
-  player: string,
-  text: string,
-  isCorrect?: boolean | null,
-  points?: number | null,
-  saveTime: string,
-  questionId: string,
+    id?: string | null;
+    player: string;
+    text: string;
+    isCorrect?: boolean | null;
+    points?: number | null;
+    saveTime: string;
+    questionId: string;
 };
 
 export type ModelAnswerConditionInput = {
-  player?: ModelStringInput | null,
-  text?: ModelStringInput | null,
-  isCorrect?: ModelBooleanInput | null,
-  points?: ModelIntInput | null,
-  saveTime?: ModelStringInput | null,
-  questionId?: ModelStringInput | null,
-  and?: Array< ModelAnswerConditionInput | null > | null,
-  or?: Array< ModelAnswerConditionInput | null > | null,
-  not?: ModelAnswerConditionInput | null,
+    player?: ModelStringInput | null;
+    text?: ModelStringInput | null;
+    isCorrect?: ModelBooleanInput | null;
+    points?: ModelIntInput | null;
+    saveTime?: ModelStringInput | null;
+    questionId?: ModelStringInput | null;
+    and?: Array<ModelAnswerConditionInput | null> | null;
+    or?: Array<ModelAnswerConditionInput | null> | null;
+    not?: ModelAnswerConditionInput | null;
 };
 
 export type ModelBooleanInput = {
-  ne?: boolean | null,
-  eq?: boolean | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
+    ne?: boolean | null;
+    eq?: boolean | null;
+    attributeExists?: boolean | null;
+    attributeType?: ModelAttributeTypes | null;
 };
 
 export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
+    ne?: number | null;
+    eq?: number | null;
+    le?: number | null;
+    lt?: number | null;
+    ge?: number | null;
+    gt?: number | null;
+    between?: Array<number | null> | null;
+    attributeExists?: boolean | null;
+    attributeType?: ModelAttributeTypes | null;
 };
 
 export type Answer = {
-  __typename: "Answer",
-  id: string,
-  player: string,
-  text: string,
-  isCorrect?: boolean | null,
-  points?: number | null,
-  saveTime: string,
-  questionId: string,
-  createdAt: string,
-  updatedAt: string,
+    __typename: 'Answer';
+    id: string;
+    player: string;
+    text: string;
+    isCorrect?: boolean | null;
+    points?: number | null;
+    saveTime: string;
+    questionId: string;
+    createdAt: string;
+    updatedAt: string;
 };
 
 export type UpdateAnswerInput = {
-  id: string,
-  player?: string | null,
-  text?: string | null,
-  isCorrect?: boolean | null,
-  points?: number | null,
-  saveTime?: string | null,
-  questionId?: string | null,
+    id: string;
+    player?: string | null;
+    text?: string | null;
+    isCorrect?: boolean | null;
+    points?: number | null;
+    saveTime?: string | null;
+    questionId?: string | null;
 };
 
 export type DeleteAnswerInput = {
-  id: string,
+    id: string;
 };
 
 export type ModelQuestionFilterInput = {
-  id?: ModelIDInput | null,
-  text?: ModelStringInput | null,
-  choices?: ModelStringInput | null,
-  icon?: ModelStringInput | null,
-  correctAnswer?: ModelStringInput | null,
-  openTime?: ModelStringInput | null,
-  closeTime?: ModelStringInput | null,
-  and?: Array< ModelQuestionFilterInput | null > | null,
-  or?: Array< ModelQuestionFilterInput | null > | null,
-  not?: ModelQuestionFilterInput | null,
+    id?: ModelIDInput | null;
+    text?: ModelStringInput | null;
+    choices?: ModelStringInput | null;
+    icon?: ModelStringInput | null;
+    correctAnswer?: ModelStringInput | null;
+    openTime?: ModelStringInput | null;
+    closeTime?: ModelStringInput | null;
+    and?: Array<ModelQuestionFilterInput | null> | null;
+    or?: Array<ModelQuestionFilterInput | null> | null;
+    not?: ModelQuestionFilterInput | null;
 };
 
 export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
+    ne?: string | null;
+    eq?: string | null;
+    le?: string | null;
+    lt?: string | null;
+    ge?: string | null;
+    gt?: string | null;
+    contains?: string | null;
+    notContains?: string | null;
+    between?: Array<string | null> | null;
+    beginsWith?: string | null;
+    attributeExists?: boolean | null;
+    attributeType?: ModelAttributeTypes | null;
+    size?: ModelSizeInput | null;
 };
 
 export type ModelQuestionConnection = {
-  __typename: "ModelQuestionConnection",
-  items:  Array<Question | null >,
-  nextToken?: string | null,
+    __typename: 'ModelQuestionConnection';
+    items: Array<Question | null>;
+    nextToken?: string | null;
 };
 
 export type ModelAnswerFilterInput = {
-  id?: ModelIDInput | null,
-  player?: ModelStringInput | null,
-  text?: ModelStringInput | null,
-  isCorrect?: ModelBooleanInput | null,
-  points?: ModelIntInput | null,
-  saveTime?: ModelStringInput | null,
-  questionId?: ModelStringInput | null,
-  and?: Array< ModelAnswerFilterInput | null > | null,
-  or?: Array< ModelAnswerFilterInput | null > | null,
-  not?: ModelAnswerFilterInput | null,
+    id?: ModelIDInput | null;
+    player?: ModelStringInput | null;
+    text?: ModelStringInput | null;
+    isCorrect?: ModelBooleanInput | null;
+    points?: ModelIntInput | null;
+    saveTime?: ModelStringInput | null;
+    questionId?: ModelStringInput | null;
+    and?: Array<ModelAnswerFilterInput | null> | null;
+    or?: Array<ModelAnswerFilterInput | null> | null;
+    not?: ModelAnswerFilterInput | null;
 };
 
 export type ModelAnswerConnection = {
-  __typename: "ModelAnswerConnection",
-  items:  Array<Answer | null >,
-  nextToken?: string | null,
+    __typename: 'ModelAnswerConnection';
+    items: Array<Answer | null>;
+    nextToken?: string | null;
 };
 
 export type PlayerQuestion = {
-  __typename: "PlayerQuestion",
-  id: string,
-  text?: string | null,
-  choices?: string | null,
-  icon: string,
-  correctAnswer?: string | null,
-  openTime: string,
-  closeTime: string,
+    __typename: 'PlayerQuestion';
+    id: string;
+    text?: string | null;
+    choices?: string | null;
+    icon: string;
+    correctAnswer?: string | null;
+    openTime: string;
+    closeTime: string;
 };
 
 export type PlayerAnswer = {
-  __typename: "PlayerAnswer",
-  id: string,
-  player: string,
-  text?: string | null,
-  isCorrect?: boolean | null,
-  points?: number | null,
-  saveTime?: string | null,
-  questionId?: string | null,
+    __typename: 'PlayerAnswer';
+    id: string;
+    player: string;
+    text?: string | null;
+    isCorrect?: boolean | null;
+    points?: number | null;
+    saveTime?: string | null;
+    questionId?: string | null;
 };
 
 export type PlayerAttributes = {
-  __typename: "PlayerAttributes",
-  username: string,
-  email: string,
+    __typename: 'PlayerAttributes';
+    username: string;
+    email: string;
 };
 
 export type ModelSubscriptionQuestionFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  text?: ModelSubscriptionStringInput | null,
-  choices?: ModelSubscriptionStringInput | null,
-  icon?: ModelSubscriptionStringInput | null,
-  correctAnswer?: ModelSubscriptionStringInput | null,
-  openTime?: ModelSubscriptionStringInput | null,
-  closeTime?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionQuestionFilterInput | null > | null,
-  or?: Array< ModelSubscriptionQuestionFilterInput | null > | null,
+    id?: ModelSubscriptionIDInput | null;
+    text?: ModelSubscriptionStringInput | null;
+    choices?: ModelSubscriptionStringInput | null;
+    icon?: ModelSubscriptionStringInput | null;
+    correctAnswer?: ModelSubscriptionStringInput | null;
+    openTime?: ModelSubscriptionStringInput | null;
+    closeTime?: ModelSubscriptionStringInput | null;
+    and?: Array<ModelSubscriptionQuestionFilterInput | null> | null;
+    or?: Array<ModelSubscriptionQuestionFilterInput | null> | null;
 };
 
 export type ModelSubscriptionIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  in?: Array< string | null > | null,
-  notIn?: Array< string | null > | null,
+    ne?: string | null;
+    eq?: string | null;
+    le?: string | null;
+    lt?: string | null;
+    ge?: string | null;
+    gt?: string | null;
+    contains?: string | null;
+    notContains?: string | null;
+    between?: Array<string | null> | null;
+    beginsWith?: string | null;
+    in?: Array<string | null> | null;
+    notIn?: Array<string | null> | null;
 };
 
 export type ModelSubscriptionStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  in?: Array< string | null > | null,
-  notIn?: Array< string | null > | null,
+    ne?: string | null;
+    eq?: string | null;
+    le?: string | null;
+    lt?: string | null;
+    ge?: string | null;
+    gt?: string | null;
+    contains?: string | null;
+    notContains?: string | null;
+    between?: Array<string | null> | null;
+    beginsWith?: string | null;
+    in?: Array<string | null> | null;
+    notIn?: Array<string | null> | null;
 };
 
 export type ModelSubscriptionAnswerFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  player?: ModelSubscriptionStringInput | null,
-  text?: ModelSubscriptionStringInput | null,
-  isCorrect?: ModelSubscriptionBooleanInput | null,
-  points?: ModelSubscriptionIntInput | null,
-  saveTime?: ModelSubscriptionStringInput | null,
-  questionId?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionAnswerFilterInput | null > | null,
-  or?: Array< ModelSubscriptionAnswerFilterInput | null > | null,
+    id?: ModelSubscriptionIDInput | null;
+    player?: ModelSubscriptionStringInput | null;
+    text?: ModelSubscriptionStringInput | null;
+    isCorrect?: ModelSubscriptionBooleanInput | null;
+    points?: ModelSubscriptionIntInput | null;
+    saveTime?: ModelSubscriptionStringInput | null;
+    questionId?: ModelSubscriptionStringInput | null;
+    and?: Array<ModelSubscriptionAnswerFilterInput | null> | null;
+    or?: Array<ModelSubscriptionAnswerFilterInput | null> | null;
 };
 
 export type ModelSubscriptionBooleanInput = {
-  ne?: boolean | null,
-  eq?: boolean | null,
+    ne?: boolean | null;
+    eq?: boolean | null;
 };
 
 export type ModelSubscriptionIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  in?: Array< number | null > | null,
-  notIn?: Array< number | null > | null,
+    ne?: number | null;
+    eq?: number | null;
+    le?: number | null;
+    lt?: number | null;
+    ge?: number | null;
+    gt?: number | null;
+    between?: Array<number | null> | null;
+    in?: Array<number | null> | null;
+    notIn?: Array<number | null> | null;
 };
 
 export type CreateQuestionMutationVariables = {
-  input: CreateQuestionInput,
-  condition?: ModelQuestionConditionInput | null,
+    input: CreateQuestionInput;
+    condition?: ModelQuestionConditionInput | null;
 };
 
 export type CreateQuestionMutation = {
-  createQuestion?:  {
-    __typename: "Question",
-    id: string,
-    text: string,
-    choices: string,
-    icon: string,
-    correctAnswer: string,
-    openTime: string,
-    closeTime: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+    createQuestion?: {
+        __typename: 'Question';
+        id: string;
+        text: string;
+        choices: string;
+        icon: string;
+        correctAnswer: string;
+        openTime: string;
+        closeTime: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
 };
 
 export type UpdateQuestionMutationVariables = {
-  input: UpdateQuestionInput,
-  condition?: ModelQuestionConditionInput | null,
+    input: UpdateQuestionInput;
+    condition?: ModelQuestionConditionInput | null;
 };
 
 export type UpdateQuestionMutation = {
-  updateQuestion?:  {
-    __typename: "Question",
-    id: string,
-    text: string,
-    choices: string,
-    icon: string,
-    correctAnswer: string,
-    openTime: string,
-    closeTime: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+    updateQuestion?: {
+        __typename: 'Question';
+        id: string;
+        text: string;
+        choices: string;
+        icon: string;
+        correctAnswer: string;
+        openTime: string;
+        closeTime: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
 };
 
 export type DeleteQuestionMutationVariables = {
-  input: DeleteQuestionInput,
-  condition?: ModelQuestionConditionInput | null,
+    input: DeleteQuestionInput;
+    condition?: ModelQuestionConditionInput | null;
 };
 
 export type DeleteQuestionMutation = {
-  deleteQuestion?:  {
-    __typename: "Question",
-    id: string,
-    text: string,
-    choices: string,
-    icon: string,
-    correctAnswer: string,
-    openTime: string,
-    closeTime: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+    deleteQuestion?: {
+        __typename: 'Question';
+        id: string;
+        text: string;
+        choices: string;
+        icon: string;
+        correctAnswer: string;
+        openTime: string;
+        closeTime: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
 };
 
 export type CreateAnswerMutationVariables = {
-  input: CreateAnswerInput,
-  condition?: ModelAnswerConditionInput | null,
+    input: CreateAnswerInput;
+    condition?: ModelAnswerConditionInput | null;
 };
 
 export type CreateAnswerMutation = {
-  createAnswer?:  {
-    __typename: "Answer",
-    id: string,
-    player: string,
-    text: string,
-    isCorrect?: boolean | null,
-    points?: number | null,
-    saveTime: string,
-    questionId: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+    createAnswer?: {
+        __typename: 'Answer';
+        id: string;
+        player: string;
+        text: string;
+        isCorrect?: boolean | null;
+        points?: number | null;
+        saveTime: string;
+        questionId: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
 };
 
 export type UpdateAnswerMutationVariables = {
-  input: UpdateAnswerInput,
-  condition?: ModelAnswerConditionInput | null,
+    input: UpdateAnswerInput;
+    condition?: ModelAnswerConditionInput | null;
 };
 
 export type UpdateAnswerMutation = {
-  updateAnswer?:  {
-    __typename: "Answer",
-    id: string,
-    player: string,
-    text: string,
-    isCorrect?: boolean | null,
-    points?: number | null,
-    saveTime: string,
-    questionId: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+    updateAnswer?: {
+        __typename: 'Answer';
+        id: string;
+        player: string;
+        text: string;
+        isCorrect?: boolean | null;
+        points?: number | null;
+        saveTime: string;
+        questionId: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
 };
 
 export type DeleteAnswerMutationVariables = {
-  input: DeleteAnswerInput,
-  condition?: ModelAnswerConditionInput | null,
+    input: DeleteAnswerInput;
+    condition?: ModelAnswerConditionInput | null;
 };
 
 export type DeleteAnswerMutation = {
-  deleteAnswer?:  {
-    __typename: "Answer",
-    id: string,
-    player: string,
-    text: string,
-    isCorrect?: boolean | null,
-    points?: number | null,
-    saveTime: string,
-    questionId: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+    deleteAnswer?: {
+        __typename: 'Answer';
+        id: string;
+        player: string;
+        text: string;
+        isCorrect?: boolean | null;
+        points?: number | null;
+        saveTime: string;
+        questionId: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
 };
 
 export type PlayerSaveAnswerMutationVariables = {
-  questionId: string,
-  text: string,
+    questionId: string;
+    text: string;
 };
 
 export type PlayerSaveAnswerMutation = {
-  playerSaveAnswer: string,
+    playerSaveAnswer: string;
 };
 
 export type GetQuestionQueryVariables = {
-  id: string,
+    id: string;
 };
 
 export type GetQuestionQuery = {
-  getQuestion?:  {
-    __typename: "Question",
-    id: string,
-    text: string,
-    choices: string,
-    icon: string,
-    correctAnswer: string,
-    openTime: string,
-    closeTime: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+    getQuestion?: {
+        __typename: 'Question';
+        id: string;
+        text: string;
+        choices: string;
+        icon: string;
+        correctAnswer: string;
+        openTime: string;
+        closeTime: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
 };
 
 export type ListQuestionsQueryVariables = {
-  filter?: ModelQuestionFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
+    filter?: ModelQuestionFilterInput | null;
+    limit?: number | null;
+    nextToken?: string | null;
 };
 
 export type ListQuestionsQuery = {
-  listQuestions?:  {
-    __typename: "ModelQuestionConnection",
-    items:  Array< {
-      __typename: "Question",
-      id: string,
-      text: string,
-      choices: string,
-      icon: string,
-      correctAnswer: string,
-      openTime: string,
-      closeTime: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
+    listQuestions?: {
+        __typename: 'ModelQuestionConnection';
+        items: Array<{
+            __typename: 'Question';
+            id: string;
+            text: string;
+            choices: string;
+            icon: string;
+            correctAnswer: string;
+            openTime: string;
+            closeTime: string;
+            createdAt: string;
+            updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+    } | null;
 };
 
 export type GetAnswerQueryVariables = {
-  id: string,
+    id: string;
 };
 
 export type GetAnswerQuery = {
-  getAnswer?:  {
-    __typename: "Answer",
-    id: string,
-    player: string,
-    text: string,
-    isCorrect?: boolean | null,
-    points?: number | null,
-    saveTime: string,
-    questionId: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+    getAnswer?: {
+        __typename: 'Answer';
+        id: string;
+        player: string;
+        text: string;
+        isCorrect?: boolean | null;
+        points?: number | null;
+        saveTime: string;
+        questionId: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
 };
 
 export type ListAnswersQueryVariables = {
-  filter?: ModelAnswerFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
+    filter?: ModelAnswerFilterInput | null;
+    limit?: number | null;
+    nextToken?: string | null;
 };
 
 export type ListAnswersQuery = {
-  listAnswers?:  {
-    __typename: "ModelAnswerConnection",
-    items:  Array< {
-      __typename: "Answer",
-      id: string,
-      player: string,
-      text: string,
-      isCorrect?: boolean | null,
-      points?: number | null,
-      saveTime: string,
-      questionId: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
+    listAnswers?: {
+        __typename: 'ModelAnswerConnection';
+        items: Array<{
+            __typename: 'Answer';
+            id: string;
+            player: string;
+            text: string;
+            isCorrect?: boolean | null;
+            points?: number | null;
+            saveTime: string;
+            questionId: string;
+            createdAt: string;
+            updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+    } | null;
 };
 
-export type PlayerQuestionListQueryVariables = {
-};
+export type PlayerQuestionListQueryVariables = {};
 
 export type PlayerQuestionListQuery = {
-  playerQuestionList:  Array< {
-    __typename: "PlayerQuestion",
-    id: string,
-    text?: string | null,
-    choices?: string | null,
-    icon: string,
-    correctAnswer?: string | null,
-    openTime: string,
-    closeTime: string,
-  } >,
+    playerQuestionList: Array<{
+        __typename: 'PlayerQuestion';
+        id: string;
+        text?: string | null;
+        choices?: string | null;
+        icon: string;
+        correctAnswer?: string | null;
+        openTime: string;
+        closeTime: string;
+    }>;
 };
 
 export type PlayerQuestionQueryVariables = {
-  questionId: string,
+    questionId: string;
 };
 
 export type PlayerQuestionQuery = {
-  playerQuestion:  {
-    __typename: "PlayerQuestion",
-    id: string,
-    text?: string | null,
-    choices?: string | null,
-    icon: string,
-    correctAnswer?: string | null,
-    openTime: string,
-    closeTime: string,
-  },
+    playerQuestion: {
+        __typename: 'PlayerQuestion';
+        id: string;
+        text?: string | null;
+        choices?: string | null;
+        icon: string;
+        correctAnswer?: string | null;
+        openTime: string;
+        closeTime: string;
+    };
 };
 
 export type PlayerAnswerListQueryVariables = {
-  questionId: string,
+    questionId: string;
 };
 
 export type PlayerAnswerListQuery = {
-  playerAnswerList:  Array< {
-    __typename: "PlayerAnswer",
-    id: string,
-    player: string,
-    text?: string | null,
-    isCorrect?: boolean | null,
-    points?: number | null,
-    saveTime?: string | null,
-    questionId?: string | null,
-  } >,
+    playerAnswerList: Array<{
+        __typename: 'PlayerAnswer';
+        id: string;
+        player: string;
+        text?: string | null;
+        isCorrect?: boolean | null;
+        points?: number | null;
+        saveTime?: string | null;
+        questionId?: string | null;
+    }>;
 };
 
 export type PlayerAnswerQueryVariables = {
-  questionId: string,
+    questionId: string;
 };
 
 export type PlayerAnswerQuery = {
-  playerAnswer?:  {
-    __typename: "PlayerAnswer",
-    id: string,
-    player: string,
-    text?: string | null,
-    isCorrect?: boolean | null,
-    points?: number | null,
-    saveTime?: string | null,
-    questionId?: string | null,
-  } | null,
+    playerAnswer?: {
+        __typename: 'PlayerAnswer';
+        id: string;
+        player: string;
+        text?: string | null;
+        isCorrect?: boolean | null;
+        points?: number | null;
+        saveTime?: string | null;
+        questionId?: string | null;
+    } | null;
 };
 
-export type PlayerAttributesListQueryVariables = {
-};
+export type PlayerAttributesListQueryVariables = {};
 
 export type PlayerAttributesListQuery = {
-  playerAttributesList:  Array< {
-    __typename: "PlayerAttributes",
-    username: string,
-    email: string,
-  } >,
+    playerAttributesList: Array<{
+        __typename: 'PlayerAttributes';
+        username: string;
+        email: string;
+    }>;
 };
 
 export type OnCreateQuestionSubscriptionVariables = {
-  filter?: ModelSubscriptionQuestionFilterInput | null,
+    filter?: ModelSubscriptionQuestionFilterInput | null;
 };
 
 export type OnCreateQuestionSubscription = {
-  onCreateQuestion?:  {
-    __typename: "Question",
-    id: string,
-    text: string,
-    choices: string,
-    icon: string,
-    correctAnswer: string,
-    openTime: string,
-    closeTime: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+    onCreateQuestion?: {
+        __typename: 'Question';
+        id: string;
+        text: string;
+        choices: string;
+        icon: string;
+        correctAnswer: string;
+        openTime: string;
+        closeTime: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
 };
 
 export type OnUpdateQuestionSubscriptionVariables = {
-  filter?: ModelSubscriptionQuestionFilterInput | null,
+    filter?: ModelSubscriptionQuestionFilterInput | null;
 };
 
 export type OnUpdateQuestionSubscription = {
-  onUpdateQuestion?:  {
-    __typename: "Question",
-    id: string,
-    text: string,
-    choices: string,
-    icon: string,
-    correctAnswer: string,
-    openTime: string,
-    closeTime: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+    onUpdateQuestion?: {
+        __typename: 'Question';
+        id: string;
+        text: string;
+        choices: string;
+        icon: string;
+        correctAnswer: string;
+        openTime: string;
+        closeTime: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
 };
 
 export type OnDeleteQuestionSubscriptionVariables = {
-  filter?: ModelSubscriptionQuestionFilterInput | null,
+    filter?: ModelSubscriptionQuestionFilterInput | null;
 };
 
 export type OnDeleteQuestionSubscription = {
-  onDeleteQuestion?:  {
-    __typename: "Question",
-    id: string,
-    text: string,
-    choices: string,
-    icon: string,
-    correctAnswer: string,
-    openTime: string,
-    closeTime: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+    onDeleteQuestion?: {
+        __typename: 'Question';
+        id: string;
+        text: string;
+        choices: string;
+        icon: string;
+        correctAnswer: string;
+        openTime: string;
+        closeTime: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
 };
 
 export type OnCreateAnswerSubscriptionVariables = {
-  filter?: ModelSubscriptionAnswerFilterInput | null,
+    filter?: ModelSubscriptionAnswerFilterInput | null;
 };
 
 export type OnCreateAnswerSubscription = {
-  onCreateAnswer?:  {
-    __typename: "Answer",
-    id: string,
-    player: string,
-    text: string,
-    isCorrect?: boolean | null,
-    points?: number | null,
-    saveTime: string,
-    questionId: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+    onCreateAnswer?: {
+        __typename: 'Answer';
+        id: string;
+        player: string;
+        text: string;
+        isCorrect?: boolean | null;
+        points?: number | null;
+        saveTime: string;
+        questionId: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
 };
 
 export type OnUpdateAnswerSubscriptionVariables = {
-  filter?: ModelSubscriptionAnswerFilterInput | null,
+    filter?: ModelSubscriptionAnswerFilterInput | null;
 };
 
 export type OnUpdateAnswerSubscription = {
-  onUpdateAnswer?:  {
-    __typename: "Answer",
-    id: string,
-    player: string,
-    text: string,
-    isCorrect?: boolean | null,
-    points?: number | null,
-    saveTime: string,
-    questionId: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+    onUpdateAnswer?: {
+        __typename: 'Answer';
+        id: string;
+        player: string;
+        text: string;
+        isCorrect?: boolean | null;
+        points?: number | null;
+        saveTime: string;
+        questionId: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
 };
 
 export type OnDeleteAnswerSubscriptionVariables = {
-  filter?: ModelSubscriptionAnswerFilterInput | null,
+    filter?: ModelSubscriptionAnswerFilterInput | null;
 };
 
 export type OnDeleteAnswerSubscription = {
-  onDeleteAnswer?:  {
-    __typename: "Answer",
-    id: string,
-    player: string,
-    text: string,
-    isCorrect?: boolean | null,
-    points?: number | null,
-    saveTime: string,
-    questionId: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+    onDeleteAnswer?: {
+        __typename: 'Answer';
+        id: string;
+        player: string;
+        text: string;
+        isCorrect?: boolean | null;
+        points?: number | null;
+        saveTime: string;
+        questionId: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
 };

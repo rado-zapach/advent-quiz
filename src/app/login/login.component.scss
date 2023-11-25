@@ -1,13 +1,13 @@
 .login-screen {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  gap: 60px;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    gap: 60px;
+    justify-content: center;
+    align-items: center;
 }
 .login-logo {
-  height: 100px;
+    height: 100px;
 }
 .button {
     -webkit-appearance: none;
@@ -25,6 +25,6 @@
     outline: 0;
 }
 .login-footer {
-  color: #fff;
-  font-size: 14pt;
+    color: #fff;
+    font-size: 14pt;
 }
