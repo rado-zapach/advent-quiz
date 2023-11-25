@@ -13,7 +13,7 @@
                         [(ngModel)]="answerText"
                         [disabled]="isLoading()"
                     >
-                        @for (q of question()?.choices?.split("\n") ?? ""; track q) {
+                        @for (q of question().choices?.split("\n") ?? ""; track q) {
                             <mat-radio-button [value]="q">{{ q }}</mat-radio-button>
                         }
                     </mat-radio-group>
@@ -44,16 +44,24 @@
         @case (State.CLOSED) {
             <div class="whitespace-pre-wrap" [innerHTML]="question().text | sanitizer"></div>
 
-            <div class="flex flex-col">
-                <mat-form-field>
-                    <textarea
-                        [value]="answer()?.text ?? ''"
-                        matInput
-                        [cdkTextareaAutosize]="true"
-                        disabled
-                    ></textarea>
-                </mat-form-field>
-            </div>
+            @if (question().choices) {
+                <mat-radio-group class="flex flex-col" [(ngModel)]="answerText" [disabled]="true">
+                    @for (q of question().choices?.split("\n") ?? ""; track q) {
+                        <mat-radio-button [value]="q">{{ q }}</mat-radio-button>
+                    }
+                </mat-radio-group>
+            } @else {
+                <div class="flex flex-col">
+                    <mat-form-field>
+                        <textarea
+                            [value]="answer()?.text ?? ''"
+                            matInput
+                            [cdkTextareaAutosize]="true"
+                            disabled
+                        ></textarea>
+                    </mat-form-field>
+                </div>
+            }
 
             <mat-list>
                 <mat-list-item>
@@ -65,12 +73,11 @@
                     <mat-icon matListItemIcon>military_tech</mat-icon>
                     <span matListItemTitle>Your points</span>
                     @if (!isLoading()) {
-                        <span matListItemLine>{{ answer()?.points }} </span>
+                        <span matListItemLine>{{ answer()?.points ?? "Processing" }} </span>
                     } @else {
                         <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
                     }
                 </mat-list-item>
-
                 <mat-list-item>
                     <mat-icon matListItemIcon>group</mat-icon>
                     <span matListItemTitle>Players</span>
@@ -79,11 +86,10 @@
                     }
                     @for (a of answerList(); track a.id) {
                         <span matListItemLine>
-                            {{ a.player | playerEmail | async }}
-                            @if (a.isCorrect) {
-                                <mat-icon class="pt-1.5">done</mat-icon>
+                            @if (a.player | playerEmail | async; as player) {
+                                {{ player }}
                             } @else {
-                                <mat-icon class="pt-1.5">close</mat-icon>
+                                <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
                             }
                         </span>
                     }

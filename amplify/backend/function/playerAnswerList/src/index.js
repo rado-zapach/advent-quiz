@@ -37,7 +37,6 @@ const findQuery = questionId => /* GraphQL */ `
       items {
         id
         player
-        isCorrect
       }
     }
     getQuestion(id: "${questionId}") {

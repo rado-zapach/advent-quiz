@@ -1,15 +1,22 @@
-<div class="flex flex-col w-96">
-    <mat-form-field>
-        <mat-label>Start date</mat-label>
-        <input matInput [(ngModel)]="startDate" />
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Close offset hours</mat-label>
-        <input matInput [(ngModel)]="closeOffsetHours" />
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Questions count</mat-label>
-        <input matInput [(ngModel)]="questionsCount" />
-    </mat-form-field>
-    <button mat-raised-button (click)="onCreate()">Create questions</button>
-</div>
+<mat-accordion>
+    <mat-expansion-panel expanded="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>Create questions</mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="w-96 flex flex-col">
+            <mat-form-field>
+                <mat-label>Start date</mat-label>
+                <input matInput [(ngModel)]="startDate" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Close offset hours</mat-label>
+                <input matInput [(ngModel)]="closeOffsetHours" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Questions count</mat-label>
+                <input matInput [(ngModel)]="questionsCount" />
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="onCreate()">Create questions</button>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

@@ -1,53 +1,64 @@
-@if (userService.user$ | async;as user) {
-  <mat-sidenav-container class="example-container" [autosize]="true">
-    <mat-sidenav #drawer class="example-sidenav" mode="side">
-      <div class="app-menu">
-        <mat-chip>{{ user.email }}</mat-chip>
-        <mat-divider></mat-divider>
+@if (userService.user$ | async; as user) {
+    <mat-sidenav-container class="example-container" [autosize]="true">
+        <mat-sidenav #drawer class="example-sidenav" mode="side">
+            <div class="app-menu">
+                <mat-chip>{{ user.email }}</mat-chip>
+                <mat-divider></mat-divider>
 
-        <button mat-button routerLink="">
-          <mat-icon>home</mat-icon>
-          <span>IBL Advent Quiz</span>
-        </button>
-        <button mat-button routerLink="leaderboard">
-          <mat-icon>leaderboard</mat-icon>
-          <span>Leaderboard</span>
-        </button>
-        <button mat-button routerLink="rules">
-          <mat-icon>gavel</mat-icon>
-          <span>Rules</span>
-        </button>
+                <button mat-button routerLink="">
+                    <mat-icon>park</mat-icon>
+                    <span>Calendar</span>
+                </button>
+                <button mat-button routerLink="leaderboard">
+                    <mat-icon>leaderboard</mat-icon>
+                    <span>Leaderboard</span>
+                </button>
+                <button mat-button routerLink="rules">
+                    <mat-icon>gavel</mat-icon>
+                    <span>Rules</span>
+                </button>
 
-        @if (user.isAdmin) {
-          <!--                <button mat-menu-item routerLink="admin/init-questions">-->
-            <!--                    <mat-icon>add</mat-icon>-->
-            <!--                    <span>Create questions</span>-->
-            <!--                </button>-->
-          <button mat-button routerLink="admin/questions">
-            <mat-icon>quiz</mat-icon>
-            <span>Questions</span>
-          </button>
-        }
+                @if (user.isAdmin) {
+                    <div class="flex flex-row w-full justify-center items-center">
+                        <mat-divider class="flex-1"></mat-divider>
+                        <div class="pl-1 pr-1">Questions</div>
+                        <mat-divider class="flex-1"></mat-divider>
+                    </div>
 
-        <button mat-button (click)="userService.signOut()">
-          <mat-icon>logout</mat-icon>
-          <span>Sign out</span>
-        </button>
-      </div>
-    </mat-sidenav>
+                    <button mat-button routerLink="admin/init-questions">
+                        <mat-icon>add_circle</mat-icon>
+                        <span>Create</span>
+                    </button>
+                    <button mat-button routerLink="admin/questions">
+                        <mat-icon>lists</mat-icon>
+                        <span>List</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                }
 
-    <mat-sidenav-content>
-      <button mat-button (click)="drawer.toggle()" class="btn-menu">
-        @if (drawer.opened) {
-          <mat-icon>close</mat-icon>
-        } @else {
-          <mat-icon>menu</mat-icon>
-        }
-      </button>
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+                <button mat-button (click)="userService.signOut()">
+                    <mat-icon>logout</mat-icon>
+                    <span>Sign out</span>
+                </button>
+            </div>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <button
+                mat-button
+                (click)="drawer.toggle()"
+                class="btn-menu"
+                [matTooltip]="drawer.opened ? 'Close' : 'Menu'"
+            >
+                @if (drawer.opened) {
+                    <mat-icon>close</mat-icon>
+                } @else {
+                    <mat-icon>lunch_dining</mat-icon>
+                }
+            </button>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
 } @else {
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 }
-
