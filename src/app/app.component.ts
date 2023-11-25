@@ -10,6 +10,8 @@ import {UserService} from './common/user.service';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatDividerModule} from '@angular/material/divider';
+import {PlayerAttributesService} from './common/player-attributes.service';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-root',
@@ -33,4 +35,9 @@ import {MatDividerModule} from '@angular/material/divider';
 })
 export class AppComponent {
     public readonly userService = inject(UserService);
+    public readonly playerAttributesService = inject(PlayerAttributesService);
+
+    public constructor() {
+        this.playerAttributesService.attributes$.pipe(takeUntilDestroyed()).subscribe();
+    }
 }

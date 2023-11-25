@@ -86,11 +86,7 @@
                     }
                     @for (a of answerList(); track a.id) {
                         <span matListItemLine>
-                            @if (a.player | playerEmail | async; as player) {
-                                {{ player }}
-                            } @else {
-                                <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
-                            }
+                            {{ a.player | playerEmail | async }}
                         </span>
                     }
                 </mat-list-item>

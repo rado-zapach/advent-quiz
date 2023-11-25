@@ -23,20 +23,14 @@
         "LambdaLayerVersion3d91a9a7": {
             "Type": "AWS::Lambda::LayerVersion",
             "Properties": {
-                "CompatibleRuntimes": {
-                    "Ref": "runtimes"
-                },
+                "CompatibleRuntimes": ["nodejs18.x"],
                 "Content": {
                     "S3Bucket": {
                         "Ref": "deploymentBucketName"
                     },
-                    "S3Key": {
-                        "Ref": "s3Key"
-                    }
+                    "S3Key": "amplify-builds/adventquiznodemodules-LambdaLayerVersion3d91a9a7-build.zip"
                 },
-                "Description": {
-                    "Ref": "description"
-                },
+                "Description": "Updated layer version 2023-11-19T11:03:29.042Z",
                 "LayerName": {
                     "Fn::Sub": [
                         "adventquiznodemodules-${env}",
@@ -55,9 +49,7 @@
             "Type": "AWS::Lambda::LayerVersionPermission",
             "Properties": {
                 "Action": "lambda:GetLayerVersion",
-                "LayerVersionArn": {
-                    "Ref": "LambdaLayerVersion3d91a9a7"
-                },
+                "LayerVersionArn": "arn:aws:lambda:eu-central-1:259500569824:layer:adventquiznodemodules-dev:2",
                 "Principal": {
                     "Ref": "AWS::AccountId"
                 }

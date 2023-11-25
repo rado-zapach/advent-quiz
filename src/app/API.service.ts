@@ -240,6 +240,12 @@ export type PlayerAttributes = {
     email: string;
 };
 
+export type Ranking = {
+    __typename: 'Ranking';
+    player?: string | null;
+    points: number;
+};
+
 export type ModelSubscriptionQuestionFilterInput = {
     id?: ModelSubscriptionIDInput | null;
     text?: ModelSubscriptionStringInput | null;
@@ -601,6 +607,16 @@ export type PlayerAttributesListQuery = {
         __typename: 'PlayerAttributes';
         username: string;
         email: string;
+    }>;
+};
+
+export type RankingQueryVariables = {};
+
+export type RankingQuery = {
+    ranking: Array<{
+        __typename: 'Ranking';
+        player?: string | null;
+        points: number;
     }>;
 };
 

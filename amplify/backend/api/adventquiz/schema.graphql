@@ -23,10 +23,8 @@ type Answer @model @auth(rules: [{allow: groups, groups: ["Admins"]}, {allow: pr
 }
 
 type Ranking {
-    user: String!
+    player: String
     points: Int!
-    correctAnswers: Int!
-    allAnswers: Int!
 }
 
 type PlayerQuestion {
@@ -70,6 +68,7 @@ type Query {
     playerAttributesList: [PlayerAttributes!]!
         @auth(rules: [{allow: private}])
         @function(name: "playerAttributesList-${env}")
+    ranking: [Ranking!]! @auth(rules: [{allow: private}]) @function(name: "ranking-${env}")
 }
 
 type Mutation {

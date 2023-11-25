@@ -177,6 +177,23 @@
             ],
             "providerPlugin": "awscloudformation",
             "service": "Lambda"
+        },
+        "ranking": {
+            "build": true,
+            "dependsOn": [
+                {
+                    "attributes": ["GraphQLAPIIdOutput", "GraphQLAPIEndpointOutput"],
+                    "category": "api",
+                    "resourceName": "adventquiz"
+                },
+                {
+                    "attributes": ["Arn"],
+                    "category": "function",
+                    "resourceName": "adventquiznodemodules"
+                }
+            ],
+            "providerPlugin": "awscloudformation",
+            "service": "Lambda"
         }
     },
     "hosting": {
@@ -328,6 +345,22 @@
                 {
                     "category": "function",
                     "resourceName": "playerSaveAnswer"
+                }
+            ]
+        },
+        "AMPLIFY_function_ranking_deploymentBucketName": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "ranking"
+                }
+            ]
+        },
+        "AMPLIFY_function_ranking_s3Key": {
+            "usedBy": [
+                {
+                    "category": "function",
+                    "resourceName": "ranking"
                 }
             ]
         },

@@ -144,3 +144,11 @@ export const playerAttributesList = /* GraphQL */ `query PlayerAttributesList {
   }
 }
 ` as GeneratedQuery<APITypes.PlayerAttributesListQueryVariables, APITypes.PlayerAttributesListQuery>;
+export const ranking = /* GraphQL */ `query Ranking {
+  ranking {
+    player
+    points
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.RankingQueryVariables, APITypes.RankingQuery>;
