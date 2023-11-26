@@ -1,5 +1,11 @@
-<div class="mat-elevation-z8">
-    <mat-table matSort matSortActive="points" matSortDirection="desc" [dataSource]="dataSource">
+<div class="leaderboard">
+    <mat-table
+        matSort
+        matSortActive="points"
+        matSortDirection="desc"
+        [dataSource]="dataSource"
+        class="table"
+    >
         <ng-container matColumnDef="player">
             <mat-header-cell *matHeaderCellDef>Player</mat-header-cell>
             <mat-cell *matCellDef="let element">

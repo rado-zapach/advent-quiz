@@ -1,0 +1,37 @@
+:host {
+    display: flex;
+    flex: 1;
+    margin: 30px auto;
+
+    ::ng-deep {
+        mat-table {
+            background-color: transparent;
+        }
+
+        mat-header-cell {
+            color: white;
+            font-weight: bold;
+            font-size: large;
+        }
+
+        mat-cell {
+            color: white;
+            font-weight: bold;
+            font-size: large;
+        }
+
+        .mat-sort-header-arrow {
+            color: white;
+        }
+
+        mat-row:nth-child(even) {
+            background-color: #c20044;
+        }
+    }
+}
+
+.leaderboard {
+    display: flex;
+    flex: 1;
+    margin: 0 60px 0 20px;
+}
