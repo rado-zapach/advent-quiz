@@ -148,6 +148,8 @@ export const ranking = /* GraphQL */ `query Ranking {
   ranking {
     player
     points
+    correctAnswers
+    allQuestions
     __typename
   }
 }

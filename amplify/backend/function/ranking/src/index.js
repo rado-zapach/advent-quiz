@@ -31,15 +31,21 @@ async function MakeRequest(query) {
     return await response.json();
 }
 
-const findQuery = /* GraphQL */ `
-    query MyQuery {
-        listAnswers(filter: {points: {gt: 0}}) {
-            items {
-                player
-                points
-            }
-        }
+const findQuery = () => /* GraphQL */ `
+  query MyQuery {
+    listAnswers(filter: {points: {gt: 0}}) {
+      items {
+        player
+        points
+        questionId
+      }
     }
+    listQuestions(filter: {closeTime: {le: "${new Date().toISOString()}"}}) {
+      items {
+        id
+      }
+    }
+  }
 `;
 
 export const handler = async event => {
@@ -47,20 +53,29 @@ export const handler = async event => {
 
     const rankings = {};
     const player = event.identity.username;
-    const result = await MakeRequest(findQuery);
+    const result = await MakeRequest(findQuery());
     const answers = result.data.listAnswers.items;
+    const questions = result.data.listQuestions.items;
 
-    answers.forEach(a => {
-        const r = rankings[a.player];
-        if (r) {
-            rankings[a.player] += a.points;
-        } else {
-            rankings[a.player] = a.points;
-        }
-    });
+    answers
+        .filter(a => questions.some(q => q.id === a.questionId))
+        .forEach(a => {
+            const r = rankings[a.player];
+            if (r) {
+                r.points += a.points;
+                r.correctAnswers += 1;
+            } else {
+                rankings[a.player] = {
+                    points: a.points,
+                    correctAnswers: 1,
+                };
+            }
+        });
 
-    return Object.entries(rankings).map(([answerPlayer, points]) => ({
+    return Object.entries(rankings).map(([answerPlayer, ranking]) => ({
         player: player === answerPlayer ? player : null,
-        points,
+        points: ranking.points,
+        correctAnswers: ranking.correctAnswers,
+        allQuestions: questions.length,
     }));
 };

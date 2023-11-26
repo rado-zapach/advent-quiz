@@ -244,6 +244,8 @@ export type Ranking = {
     __typename: 'Ranking';
     player?: string | null;
     points: number;
+    correctAnswers?: number | null;
+    allQuestions?: number | null;
 };
 
 export type ModelSubscriptionQuestionFilterInput = {
@@ -617,6 +619,8 @@ export type RankingQuery = {
         __typename: 'Ranking';
         player?: string | null;
         points: number;
+        correctAnswers?: number | null;
+        allQuestions?: number | null;
     }>;
 };
 

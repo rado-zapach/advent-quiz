@@ -25,6 +25,8 @@ type Answer @model @auth(rules: [{allow: groups, groups: ["Admins"]}, {allow: pr
 type Ranking {
     player: String
     points: Int!
+    correctAnswers: Int
+    allQuestions: Int
 }
 
 type PlayerQuestion {

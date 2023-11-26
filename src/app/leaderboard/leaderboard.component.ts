@@ -40,7 +40,7 @@ import * as queries from '../../graphql/queries';
 })
 export class LeaderboardComponent implements OnInit, AfterViewInit {
     public readonly client = generateClient();
-    public readonly displayedColumns = ['player', 'points'];
+    public readonly displayedColumns = ['player', 'points', 'ratio'];
     public dataSource = new MatTableDataSource<Ranking>([]);
 
     public async ngOnInit(): Promise<void> {
