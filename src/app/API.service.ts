@@ -158,6 +158,36 @@ export type DeleteAnswerInput = {
     id: string;
 };
 
+export type CreateChatMessageInput = {
+    id?: string | null;
+    text: string;
+};
+
+export type ModelChatMessageConditionInput = {
+    text?: ModelStringInput | null;
+    and?: Array<ModelChatMessageConditionInput | null> | null;
+    or?: Array<ModelChatMessageConditionInput | null> | null;
+    not?: ModelChatMessageConditionInput | null;
+};
+
+export type ChatMessage = {
+    __typename: 'ChatMessage';
+    id: string;
+    text: string;
+    createdAt: string;
+    updatedAt: string;
+    owner?: string | null;
+};
+
+export type UpdateChatMessageInput = {
+    id: string;
+    text?: string | null;
+};
+
+export type DeleteChatMessageInput = {
+    id: string;
+};
+
 export type ModelQuestionFilterInput = {
     id?: ModelIDInput | null;
     text?: ModelStringInput | null;
@@ -209,6 +239,20 @@ export type ModelAnswerFilterInput = {
 export type ModelAnswerConnection = {
     __typename: 'ModelAnswerConnection';
     items: Array<Answer | null>;
+    nextToken?: string | null;
+};
+
+export type ModelChatMessageFilterInput = {
+    id?: ModelIDInput | null;
+    text?: ModelStringInput | null;
+    and?: Array<ModelChatMessageFilterInput | null> | null;
+    or?: Array<ModelChatMessageFilterInput | null> | null;
+    not?: ModelChatMessageFilterInput | null;
+};
+
+export type ModelChatMessageConnection = {
+    __typename: 'ModelChatMessageConnection';
+    items: Array<ChatMessage | null>;
     nextToken?: string | null;
 };
 
@@ -317,6 +361,13 @@ export type ModelSubscriptionIntInput = {
     between?: Array<number | null> | null;
     in?: Array<number | null> | null;
     notIn?: Array<number | null> | null;
+};
+
+export type ModelSubscriptionChatMessageFilterInput = {
+    id?: ModelSubscriptionIDInput | null;
+    text?: ModelSubscriptionStringInput | null;
+    and?: Array<ModelSubscriptionChatMessageFilterInput | null> | null;
+    or?: Array<ModelSubscriptionChatMessageFilterInput | null> | null;
 };
 
 export type CreateQuestionMutationVariables = {
@@ -439,6 +490,54 @@ export type DeleteAnswerMutation = {
     } | null;
 };
 
+export type CreateChatMessageMutationVariables = {
+    input: CreateChatMessageInput;
+    condition?: ModelChatMessageConditionInput | null;
+};
+
+export type CreateChatMessageMutation = {
+    createChatMessage?: {
+        __typename: 'ChatMessage';
+        id: string;
+        text: string;
+        createdAt: string;
+        updatedAt: string;
+        owner?: string | null;
+    } | null;
+};
+
+export type UpdateChatMessageMutationVariables = {
+    input: UpdateChatMessageInput;
+    condition?: ModelChatMessageConditionInput | null;
+};
+
+export type UpdateChatMessageMutation = {
+    updateChatMessage?: {
+        __typename: 'ChatMessage';
+        id: string;
+        text: string;
+        createdAt: string;
+        updatedAt: string;
+        owner?: string | null;
+    } | null;
+};
+
+export type DeleteChatMessageMutationVariables = {
+    input: DeleteChatMessageInput;
+    condition?: ModelChatMessageConditionInput | null;
+};
+
+export type DeleteChatMessageMutation = {
+    deleteChatMessage?: {
+        __typename: 'ChatMessage';
+        id: string;
+        text: string;
+        createdAt: string;
+        updatedAt: string;
+        owner?: string | null;
+    } | null;
+};
+
 export type PlayerSaveAnswerMutationVariables = {
     questionId: string;
     text: string;
@@ -531,6 +630,42 @@ export type ListAnswersQuery = {
             questionId: string;
             createdAt: string;
             updatedAt: string;
+        } | null>;
+        nextToken?: string | null;
+    } | null;
+};
+
+export type GetChatMessageQueryVariables = {
+    id: string;
+};
+
+export type GetChatMessageQuery = {
+    getChatMessage?: {
+        __typename: 'ChatMessage';
+        id: string;
+        text: string;
+        createdAt: string;
+        updatedAt: string;
+        owner?: string | null;
+    } | null;
+};
+
+export type ListChatMessagesQueryVariables = {
+    filter?: ModelChatMessageFilterInput | null;
+    limit?: number | null;
+    nextToken?: string | null;
+};
+
+export type ListChatMessagesQuery = {
+    listChatMessages?: {
+        __typename: 'ModelChatMessageConnection';
+        items: Array<{
+            __typename: 'ChatMessage';
+            id: string;
+            text: string;
+            createdAt: string;
+            updatedAt: string;
+            owner?: string | null;
         } | null>;
         nextToken?: string | null;
     } | null;
@@ -735,5 +870,50 @@ export type OnDeleteAnswerSubscription = {
         questionId: string;
         createdAt: string;
         updatedAt: string;
+    } | null;
+};
+
+export type OnCreateChatMessageSubscriptionVariables = {
+    filter?: ModelSubscriptionChatMessageFilterInput | null;
+};
+
+export type OnCreateChatMessageSubscription = {
+    onCreateChatMessage?: {
+        __typename: 'ChatMessage';
+        id: string;
+        text: string;
+        createdAt: string;
+        updatedAt: string;
+        owner?: string | null;
+    } | null;
+};
+
+export type OnUpdateChatMessageSubscriptionVariables = {
+    filter?: ModelSubscriptionChatMessageFilterInput | null;
+};
+
+export type OnUpdateChatMessageSubscription = {
+    onUpdateChatMessage?: {
+        __typename: 'ChatMessage';
+        id: string;
+        text: string;
+        createdAt: string;
+        updatedAt: string;
+        owner?: string | null;
+    } | null;
+};
+
+export type OnDeleteChatMessageSubscriptionVariables = {
+    filter?: ModelSubscriptionChatMessageFilterInput | null;
+};
+
+export type OnDeleteChatMessageSubscription = {
+    onDeleteChatMessage?: {
+        __typename: 'ChatMessage';
+        id: string;
+        text: string;
+        createdAt: string;
+        updatedAt: string;
+        owner?: string | null;
     } | null;
 };

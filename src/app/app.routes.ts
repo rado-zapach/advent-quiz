@@ -13,6 +13,11 @@ export const routes: Routes = [
         loadComponent: () => import('./calendar/calendar.component').then(m => m.CalendarComponent),
     },
     {
+        path: 'chat',
+        canActivate: [isSignedInGuard],
+        loadComponent: () => import('./chat/chat.component').then(m => m.ChatComponent),
+    },
+    {
         path: 'question/:id',
         canActivate: [isSignedInGuard],
         loadComponent: () => import('./question/question.component').then(m => m.QuestionComponent),

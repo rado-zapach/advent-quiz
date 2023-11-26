@@ -116,6 +116,48 @@ export const deleteAnswer = /* GraphQL */ `mutation DeleteAnswer(
   }
 }
 ` as GeneratedMutation<APITypes.DeleteAnswerMutationVariables, APITypes.DeleteAnswerMutation>;
+export const createChatMessage = /* GraphQL */ `mutation CreateChatMessage(
+  $input: CreateChatMessageInput!
+  $condition: ModelChatMessageConditionInput
+) {
+  createChatMessage(input: $input, condition: $condition) {
+    id
+    text
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedMutation<APITypes.CreateChatMessageMutationVariables, APITypes.CreateChatMessageMutation>;
+export const updateChatMessage = /* GraphQL */ `mutation UpdateChatMessage(
+  $input: UpdateChatMessageInput!
+  $condition: ModelChatMessageConditionInput
+) {
+  updateChatMessage(input: $input, condition: $condition) {
+    id
+    text
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedMutation<APITypes.UpdateChatMessageMutationVariables, APITypes.UpdateChatMessageMutation>;
+export const deleteChatMessage = /* GraphQL */ `mutation DeleteChatMessage(
+  $input: DeleteChatMessageInput!
+  $condition: ModelChatMessageConditionInput
+) {
+  deleteChatMessage(input: $input, condition: $condition) {
+    id
+    text
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedMutation<APITypes.DeleteChatMessageMutationVariables, APITypes.DeleteChatMessageMutation>;
 export const playerSaveAnswer =
     /* GraphQL */ `mutation PlayerSaveAnswer($questionId: ID!, $text: String!) {
   playerSaveAnswer(questionId: $questionId, text: $text)

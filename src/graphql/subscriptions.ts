@@ -122,3 +122,51 @@ export const onDeleteAnswer =
         APITypes.OnDeleteAnswerSubscriptionVariables,
         APITypes.OnDeleteAnswerSubscription
     >;
+export const onCreateChatMessage = /* GraphQL */ `subscription OnCreateChatMessage(
+  $filter: ModelSubscriptionChatMessageFilterInput
+) {
+  onCreateChatMessage(filter: $filter) {
+    id
+    text
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedSubscription<
+    APITypes.OnCreateChatMessageSubscriptionVariables,
+    APITypes.OnCreateChatMessageSubscription
+>;
+export const onUpdateChatMessage = /* GraphQL */ `subscription OnUpdateChatMessage(
+  $filter: ModelSubscriptionChatMessageFilterInput
+) {
+  onUpdateChatMessage(filter: $filter) {
+    id
+    text
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedSubscription<
+    APITypes.OnUpdateChatMessageSubscriptionVariables,
+    APITypes.OnUpdateChatMessageSubscription
+>;
+export const onDeleteChatMessage = /* GraphQL */ `subscription OnDeleteChatMessage(
+  $filter: ModelSubscriptionChatMessageFilterInput
+) {
+  onDeleteChatMessage(filter: $filter) {
+    id
+    text
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedSubscription<
+    APITypes.OnDeleteChatMessageSubscriptionVariables,
+    APITypes.OnDeleteChatMessageSubscription
+>;

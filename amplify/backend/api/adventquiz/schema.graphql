@@ -22,6 +22,11 @@ type Answer @model @auth(rules: [{allow: groups, groups: ["Admins"]}, {allow: pr
     questionId: String!
 }
 
+type ChatMessage @model @auth(rules: [{ allow: owner, operations: [create] }, {allow: private, operations: [read]}]) {
+    id: ID!
+    text: String!
+}
+
 type Ranking {
     player: String
     points: Int!

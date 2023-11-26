@@ -84,6 +84,36 @@ export const listAnswers = /* GraphQL */ `query ListAnswers(
   }
 }
 ` as GeneratedQuery<APITypes.ListAnswersQueryVariables, APITypes.ListAnswersQuery>;
+export const getChatMessage = /* GraphQL */ `query GetChatMessage($id: ID!) {
+  getChatMessage(id: $id) {
+    id
+    text
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.GetChatMessageQueryVariables, APITypes.GetChatMessageQuery>;
+export const listChatMessages = /* GraphQL */ `query ListChatMessages(
+  $filter: ModelChatMessageFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listChatMessages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      text
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.ListChatMessagesQueryVariables, APITypes.ListChatMessagesQuery>;
 export const playerQuestionList = /* GraphQL */ `query PlayerQuestionList {
   playerQuestionList {
     id
