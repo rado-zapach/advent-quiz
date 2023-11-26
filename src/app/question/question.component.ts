@@ -10,6 +10,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatRadioModule} from '@angular/material/radio';
 import {generateClient} from 'aws-amplify/api';
 import {filter, first, interval, map, switchMap, takeWhile, timer} from 'rxjs';
 import * as mutations from '../../graphql/mutations';
@@ -17,7 +18,6 @@ import * as queries from '../../graphql/queries';
 import {PlayerAnswer, PlayerQuestion} from '../API.service';
 import {PlayerEmailPipe} from '../common/player-email.pipe';
 import {SanitizerPipe} from '../common/sanitizer.pipe';
-import {MatRadioModule} from '@angular/material/radio';
 
 enum State {
     BEFORE = 'before',
@@ -110,7 +110,7 @@ export class QuestionComponent implements OnInit {
 
         // update remaining time to open/close time
         this.timeRemaining$ = timer(0, 1000).pipe(
-            map(n => {
+            map(() => {
                 const q = this.question();
                 const now = new Date().getTime();
                 const openTime = new Date(q.openTime).getTime();
@@ -138,34 +138,48 @@ export class QuestionComponent implements OnInit {
     }
 
     public async ngOnInit() {
-        if (this.question().state === State.BEFORE) {
-            return;
+        switch (this.question().state) {
+            case State.OPEN: {
+                const result = await this.client.graphql({
+                    query: queries.playerAnswer,
+                    variables: {
+                        questionId: this.question().id,
+                    },
+                });
+                const answer = result.data.playerAnswer;
+                if (answer) {
+                    this.answer.set(answer);
+                    this.answerText = answer.text ?? '';
+                }
+                break;
+            }
+            case State.CLOSED: {
+                const result = await Promise.all([
+                    this.client.graphql({
+                        query: queries.playerAnswer,
+                        variables: {
+                            questionId: this.question().id,
+                        },
+                    }),
+                    this.client.graphql({
+                        query: queries.playerAnswerList,
+                        variables: {
+                            questionId: this.question().id,
+                        },
+                    }),
+                ]);
+                const answer = result[0].data.playerAnswer;
+                if (answer) {
+                    this.answer.set(answer);
+                    this.answerText = answer.text ?? '';
+                }
+                const answerList = result[1].data.playerAnswerList;
+                this.answerList.set(answerList);
+                break;
+            }
+            default: {
+            }
         }
-        const result = await this.client.graphql({
-            query: queries.playerAnswer,
-            variables: {
-                questionId: this.question().id,
-            },
-        });
-        const answer = result.data.playerAnswer;
-        if (answer) {
-            this.answer.set(answer);
-            this.answerText = answer.text ?? '';
-        }
-
-        if (this.question().state === State.OPEN) {
-            this.isLoading.set(false);
-            return;
-        }
-
-        const result2 = await this.client.graphql({
-            query: queries.playerAnswerList,
-            variables: {
-                questionId: this.question().id,
-            },
-        });
-        const answerList = result2.data.playerAnswerList;
-        this.answerList.set(answerList);
         this.isLoading.set(false);
     }
 
