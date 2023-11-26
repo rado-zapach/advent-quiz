@@ -54,6 +54,10 @@ export const routes: Routes = [
                 loadComponent: () =>
                     import('./admin/answers/answers.component').then(m => m.AnswersComponent),
             },
+            {
+                path: 'files',
+                loadComponent: () => import('./admin/files/files.component').then(m => m.FilesComponent),
+            },
         ],
     },
 ];

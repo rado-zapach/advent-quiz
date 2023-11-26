@@ -1,0 +1,19 @@
+{
+  "resourceName": "data",
+  "policyUUID": "582ab67d",
+  "bucketName": "adventquiz67e7e8f5f9d949e4be590075d2987212",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "groupAccess": {
+    "Admins": [
+      "CREATE_AND_UPDATE",
+      "READ",
+      "DELETE"
+    ]
+  }
+}

@@ -66,6 +66,9 @@
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
           "s3Key": "amplify-builds/ranking-69724146305137773749-build.zip"
         }
+      },
+      "storage": {
+        "data": {}
       }
     }
   }
