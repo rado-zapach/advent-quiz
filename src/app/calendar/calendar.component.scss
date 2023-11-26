@@ -5,14 +5,175 @@ $tree-bg-color: #2e7d32;
 $tree-border-color: #1b5e20;
 $tree-shadow-color: rgba(27, 94, 32, 0.2);
 
-:host {
-    width: 100%;
+@mixin box($rotation, $col, $row, $ratio-x, $ratio-y) {
+    $x: $col * 130 * $ratio-x;
+    $y: $row * 130 * $ratio-y;
+    transform: rotateY(#{$rotation}deg) translateZ(100px) translateY(#{$y}px) translateX(#{$x}px);
 }
 
-@mixin box($rotation, $col, $row) {
-    $x: $col * 130;
-    $y: $row * 130;
-    transform: rotateY(#{$rotation}deg) translateZ(100px) translateY(#{$y}px) translateX(#{$x}px);
+@media only screen and (min-width: 1280px) {
+    $ratio-x: 1;
+    $ratio-y: 1;
+    .container {
+        width: 130px;
+        height: 130px;
+    }
+    .container {
+        position: relative;
+        perspective: 1200px;
+        margin: 50px auto 0;
+    }
+
+    .cube {
+        transform-style: preserve-3d;
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    .face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+    // row 1
+    .box1 {
+        @include box(0, 0, 0, $ratio-x, $ratio-y);
+    }
+
+    // row 2
+    .box2 {
+        @include box(-9, -0.5, 1, $ratio-x, $ratio-y);
+    }
+
+    .box3 {
+        @include box(9, 0.5, 1, $ratio-x, $ratio-y);
+    }
+
+    // row 3
+    .box4 {
+        @include box(-7, -1, 2, $ratio-x, $ratio-y);
+    }
+
+    .box5 {
+        @include box(0, 0, 2, $ratio-x, $ratio-y);
+    }
+
+    .box6 {
+        @include box(7, 1, 2, $ratio-x, $ratio-y);
+    }
+
+    // row 4
+    .box7 {
+        @include box(-10, -1.5, 3, $ratio-x, $ratio-y);
+    }
+
+    .box8 {
+        @include box(-4, -0.5, 3, $ratio-x, $ratio-y);
+    }
+
+    .box9 {
+        @include box(4, 0.5, 3, $ratio-x, $ratio-y);
+    }
+
+    .box10 {
+        @include box(10, 1.5, 3, $ratio-x, $ratio-y);
+    }
+
+    // row 5
+    .box11 {
+        @include box(-17, -2, 4, $ratio-x, $ratio-y);
+    }
+
+    .box12 {
+        @include box(-6, -1, 4, $ratio-x, $ratio-y);
+    }
+
+    .box13 {
+        @include box(0, 0, 4, $ratio-x, $ratio-y);
+    }
+
+    .box14 {
+        @include box(6, 1, 4, $ratio-x, $ratio-y);
+    }
+
+    .box15 {
+        @include box(17, 2, 4, $ratio-x, $ratio-y);
+    }
+
+    // row 6
+    .box16 {
+        @include box(-17, -2.5, 5, $ratio-x, $ratio-y);
+    }
+
+    .box17 {
+        @include box(-12, -1.5, 5, $ratio-x, $ratio-y);
+    }
+
+    .box18 {
+        @include box(-5, -0.5, 5, $ratio-x, $ratio-y);
+    }
+
+    .box19 {
+        @include box(5, 0.5, 5, $ratio-x, $ratio-y);
+    }
+
+    .box20 {
+        @include box(12, 1.5, 5, $ratio-x, $ratio-y);
+    }
+
+    .box21 {
+        @include box(17, 2.5, 5, $ratio-x, $ratio-y);
+    }
+
+    .box22 {
+        @include box(5, -3, 4, $ratio-x, $ratio-y);
+    }
+
+    .box23 {
+        @include box(12, -3.7, 4, $ratio-x, $ratio-y);
+    }
+
+    .box24 {
+        @include box(-8, 3.2, 4, $ratio-x, $ratio-y);
+    }
+}
+
+// boxes under 1024px
+@media only screen and (max-width: 1280px) {
+    $screen-ratio-x: 0.5;
+    $screen-ratio-y: 0.9;
+
+    .container {
+        display: flex;
+        flex: 1;
+        flex-wrap: wrap;
+        flex-direction: row;
+        width: 100%;
+        margin: 24px 0;
+    }
+    .cube {
+        display: flex;
+        flex: 1;
+        flex-wrap: wrap;
+    }
+    .face {
+        display: flex;
+        flex: 1;
+        padding: 12px 0;
+    }
+
+    .face img {
+        min-width: 100px;
+    }
+
+    .question {
+        width: 40%;
+    }
+}
+
+:host {
+    width: 100%;
 }
 
 .question-container {
@@ -24,10 +185,14 @@ $tree-shadow-color: rgba(27, 94, 32, 0.2);
 .question {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 24px;
     color: white;
     font-size: 24px;
     font-weight: bold;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 6px;
 }
 
 .disabled {
@@ -36,127 +201,4 @@ $tree-shadow-color: rgba(27, 94, 32, 0.2);
 
 mat-progress-bar {
     margin-top: 12px;
-}
-
-.container {
-    position: relative;
-    width: $box-width;
-    height: $box-height;
-    perspective: 800px;
-    margin: 100px auto 0;
-}
-
-.cube {
-    transform-style: preserve-3d;
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-// row 1
-.box1 {
-    @include box(0, 0, 0);
-}
-
-// row 2
-.box2 {
-    @include box(-9, -0.5, 1);
-}
-
-.box3 {
-    @include box(9, 0.5, 1);
-}
-
-// row 3
-.box4 {
-    @include box(-7, -1, 2);
-}
-
-.box5 {
-    @include box(0, 0, 2);
-}
-
-.box6 {
-    @include box(7, 1, 2);
-}
-
-// row 4
-.box7 {
-    @include box(-10, -1.5, 3);
-}
-
-.box8 {
-    @include box(-4, -0.5, 3);
-}
-
-.box9 {
-    @include box(4, 0.5, 3);
-}
-
-.box10 {
-    @include box(10, 1.5, 3);
-}
-
-// row 5
-.box11 {
-    @include box(-17, -2, 4);
-}
-
-.box12 {
-    @include box(-6, -1, 4);
-}
-
-.box13 {
-    @include box(0, 0, 4);
-}
-
-.box14 {
-    @include box(6, 1, 4);
-}
-
-.box15 {
-    @include box(17, 2, 4);
-}
-
-// row 6
-.box16 {
-    @include box(-17, -2.5, 5);
-}
-
-.box17 {
-    @include box(-12, -1.5, 5);
-}
-
-.box18 {
-    @include box(-5, -0.5, 5);
-}
-
-.box19 {
-    @include box(5, 0.5, 5);
-}
-
-.box20 {
-    @include box(12, 1.5, 5);
-}
-
-.box21 {
-    @include box(17, 2.5, 5);
-}
-
-.box22 {
-    @include box(5, -3, 4);
-}
-
-.box23 {
-    @include box(12, -3.7, 4);
-}
-
-.box24 {
-    @include box(-8, 3.2, 4);
 }
