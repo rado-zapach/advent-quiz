@@ -3,6 +3,7 @@
         <mat-list-item>
             <div matListItemTitle>{{ message.text }}</div>
             <div matListItemLine>{{ message?.owner ?? "" | playerEmail | async }}</div>
+            <div matListItemLine>{{ message.updatedAt | date: "dd.MM.yyyy HH:mm" }}</div>
         </mat-list-item>
     }
 
