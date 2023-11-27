@@ -1,15 +1,22 @@
-<mat-list>
-    @for (message of chatMessages(); track message.id) {
-        <mat-list-item>
-            <div matListItemTitle>{{ message.text }}</div>
-            <div matListItemLine>{{ message?.owner ?? "" | playerEmail | async }}</div>
-            <div matListItemLine>{{ message.updatedAt | date: "dd.MM.yyyy HH:mm" }}</div>
-        </mat-list-item>
-    }
-
-    <mat-form-field>
+<div class="messages">
+    <mat-list>
+        @for (message of chatMessages(); track message.id) {
+            <mat-list-item>
+                <div matListItemLine>
+                    <span class="msg-author">{{ message?.owner ?? "" | playerEmail | async }}</span>
+                    <span class="msg-date">{{ message.updatedAt | date: "HH:mm" }}</span>
+                </div>
+                <div matListItemLine>{{ message.text }}</div>
+            </mat-list-item>
+        }
+    </mat-list>
+</div>
+<div class="message">
+    <mat-form-field class="message-input">
         <mat-label>Message</mat-label>
         <input #messageText matInput type="text" />
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="onMessageSend(messageText)">Send</button>
-</mat-list>
+    <button mat-raised-button color="primary" class="send-button" (click)="onMessageSend(messageText)">
+        Send
+    </button>
+</div>

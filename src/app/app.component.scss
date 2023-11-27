@@ -30,6 +30,8 @@ mat-sidenav-content {
 
 .btn-menu {
     color: #fff !important;
+    position: fixed;
+    z-index: 1000;
 }
 
 .btn-menu mat-icon {

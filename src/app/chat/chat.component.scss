@@ -1,0 +1,55 @@
+:host {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    ::ng-deep {
+        mat-list-item {
+            margin: 12px 0;
+            color: white;
+            height: unset !important;
+        }
+        .mdc-list-item__secondary-text {
+            color: white;
+            white-space: wrap;
+        }
+    }
+}
+
+.messages {
+    display: flex;
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+    margin-top: 32px;
+}
+
+.msg {
+    color: #fff;
+}
+.msg-author {
+    font-weight: bold;
+    font-size: 18px;
+}
+.msg-date {
+    margin-left: 12px;
+    font-size: 12px;
+}
+
+.message {
+    display: flex;
+    flex-direction: row;
+    padding: 24px 12px 0 12px;
+    gap: 12px;
+    border-top: 1px solid #b20044;
+    background-color: #c20044;
+}
+
+.send-button {
+    width: 150px;
+    height: 56px;
+}
+
+.message-input {
+    flex: 1;
+}
