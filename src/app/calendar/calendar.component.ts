@@ -56,6 +56,6 @@ export class CalendarComponent implements OnInit {
     }
 
     public openQuestion(q: PlayerQuestion): void {
-        this.dialog.open(QuestionComponent, {data: q});
+        this.dialog.open(QuestionComponent, {data: q, width: '700px'});
     }
 }
