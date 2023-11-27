@@ -30,7 +30,7 @@ const questionPositions = [
         MatProgressBarModule,
     ],
     templateUrl: './calendar.component.html',
-    styleUrl: './calendar.component.scss',
+    styleUrls: ['./calendar.component.scss', './xmas-tree.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarComponent implements OnInit {
