@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Edit rules</h2>
+<mat-dialog-content class="mat-typography">
+    <textarea class="w-full h-full" [(ngModel)]="rulesText"></textarea>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" (click)="onSave()" [disabled]="isLoading()">Save</button>
+    @if (isLoading()) {
+        <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+    }
+</mat-dialog-actions>

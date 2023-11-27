@@ -1,1 +1,10 @@
-<p>rules works!</p>
+<div class="flex mt-6">
+    <div class="spacer"></div>
+    <div class="rules">
+        <div [innerHTML]="rules()?.text | sanitizer"></div>
+        @if ((userService.user$ | async)?.isAdmin) {
+            <button class="mt-5" mat-raised-button color="primary" (click)="onEdit()">Edit</button>
+        }
+    </div>
+    <div class="spacer"></div>
+</div>

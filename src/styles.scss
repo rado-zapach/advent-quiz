@@ -13,3 +13,10 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: #e40050;
 }
+ol {
+    margin: revert;
+    padding: revert;
+    li {
+        list-style: decimal !important;
+    }
+}
