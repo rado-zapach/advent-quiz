@@ -1,6 +1,6 @@
 @if (userService.user$ | async; as user) {
     <mat-sidenav-container class="example-container" [autosize]="true">
-        <mat-sidenav #drawer class="example-sidenav" mode="side">
+        <mat-sidenav #drawer class="example-sidenav" mode="over">
             <div class="app-menu">
                 <mat-chip>{{ user.email }}</mat-chip>
                 <mat-divider></mat-divider>
