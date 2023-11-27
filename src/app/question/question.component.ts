@@ -18,6 +18,7 @@ import * as queries from '../../graphql/queries';
 import {PlayerAnswer, PlayerQuestion} from '../API.service';
 import {PlayerEmailPipe} from '../common/player-email.pipe';
 import {SanitizerPipe} from '../common/sanitizer.pipe';
+import {WheelComponent} from '../wheel/wheel.component';
 
 enum State {
     BEFORE = 'before',
@@ -54,6 +55,7 @@ function GetState(q: PlayerQuestion) {
         MatListModule,
         PlayerEmailPipe,
         MatRadioModule,
+        WheelComponent,
     ],
     templateUrl: './question.component.html',
     styleUrl: './question.component.scss',
