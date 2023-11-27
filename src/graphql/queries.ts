@@ -88,6 +88,7 @@ export const getChatMessage = /* GraphQL */ `query GetChatMessage($id: ID!) {
   getChatMessage(id: $id) {
     id
     text
+    channel
     createdAt
     updatedAt
     owner
@@ -104,6 +105,7 @@ export const listChatMessages = /* GraphQL */ `query ListChatMessages(
     items {
       id
       text
+      channel
       createdAt
       updatedAt
       owner
@@ -114,6 +116,67 @@ export const listChatMessages = /* GraphQL */ `query ListChatMessages(
   }
 }
 ` as GeneratedQuery<APITypes.ListChatMessagesQueryVariables, APITypes.ListChatMessagesQuery>;
+export const chatMessagesByChannelAndCreatedAt = /* GraphQL */ `query ChatMessagesByChannelAndCreatedAt(
+  $channel: String!
+  $createdAt: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelChatMessageFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  chatMessagesByChannelAndCreatedAt(
+    channel: $channel
+    createdAt: $createdAt
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      text
+      channel
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+    APITypes.ChatMessagesByChannelAndCreatedAtQueryVariables,
+    APITypes.ChatMessagesByChannelAndCreatedAtQuery
+>;
+export const getRules = /* GraphQL */ `query GetRules($id: ID!) {
+  getRules(id: $id) {
+    id
+    text
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.GetRulesQueryVariables, APITypes.GetRulesQuery>;
+export const listRules = /* GraphQL */ `query ListRules(
+  $filter: ModelRulesFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listRules(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      text
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.ListRulesQueryVariables, APITypes.ListRulesQuery>;
 export const playerQuestionList = /* GraphQL */ `query PlayerQuestionList {
   playerQuestionList {
     id

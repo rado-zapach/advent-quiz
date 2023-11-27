@@ -11,7 +11,7 @@ import {generateClient} from 'aws-amplify/api';
 import * as mutations from '../../graphql/mutations';
 import * as queries from '../../graphql/queries';
 import * as subscriptions from '../../graphql/subscriptions';
-import {ChatMessage} from '../API.service';
+import {ChatMessage, ModelSortDirection} from '../API.service';
 import {PlayerEmailPipe} from '../common/player-email.pipe';
 
 @Component({
@@ -35,6 +35,7 @@ import {PlayerEmailPipe} from '../common/player-email.pipe';
 export class ChatComponent implements OnInit {
     public readonly client = generateClient();
     public readonly chatMessages = signal<ChatMessage[]>([]);
+    private readonly channel = 'global';
 
     public constructor() {
         this.client
@@ -52,9 +53,13 @@ export class ChatComponent implements OnInit {
 
     public async ngOnInit(): Promise<void> {
         const result = await this.client.graphql({
-            query: queries.listChatMessages,
+            query: queries.chatMessagesByChannelAndCreatedAt,
+            variables: {
+                channel: this.channel,
+                sortDirection: ModelSortDirection.DESC,
+            },
         });
-        const messages = result.data.listChatMessages.items;
+        const messages = result.data.chatMessagesByChannelAndCreatedAt.items;
         messages.sort((a, b) => a.updatedAt.localeCompare(b.updatedAt));
         this.chatMessages.set(messages);
     }
@@ -65,6 +70,7 @@ export class ChatComponent implements OnInit {
             variables: {
                 input: {
                     text: input.value,
+                    channel: this.channel,
                 },
             },
         });

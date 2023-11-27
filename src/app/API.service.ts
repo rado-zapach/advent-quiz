@@ -161,10 +161,14 @@ export type DeleteAnswerInput = {
 export type CreateChatMessageInput = {
     id?: string | null;
     text: string;
+    channel: string;
+    createdAt?: string | null;
 };
 
 export type ModelChatMessageConditionInput = {
     text?: ModelStringInput | null;
+    channel?: ModelStringInput | null;
+    createdAt?: ModelStringInput | null;
     and?: Array<ModelChatMessageConditionInput | null> | null;
     or?: Array<ModelChatMessageConditionInput | null> | null;
     not?: ModelChatMessageConditionInput | null;
@@ -174,6 +178,7 @@ export type ChatMessage = {
     __typename: 'ChatMessage';
     id: string;
     text: string;
+    channel: string;
     createdAt: string;
     updatedAt: string;
     owner?: string | null;
@@ -182,9 +187,40 @@ export type ChatMessage = {
 export type UpdateChatMessageInput = {
     id: string;
     text?: string | null;
+    channel?: string | null;
+    createdAt?: string | null;
 };
 
 export type DeleteChatMessageInput = {
+    id: string;
+};
+
+export type CreateRulesInput = {
+    id?: string | null;
+    text: string;
+};
+
+export type ModelRulesConditionInput = {
+    text?: ModelStringInput | null;
+    and?: Array<ModelRulesConditionInput | null> | null;
+    or?: Array<ModelRulesConditionInput | null> | null;
+    not?: ModelRulesConditionInput | null;
+};
+
+export type Rules = {
+    __typename: 'Rules';
+    id: string;
+    text: string;
+    createdAt: string;
+    updatedAt: string;
+};
+
+export type UpdateRulesInput = {
+    id: string;
+    text?: string | null;
+};
+
+export type DeleteRulesInput = {
     id: string;
 };
 
@@ -245,6 +281,8 @@ export type ModelAnswerConnection = {
 export type ModelChatMessageFilterInput = {
     id?: ModelIDInput | null;
     text?: ModelStringInput | null;
+    channel?: ModelStringInput | null;
+    createdAt?: ModelStringInput | null;
     and?: Array<ModelChatMessageFilterInput | null> | null;
     or?: Array<ModelChatMessageFilterInput | null> | null;
     not?: ModelChatMessageFilterInput | null;
@@ -253,6 +291,35 @@ export type ModelChatMessageFilterInput = {
 export type ModelChatMessageConnection = {
     __typename: 'ModelChatMessageConnection';
     items: Array<ChatMessage | null>;
+    nextToken?: string | null;
+};
+
+export type ModelStringKeyConditionInput = {
+    eq?: string | null;
+    le?: string | null;
+    lt?: string | null;
+    ge?: string | null;
+    gt?: string | null;
+    between?: Array<string | null> | null;
+    beginsWith?: string | null;
+};
+
+export enum ModelSortDirection {
+    ASC = 'ASC',
+    DESC = 'DESC',
+}
+
+export type ModelRulesFilterInput = {
+    id?: ModelIDInput | null;
+    text?: ModelStringInput | null;
+    and?: Array<ModelRulesFilterInput | null> | null;
+    or?: Array<ModelRulesFilterInput | null> | null;
+    not?: ModelRulesFilterInput | null;
+};
+
+export type ModelRulesConnection = {
+    __typename: 'ModelRulesConnection';
+    items: Array<Rules | null>;
     nextToken?: string | null;
 };
 
@@ -366,8 +433,17 @@ export type ModelSubscriptionIntInput = {
 export type ModelSubscriptionChatMessageFilterInput = {
     id?: ModelSubscriptionIDInput | null;
     text?: ModelSubscriptionStringInput | null;
+    channel?: ModelSubscriptionStringInput | null;
+    createdAt?: ModelSubscriptionStringInput | null;
     and?: Array<ModelSubscriptionChatMessageFilterInput | null> | null;
     or?: Array<ModelSubscriptionChatMessageFilterInput | null> | null;
+};
+
+export type ModelSubscriptionRulesFilterInput = {
+    id?: ModelSubscriptionIDInput | null;
+    text?: ModelSubscriptionStringInput | null;
+    and?: Array<ModelSubscriptionRulesFilterInput | null> | null;
+    or?: Array<ModelSubscriptionRulesFilterInput | null> | null;
 };
 
 export type CreateQuestionMutationVariables = {
@@ -500,6 +576,7 @@ export type CreateChatMessageMutation = {
         __typename: 'ChatMessage';
         id: string;
         text: string;
+        channel: string;
         createdAt: string;
         updatedAt: string;
         owner?: string | null;
@@ -516,6 +593,7 @@ export type UpdateChatMessageMutation = {
         __typename: 'ChatMessage';
         id: string;
         text: string;
+        channel: string;
         createdAt: string;
         updatedAt: string;
         owner?: string | null;
@@ -532,9 +610,55 @@ export type DeleteChatMessageMutation = {
         __typename: 'ChatMessage';
         id: string;
         text: string;
+        channel: string;
         createdAt: string;
         updatedAt: string;
         owner?: string | null;
+    } | null;
+};
+
+export type CreateRulesMutationVariables = {
+    input: CreateRulesInput;
+    condition?: ModelRulesConditionInput | null;
+};
+
+export type CreateRulesMutation = {
+    createRules?: {
+        __typename: 'Rules';
+        id: string;
+        text: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
+};
+
+export type UpdateRulesMutationVariables = {
+    input: UpdateRulesInput;
+    condition?: ModelRulesConditionInput | null;
+};
+
+export type UpdateRulesMutation = {
+    updateRules?: {
+        __typename: 'Rules';
+        id: string;
+        text: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
+};
+
+export type DeleteRulesMutationVariables = {
+    input: DeleteRulesInput;
+    condition?: ModelRulesConditionInput | null;
+};
+
+export type DeleteRulesMutation = {
+    deleteRules?: {
+        __typename: 'Rules';
+        id: string;
+        text: string;
+        createdAt: string;
+        updatedAt: string;
     } | null;
 };
 
@@ -644,6 +768,7 @@ export type GetChatMessageQuery = {
         __typename: 'ChatMessage';
         id: string;
         text: string;
+        channel: string;
         createdAt: string;
         updatedAt: string;
         owner?: string | null;
@@ -663,9 +788,69 @@ export type ListChatMessagesQuery = {
             __typename: 'ChatMessage';
             id: string;
             text: string;
+            channel: string;
             createdAt: string;
             updatedAt: string;
             owner?: string | null;
+        } | null>;
+        nextToken?: string | null;
+    } | null;
+};
+
+export type ChatMessagesByChannelAndCreatedAtQueryVariables = {
+    channel: string;
+    createdAt?: ModelStringKeyConditionInput | null;
+    sortDirection?: ModelSortDirection | null;
+    filter?: ModelChatMessageFilterInput | null;
+    limit?: number | null;
+    nextToken?: string | null;
+};
+
+export type ChatMessagesByChannelAndCreatedAtQuery = {
+    chatMessagesByChannelAndCreatedAt?: {
+        __typename: 'ModelChatMessageConnection';
+        items: Array<{
+            __typename: 'ChatMessage';
+            id: string;
+            text: string;
+            channel: string;
+            createdAt: string;
+            updatedAt: string;
+            owner?: string | null;
+        } | null>;
+        nextToken?: string | null;
+    } | null;
+};
+
+export type GetRulesQueryVariables = {
+    id: string;
+};
+
+export type GetRulesQuery = {
+    getRules?: {
+        __typename: 'Rules';
+        id: string;
+        text: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
+};
+
+export type ListRulesQueryVariables = {
+    filter?: ModelRulesFilterInput | null;
+    limit?: number | null;
+    nextToken?: string | null;
+};
+
+export type ListRulesQuery = {
+    listRules?: {
+        __typename: 'ModelRulesConnection';
+        items: Array<{
+            __typename: 'Rules';
+            id: string;
+            text: string;
+            createdAt: string;
+            updatedAt: string;
         } | null>;
         nextToken?: string | null;
     } | null;
@@ -882,6 +1067,7 @@ export type OnCreateChatMessageSubscription = {
         __typename: 'ChatMessage';
         id: string;
         text: string;
+        channel: string;
         createdAt: string;
         updatedAt: string;
         owner?: string | null;
@@ -897,6 +1083,7 @@ export type OnUpdateChatMessageSubscription = {
         __typename: 'ChatMessage';
         id: string;
         text: string;
+        channel: string;
         createdAt: string;
         updatedAt: string;
         owner?: string | null;
@@ -912,8 +1099,51 @@ export type OnDeleteChatMessageSubscription = {
         __typename: 'ChatMessage';
         id: string;
         text: string;
+        channel: string;
         createdAt: string;
         updatedAt: string;
         owner?: string | null;
+    } | null;
+};
+
+export type OnCreateRulesSubscriptionVariables = {
+    filter?: ModelSubscriptionRulesFilterInput | null;
+};
+
+export type OnCreateRulesSubscription = {
+    onCreateRules?: {
+        __typename: 'Rules';
+        id: string;
+        text: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
+};
+
+export type OnUpdateRulesSubscriptionVariables = {
+    filter?: ModelSubscriptionRulesFilterInput | null;
+};
+
+export type OnUpdateRulesSubscription = {
+    onUpdateRules?: {
+        __typename: 'Rules';
+        id: string;
+        text: string;
+        createdAt: string;
+        updatedAt: string;
+    } | null;
+};
+
+export type OnDeleteRulesSubscriptionVariables = {
+    filter?: ModelSubscriptionRulesFilterInput | null;
+};
+
+export type OnDeleteRulesSubscription = {
+    onDeleteRules?: {
+        __typename: 'Rules';
+        id: string;
+        text: string;
+        createdAt: string;
+        updatedAt: string;
     } | null;
 };

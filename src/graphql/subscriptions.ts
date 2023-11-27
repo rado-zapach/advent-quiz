@@ -128,6 +128,7 @@ export const onCreateChatMessage = /* GraphQL */ `subscription OnCreateChatMessa
   onCreateChatMessage(filter: $filter) {
     id
     text
+    channel
     createdAt
     updatedAt
     owner
@@ -144,6 +145,7 @@ export const onUpdateChatMessage = /* GraphQL */ `subscription OnUpdateChatMessa
   onUpdateChatMessage(filter: $filter) {
     id
     text
+    channel
     createdAt
     updatedAt
     owner
@@ -160,6 +162,7 @@ export const onDeleteChatMessage = /* GraphQL */ `subscription OnDeleteChatMessa
   onDeleteChatMessage(filter: $filter) {
     id
     text
+    channel
     createdAt
     updatedAt
     owner
@@ -170,3 +173,45 @@ export const onDeleteChatMessage = /* GraphQL */ `subscription OnDeleteChatMessa
     APITypes.OnDeleteChatMessageSubscriptionVariables,
     APITypes.OnDeleteChatMessageSubscription
 >;
+export const onCreateRules =
+    /* GraphQL */ `subscription OnCreateRules($filter: ModelSubscriptionRulesFilterInput) {
+  onCreateRules(filter: $filter) {
+    id
+    text
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+        APITypes.OnCreateRulesSubscriptionVariables,
+        APITypes.OnCreateRulesSubscription
+    >;
+export const onUpdateRules =
+    /* GraphQL */ `subscription OnUpdateRules($filter: ModelSubscriptionRulesFilterInput) {
+  onUpdateRules(filter: $filter) {
+    id
+    text
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+        APITypes.OnUpdateRulesSubscriptionVariables,
+        APITypes.OnUpdateRulesSubscription
+    >;
+export const onDeleteRules =
+    /* GraphQL */ `subscription OnDeleteRules($filter: ModelSubscriptionRulesFilterInput) {
+  onDeleteRules(filter: $filter) {
+    id
+    text
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+        APITypes.OnDeleteRulesSubscriptionVariables,
+        APITypes.OnDeleteRulesSubscription
+    >;

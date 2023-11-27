@@ -123,6 +123,7 @@ export const createChatMessage = /* GraphQL */ `mutation CreateChatMessage(
   createChatMessage(input: $input, condition: $condition) {
     id
     text
+    channel
     createdAt
     updatedAt
     owner
@@ -137,6 +138,7 @@ export const updateChatMessage = /* GraphQL */ `mutation UpdateChatMessage(
   updateChatMessage(input: $input, condition: $condition) {
     id
     text
+    channel
     createdAt
     updatedAt
     owner
@@ -151,6 +153,7 @@ export const deleteChatMessage = /* GraphQL */ `mutation DeleteChatMessage(
   deleteChatMessage(input: $input, condition: $condition) {
     id
     text
+    channel
     createdAt
     updatedAt
     owner
@@ -158,6 +161,45 @@ export const deleteChatMessage = /* GraphQL */ `mutation DeleteChatMessage(
   }
 }
 ` as GeneratedMutation<APITypes.DeleteChatMessageMutationVariables, APITypes.DeleteChatMessageMutation>;
+export const createRules = /* GraphQL */ `mutation CreateRules(
+  $input: CreateRulesInput!
+  $condition: ModelRulesConditionInput
+) {
+  createRules(input: $input, condition: $condition) {
+    id
+    text
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<APITypes.CreateRulesMutationVariables, APITypes.CreateRulesMutation>;
+export const updateRules = /* GraphQL */ `mutation UpdateRules(
+  $input: UpdateRulesInput!
+  $condition: ModelRulesConditionInput
+) {
+  updateRules(input: $input, condition: $condition) {
+    id
+    text
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<APITypes.UpdateRulesMutationVariables, APITypes.UpdateRulesMutation>;
+export const deleteRules = /* GraphQL */ `mutation DeleteRules(
+  $input: DeleteRulesInput!
+  $condition: ModelRulesConditionInput
+) {
+  deleteRules(input: $input, condition: $condition) {
+    id
+    text
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<APITypes.DeleteRulesMutationVariables, APITypes.DeleteRulesMutation>;
 export const playerSaveAnswer =
     /* GraphQL */ `mutation PlayerSaveAnswer($questionId: ID!, $text: String!) {
   playerSaveAnswer(questionId: $questionId, text: $text)

@@ -22,7 +22,18 @@ type Answer @model @auth(rules: [{allow: groups, groups: ["Admins"]}, {allow: pr
     questionId: String!
 }
 
-type ChatMessage @model @auth(rules: [{ allow: owner, operations: [create] }, {allow: private, operations: [read]}]) {
+type ChatMessage
+    @model
+    @auth(rules: [{allow: owner, operations: [create]}, {allow: private, operations: [read]}]) {
+    id: ID!
+    text: String!
+    channel: String! @index(sortKeyFields: ["createdAt"])
+    createdAt: AWSDateTime!
+}
+
+type Rules
+    @model
+    @auth(rules: [{allow: groups, groups: ["Admins"]}, {allow: private, operations: [read]}]) {
     id: ID!
     text: String!
 }
