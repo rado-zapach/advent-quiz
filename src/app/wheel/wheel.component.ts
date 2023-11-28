@@ -6,8 +6,10 @@ import {
     Component,
     DoCheck,
     ElementRef,
+    EventEmitter,
     inject,
     Input,
+    Output,
     ViewChild,
 } from '@angular/core';
 
@@ -26,7 +28,6 @@ export class WheelComponent implements AfterViewInit, DoCheck {
 
     @Input()
     set options(values: string[]) {
-        console.log('Values', values);
         this.sectors = values.map((opts, i) => {
             return {
                 color: COLORS[(i >= COLORS.length ? i + 1 : i) % COLORS.length],
@@ -34,11 +35,13 @@ export class WheelComponent implements AfterViewInit, DoCheck {
             };
         });
 
-        console.log(this.sectors);
         if (this.wheel) {
             this.createWheel();
         }
     }
+
+    @Output()
+    public winner = new EventEmitter<string>();
 
     @ViewChild('wheel')
     wheel!: ElementRef<HTMLCanvasElement>;
@@ -58,7 +61,7 @@ export class WheelComponent implements AfterViewInit, DoCheck {
 
     modeDelete = true;
 
-    friction = 0.995; // 0.995=soft, 0.99=mid, 0.98=hard
+    friction = 0.996; // 0.995=soft, 0.99=mid, 0.98=hard
     angVel = 0; // Angular velocity
     ang = 0; // Angle in radians
     lastSelection!: number;
@@ -86,7 +89,10 @@ export class WheelComponent implements AfterViewInit, DoCheck {
     }
 
     spinner() {
-        if (!this.angVel) this.angVel = this.rand(0.25, 0.35);
+        if (!this.angVel) {
+            this.winner.emit(undefined);
+            this.angVel = this.rand(0.25, 0.35);
+        }
     }
 
     getIndex = () => Math.floor(this.tot - (this.ang / this.TAU) * this.tot) % this.tot;
@@ -120,7 +126,6 @@ export class WheelComponent implements AfterViewInit, DoCheck {
         if (!first) {
             this.lastSelection = !this.angVel ? this.lastSelection : this.getIndex();
             this.spin.nativeElement.textContent = this.sectors[this.lastSelection].label;
-            // this.deleteOption();
         }
         this.spin.nativeElement.style.background = sector.color;
     }
@@ -129,7 +134,10 @@ export class WheelComponent implements AfterViewInit, DoCheck {
         if (!this.angVel) return;
 
         this.angVel *= this.friction; // Decrement velocity by friction
-        if (this.angVel < 0.0001) this.angVel = 0; // Bring to stop
+        if (this.angVel < 0.0001) {
+            this.angVel = 0; // Bring to stop
+            this.winner.emit(this.sectors[this.lastSelection].label);
+        }
         this.ang += this.angVel; // Update angle
         this.ang %= this.TAU; // Normalize angle
         this.rotate();
@@ -138,15 +146,5 @@ export class WheelComponent implements AfterViewInit, DoCheck {
 
     engine() {
         requestAnimationFrame(this.frame.bind(this));
-    }
-
-    deleteOption() {
-        if (this.modeDelete && !this.angVel) {
-            console.log('eliminar', this.lastSelection);
-            this.sectors.splice(this.lastSelection, 1);
-            setTimeout(() => {
-                this.createWheel();
-            }, 1200);
-        }
     }
 }

@@ -18,6 +18,7 @@ export const onCreateQuestion =
     correctAnswer
     openTime
     closeTime
+    winner
     createdAt
     updatedAt
     __typename
@@ -37,6 +38,7 @@ export const onUpdateQuestion =
     correctAnswer
     openTime
     closeTime
+    winner
     createdAt
     updatedAt
     __typename
@@ -56,6 +58,7 @@ export const onDeleteQuestion =
     correctAnswer
     openTime
     closeTime
+    winner
     createdAt
     updatedAt
     __typename

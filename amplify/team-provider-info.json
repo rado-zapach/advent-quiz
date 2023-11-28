@@ -65,6 +65,14 @@
         "ranking": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
           "s3Key": "amplify-builds/ranking-69724146305137773749-build.zip"
+        },
+        "adminCanWinQuestion": {
+          "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
+          "s3Key": "amplify-builds/adminCanWinQuestion-73476a79355172767459-build.zip"
+        },
+        "adminSaveWinner": {
+          "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
+          "s3Key": "amplify-builds/adminSaveWinner-77434536475868486471-build.zip"
         }
       },
       "storage": {

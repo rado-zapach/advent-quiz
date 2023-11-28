@@ -10,6 +10,7 @@ export type CreateQuestionInput = {
     correctAnswer: string;
     openTime: string;
     closeTime: string;
+    winner?: string | null;
 };
 
 export type ModelQuestionConditionInput = {
@@ -19,6 +20,7 @@ export type ModelQuestionConditionInput = {
     correctAnswer?: ModelStringInput | null;
     openTime?: ModelStringInput | null;
     closeTime?: ModelStringInput | null;
+    winner?: ModelStringInput | null;
     and?: Array<ModelQuestionConditionInput | null> | null;
     or?: Array<ModelQuestionConditionInput | null> | null;
     not?: ModelQuestionConditionInput | null;
@@ -72,6 +74,7 @@ export type Question = {
     correctAnswer: string;
     openTime: string;
     closeTime: string;
+    winner?: string | null;
     createdAt: string;
     updatedAt: string;
 };
@@ -84,6 +87,7 @@ export type UpdateQuestionInput = {
     correctAnswer?: string | null;
     openTime?: string | null;
     closeTime?: string | null;
+    winner?: string | null;
 };
 
 export type DeleteQuestionInput = {
@@ -232,6 +236,7 @@ export type ModelQuestionFilterInput = {
     correctAnswer?: ModelStringInput | null;
     openTime?: ModelStringInput | null;
     closeTime?: ModelStringInput | null;
+    winner?: ModelStringInput | null;
     and?: Array<ModelQuestionFilterInput | null> | null;
     or?: Array<ModelQuestionFilterInput | null> | null;
     not?: ModelQuestionFilterInput | null;
@@ -367,6 +372,7 @@ export type ModelSubscriptionQuestionFilterInput = {
     correctAnswer?: ModelSubscriptionStringInput | null;
     openTime?: ModelSubscriptionStringInput | null;
     closeTime?: ModelSubscriptionStringInput | null;
+    winner?: ModelSubscriptionStringInput | null;
     and?: Array<ModelSubscriptionQuestionFilterInput | null> | null;
     or?: Array<ModelSubscriptionQuestionFilterInput | null> | null;
 };
@@ -461,6 +467,7 @@ export type CreateQuestionMutation = {
         correctAnswer: string;
         openTime: string;
         closeTime: string;
+        winner?: string | null;
         createdAt: string;
         updatedAt: string;
     } | null;
@@ -481,6 +488,7 @@ export type UpdateQuestionMutation = {
         correctAnswer: string;
         openTime: string;
         closeTime: string;
+        winner?: string | null;
         createdAt: string;
         updatedAt: string;
     } | null;
@@ -501,6 +509,7 @@ export type DeleteQuestionMutation = {
         correctAnswer: string;
         openTime: string;
         closeTime: string;
+        winner?: string | null;
         createdAt: string;
         updatedAt: string;
     } | null;
@@ -671,6 +680,15 @@ export type PlayerSaveAnswerMutation = {
     playerSaveAnswer: string;
 };
 
+export type AdminSaveWinnerMutationVariables = {
+    questionId: string;
+    username: string;
+};
+
+export type AdminSaveWinnerMutation = {
+    adminSaveWinner: string;
+};
+
 export type GetQuestionQueryVariables = {
     id: string;
 };
@@ -685,6 +703,7 @@ export type GetQuestionQuery = {
         correctAnswer: string;
         openTime: string;
         closeTime: string;
+        winner?: string | null;
         createdAt: string;
         updatedAt: string;
     } | null;
@@ -708,6 +727,7 @@ export type ListQuestionsQuery = {
             correctAnswer: string;
             openTime: string;
             closeTime: string;
+            winner?: string | null;
             createdAt: string;
             updatedAt: string;
         } | null>;
@@ -944,6 +964,15 @@ export type RankingQuery = {
     }>;
 };
 
+export type AdminCanWinQuestionQueryVariables = {
+    questionId: string;
+    username: string;
+};
+
+export type AdminCanWinQuestionQuery = {
+    adminCanWinQuestion: boolean;
+};
+
 export type OnCreateQuestionSubscriptionVariables = {
     filter?: ModelSubscriptionQuestionFilterInput | null;
 };
@@ -958,6 +987,7 @@ export type OnCreateQuestionSubscription = {
         correctAnswer: string;
         openTime: string;
         closeTime: string;
+        winner?: string | null;
         createdAt: string;
         updatedAt: string;
     } | null;
@@ -977,6 +1007,7 @@ export type OnUpdateQuestionSubscription = {
         correctAnswer: string;
         openTime: string;
         closeTime: string;
+        winner?: string | null;
         createdAt: string;
         updatedAt: string;
     } | null;
@@ -996,6 +1027,7 @@ export type OnDeleteQuestionSubscription = {
         correctAnswer: string;
         openTime: string;
         closeTime: string;
+        winner?: string | null;
         createdAt: string;
         updatedAt: string;
     } | null;

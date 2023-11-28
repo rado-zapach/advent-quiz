@@ -20,6 +20,7 @@ export const createQuestion = /* GraphQL */ `mutation CreateQuestion(
     correctAnswer
     openTime
     closeTime
+    winner
     createdAt
     updatedAt
     __typename
@@ -38,6 +39,7 @@ export const updateQuestion = /* GraphQL */ `mutation UpdateQuestion(
     correctAnswer
     openTime
     closeTime
+    winner
     createdAt
     updatedAt
     __typename
@@ -56,6 +58,7 @@ export const deleteQuestion = /* GraphQL */ `mutation DeleteQuestion(
     correctAnswer
     openTime
     closeTime
+    winner
     createdAt
     updatedAt
     __typename
@@ -205,3 +208,8 @@ export const playerSaveAnswer =
   playerSaveAnswer(questionId: $questionId, text: $text)
 }
 ` as GeneratedMutation<APITypes.PlayerSaveAnswerMutationVariables, APITypes.PlayerSaveAnswerMutation>;
+export const adminSaveWinner =
+    /* GraphQL */ `mutation AdminSaveWinner($questionId: ID!, $username: String!) {
+  adminSaveWinner(questionId: $questionId, username: $username)
+}
+` as GeneratedMutation<APITypes.AdminSaveWinnerMutationVariables, APITypes.AdminSaveWinnerMutation>;

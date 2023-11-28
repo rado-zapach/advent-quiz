@@ -7,6 +7,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatRadioModule} from '@angular/material/radio';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -16,8 +17,8 @@ import * as mutations from '../../../graphql/mutations';
 import * as queries from '../../../graphql/queries';
 import * as subscriptions from '../../../graphql/subscriptions';
 import {Question, UpdateQuestionInput} from '../../API.service';
+import {PlayerEmailPipe} from '../../common/player-email.pipe';
 import {SanitizerPipe} from '../../common/sanitizer.pipe';
-import {MatRadioModule} from '@angular/material/radio';
 
 @Component({
     selector: 'app-questions',
@@ -37,6 +38,7 @@ import {MatRadioModule} from '@angular/material/radio';
         SanitizerPipe,
         NgOptimizedImage,
         MatRadioModule,
+        PlayerEmailPipe,
     ],
     templateUrl: './questions.component.html',
     styleUrl: './questions.component.scss',
@@ -51,6 +53,7 @@ export class QuestionsComponent implements OnInit, AfterViewInit {
         'correctAnswer',
         'openTime',
         'closeTime',
+        'winner',
         'actions',
     ];
     public dataSource = new MatTableDataSource<Question>([]);

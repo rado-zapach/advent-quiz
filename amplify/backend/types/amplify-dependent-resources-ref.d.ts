@@ -23,6 +23,20 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
+    "adminCanWinQuestion": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "adminSaveWinner": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "adventquiz6a5522dcPreSignup": {
       "Arn": "string",
       "LambdaExecutionRole": "string",

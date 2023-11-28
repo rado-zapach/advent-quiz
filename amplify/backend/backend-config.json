@@ -84,6 +84,50 @@
     }
   },
   "function": {
+    "adminCanWinQuestion": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "adventquiz"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "adventquiznodemodules"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "adminSaveWinner": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "adventquiz"
+        },
+        {
+          "attributes": [
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "adventquiznodemodules"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "adventquiz6a5522dcPreSignup": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -261,6 +305,38 @@
         {
           "category": "auth",
           "resourceName": "adventquiz6a5522dc"
+        }
+      ]
+    },
+    "AMPLIFY_function_adminCanWinQuestion_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "adminCanWinQuestion"
+        }
+      ]
+    },
+    "AMPLIFY_function_adminCanWinQuestion_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "adminCanWinQuestion"
+        }
+      ]
+    },
+    "AMPLIFY_function_adminSaveWinner_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "adminSaveWinner"
+        }
+      ]
+    },
+    "AMPLIFY_function_adminSaveWinner_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "adminSaveWinner"
         }
       ]
     },

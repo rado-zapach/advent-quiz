@@ -17,6 +17,7 @@ export const getQuestion = /* GraphQL */ `query GetQuestion($id: ID!) {
     correctAnswer
     openTime
     closeTime
+    winner
     createdAt
     updatedAt
     __typename
@@ -37,6 +38,7 @@ export const listQuestions = /* GraphQL */ `query ListQuestions(
       correctAnswer
       openTime
       closeTime
+      winner
       createdAt
       updatedAt
       __typename
@@ -247,3 +249,8 @@ export const ranking = /* GraphQL */ `query Ranking {
   }
 }
 ` as GeneratedQuery<APITypes.RankingQueryVariables, APITypes.RankingQuery>;
+export const adminCanWinQuestion =
+    /* GraphQL */ `query AdminCanWinQuestion($questionId: ID!, $username: String!) {
+  adminCanWinQuestion(questionId: $questionId, username: $username)
+}
+` as GeneratedQuery<APITypes.AdminCanWinQuestionQueryVariables, APITypes.AdminCanWinQuestionQuery>;

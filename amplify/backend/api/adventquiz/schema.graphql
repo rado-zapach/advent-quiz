@@ -10,6 +10,7 @@ type Question
     correctAnswer: String!
     openTime: AWSDateTime!
     closeTime: AWSDateTime!
+    winner: String
 }
 
 type Answer @model @auth(rules: [{allow: groups, groups: ["Admins"]}, {allow: private, provider: iam}]) {
@@ -87,10 +88,16 @@ type Query {
         @auth(rules: [{allow: private}])
         @function(name: "playerAttributesList-${env}")
     ranking: [Ranking!]! @auth(rules: [{allow: private}]) @function(name: "ranking-${env}")
+    adminCanWinQuestion(questionId: ID!, username: String!): Boolean!
+        @auth(rules: [{allow: groups, groups: ["Admins"]}])
+        @function(name: "adminCanWinQuestion-${env}")
 }
 
 type Mutation {
     playerSaveAnswer(questionId: ID!, text: String!): String!
         @auth(rules: [{allow: private}])
         @function(name: "playerSaveAnswer-${env}")
+    adminSaveWinner(questionId: ID!, username: String!): String!
+        @auth(rules: [{allow: groups, groups: ["Admins"]}])
+        @function(name: "adminSaveWinner-${env}")
 }
