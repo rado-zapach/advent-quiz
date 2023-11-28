@@ -1,12 +1,12 @@
 import {CommonModule} from '@angular/common';
-import {ChangeDetectionStrategy, Component, Inject, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, OnInit, signal} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {MatButtonModule} from '@angular/material/button';
 import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {generateClient} from 'aws-amplify/api';
 import {filter, first, interval, map, switchMap, takeWhile, timer} from 'rxjs';
 import * as queries from '../../graphql/queries';
-import {Question} from '../calendar/calendar.component';
 import {GetQuestionState} from './get-question-state';
 import {PlayerQuestionState} from './player-question-state.enum';
 import {PlayerQuestionView} from './player-question-view';
@@ -22,28 +22,27 @@ import {QuestionOpenComponent} from './question-open/question-open.component';
         MatButtonModule,
         QuestionClosedComponent,
         QuestionOpenComponent,
+        MatProgressBarModule,
     ],
     templateUrl: './question.component.html',
     styleUrl: './question.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuestionComponent {
+export class QuestionComponent implements OnInit {
     public readonly client = generateClient();
-    public readonly question;
+    public readonly question = signal<PlayerQuestionView | undefined>(undefined);
     public readonly timeRemaining$;
     public readonly State = PlayerQuestionState;
 
-    public constructor(@Inject(MAT_DIALOG_DATA) q: Question) {
-        this.question = signal<PlayerQuestionView>({
-            ...q,
-            state: GetQuestionState(q),
-        });
-
+    public constructor(@Inject(MAT_DIALOG_DATA) public readonly questionId: string) {
         // update question at open/close time
         interval(1000)
             .pipe(
                 filter(() => {
                     const q = this.question();
+                    if (!q) {
+                        return false;
+                    }
                     const now = new Date().getTime();
                     const openTime = new Date(q.openTime).getTime();
                     const closeTime = new Date(q.closeTime).getTime();
@@ -56,7 +55,7 @@ export class QuestionComponent {
                     this.client.graphql({
                         query: queries.playerQuestion,
                         variables: {
-                            questionId: this.question().id,
+                            questionId: this.questionId,
                         },
                     })
                 ),
@@ -74,8 +73,12 @@ export class QuestionComponent {
 
         // update remaining time to open/close time
         this.timeRemaining$ = timer(0, 1000).pipe(
+            filter(() => !!this.question()),
             map(() => {
                 const q = this.question();
+                if (!q) {
+                    return 9999;
+                }
                 const now = new Date().getTime();
                 const openTime = new Date(q.openTime).getTime();
                 const closeTime = new Date(q.closeTime).getTime();
@@ -99,5 +102,20 @@ export class QuestionComponent {
                 return `${hours}h ${minutes}m ${seconds}s`;
             })
         );
+    }
+
+    public async ngOnInit() {
+        const result = await this.client.graphql({
+            query: queries.playerQuestion,
+            variables: {
+                questionId: this.questionId,
+            },
+        });
+        const q = result.data.playerQuestion;
+        this.question.set({
+            ...q,
+            day: new Date(q.openTime).getDate(),
+            state: GetQuestionState(q),
+        });
     }
 }

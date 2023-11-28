@@ -34,14 +34,14 @@
                     @if (!isLoading()) {
                         <span matListItemLine>{{ answer()?.points ?? "Processing" }} </span>
                     } @else {
-                        <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+                        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
                     }
                 </mat-list-item>
                 <mat-list-item>
                     <mat-icon matListItemIcon>group</mat-icon>
                     <span matListItemTitle>Players</span>
                     @if (isLoading()) {
-                        <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+                        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
                     }
                     @for (a of answerList(); track a.id) {
                         <span matListItemLine>

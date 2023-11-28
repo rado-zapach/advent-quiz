@@ -6,7 +6,7 @@
                     class="question-container"
                     mat-button
                     (click)="openQuestion(q)"
-                    [ngClass]="{disabled: !q.text}"
+                    [ngClass]="{disabled: !q.isOpen}"
                 >
                     <div class="question">
                         <img [ngSrc]="q.icon" alt="" height="128" width="128" priority="high" />

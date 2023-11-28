@@ -5,6 +5,6 @@
 <mat-dialog-actions align="end">
     <button mat-raised-button color="primary" (click)="onSave()" [disabled]="isLoading()">Save</button>
     @if (isLoading()) {
-        <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     }
 </mat-dialog-actions>

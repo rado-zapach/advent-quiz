@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>Day {{ question().day }}</h2>
+<h2 mat-dialog-title>Day {{ question()?.day ?? "" }}</h2>
 <mat-dialog-content class="mat-typography">
-    @switch (question().state) {
+    @switch (question()?.state) {
         @case (State.BEFORE) {
             <span>Opens in {{ timeRemaining$ | async }}</span>
         }
@@ -12,6 +12,9 @@
         }
         @case (State.CLOSED) {
             <app-question-closed [question]="question()"></app-question-closed>
+        }
+        @default {
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
         }
     }
 </mat-dialog-content>

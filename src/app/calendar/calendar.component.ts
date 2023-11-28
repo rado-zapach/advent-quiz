@@ -12,6 +12,7 @@ import {QuestionComponent} from '../question/question.component';
 export interface Question extends PlayerQuestion {
     day: number;
     position: number;
+    isOpen: boolean;
 }
 
 const questionPositions = [
@@ -49,6 +50,7 @@ export class CalendarComponent implements OnInit {
                 ...q,
                 day,
                 position,
+                isOpen: new Date().getTime() >= new Date(q.openTime).getTime(),
             };
         });
         questions.sort((a, b) => new Date(a.openTime).getTime() - new Date(b.openTime).getTime());
@@ -56,6 +58,6 @@ export class CalendarComponent implements OnInit {
     }
 
     public openQuestion(q: PlayerQuestion): void {
-        this.dialog.open(QuestionComponent, {data: q, width: '700px'});
+        this.dialog.open(QuestionComponent, {data: q.id, width: '700px'});
     }
 }

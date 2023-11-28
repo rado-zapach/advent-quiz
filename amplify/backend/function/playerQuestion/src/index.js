@@ -18,6 +18,7 @@ const findQuery = questionId => /* GraphQL */ `
       correctAnswer
       openTime
       closeTime
+      winner
     }
   }
 `;
@@ -76,6 +77,7 @@ export const handler = async event => {
             text: i.text,
             choices: i.choices,
             correctAnswer: i.correctAnswer,
+            winner: i.winner,
         };
     }
     return {
