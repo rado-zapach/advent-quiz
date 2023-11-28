@@ -57,16 +57,22 @@
             </div>
         </mat-sidenav>
 
-        <mat-sidenav-content>
-            <button
-                mat-button
-                (click)="drawer.toggle()"
-                class="btn-menu"
-                [matTooltip]="drawer.opened ? 'Close' : 'Menu'"
-            >
-                <mat-icon>lunch_dining</mat-icon>
-            </button>
-            <router-outlet></router-outlet>
+        <mat-sidenav-content class="flex flex-col">
+            <mat-toolbar color="primary" class="shrink-0">
+                <button
+                    mat-button
+                    (click)="drawer.toggle()"
+                    class="btn-menu"
+                    [matTooltip]="drawer.opened ? 'Close' : 'Menu'"
+                >
+                    <mat-icon>lunch_dining</mat-icon>
+                </button>
+                <h1 class="mat-h1 !mb-0 !ml-2">{{ title$ | async }}</h1>
+            </mat-toolbar>
+
+            <main class="container mx-auto px-4">
+                <router-outlet></router-outlet>
+            </main>
         </mat-sidenav-content>
     </mat-sidenav-container>
 } @else {

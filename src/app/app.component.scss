@@ -32,20 +32,9 @@ mat-sidenav-content {
     justify-content: flex-start;
 }
 
-.mat-sidenav-content {
-    padding: 0 32px;
-}
-
-.btn-menu {
-    color: #fff !important;
-    position: fixed;
-    z-index: 1000;
-    top: 4px;
-    left: 4px;
-}
-
 .btn-menu mat-icon {
     font-size: 32px;
     width: 32px;
     height: 32px;
+    margin: 0;
 }
