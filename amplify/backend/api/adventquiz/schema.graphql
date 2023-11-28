@@ -54,6 +54,7 @@ type PlayerQuestion {
     correctAnswer: String
     openTime: AWSDateTime!
     closeTime: AWSDateTime!
+    winner: String
 }
 
 type PlayerAnswer {

@@ -337,6 +337,7 @@ export type PlayerQuestion = {
     correctAnswer?: string | null;
     openTime: string;
     closeTime: string;
+    winner?: string | null;
 };
 
 export type PlayerAnswer = {
@@ -888,6 +889,7 @@ export type PlayerQuestionListQuery = {
         correctAnswer?: string | null;
         openTime: string;
         closeTime: string;
+        winner?: string | null;
     }>;
 };
 
@@ -905,6 +907,7 @@ export type PlayerQuestionQuery = {
         correctAnswer?: string | null;
         openTime: string;
         closeTime: string;
+        winner?: string | null;
     };
 };
 

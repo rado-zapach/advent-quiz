@@ -188,6 +188,7 @@ export const playerQuestionList = /* GraphQL */ `query PlayerQuestionList {
     correctAnswer
     openTime
     closeTime
+    winner
     __typename
   }
 }
@@ -201,6 +202,7 @@ export const playerQuestion = /* GraphQL */ `query PlayerQuestion($questionId: I
     correctAnswer
     openTime
     closeTime
+    winner
     __typename
   }
 }
