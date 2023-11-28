@@ -107,7 +107,7 @@ export class QuestionClosedComponent implements OnInit {
         if (!this.question) {
             throw new Error();
         }
-        if (winner.length < 1) {
+        if (!winner || winner.length < 1) {
             return;
         }
         this.winner.set(winner);
