@@ -1,42 +1,17 @@
-import {TextFieldModule} from '@angular/cdk/text-field';
 import {CommonModule} from '@angular/common';
-import {ChangeDetectionStrategy, Component, Inject, OnInit, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, signal} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import {MatListModule} from '@angular/material/list';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatRadioModule} from '@angular/material/radio';
 import {generateClient} from 'aws-amplify/api';
 import {filter, first, interval, map, switchMap, takeWhile, timer} from 'rxjs';
-import * as mutations from '../../graphql/mutations';
 import * as queries from '../../graphql/queries';
-import {PlayerAnswer, PlayerQuestion} from '../API.service';
-import {PlayerEmailPipe} from '../common/player-email.pipe';
-import {SanitizerPipe} from '../common/sanitizer.pipe';
-import {WheelComponent} from '../wheel/wheel.component';
-
-enum State {
-    BEFORE = 'before',
-    OPEN = 'open',
-    CLOSED = 'closed',
-}
-
-interface Question extends PlayerQuestion {
-    day: number;
-    state: State;
-}
-
-function GetState(q: PlayerQuestion) {
-    const now = new Date().getTime();
-    const openTime = new Date(q.openTime).getTime();
-    const closeTime = new Date(q.closeTime).getTime();
-    return now >= closeTime ? State.CLOSED : now >= openTime ? State.OPEN : State.BEFORE;
-}
+import {Question} from '../calendar/calendar.component';
+import {GetQuestionState} from './get-question-state';
+import {PlayerQuestionState} from './player-question-state.enum';
+import {PlayerQuestionView} from './player-question-view';
+import {QuestionClosedComponent} from './question-closed/question-closed.component';
+import {QuestionOpenComponent} from './question-open/question-open.component';
 
 @Component({
     selector: 'app-question',
@@ -45,36 +20,23 @@ function GetState(q: PlayerQuestion) {
         CommonModule,
         MatDialogModule,
         MatButtonModule,
-        SanitizerPipe,
-        FormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        TextFieldModule,
-        MatProgressBarModule,
-        MatIconModule,
-        MatListModule,
-        PlayerEmailPipe,
-        MatRadioModule,
-        WheelComponent,
+        QuestionClosedComponent,
+        QuestionOpenComponent,
     ],
     templateUrl: './question.component.html',
     styleUrl: './question.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuestionComponent implements OnInit {
+export class QuestionComponent {
     public readonly client = generateClient();
     public readonly question;
     public readonly timeRemaining$;
-    public readonly State = State;
-    public readonly answer = signal<PlayerAnswer | undefined>(undefined);
-    public readonly isLoading = signal(true);
-    public readonly answerList = signal<PlayerAnswer[] | undefined>(undefined);
-    public answerText: string | undefined;
+    public readonly State = PlayerQuestionState;
 
     public constructor(@Inject(MAT_DIALOG_DATA) q: Question) {
-        this.question = signal<Question>({
+        this.question = signal<PlayerQuestionView>({
             ...q,
-            state: GetState(q),
+            state: GetQuestionState(q),
         });
 
         // update question at open/close time
@@ -86,8 +48,8 @@ export class QuestionComponent implements OnInit {
                     const openTime = new Date(q.openTime).getTime();
                     const closeTime = new Date(q.closeTime).getTime();
                     return (
-                        (q.state === State.BEFORE && now >= openTime) ||
-                        (q.state === State.OPEN && now >= closeTime)
+                        (q.state === PlayerQuestionState.BEFORE && now >= openTime) ||
+                        (q.state === PlayerQuestionState.OPEN && now >= closeTime)
                     );
                 }),
                 switchMap(() =>
@@ -106,7 +68,7 @@ export class QuestionComponent implements OnInit {
                 this.question.set({
                     ...q,
                     day: new Date(q.openTime).getDate(),
-                    state: GetState(q),
+                    state: GetQuestionState(q),
                 });
             });
 
@@ -137,63 +99,5 @@ export class QuestionComponent implements OnInit {
                 return `${hours}h ${minutes}m ${seconds}s`;
             })
         );
-    }
-
-    public async ngOnInit() {
-        switch (this.question().state) {
-            case State.OPEN: {
-                const result = await this.client.graphql({
-                    query: queries.playerAnswer,
-                    variables: {
-                        questionId: this.question().id,
-                    },
-                });
-                const answer = result.data.playerAnswer;
-                if (answer) {
-                    this.answer.set(answer);
-                    this.answerText = answer.text ?? '';
-                }
-                break;
-            }
-            case State.CLOSED: {
-                const result = await Promise.all([
-                    this.client.graphql({
-                        query: queries.playerAnswer,
-                        variables: {
-                            questionId: this.question().id,
-                        },
-                    }),
-                    this.client.graphql({
-                        query: queries.playerAnswerList,
-                        variables: {
-                            questionId: this.question().id,
-                        },
-                    }),
-                ]);
-                const answer = result[0].data.playerAnswer;
-                if (answer) {
-                    this.answer.set(answer);
-                    this.answerText = answer.text ?? '';
-                }
-                const answerList = result[1].data.playerAnswerList;
-                this.answerList.set(answerList);
-                break;
-            }
-            default: {
-            }
-        }
-        this.isLoading.set(false);
-    }
-
-    public async onSubmitAnswer(): Promise<void> {
-        this.isLoading.set(true);
-        await this.client.graphql({
-            query: mutations.playerSaveAnswer,
-            variables: {
-                questionId: this.question().id,
-                text: this.answerText ?? '',
-            },
-        });
-        this.isLoading.set(false);
     }
 }

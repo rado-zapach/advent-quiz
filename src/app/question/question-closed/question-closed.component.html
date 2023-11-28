@@ -1,0 +1,53 @@
+@if (question) {
+    <div class="whitespace-pre-wrap mb-3" [innerHTML]="question.text | sanitizer"></div>
+
+    @if (question.choices) {
+        <mat-radio-group class="flex flex-col" [value]="answer()?.text" [disabled]="true">
+            @for (q of question.choices.split("\n"); track q) {
+                <mat-radio-button [value]="q">{{ q }}</mat-radio-button>
+            }
+        </mat-radio-group>
+    } @else {
+        <div class="flex flex-col">
+            <mat-form-field>
+                <textarea
+                    [value]="answer()?.text ?? ''"
+                    matInput
+                    [cdkTextareaAutosize]="true"
+                    disabled
+                ></textarea>
+            </mat-form-field>
+        </div>
+    }
+
+    <mat-list>
+        <mat-list-item>
+            <mat-icon matListItemIcon>task_alt</mat-icon>
+            <span matListItemTitle>Correct answer</span>
+            <span matListItemLine>{{ question.correctAnswer }}</span>
+        </mat-list-item>
+        <mat-list-item>
+            <mat-icon matListItemIcon>military_tech</mat-icon>
+            <span matListItemTitle>Your points</span>
+            @if (!isLoading()) {
+                <span matListItemLine>{{ answer()?.points ?? "Processing" }} </span>
+            } @else {
+                <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+            }
+        </mat-list-item>
+        <mat-list-item>
+            <mat-icon matListItemIcon>group</mat-icon>
+            <span matListItemTitle>Players</span>
+            @if (isLoading()) {
+                <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+            }
+            @for (a of answerList(); track a.id) {
+                <span matListItemLine>
+                    {{ a.player | playerEmail | async }}
+                </span>
+            }
+        </mat-list-item>
+    </mat-list>
+} @else {
+    <span>No question!</span>
+}
