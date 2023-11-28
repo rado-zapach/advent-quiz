@@ -12,6 +12,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatDividerModule} from '@angular/material/divider';
 import {PlayerAttributesService} from './common/player-attributes.service';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {MatListModule} from '@angular/material/list';
 
 @Component({
     selector: 'app-root',
@@ -27,6 +28,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
         MatSidenavModule,
         MatChipsModule,
         MatDividerModule,
+        MatListModule,
         RouterLink,
     ],
     templateUrl: './app.component.html',

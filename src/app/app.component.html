@@ -2,25 +2,26 @@
     <mat-sidenav-container class="example-container" [autosize]="true">
         <mat-sidenav #drawer class="example-sidenav" mode="over">
             <div class="app-menu">
-                <mat-chip>{{ user.email }}</mat-chip>
+                <mat-chip class="mx-4" disabled>
+                    <mat-icon matChipAvatar>person</mat-icon>
+                    {{ user.email }}
+                </mat-chip>
                 <mat-divider></mat-divider>
 
-                <button mat-button routerLink="">
-                    <mat-icon>park</mat-icon>
-                    <span>Calendar</span>
-                </button>
-                <button mat-button routerLink="leaderboard">
-                    <mat-icon>leaderboard</mat-icon>
-                    <span>Leaderboard</span>
-                </button>
-                <button mat-button routerLink="rules">
-                    <mat-icon>gavel</mat-icon>
-                    <span>Rules</span>
-                </button>
-                <button mat-button routerLink="chat">
-                    <mat-icon>chat</mat-icon>
-                    <span>Chat</span>
-                </button>
+                <mat-nav-list>
+                    <a mat-list-item routerLink="" (click)="drawer.toggle()">
+                        <mat-icon matListItemIcon>park</mat-icon>
+                        <div matListItemTitle>Calendar</div>
+                    </a>
+                    <a mat-list-item routerLink="leaderboard" (click)="drawer.toggle()">
+                        <mat-icon matListItemIcon>leaderboard</mat-icon>
+                        <div matListItemTitle>Leaderboard</div>
+                    </a>
+                    <a mat-list-item routerLink="rules" (click)="drawer.toggle()">
+                        <mat-icon matListItemIcon>gavel</mat-icon>
+                        <div matListItemTitle>Rules</div>
+                    </a>
+                </mat-nav-list>
 
                 @if (user.isAdmin) {
                     <div class="flex flex-row w-full justify-center items-center">
@@ -29,14 +30,17 @@
                         <mat-divider class="flex-1"></mat-divider>
                     </div>
 
-                    <button mat-button routerLink="admin/init-questions">
-                        <mat-icon>add_circle</mat-icon>
-                        <span>Create questions</span>
-                    </button>
-                    <button mat-button routerLink="admin/questions">
-                        <mat-icon>lists</mat-icon>
-                        <span>List questions</span>
-                    </button>
+                    <mat-nav-list>
+                        <a mat-list-item routerLink="admin/init-questions" (click)="drawer.toggle()">
+                            <mat-icon matListItemIcon>add_circle</mat-icon>
+                            <div matListItemTitle>Create questions</div>
+                        </a>
+                        <a mat-list-item routerLink="admin/questions" (click)="drawer.toggle()">
+                            <mat-icon matListItemIcon>lists</mat-icon>
+                            <div matListItemTitle>List questions</div>
+                        </a>
+                    </mat-nav-list>
+
                     <!--                    <mat-divider></mat-divider>-->
                     <!--                    <button mat-button routerLink="admin/files">-->
                     <!--                        <mat-icon>cloud_upload</mat-icon>-->
@@ -44,11 +48,12 @@
                     <!--                    </button>-->
                     <mat-divider></mat-divider>
                 }
-
-                <button mat-button (click)="userService.signOut()">
-                    <mat-icon>logout</mat-icon>
-                    <span>Sign out</span>
-                </button>
+                <mat-action-list>
+                    <button mat-list-item (click)="userService.signOut()">
+                        <mat-icon matListItemIcon>logout</mat-icon>
+                        <div matListItemTitle>Sign out</div>
+                    </button>
+                </mat-action-list>
             </div>
         </mat-sidenav>
 
@@ -59,11 +64,7 @@
                 class="btn-menu"
                 [matTooltip]="drawer.opened ? 'Close' : 'Menu'"
             >
-                @if (drawer.opened) {
-                    <mat-icon>close</mat-icon>
-                } @else {
-                    <mat-icon>lunch_dining</mat-icon>
-                }
+                <mat-icon>lunch_dining</mat-icon>
             </button>
             <router-outlet></router-outlet>
         </mat-sidenav-content>

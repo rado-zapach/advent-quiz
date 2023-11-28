@@ -1,6 +1,9 @@
 .spacer {
     flex: 1 1 auto;
 }
+.mat-mdc-standard-chip.mdc-evolution-chip--disabled {
+    opacity: 1 !important;
+}
 .example-container {
     width: 100%;
     height: 100%;
@@ -14,7 +17,8 @@ mat-sidenav-content {
 }
 
 .example-sidenav {
-    padding: 24px;
+    padding-top: 24px;
+    padding-bottom: 24px;
 }
 
 .app-menu {
@@ -28,10 +32,16 @@ mat-sidenav-content {
     justify-content: flex-start;
 }
 
+.mat-sidenav-content {
+    padding: 0 32px;
+}
+
 .btn-menu {
     color: #fff !important;
     position: fixed;
     z-index: 1000;
+    top: 4px;
+    left: 4px;
 }
 
 .btn-menu mat-icon {
