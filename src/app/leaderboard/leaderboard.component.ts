@@ -1,5 +1,12 @@
 import {CommonModule} from '@angular/common';
-import {AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    OnInit,
+    signal,
+    ViewChild,
+} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -15,6 +22,7 @@ import {SanitizerPipe} from '../common/sanitizer.pipe';
 import {generateClient} from 'aws-amplify/api';
 import {Ranking} from '../API.service';
 import * as queries from '../../graphql/queries';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @Component({
     selector: 'app-leaderboard',
@@ -33,6 +41,7 @@ import * as queries from '../../graphql/queries';
         MatTooltipModule,
         PlayerEmailPipe,
         SanitizerPipe,
+        MatProgressBarModule,
     ],
     templateUrl: './leaderboard.component.html',
     styleUrl: './leaderboard.component.scss',
@@ -42,12 +51,14 @@ export class LeaderboardComponent implements OnInit, AfterViewInit {
     public readonly client = generateClient();
     public readonly displayedColumns = ['player', 'points', 'ratio'];
     public dataSource = new MatTableDataSource<Ranking>([]);
+    public isLoading = signal(true);
 
     public async ngOnInit(): Promise<void> {
         const response = await this.client.graphql({
             query: queries.ranking,
         });
         this.dataSource.data = response.data.ranking;
+        this.isLoading.set(false);
     }
 
     @ViewChild(MatSort) sort: MatSort | undefined;

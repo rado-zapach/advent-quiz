@@ -1,33 +1,37 @@
 <div class="leaderboard">
-    <mat-table
-        matSort
-        matSortActive="points"
-        matSortDirection="desc"
-        [dataSource]="dataSource"
-        class="table"
-    >
-        <ng-container matColumnDef="player">
-            <mat-header-cell *matHeaderCellDef>Player</mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                {{ element.player | playerEmail | async }}
-            </mat-cell>
-        </ng-container>
+    @if (isLoading()) {
+        <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+    } @else {
+        <mat-table
+            matSort
+            matSortActive="points"
+            matSortDirection="desc"
+            [dataSource]="dataSource"
+            class="table"
+        >
+            <ng-container matColumnDef="player">
+                <mat-header-cell *matHeaderCellDef>Player</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{ element.player | playerEmail | async }}
+                </mat-cell>
+            </ng-container>
 
-        <ng-container matColumnDef="points">
-            <mat-header-cell mat-sort-header *matHeaderCellDef>Points</mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                {{ element.points }}
-            </mat-cell>
-        </ng-container>
+            <ng-container matColumnDef="points">
+                <mat-header-cell mat-sort-header *matHeaderCellDef>Points</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{ element.points }}
+                </mat-cell>
+            </ng-container>
 
-        <ng-container matColumnDef="ratio">
-            <mat-header-cell mat-sort-header *matHeaderCellDef>Correct </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                {{ element.correctAnswers }}
-            </mat-cell>
-        </ng-container>
+            <ng-container matColumnDef="ratio">
+                <mat-header-cell mat-sort-header *matHeaderCellDef>Correct</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{ element.correctAnswers }}
+                </mat-cell>
+            </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-    </mat-table>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+    }
 </div>
