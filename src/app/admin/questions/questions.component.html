@@ -33,7 +33,11 @@
                         matTooltip="Use a new line (enter) to create multiple choices"
                     ></mat-icon>
                 } @else if (element.choices) {
-                    <mat-radio-group class="flex flex-col" [disabled]="true">
+                    <mat-radio-group
+                        class="flex flex-col"
+                        [disabled]="true"
+                        [value]="element.correctAnswer"
+                    >
                         @for (q of element.choices.split("\n"); track q) {
                             <mat-radio-button [value]="q">{{ q }}</mat-radio-button>
                         }
