@@ -36,20 +36,20 @@ $md-primary-palette: (
 );
 
 $md-accent-palette: (
-    50: #e6fae7,
-    100: #bff4c4,
-    200: #95ec9d,
-    300: #6be475,
-    400: #4bdf58,
-    500: #2bd93a,
-    600: #26d534,
-    700: #20cf2c,
-    800: #1aca25,
-    900: #10c018,
-    A100: #efffef,
-    A200: #bcffbe,
-    A400: #89ff8d,
-    A700: #6fff74,
+    50: #edfbfe,
+    100: #d3f5fe,
+    200: #b5eefd,
+    300: #97e7fc,
+    400: #81e2fb,
+    500: #6bddfa,
+    600: #63d9f9,
+    700: #58d4f9,
+    800: #4ecff8,
+    900: #3cc7f6,
+    A100: #ffffff,
+    A200: #ffffff,
+    A400: #dcf6ff,
+    A700: #c3efff,
     contrast: (
         50: #000000,
         100: #000000,
@@ -60,7 +60,7 @@ $md-accent-palette: (
         600: #000000,
         700: #000000,
         800: #000000,
-        900: #ffffff,
+        900: #000000,
         A100: #000000,
         A200: #000000,
         A400: #000000,
@@ -69,7 +69,7 @@ $md-accent-palette: (
 );
 
 $my-primary: mat.define-palette($md-primary-palette, 500);
-$my-accent: mat.define-palette($md-accent-palette, A200, A100, A400);
+$my-accent: mat.define-palette($md-accent-palette, 400, A100, A400);
 
 $my-theme: mat.define-light-theme(
     (
