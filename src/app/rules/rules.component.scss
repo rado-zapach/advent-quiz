@@ -9,6 +9,8 @@
     line-height: 38px;
 }
 
-.spacer {
-    flex: 1;
+@media (min-width: 1024px) {
+    .rules {
+        max-width: 1024px;
+    }
 }
