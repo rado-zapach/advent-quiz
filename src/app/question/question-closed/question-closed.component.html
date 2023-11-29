@@ -4,7 +4,7 @@
             <div class="whitespace-pre-wrap mb-3" [innerHTML]="question.text | sanitizer"></div>
 
             @if (question.choices) {
-                <mat-radio-group class="flex flex-col" [value]="answer()?.text" [disabled]="true">
+                <mat-radio-group class="flex flex-col mb-3" [value]="answer()?.text" [disabled]="true">
                     @for (q of question.choices.split("\n"); track q) {
                         <mat-radio-button [value]="q">{{ q }}</mat-radio-button>
                     }
@@ -62,13 +62,26 @@
         </mat-tab>
         <mat-tab label="Lottery">
             @if (lotteryOptions(); as options) {
-                <app-wheel [options]="options" (winner)="onWinner($event)"></app-wheel>
-                <span>Winner is: {{ winner() }}</span>
-                @if ((userService.user$ | async)?.isAdmin) {
-                    <button mat-raised-button color="primary" (click)="onSaveWinner()">
-                        Save winner
-                    </button>
-                }
+                <div class="flex flex-col gap-3 py-3">
+                    <app-wheel
+                        class="self-center"
+                        [options]="options"
+                        (winner)="onWinner($event)"
+                    ></app-wheel>
+                    <div>
+                        Winner is: <b>{{ winner() }}</b>
+                    </div>
+                    @if ((userService.user$ | async)?.isAdmin) {
+                        <button
+                            mat-raised-button
+                            class="w-[250px]"
+                            color="primary"
+                            (click)="onSaveWinner()"
+                        >
+                            Save winner
+                        </button>
+                    }
+                </div>
             }
         </mat-tab>
     </mat-tab-group>
