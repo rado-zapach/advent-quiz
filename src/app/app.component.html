@@ -39,13 +39,11 @@
                             <mat-icon matListItemIcon>lists</mat-icon>
                             <div matListItemTitle>List questions</div>
                         </a>
+                        <a mat-list-item routerLink="admin/files" (click)="drawer.toggle()">
+                            <mat-icon matListItemIcon>cloud_upload</mat-icon>
+                            <div matListItemTitle>Files</div>
+                        </a>
                     </mat-nav-list>
-
-                    <!--                    <mat-divider></mat-divider>-->
-                    <!--                    <button mat-button routerLink="admin/files">-->
-                    <!--                        <mat-icon>cloud_upload</mat-icon>-->
-                    <!--                        <span>Files</span>-->
-                    <!--                    </button>-->
                     <mat-divider></mat-divider>
                 }
                 <mat-action-list>
