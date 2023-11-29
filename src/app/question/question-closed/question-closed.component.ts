@@ -73,6 +73,7 @@ export class QuestionClosedComponent implements OnInit {
     });
 
     public winner = signal<string | undefined>(undefined);
+    public winnerText = signal<string | undefined>(undefined);
 
     public async ngOnInit() {
         if (!this.question) {
@@ -103,26 +104,34 @@ export class QuestionClosedComponent implements OnInit {
         this.isLoading.set(false);
     }
 
-    public async onWinner(winner: string): Promise<void> {
+    public async onWinner(winner: string, isAdmin: boolean): Promise<void> {
+        if (!isAdmin) {
+            return;
+        }
         if (!this.question) {
             throw new Error();
         }
         if (!winner || winner.length < 1) {
             return;
         }
-        this.winner.set(winner);
-
         const attr = this.playerAttributesService.attributes.find(attr => attr.email.startsWith(winner));
         if (!attr) {
             throw new Error();
         }
-        this.client.graphql({
+        const hasCorrectAnswer = await this.client.graphql({
             query: queries.adminCanWinQuestion,
             variables: {
                 questionId: this.question.id,
                 username: attr.username,
             },
         });
+        if (hasCorrectAnswer) {
+            this.winner.set(winner);
+            this.winnerText.set(`Player ${winner} answered correctly. Good job!`);
+        } else {
+            this.winner.set(undefined);
+            this.winnerText.set(`Player ${winner} did NOT answer correctly. Spin again!`);
+        }
     }
 
     public async onSaveWinner(): Promise<void> {
