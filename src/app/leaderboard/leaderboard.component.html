@@ -2,13 +2,14 @@
     @if (isLoading()) {
         <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
     } @else {
-        <mat-table
-            matSort
-            matSortActive="points"
-            matSortDirection="desc"
-            [dataSource]="dataSource"
-            class="table"
-        >
+        <mat-table [dataSource]="dataSource" class="table">
+            <ng-container matColumnDef="position">
+                <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{ element.position }}
+                </mat-cell>
+            </ng-container>
+
             <ng-container matColumnDef="player">
                 <mat-header-cell *matHeaderCellDef>Player</mat-header-cell>
                 <mat-cell *matCellDef="let element">
@@ -17,7 +18,7 @@
             </ng-container>
 
             <ng-container matColumnDef="points">
-                <mat-header-cell mat-sort-header *matHeaderCellDef>Points</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>Points</mat-header-cell>
                 <mat-cell *matCellDef="let element">
                     {{ element.points }}
                 </mat-cell>
