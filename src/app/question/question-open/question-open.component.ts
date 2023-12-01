@@ -42,22 +42,10 @@ export class QuestionOpenComponent implements OnInit {
     public timeRemaining: string | undefined | null;
 
     public answerText: string | undefined;
+    public answerTime: string | undefined;
 
     public async ngOnInit() {
-        if (!this.question) {
-            throw new Error('No question!');
-        }
-
-        const result = await this.client.graphql({
-            query: queries.playerAnswer,
-            variables: {
-                questionId: this.question.id,
-            },
-        });
-        const answer = result.data.playerAnswer;
-        if (answer) {
-            this.answerText = answer.text ?? '';
-        }
+        await this.fetchAnswer();
         this.isLoading.set(false);
     }
 
@@ -74,6 +62,25 @@ export class QuestionOpenComponent implements OnInit {
                 text: this.answerText ?? '',
             },
         });
+        await this.fetchAnswer();
         this.isLoading.set(false);
+    }
+
+    private async fetchAnswer(): Promise<void> {
+        if (!this.question) {
+            throw new Error('No question!');
+        }
+
+        const result = await this.client.graphql({
+            query: queries.playerAnswer,
+            variables: {
+                questionId: this.question.id,
+            },
+        });
+        const answer = result.data.playerAnswer;
+        if (answer) {
+            this.answerText = answer.text ?? '';
+            this.answerTime = answer.saveTime ?? '';
+        }
     }
 }

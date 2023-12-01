@@ -27,7 +27,10 @@
         @if (isLoading()) {
             <mat-progress-bar mode="indeterminate"></mat-progress-bar>
         }
-        <div class="mt-2">Closes in {{ timeRemaining }}</div>
+        <div class="flex justify-between mt-2">
+            <span>Submitted at: {{ answerTime | date: "HH:mm:ss" }}</span>
+            <span>Closes in {{ timeRemaining }}</span>
+        </div>
     </div>
 } @else {
     <span>No question!</span>
