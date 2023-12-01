@@ -5,7 +5,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {generateClient} from 'aws-amplify/api';
-import {filter, first, interval, map, switchMap, takeWhile, timer} from 'rxjs';
+import {debounceTime, filter, first, interval, map, switchMap, takeWhile, timer} from 'rxjs';
 import * as queries from '../../graphql/queries';
 import {GetQuestionState} from './get-question-state';
 import {PlayerQuestionState} from './player-question-state.enum';
@@ -51,6 +51,7 @@ export class QuestionComponent implements OnInit {
                         (q.state === PlayerQuestionState.OPEN && now >= closeTime)
                     );
                 }),
+                debounceTime(1000),
                 switchMap(() =>
                     this.client.graphql({
                         query: queries.playerQuestion,
