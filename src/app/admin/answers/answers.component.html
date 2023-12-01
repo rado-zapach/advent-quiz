@@ -63,15 +63,15 @@
                         <button mat-icon-button matTooltip="Edit" (click)="onStartEdit(element)">
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <!--                    <button mat-icon-button matTooltip="More" [matMenuTriggerFor]="actionsMenu">-->
-                        <!--                        <mat-icon>more_vert</mat-icon>-->
-                        <!--                    </button>-->
-                        <!--                    <mat-menu #actionsMenu>-->
-                        <!--                        <button mat-menu-item (click)="onDelete(element.id)">-->
-                        <!--                            <mat-icon>delete</mat-icon>-->
-                        <!--                            <span>Delete</span>-->
-                        <!--                        </button>-->
-                        <!--                    </mat-menu>-->
+                        <button mat-icon-button matTooltip="More" [matMenuTriggerFor]="actionsMenu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #actionsMenu>
+                            <button mat-menu-item (click)="onDelete(element.id)">
+                                <mat-icon>delete</mat-icon>
+                                <span>Delete</span>
+                            </button>
+                        </mat-menu>
                     } @else {
                         <button mat-icon-button matTooltip="Cancel" (click)="onStartEdit(undefined)">
                             <mat-icon>close</mat-icon>
