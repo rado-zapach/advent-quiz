@@ -234,7 +234,7 @@ export class AnswersComponent implements AfterViewInit {
         const correctAnswersCount = this.dataSource.data.filter(a => a.isCorrect).length;
         const playerPoints = Math.min(
             parseInt(maxPlayerPoints),
-            Math.ceil(parseInt(allPoints) / correctAnswersCount)
+            Math.floor(parseInt(allPoints) / correctAnswersCount)
         );
         const queries = this.dataSource.data.map(a => {
             const points = a.isCorrect ? playerPoints : 0;
