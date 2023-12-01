@@ -13,7 +13,7 @@ import {
     ViewChild,
 } from '@angular/core';
 
-const COLORS = ['#f82', '#0bf', '#fb0', '#0fb', '#b0f', '#f0b', '#bf0'];
+const COLORS = ['#E53935', '#E91E63', '#BA68C8', '#1E88E5', '#00ACC1', '#C0CA33', '#F57C00'];
 
 @Component({
     selector: 'app-wheel',
@@ -114,6 +114,10 @@ export class WheelComponent implements AfterViewInit, DoCheck {
         this.ctx.textAlign = 'right';
         this.ctx.fillStyle = '#fff';
         this.ctx.font = 'bold 16px sans-serif';
+
+        this.ctx.strokeStyle = '#444';
+        this.ctx.strokeText(sector.label, this.rad - 10, 10);
+
         this.ctx.fillText(sector.label, this.rad - 10, 10);
         //
         this.ctx.restore();
