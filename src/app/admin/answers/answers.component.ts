@@ -11,10 +11,12 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -27,8 +29,6 @@ import * as subscriptions from '../../../graphql/subscriptions';
 import {Answer, Question, UpdateAnswerInput} from '../../API.service';
 import {PlayerEmailPipe} from '../../common/player-email.pipe';
 import {SanitizerPipe} from '../../common/sanitizer.pipe';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatExpansionModule} from '@angular/material/expansion';
 
 interface QuestionWithDay extends Question {
     day: number;
@@ -61,7 +61,7 @@ interface QuestionWithDay extends Question {
 export class AnswersComponent implements AfterViewInit {
     private readonly route = inject(ActivatedRoute);
     public readonly client = generateClient();
-    public readonly displayedColumns = ['player', 'text', 'isCorrect', 'points', 'updatedAt', 'actions'];
+    public readonly displayedColumns = ['player', 'text', 'isCorrect', 'points', 'saveTime', 'actions'];
     public dataSource = new MatTableDataSource<Answer>([]);
     public editAnswer: UpdateAnswerInput | undefined;
     public question = signal<QuestionWithDay | undefined>(undefined);
@@ -154,6 +154,16 @@ export class AnswersComponent implements AfterViewInit {
     public ngAfterViewInit() {
         if (this.sort) {
             this.dataSource.sort = this.sort;
+
+            this.dataSource.sortingDataAccessor = (item, property) => {
+                switch (property) {
+                    case 'saveTime':
+                        return new Date(item.saveTime);
+                    default:
+                        // @ts-ignore
+                        return item[property];
+                }
+            };
         }
     }
 
@@ -224,7 +234,7 @@ export class AnswersComponent implements AfterViewInit {
         const correctAnswersCount = this.dataSource.data.filter(a => a.isCorrect).length;
         const playerPoints = Math.min(
             parseInt(maxPlayerPoints),
-            parseInt(allPoints) / correctAnswersCount
+            Math.ceil(parseInt(allPoints) / correctAnswersCount)
         );
         const queries = this.dataSource.data.map(a => {
             const points = a.isCorrect ? playerPoints : 0;

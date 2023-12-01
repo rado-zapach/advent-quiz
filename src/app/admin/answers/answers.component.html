@@ -11,7 +11,7 @@
     </mat-accordion>
 
     <div class="mat-elevation-z8">
-        <mat-table matSort matSortActive="player" matSortDirection="asc" [dataSource]="dataSource">
+        <mat-table matSort matSortActive="saveTime" matSortDirection="asc" [dataSource]="dataSource">
             <ng-container matColumnDef="player">
                 <mat-header-cell mat-sort-header *matHeaderCellDef>Player</mat-header-cell>
                 <mat-cell *matCellDef="let element">
@@ -49,7 +49,7 @@
                 </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="updatedAt">
+            <ng-container matColumnDef="saveTime">
                 <mat-header-cell mat-sort-header *matHeaderCellDef>Time</mat-header-cell>
                 <mat-cell *matCellDef="let element">
                     {{ element.saveTime | date: "HH:mm:ss" }}
