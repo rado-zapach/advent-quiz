@@ -95,7 +95,7 @@ type Query {
 }
 
 type Mutation {
-    playerSaveAnswer(questionId: ID!, text: String!): String!
+    playerSaveAnswer(questionId: ID!, text: String!): PlayerAnswer!
         @auth(rules: [{allow: private}])
         @function(name: "playerSaveAnswer-${env}")
     adminSaveWinner(questionId: ID!, username: String!): String!

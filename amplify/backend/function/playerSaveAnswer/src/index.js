@@ -16,32 +16,42 @@ const AWS_REGION = process.env.AWS_REGION || "us-east-1";
 
 const findQuery = (questionId, player) => ({
     query: /* GraphQL */ `
-    query MyQuery {
-      listAnswers(filter: {questionId: {eq: "${questionId}"}, and: {player: {eq: "${player}"}}}) {
-        items {
-          id
+        query MyQuery {
+            listAnswers(filter: {questionId: {eq: "${questionId}"}, and: {player: {eq: "${player}"}}}) {
+                items {
+                    id
+                }
+            }
+            getQuestion(id: "${questionId}") {
+                correctAnswer
+                openTime
+                closeTime
+            }
         }
-      }
-      getQuestion(id: "${questionId}") {
-        openTime
-        closeTime
-      }
-    }
-  `,
+    `,
 });
 
-const createQuery = (player, text, questionId) => ({
+const createQuery = (player, text, questionId, isCorrect) => ({
     query: /* GraphQL */ `
         mutation MyMutation(
             $player: String!
             $text: String!
             $questionId: String!
             $saveTime: AWSDateTime!
+            $isCorrect: Boolean!
         ) {
             createAnswer(
-                input: {player: $player, text: $text, questionId: $questionId, saveTime: $saveTime}
+                input: {
+                    player: $player
+                    text: $text
+                    questionId: $questionId
+                    saveTime: $saveTime
+                    isCorrect: $isCorrect
+                }
             ) {
                 id
+                player
+                saveTime
             }
         }
     `,
@@ -50,13 +60,23 @@ const createQuery = (player, text, questionId) => ({
         text,
         questionId,
         saveTime: new Date().toISOString(),
+        isCorrect,
     },
 });
-const updateQuery = (answerId, text) => ({
+const updateQuery = (answerId, text, isCorrect) => ({
     query: /* GraphQL */ `
-        mutation MyMutation($answerId: ID!, $text: String!, $saveTime: AWSDateTime!) {
-            updateAnswer(input: {id: $answerId, text: $text, saveTime: $saveTime}) {
+        mutation MyMutation(
+            $answerId: ID!
+            $text: String!
+            $saveTime: AWSDateTime!
+            $isCorrect: Boolean!
+        ) {
+            updateAnswer(
+                input: {id: $answerId, text: $text, saveTime: $saveTime, isCorrect: $isCorrect}
+            ) {
                 id
+                player
+                saveTime
             }
         }
     `,
@@ -64,6 +84,7 @@ const updateQuery = (answerId, text) => ({
         answerId,
         text,
         saveTime: new Date().toISOString(),
+        isCorrect,
     },
 });
 
@@ -110,16 +131,25 @@ export const handler = async event => {
     if (now < openTime || now > closeTime) {
         throw new Error(`Question is not open!`);
     }
+    const isCorrect = question.correctAnswer.toLowerCase().trim() === text.toLowerCase().trim();
 
     if (answers.length <= 0) {
-        const id = await MakeRequest(createQuery(player, text, questionId));
-        return id.data.createAnswer.id;
+        const result = await MakeRequest(createQuery(player, text, questionId, isCorrect));
+        return {
+            id: result.data.createAnswer.id,
+            player: result.data.createAnswer.player,
+            saveTime: result.data.createAnswer.saveTime,
+        };
     }
 
     if (answers.length > 1) {
         answers.sort((a, b) => new Date(b.openTime).getTime() - new Date(a.openTime).getTime());
     }
     const answerId = answers[0].id;
-    const id = await MakeRequest(updateQuery(answerId, text));
-    return id.data.updateAnswer.id;
+    const result = await MakeRequest(updateQuery(answerId, text, isCorrect));
+    return {
+        id: result.data.updateAnswer.id,
+        player: result.data.updateAnswer.player,
+        saveTime: result.data.updateAnswer.saveTime,
+    };
 };

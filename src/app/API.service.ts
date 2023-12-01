@@ -228,6 +228,17 @@ export type DeleteRulesInput = {
     id: string;
 };
 
+export type PlayerAnswer = {
+    __typename: 'PlayerAnswer';
+    id: string;
+    player: string;
+    text?: string | null;
+    isCorrect?: boolean | null;
+    points?: number | null;
+    saveTime?: string | null;
+    questionId?: string | null;
+};
+
 export type ModelQuestionFilterInput = {
     id?: ModelIDInput | null;
     text?: ModelStringInput | null;
@@ -338,17 +349,6 @@ export type PlayerQuestion = {
     openTime: string;
     closeTime: string;
     winner?: string | null;
-};
-
-export type PlayerAnswer = {
-    __typename: 'PlayerAnswer';
-    id: string;
-    player: string;
-    text?: string | null;
-    isCorrect?: boolean | null;
-    points?: number | null;
-    saveTime?: string | null;
-    questionId?: string | null;
 };
 
 export type PlayerAttributes = {
@@ -678,7 +678,16 @@ export type PlayerSaveAnswerMutationVariables = {
 };
 
 export type PlayerSaveAnswerMutation = {
-    playerSaveAnswer: string;
+    playerSaveAnswer: {
+        __typename: 'PlayerAnswer';
+        id: string;
+        player: string;
+        text?: string | null;
+        isCorrect?: boolean | null;
+        points?: number | null;
+        saveTime?: string | null;
+        questionId?: string | null;
+    };
 };
 
 export type AdminSaveWinnerMutationVariables = {

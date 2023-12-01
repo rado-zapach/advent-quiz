@@ -205,7 +205,16 @@ export const deleteRules = /* GraphQL */ `mutation DeleteRules(
 ` as GeneratedMutation<APITypes.DeleteRulesMutationVariables, APITypes.DeleteRulesMutation>;
 export const playerSaveAnswer =
     /* GraphQL */ `mutation PlayerSaveAnswer($questionId: ID!, $text: String!) {
-  playerSaveAnswer(questionId: $questionId, text: $text)
+  playerSaveAnswer(questionId: $questionId, text: $text) {
+    id
+    player
+    text
+    isCorrect
+    points
+    saveTime
+    questionId
+    __typename
+  }
 }
 ` as GeneratedMutation<APITypes.PlayerSaveAnswerMutationVariables, APITypes.PlayerSaveAnswerMutation>;
 export const adminSaveWinner =

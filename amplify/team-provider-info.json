@@ -31,11 +31,11 @@
       "function": {
         "playerQuestionList": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerQuestionList-4343786f4958626b5342-build.zip"
+          "s3Key": "amplify-builds/playerQuestionList-45375162713638656961-build.zip"
         },
         "playerSaveAnswer": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerSaveAnswer-345a6c61566a50396e64-build.zip"
+          "s3Key": "amplify-builds/playerSaveAnswer-434337414f477975624f-build.zip"
         },
         "adventquiznodemodules": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
@@ -43,7 +43,7 @@
         },
         "playerQuestion": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerQuestion-39536e456b626a566238-build.zip"
+          "s3Key": "amplify-builds/playerQuestion-70412f374f6b5450336a-build.zip"
         },
         "playerAnswerList": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",

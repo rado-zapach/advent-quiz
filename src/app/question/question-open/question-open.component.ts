@@ -55,14 +55,14 @@ export class QuestionOpenComponent implements OnInit {
         }
 
         this.isLoading.set(true);
-        await this.client.graphql({
+        const result = await this.client.graphql({
             query: mutations.playerSaveAnswer,
             variables: {
                 questionId: this.question.id,
                 text: this.answerText ?? '',
             },
         });
-        await this.fetchAnswer();
+        this.answerTime = result.data.playerSaveAnswer.saveTime ?? '';
         this.isLoading.set(false);
     }
 
