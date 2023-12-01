@@ -73,7 +73,7 @@ export class QuestionClosedComponent implements OnInit {
     });
 
     public winner = signal<string | undefined>(undefined);
-    public winnerText = signal<string | undefined>(undefined);
+    public isCorrect = signal<boolean>(false);
 
     public async ngOnInit() {
         if (!this.question) {
@@ -105,6 +105,8 @@ export class QuestionClosedComponent implements OnInit {
     }
 
     public async onWinner(winner: string, isAdmin: boolean): Promise<void> {
+        this.winner.set(undefined);
+        this.isCorrect.set(false);
         if (!isAdmin) {
             return;
         }
@@ -125,13 +127,8 @@ export class QuestionClosedComponent implements OnInit {
                 username: attr.username,
             },
         });
-        if (hasCorrectAnswer) {
-            this.winner.set(winner);
-            this.winnerText.set(`Player ${winner} answered correctly. Good job!`);
-        } else {
-            this.winner.set(undefined);
-            this.winnerText.set(`Player ${winner} did NOT answer correctly. Spin again!`);
-        }
+        this.winner.set(winner);
+        this.isCorrect.set(hasCorrectAnswer.data.adminCanWinQuestion);
     }
 
     public async onSaveWinner(): Promise<void> {

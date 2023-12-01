@@ -70,14 +70,20 @@
                             (winner)="onWinner($event, user.isAdmin)"
                         ></app-wheel>
                         @if (user.isAdmin) {
-                            <div>
-                                {{ winnerText() }}
-                            </div>
+                            @if (isCorrect()) {
+                                <span class="self-center"
+                                    ><b>{{ winner() }}</b> has <b>correct</b> answer. Good job!</span
+                                >
+                            } @else if (winner()) {
+                                <span class="self-center"
+                                    ><b>{{ winner() }}</b> has <b>incorrect</b> answer. Spin again!</span
+                                >
+                            }
                             <button
                                 mat-raised-button
-                                class="w-[250px]"
+                                class="w-[250px] self-center"
                                 color="primary"
-                                [disabled]="!winner()"
+                                [disabled]="!isCorrect()"
                                 (click)="onSaveWinner()"
                             >
                                 Save winner
