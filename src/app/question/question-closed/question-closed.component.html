@@ -1,7 +1,7 @@
 @if (question) {
     <mat-tab-group>
         <mat-tab label="Results">
-            <div class="whitespace-pre-wrap mb-3" [innerHTML]="question.text | sanitizer"></div>
+            <div class="whitespace-pre-wrap my-3" [innerHTML]="question.text | sanitizer"></div>
 
             @if (question.choices) {
                 <mat-radio-group class="flex flex-col mb-3" [value]="answer()?.text" [disabled]="true">
@@ -46,18 +46,6 @@
                         <span matListItemLine>No winner yet</span>
                     }
                 </mat-list-item>
-                <!--                <mat-list-item>-->
-                <!--                    <mat-icon matListItemIcon>group</mat-icon>-->
-                <!--                    <span matListItemTitle>Players</span>-->
-                <!--                    @if (isLoading()) {-->
-                <!--                        <mat-progress-bar mode="indeterminate"></mat-progress-bar>-->
-                <!--                    }-->
-                <!--                    @for (a of answerList(); track a.id) {-->
-                <!--                        <span matListItemLine>-->
-                <!--                            {{ a.player | playerEmail | async }}-->
-                <!--                        </span>-->
-                <!--                    }-->
-                <!--                </mat-list-item>-->
             </mat-list>
         </mat-tab>
         <mat-tab label="Lottery">
