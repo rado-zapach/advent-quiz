@@ -43,7 +43,7 @@
         },
         "playerQuestion": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerQuestion-70412f374f6b5450336a-build.zip"
+          "s3Key": "amplify-builds/playerQuestion-3534316d6952772b7355-build.zip"
         },
         "playerAnswerList": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
@@ -76,7 +76,7 @@
         },
         "playerQuestionListDirect": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerQuestionListDirect-7a4a656d735174563866-build.zip"
+          "s3Key": "amplify-builds/playerQuestionListDirect-4a33646a476479484357-build.zip"
         }
       },
       "storage": {
