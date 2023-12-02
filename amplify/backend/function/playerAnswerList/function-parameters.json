@@ -1,16 +1,10 @@
 {
-    "permissions": {
-        "api": {
-            "adventquiz": ["Query"]
-        }
-    },
-    "lambdaLayers": [
-        {
-            "type": "ProjectLayer",
-            "resourceName": "adventquiznodemodules",
-            "env": "dev",
-            "version": "Always choose latest version",
-            "isLatestVersionSelected": true
-        }
-    ]
+  "permissions": {
+    "api": {
+      "adventquiz": [
+        "Query"
+      ]
+    }
+  },
+  "lambdaLayers": []
 }
