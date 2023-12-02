@@ -97,11 +97,7 @@
           ]
         },
         "Runtime": "nodejs18.x",
-        "Layers": [
-          {
-            "Ref": "functionadventquiznodemodulesArn"
-          }
-        ],
+        "Layers": [],
         "Timeout": 25
       }
     },

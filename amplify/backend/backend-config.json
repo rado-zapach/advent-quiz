@@ -213,13 +213,6 @@
           ],
           "category": "api",
           "resourceName": "adventquiz"
-        },
-        {
-          "attributes": [
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "adventquiznodemodules"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -228,13 +221,6 @@
     "playerQuestionList": {
       "build": true,
       "dependsOn": [
-        {
-          "attributes": [
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "adventquiznodemodules"
-        },
         {
           "attributes": [
             "GraphQLAPIIdOutput",
