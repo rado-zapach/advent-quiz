@@ -61,7 +61,15 @@ interface QuestionWithDay extends Question {
 export class AnswersComponent implements AfterViewInit {
     private readonly route = inject(ActivatedRoute);
     public readonly client = generateClient();
-    public readonly displayedColumns = ['player', 'text', 'isCorrect', 'points', 'saveTime', 'actions'];
+    public readonly displayedColumns = [
+        'index',
+        'player',
+        'text',
+        'isCorrect',
+        'points',
+        'saveTime',
+        'actions',
+    ];
     public dataSource = new MatTableDataSource<Answer>([]);
     public editAnswer: UpdateAnswerInput | undefined;
     public question = signal<QuestionWithDay | undefined>(undefined);
