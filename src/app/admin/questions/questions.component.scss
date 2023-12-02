@@ -9,3 +9,15 @@ mat-form-field {
 .red-color {
     background-color: #e40050;
 }
+
+.mat-column-icon {
+    flex: 0 0 90px;
+}
+
+.mat-column-actions {
+    flex: 0 0 170px;
+}
+
+.mat-column-text {
+    flex: 0 0 30%;
+}
