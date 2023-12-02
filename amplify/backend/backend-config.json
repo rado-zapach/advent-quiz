@@ -148,13 +148,6 @@
           ],
           "category": "api",
           "resourceName": "adventquiz"
-        },
-        {
-          "attributes": [
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "adventquiznodemodules"
         }
       ],
       "providerPlugin": "awscloudformation",

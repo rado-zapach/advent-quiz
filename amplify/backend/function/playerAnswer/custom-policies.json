@@ -1,6 +1,52 @@
 [
-    {
-        "Action": [],
-        "Resource": []
-    }
+  {
+    "Action": ["dynamodb:*"],
+    "Resource": [
+      {
+        "Fn::Join": ["", [
+          "arn:aws:dynamodb:",
+          {
+            "Ref": "AWS::Region"
+          },
+          ":",
+          {
+            "Ref": "AWS::AccountId"
+          },
+          ":table/Question-",
+          {
+            "Ref": "apiadventquizGraphQLAPIIdOutput"
+          },
+          "-",
+          {
+            "Ref": "env"
+          }
+        ]]
+      }
+    ]
+  },
+  {
+    "Action": ["dynamodb:*"],
+    "Resource": [
+      {
+        "Fn::Join": ["", [
+          "arn:aws:dynamodb:",
+          {
+            "Ref": "AWS::Region"
+          },
+          ":",
+          {
+            "Ref": "AWS::AccountId"
+          },
+          ":table/Answer-",
+          {
+            "Ref": "apiadventquizGraphQLAPIIdOutput"
+          },
+          "-",
+          {
+            "Ref": "env"
+          }
+        ]]
+      }
+    ]
+  }
 ]
