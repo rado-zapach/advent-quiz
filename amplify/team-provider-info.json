@@ -73,6 +73,10 @@
         "adminSaveWinner": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
           "s3Key": "amplify-builds/adminSaveWinner-77434536475868486471-build.zip"
+        },
+        "playerQuestionListDirect": {
+          "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
+          "s3Key": "amplify-builds/playerQuestionListDirect-7a4a656d735174563866-build.zip"
         }
       },
       "storage": {

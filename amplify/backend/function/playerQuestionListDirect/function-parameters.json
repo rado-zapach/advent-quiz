@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "api": {
+      "adventquiz": [
+        "Query"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

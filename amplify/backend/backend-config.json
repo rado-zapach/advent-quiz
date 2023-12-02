@@ -247,6 +247,21 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "playerQuestionListDirect": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ],
+          "category": "api",
+          "resourceName": "adventquiz"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "playerSaveAnswer": {
       "build": true,
       "dependsOn": [
@@ -425,6 +440,22 @@
         {
           "category": "function",
           "resourceName": "playerAttributesList"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerQuestionListDirect_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerQuestionListDirect"
+        }
+      ]
+    },
+    "AMPLIFY_function_playerQuestionListDirect_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "playerQuestionListDirect"
         }
       ]
     },

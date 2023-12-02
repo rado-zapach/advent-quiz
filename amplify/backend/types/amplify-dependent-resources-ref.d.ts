@@ -82,6 +82,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     },
+    "playerQuestionListDirect": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "playerSaveAnswer": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
