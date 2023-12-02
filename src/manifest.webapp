@@ -5,12 +5,18 @@
     "background_color": "#e40050",
     "start_url": ".",
     "display": "standalone",
-    "orientation": "portrait",
+    "orientation": "any",
     "icons": [
         {
             "src": "./assets/images/logo-xmas-512.png",
             "sizes": "512x512",
             "type": "image/png"
+        },
+        {
+            "src": "./assets/images/maskable_icon_x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
         }
     ]
 }
