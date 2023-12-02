@@ -1,39 +1,22 @@
 import {Injectable} from '@angular/core';
-import {
-    fetchAuthSession,
-    fetchUserAttributes,
-    getCurrentUser,
-    signInWithRedirect,
-    signOut,
-} from 'aws-amplify/auth';
-import {catchError, combineLatest, map, Observable, of, shareReplay} from 'rxjs';
+import {fetchAuthSession, signInWithRedirect, signOut} from 'aws-amplify/auth';
+import {catchError, from, map, Observable, of, shareReplay} from 'rxjs';
 
 interface User {
-    id: string;
     email: string | undefined;
     isAdmin: boolean;
 }
 
 @Injectable({providedIn: 'root'})
 export class UserService {
-    public readonly user$: Observable<User | undefined> = combineLatest([
-        getCurrentUser(),
-        fetchUserAttributes(),
-        fetchAuthSession(),
-    ]).pipe(
-        map(data => {
-            let isAdmin = false;
-            try {
-                // @ts-ignore
-                isAdmin = data[2].tokens.accessToken.payload['cognito:groups'].includes('Admins');
-            } catch (e) {
-                console.log(e);
-            }
-            const {username, userId, signInDetails} = data[0];
-            const attributes = data[1];
+    public readonly user$: Observable<User | undefined> = from(fetchAuthSession()).pipe(
+        map(session => {
+            // @ts-ignore
+            const isAdmin = session.tokens.idToken.payload['cognito:groups'].includes('Admins');
+            // @ts-ignore
+            const email: string = session.tokens.idToken.payload['email'];
             return {
-                id: userId,
-                email: attributes.email,
+                email,
                 isAdmin,
             };
         }),
