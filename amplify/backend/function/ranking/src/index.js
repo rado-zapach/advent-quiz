@@ -33,14 +33,14 @@ async function MakeRequest(query) {
 
 const findQuery = () => /* GraphQL */ `
   query MyQuery {
-    listAnswers(filter: {points: {gt: 0}}) {
+    listAnswers(filter: {points: {gt: 0}}, limit: 1000000) {
       items {
         player
         points
         questionId
       }
     }
-    listQuestions(filter: {closeTime: {le: "${new Date().toISOString()}"}}) {
+    listQuestions(filter: {closeTime: {le: "${new Date().toISOString()}"}}, limit: 1000000) {
       items {
         id
       }

@@ -9,6 +9,7 @@ export const handler = async event => {
 
     const command = new ScanCommand({
         TableName: `Question-${process.env.API_ADVENTQUIZ_GRAPHQLAPIIDOUTPUT}-${process.env.ENV}`,
+        Limit: 1000000,
     });
     const result = await docClient.send(command);
     return result.Items.map(i => ({

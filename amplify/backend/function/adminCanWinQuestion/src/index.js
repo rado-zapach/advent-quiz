@@ -33,7 +33,7 @@ async function MakeRequest(query) {
 
 const findQuery = (questionId, player) => /* GraphQL */ `
   query MyQuery {
-    listAnswers(filter: {questionId: {eq: "${questionId}"}, and: {player: {eq: "${player}"}}}) {
+    listAnswers(filter: {questionId: {eq: "${questionId}"}, and: {player: {eq: "${player}"}}}, limit: 1000000) {
       items {
         isCorrect
       }

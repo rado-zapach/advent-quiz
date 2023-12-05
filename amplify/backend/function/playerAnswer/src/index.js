@@ -25,6 +25,7 @@ export const handler = async event => {
             ":questionId": questionId,
             ":player": player,
         },
+        Limit: 1000000,
     });
     const fetchAnswers = await docClient.send(answersCommand);
 

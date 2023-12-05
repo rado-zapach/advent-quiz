@@ -23,6 +23,7 @@ export const handler = async event => {
         ExpressionAttributeValues: {
             ":questionId": questionId,
         },
+      Limit: 1000000,
     });
     const fetchAnswers = await docClient.send(answersCommand);
 
