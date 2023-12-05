@@ -31,6 +31,9 @@ export class RulesComponent implements OnInit {
     private async fetchRules(): Promise<void> {
         const result = await this.client.graphql({
             query: queries.listRules,
+            variables: {
+                limit: 1000000,
+            },
         });
         const rules = result.data.listRules.items;
         if (rules.length > 0) {

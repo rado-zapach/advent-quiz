@@ -101,6 +101,9 @@ export class QuestionsComponent implements OnInit, AfterViewInit {
     public async ngOnInit() {
         const response = await this.client.graphql({
             query: queries.listQuestions,
+            variables: {
+                limit: 1000000,
+            },
         });
         this.dataSource.data = response.data.listQuestions.items;
     }
