@@ -17,7 +17,7 @@ const AWS_REGION = process.env.AWS_REGION || "us-east-1";
 const findQuery = (questionId, player) => ({
     query: /* GraphQL */ `
         query MyQuery {
-            listAnswers(filter: {questionId: {eq: "${questionId}"}, and: {player: {eq: "${player}"}}}) {
+            listAnswers(filter: {questionId: {eq: "${questionId}"}, and: {player: {eq: "${player}"}}}, limit: 1000000) {
                 items {
                     id
                 }

@@ -31,11 +31,11 @@
       "function": {
         "playerQuestionList": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerQuestionList-4a626f546e6a44536b38-build.zip"
+          "s3Key": "amplify-builds/playerQuestionList-374b4c4c496d56725a64-build.zip"
         },
         "playerSaveAnswer": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerSaveAnswer-434337414f477975624f-build.zip"
+          "s3Key": "amplify-builds/playerSaveAnswer-47433772635444456e4e-build.zip"
         },
         "adventquiznodemodules": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
@@ -47,11 +47,11 @@
         },
         "playerAnswerList": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerAnswerList-4358576676516e536132-build.zip"
+          "s3Key": "amplify-builds/playerAnswerList-3651506b5254456b7872-build.zip"
         },
         "playerAnswer": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerAnswer-7a626a5547414c76624b-build.zip"
+          "s3Key": "amplify-builds/playerAnswer-766562514937426f4473-build.zip"
         },
         "playerAttributesList": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
@@ -64,11 +64,11 @@
         },
         "ranking": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/ranking-69724146305137773749-build.zip"
+          "s3Key": "amplify-builds/ranking-6d746778763556555a72-build.zip"
         },
         "adminCanWinQuestion": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/adminCanWinQuestion-73476a79355172767459-build.zip"
+          "s3Key": "amplify-builds/adminCanWinQuestion-474a357861687930384f-build.zip"
         },
         "adminSaveWinner": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
