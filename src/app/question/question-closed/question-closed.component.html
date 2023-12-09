@@ -26,7 +26,9 @@
                 <mat-list-item>
                     <mat-icon matListItemIcon>task_alt</mat-icon>
                     <span matListItemTitle>Correct answer</span>
-                    <span matListItemLine>{{ question.correctAnswer }}</span>
+                    @for (a of question.correctAnswer?.split("\n"); track a) {
+                        <span matListItemLine>{{ a }}</span>
+                    }
                 </mat-list-item>
                 <mat-list-item>
                     <mat-icon matListItemIcon>military_tech</mat-icon>
