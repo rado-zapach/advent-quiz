@@ -50,6 +50,7 @@ const findQuery = () => /* GraphQL */ `
 
 export const handler = async event => {
     console.log(`EVENT: ${JSON.stringify(event)}`);
+    const isAdmin = event.identity.groups.includes("Admins");
 
     const rankings = {};
     const player = event.identity.username;
@@ -73,7 +74,7 @@ export const handler = async event => {
         });
 
     return Object.entries(rankings).map(([answerPlayer, ranking]) => ({
-        player: player === answerPlayer ? player : null,
+        player: isAdmin || player === answerPlayer ? answerPlayer : null,
         points: ranking.points,
         correctAnswers: ranking.correctAnswers,
         allQuestions: questions.length,
