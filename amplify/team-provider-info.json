@@ -64,7 +64,7 @@
         },
         "ranking": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/ranking-6d746778763556555a72-build.zip"
+          "s3Key": "amplify-builds/ranking-6f48374e734b58624442-build.zip"
         },
         "adminCanWinQuestion": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
