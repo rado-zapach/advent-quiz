@@ -42,8 +42,6 @@ const findQuery = (questionId, player) => /* GraphQL */ `
 `;
 
 export const handler = async event => {
-    console.log(`EVENT: ${JSON.stringify(event)}`);
-
     const questionId = event.arguments.questionId;
     const username = event.arguments.username;
 

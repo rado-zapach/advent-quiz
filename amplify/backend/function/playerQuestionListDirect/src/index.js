@@ -15,8 +15,6 @@ const docClient = DynamoDBDocumentClient.from(client);
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
 export const handler = async event => {
-    console.log(`EVENT: ${JSON.stringify(event)}`);
-
     const command = new GetCommand({
         TableName: `Question-${process.env.API_ADVENTQUIZ_GRAPHQLAPIIDOUTPUT}-${process.env.ENV}`,
         Key: {

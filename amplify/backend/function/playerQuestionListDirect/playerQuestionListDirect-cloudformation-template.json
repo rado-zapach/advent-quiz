@@ -93,6 +93,7 @@
           ]
         },
         "Runtime": "nodejs20.x",
+        "MemorySize": 512,
         "Layers": [],
         "Timeout": 25
       }

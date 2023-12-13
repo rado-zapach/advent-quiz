@@ -114,8 +114,6 @@ async function MakeRequest(query) {
 }
 
 export const handler = async event => {
-    console.log(`EVENT: ${JSON.stringify(event)}`);
-
     const questionId = event.arguments.questionId;
     const text = event.arguments.text;
     const player = event.identity.username;

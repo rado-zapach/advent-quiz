@@ -6,8 +6,6 @@ import {
 let cache = undefined;
 
 export const handler = async event => {
-    console.log(`EVENT: ${JSON.stringify(event)}`);
-
     if (cache) {
         return cache;
     }

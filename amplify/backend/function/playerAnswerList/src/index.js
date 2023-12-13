@@ -5,8 +5,6 @@ const client = new DynamoDBClient({});
 const docClient = DynamoDBDocumentClient.from(client);
 
 export const handler = async event => {
-    console.log(`EVENT: ${JSON.stringify(event)}`);
-
     const questionId = event.arguments.questionId;
 
     const questionCommand = new GetCommand({

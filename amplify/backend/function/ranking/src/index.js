@@ -49,7 +49,6 @@ const findQuery = () => /* GraphQL */ `
 `;
 
 export const handler = async event => {
-    console.log(`EVENT: ${JSON.stringify(event)}`);
     const isAdmin = event.identity.groups.includes("Admins");
 
     const rankings = {};

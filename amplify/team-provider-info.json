@@ -31,11 +31,11 @@
       "function": {
         "playerQuestionList": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerQuestionList-374b4c4c496d56725a64-build.zip"
+          "s3Key": "amplify-builds/playerQuestionList-384a51426f7155707148-build.zip"
         },
         "playerSaveAnswer": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerSaveAnswer-47433772635444456e4e-build.zip"
+          "s3Key": "amplify-builds/playerSaveAnswer-54764f5434376455536f-build.zip"
         },
         "adventquiznodemodules": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
@@ -43,19 +43,19 @@
         },
         "playerQuestion": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerQuestion-3534316d6952772b7355-build.zip"
+          "s3Key": "amplify-builds/playerQuestion-616e6a7063613044354a-build.zip"
         },
         "playerAnswerList": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerAnswerList-3651506b5254456b7872-build.zip"
+          "s3Key": "amplify-builds/playerAnswerList-396d67374946546f3465-build.zip"
         },
         "playerAnswer": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerAnswer-766562514937426f4473-build.zip"
+          "s3Key": "amplify-builds/playerAnswer-62527466434f34383369-build.zip"
         },
         "playerAttributesList": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerAttributesList-70476e734c582f514550-build.zip"
+          "s3Key": "amplify-builds/playerAttributesList-706d4c76436f42644550-build.zip"
         },
         "adventquiz6a5522dcPreSignup": {
           "DOMAINALLOWLIST": "iblsoft.com",
@@ -64,19 +64,19 @@
         },
         "ranking": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/ranking-6f48374e734b58624442-build.zip"
+          "s3Key": "amplify-builds/ranking-59614944746f76345668-build.zip"
         },
         "adminCanWinQuestion": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/adminCanWinQuestion-474a357861687930384f-build.zip"
+          "s3Key": "amplify-builds/adminCanWinQuestion-394c794c546f73423434-build.zip"
         },
         "adminSaveWinner": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/adminSaveWinner-77434536475868486471-build.zip"
+          "s3Key": "amplify-builds/adminSaveWinner-4d7077424361542f6b71-build.zip"
         },
         "playerQuestionListDirect": {
           "deploymentBucketName": "amplify-adventquiz-dev-124024-deployment",
-          "s3Key": "amplify-builds/playerQuestionListDirect-4a33646a476479484357-build.zip"
+          "s3Key": "amplify-builds/playerQuestionListDirect-4c782f49642b462b7446-build.zip"
         }
       },
       "storage": {
