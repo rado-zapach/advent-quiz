@@ -113,6 +113,9 @@
         },
         "Runtime": "nodejs20.x",
         "MemorySize": 512,
+        "Architectures": [
+          "arm64"
+        ],
         "Timeout": 25,
         "Code": {
           "S3Bucket": {

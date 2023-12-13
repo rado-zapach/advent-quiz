@@ -98,6 +98,9 @@
         },
         "Runtime": "nodejs20.x",
         "MemorySize": 512,
+        "Architectures": [
+          "arm64"
+        ],
         "Layers": [
           {
             "Ref": "functionadventquiznodemodulesArn"
