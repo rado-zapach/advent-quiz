@@ -68,7 +68,7 @@
         "triggers": {
             "PreSignup": ["email-filter-allowlist"]
         },
-        "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:4200/\",\"https://dev.dwj086uzt62ft.amplifyapp.com/\",\"https://advent.iblsoft.com/\"],\"LogoutURLs\":[\"http://localhost:4200/\",\"https://dev.dwj086uzt62ft.amplifyapp.com/\",\"https://advent.iblsoft.com/\"]}",
+        "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:4200/\",\"https://dev.drxyhp2kjajx3.amplifyapp.com/\",\"https://advent.iblsoft.com/\"],\"LogoutURLs\":[\"http://localhost:4200/\",\"https://dev.drxyhp2kjajx3.amplifyapp.com/\",\"https://advent.iblsoft.com/\"]}",
         "parentStack": {
             "Ref": "AWS::StackId"
         },

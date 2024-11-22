@@ -1,4 +1,6 @@
 {
-    "runtimes": ["nodejs20.x"],
-    "description": "Updated layer version 2023-11-19T11:03:29.042Z"
+  "runtimes": [
+    "nodejs20.x"
+  ],
+  "description": "Updated layer version 2024-11-21T15:12:44.851Z"
 }
