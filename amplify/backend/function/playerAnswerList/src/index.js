@@ -17,9 +17,10 @@ export const handler = async event => {
 
     const answersCommand = new ScanCommand({
         TableName: `Answer-${process.env.API_ADVENTQUIZ_GRAPHQLAPIIDOUTPUT}-${process.env.ENV}`,
-        FilterExpression: "questionId = :questionId",
+        FilterExpression: "questionId = :questionId AND isCorrect = :isCorrect",
         ExpressionAttributeValues: {
             ":questionId": questionId,
+            ":isCorrect": true,
         },
       Limit: 1000000,
     });
