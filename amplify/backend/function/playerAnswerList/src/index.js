@@ -40,5 +40,7 @@ export const handler = async event => {
     return answers.map(a => ({
         id: a.id,
         player: a.player,
-    }));
+    })).map(value => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
 };
