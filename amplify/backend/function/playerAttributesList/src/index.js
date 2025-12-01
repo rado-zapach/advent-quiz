@@ -1,23 +1,42 @@
 import {
     CognitoIdentityProviderClient,
-    ListUsersCommand,
+    paginateListUsers,
 } from "@aws-sdk/client-cognito-identity-provider";
 
-let cache = undefined;
+async function getUsersWithSpecificAttributes() {
+    const client = new CognitoIdentityProviderClient();
+    const paginator = paginateListUsers(
+      { client }, 
+      { 
+        UserPoolId: process.env.AUTH_ADVENTQUIZ6A5522DC_USERPOOLID,
+        AttributesToGet: ["email"]
+      }
+    );
+  
+    const users = [];
+    
+    try {
+      for await (const page of paginator) {
+        if (page.Users) {
+          users.push(...page.Users);
+        }
+      }
+      return users;
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  }
 
+let cache = undefined;
+// cache bust1
 export const handler = async event => {
     if (cache) {
         return cache;
     }
 
-    const client = new CognitoIdentityProviderClient();
-    const input = {
-        AttributesToGet: ["email"],
-        UserPoolId: process.env.AUTH_ADVENTQUIZ6A5522DC_USERPOOLID,
-    };
-    const command = new ListUsersCommand(input);
-    const response = await client.send(command);
-    const result = response.Users.map(u => ({
+    const users = await getUsersWithSpecificAttributes();
+    console.log(users.length);
+    const result = users.map(u => ({
         username: u.Username,
         email: u.Attributes.find(a => a.Name === "email").Value,
     }));
